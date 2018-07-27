@@ -45,3 +45,72 @@ INFO: [ app_end ] --START--
 INFO: Run Behavior\ShowPageTrace [ RunTime:0.000257s ]
 INFO: [ app_end ] --END-- [ RunTime:0.000311s ]
 
+[ 2018-07-27T15:16:32+08:00 ] 127.0.0.1 /
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000317s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000623s ]
+ERR: 系统不支持:mysql
+
+[ 2018-07-27T15:19:51+08:00 ] 127.0.0.1 /
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000283s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000658s ]
+NOTIC: [2] session_start(): open(/var/tmp//sess_f21d94e7c1c3f83575c27d85460e21e0, O_RDWR) failed: Permission denied (13) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+NOTIC: [2] session_start(): Failed to read session data: files (path: ) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+ERR: 系统不支持:mysql
+
+[ 2018-07-27T15:19:52+08:00 ] 127.0.0.1 /
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000236s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000436s ]
+NOTIC: [2] session_start(): open(/var/tmp//sess_f21d94e7c1c3f83575c27d85460e21e0, O_RDWR) failed: Permission denied (13) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+NOTIC: [2] session_start(): Failed to read session data: files (path: ) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+ERR: 系统不支持:mysql
+
+[ 2018-07-27T15:19:53+08:00 ] 127.0.0.1 /
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000288s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000520s ]
+NOTIC: [2] session_start(): open(/var/tmp//sess_f21d94e7c1c3f83575c27d85460e21e0, O_RDWR) failed: Permission denied (13) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+NOTIC: [2] session_start(): Failed to read session data: files (path: ) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+ERR: 系统不支持:mysql
+
+[ 2018-07-27T15:19:53+08:00 ] 127.0.0.1 /
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000306s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000557s ]
+NOTIC: [2] session_start(): open(/var/tmp//sess_f21d94e7c1c3f83575c27d85460e21e0, O_RDWR) failed: Permission denied (13) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+NOTIC: [2] session_start(): Failed to read session data: files (path: ) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+ERR: 系统不支持:mysql
+
+[ 2018-07-27T15:19:53+08:00 ] 127.0.0.1 /
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000250s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000434s ]
+NOTIC: [2] session_start(): open(/var/tmp//sess_f21d94e7c1c3f83575c27d85460e21e0, O_RDWR) failed: Permission denied (13) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+NOTIC: [2] session_start(): Failed to read session data: files (path: ) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+ERR: 系统不支持:mysql
+
+[ 2018-07-27T15:19:54+08:00 ] 127.0.0.1 /
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000272s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000511s ]
+NOTIC: [2] session_start(): open(/var/tmp//sess_f21d94e7c1c3f83575c27d85460e21e0, O_RDWR) failed: Permission denied (13) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+NOTIC: [2] session_start(): Failed to read session data: files (path: ) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+ERR: 系统不支持:mysql
+
+[ 2018-07-27T15:20:01+08:00 ] 127.0.0.1 /
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000272s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000511s ]
+NOTIC: [2] session_start(): open(/var/tmp//sess_f21d94e7c1c3f83575c27d85460e21e0, O_RDWR) failed: Permission denied (13) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+NOTIC: [2] session_start(): Failed to read session data: files (path: ) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+ERR: 系统不支持:mysql
+
+[ 2018-07-27T15:20:17+08:00 ] 127.0.0.1 /
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000210s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000392s ]
+NOTIC: [2] session_start(): open(/var/tmp//sess_f21d94e7c1c3f83575c27d85460e21e0, O_RDWR) failed: Permission denied (13) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+NOTIC: [2] session_start(): Failed to read session data: files (path: ) /Users/guanliyang/php/fu/ThinkPHP/Common/functions.php 第 1092 行.
+
