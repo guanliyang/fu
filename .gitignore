@@ -1,2 +1,5 @@
 .DS_Store*
-Application/Runtime*
+.idea/workspace.xml
+ThinkPHP/Conf/convention.php
+.idea/vcs.xml
+*.log

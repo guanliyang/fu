@@ -4,7 +4,7 @@ namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
     public function index(){
-        //phpinfo();
+        phpinfo();
 	echo '<meta charset="utf-8">';
 	$userModel = M('User');
         $a = $userModel->select();
