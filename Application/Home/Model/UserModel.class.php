@@ -8,5 +8,9 @@
 namespace Home\Model;
 use Think\Model;
 class UserModel extends Model {
-    protected $tableName = 'user';
+	protected $tableName = 'user';
+
+	public function getMobile() {
+		var_dump(I('d'));
+	}
 }
