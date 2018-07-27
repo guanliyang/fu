@@ -49,7 +49,7 @@ return  array(
     'DEFAULT_FILTER'        =>  'htmlspecialchars', // 默认参数过滤方法 用于I函数...
 
     /* 数据库设置 */
-    'DB_TYPE'               =>  'mysqli',     // 数据库类型
+    'DB_TYPE'               =>  'mysql',     // 数据库类型
     'DB_HOST'               =>  '127.0.0.1', // 服务器地址
     'DB_NAME'               =>  'fu',          // 数据库名
     'DB_USER'               =>  'root',      // 用户名
