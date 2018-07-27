@@ -1,2 +1,2 @@
 <?php
-echo "df";
+echo "你好";
