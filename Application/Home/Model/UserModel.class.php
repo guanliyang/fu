@@ -23,7 +23,7 @@ class UserModel extends Model {
     }
 
     private function _addUser($mobile) {
-        $where = ['mobile' => $mobile];
+        $where = array('mobile' => $mobile);
         $user = $this->where($where)->find();
         if (empty($user)) {
             $this->mobile = $mobile;
@@ -35,7 +35,7 @@ class UserModel extends Model {
     private function _checkCode($mobile) {
         $userCode = I('request.code');
         $smsLog = M('SmsLog');
-        $where = ['mobile' => $mobile];
+        $where = array('mobile' => $mobile);
         $sms = $smsLog->where($where)->order('id desc')->find();
         if (empty($sms)) {
             notice('未查询到数据');
