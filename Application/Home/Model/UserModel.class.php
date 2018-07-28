@@ -67,7 +67,7 @@ class UserModel extends Model {
         $password = $this->_checkPassword();
         $where = array(
             "mobile"    => $mobile,
-            "passport"  => $password
+            "password"  => $password
         );
         if (! $this->where($where)->find()) {
             notice("密码输入错误，请重新填写");
