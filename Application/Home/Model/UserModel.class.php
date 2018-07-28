@@ -8,7 +8,7 @@ class UserModel extends Model {
     protected $codeTime = 600;
 
     // cookie有效时间
-    protected $cookieTime = 60 * 60 * 24 * 365;
+    protected $cookieTime = 31536000;
 
     public function ajaxSendSms() {
         $mobile = $this->_checkMobile();
