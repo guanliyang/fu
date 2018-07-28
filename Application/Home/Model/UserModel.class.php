@@ -12,7 +12,7 @@ class UserModel extends Model {
         $this->_checkToken();
         $this->_insertSmsLog($mobile);
         //发短信 方法
-        success('');
+        notice('请求成功', 0);
     }
 
     public function ajaxLogin() {
