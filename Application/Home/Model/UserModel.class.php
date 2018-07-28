@@ -12,13 +12,12 @@ class UserModel extends Model {
 
 
     public function register() {
-        $this->name = $this->_checkName();
+        $this->real_name = $this->_checkName();
         $this->mobile = $this->_checkMobile();
         //$this->_checkCode($this->mobile);
         $this->_checkMobileExisted($this->mobile);
         $this->password = $this->_checkPassword();
         $this->add();
-
     }
 
     private function _checkMobileExisted($mobile) {
@@ -72,6 +71,7 @@ class UserModel extends Model {
         if (! $this->where($where)->find()) {
             notice("密码输入错误，请重新填写");
         }
+        cookie('uid', $this->id, $this->cookieTime);
     }
 
     private function _addUser($mobile) {
@@ -86,6 +86,7 @@ class UserModel extends Model {
         return true;
     }
 
+    // 由电话对比验证码是否正确
     private function _checkCode($mobile) {
         $userCode = I('request.code');
         $smsLog = M('SmsLog');
@@ -135,5 +136,16 @@ class UserModel extends Model {
 
     private function _getCode() {
         return rand(100000, 999999);
+    }
+
+    public function changePassword($user_mobile) {
+        $mobile = $this->_checkMobile();
+        if ($user_mobile != $mobile) {
+            notice("您填写的电话不是你自己的");
+        }
+//        $this->_checkCode($mobile);
+        $this->password = $this->_checkPassword();
+        $where = array('mobile' => $mobile);
+        $user = $this->where($where)->save();
     }
 }

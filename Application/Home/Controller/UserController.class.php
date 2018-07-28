@@ -17,12 +17,14 @@ class UserController extends HomeController {
     // 密码重置
     public function changePasswordView() {
         $this->checkoutLogin();
+
         $this->display();
     }
 
     // 用户详细信息
     public function userView() {
         $this->checkoutLogin();
+        var_dump($this->user);
         $this->display();
     }
 
@@ -40,5 +42,13 @@ class UserController extends HomeController {
 
     public function registerSuccessView() {
         $this->display();
+    }
+
+    // 设置新密码
+    public function changePassword() {
+        $this->checkoutLogin();
+        $user = new \Home\Model\UserModel();
+        $user->changePassword($this->user['mobile']);
+        notice("修改成功", 0);
     }
 }
