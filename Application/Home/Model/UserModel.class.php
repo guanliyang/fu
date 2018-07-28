@@ -7,6 +7,9 @@ class UserModel extends Model {
     // 二维码有效期10分钟
     protected $codeTime = 600;
 
+    // cookie有效时间
+    protected $cookieTime = 60 * 60 * 24 * 365;
+
     public function ajaxSendSms() {
         $mobile = $this->_checkMobile();
         $this->_checkToken();
@@ -29,7 +32,9 @@ class UserModel extends Model {
             $this->mobile = $mobile;
             $this->add();
         }
-        var_dump($this->id);
+
+        cookie('uid', $this->id, $this->cookieTime);
+        return true;
     }
 
     private function _checkCode($mobile) {

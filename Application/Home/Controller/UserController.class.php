@@ -10,5 +10,6 @@ class UserController extends Controller {
     public function login() {
         $User = new \Home\Model\UserModel();
         $User->ajaxLogin();
+        redirect('/Home/Message/index');
     }
 }
