@@ -10,6 +10,50 @@ class UserModel extends Model {
     // cookie有效时间
     protected $cookieTime = 31536000;
 
+
+    public function register() {
+        $this->name = $this->_checkName();
+        $this->mobile = $this->_checkMobile();
+        //$this->_checkCode($this->mobile);
+        $this->_checkMobileExisted($this->mobile);
+        $this->password = $this->_checkPassword();
+        $this->add();
+
+    }
+
+    private function _checkMobileExisted($mobile) {
+        $where = array('mobile' => $mobile);
+        $existed = $this->where($where)->find();
+        if ($existed) {
+            notice("此电话已被注册");
+        }
+    }
+
+    private function _checkPassword() {
+        $password = trim(I('request.password'));
+        if (empty($password)) {
+            notice('密码不能为空');
+        }
+
+        if (strlen($password) > 45) {
+            notice('密码过长不方便记忆，请重新填写');
+        }
+        return md5($password);
+    }
+
+    private function _checkName() {
+        $name = trim(I('request.name'));
+        if (empty($name)) {
+            notice("姓名为空，请填写完整");
+        }
+
+        // 一般汉字三个长度
+        if (strlen($name) > 45) {
+            notice("姓名超长");
+        }
+        return $name;
+    }
+
     public function ajaxSendSms() {
         $mobile = $this->_checkMobile();
         $this->_checkToken();
@@ -20,9 +64,14 @@ class UserModel extends Model {
 
     public function ajaxLogin() {
         $mobile = $this->_checkMobile();
-
-        $this->_checkCode($mobile);
-        $this->_addUser($mobile);
+        $password = $this->_checkPassword();
+        $where = array(
+            "mobile"    => $mobile,
+            "passport"  => $password
+        );
+        if (! $this->where($where)->find()) {
+            notice("密码输入错误，请重新填写");
+        }
     }
 
     private function _addUser($mobile) {
