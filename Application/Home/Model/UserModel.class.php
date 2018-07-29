@@ -68,8 +68,24 @@ class UserModel extends Model {
             "mobile"    => $mobile,
             "password"  => $password
         );
+
         if (! $user =  $this->where($where)->find()) {
+            $input_password_num = intval(cookie('input_password_num')) + 1;
+            cookie('input_password_num', $input_password_num);
+            var_dump($input_password_num);
             notice("密码输入错误，请重新填写");
+        }
+        session('uid', $user['id']);
+    }
+
+    public function mobileLogin() {
+        $mobile = $this->_checkMobile();
+//        $this->_checkCode($mobile);
+        $where = array(
+            "mobile"    => $mobile,
+        );
+        if (! $user =  $this->where($where)->find()) {
+            notice("此电话没有注册");
         }
         session('uid', $user['id']);
     }
