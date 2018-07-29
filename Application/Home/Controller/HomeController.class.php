@@ -5,7 +5,8 @@ class HomeController extends Controller {
     public $user;
 
     public function _initialize() {
-        $uid = cookie('uid');
+        $uid = session('uid');
+
         if (empty($uid)) {
             redirect("/index.php");
         }

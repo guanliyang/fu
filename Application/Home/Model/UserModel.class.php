@@ -7,8 +7,8 @@ class UserModel extends Model {
     // 二维码有效期10分钟
     protected $codeTime = 600;
 
-    // cookie有效时间
-    protected $cookieTime = 31536000;
+    // session有效时间
+    protected $sessionTime = 31536000;
 
 
     public function register() {
@@ -68,22 +68,10 @@ class UserModel extends Model {
             "mobile"    => $mobile,
             "password"  => $password
         );
-        if (! $this->where($where)->find()) {
+        if (! $user =  $this->where($where)->find()) {
             notice("密码输入错误，请重新填写");
         }
-        cookie('uid', $this->id, $this->cookieTime);
-    }
-
-    private function _addUser($mobile) {
-        $where = array('mobile' => $mobile);
-        $user = $this->where($where)->find();
-        if (empty($user)) {
-            $this->mobile = $mobile;
-            $this->add();
-        }
-
-        cookie('uid', $this->id, $this->cookieTime);
-        return true;
+        session('uid', $user['id']);
     }
 
     // 由电话对比验证码是否正确
@@ -122,6 +110,9 @@ class UserModel extends Model {
 
     private function _checkMobile() {
         $mobile = I('request.mobile');
+        if (empty($mobile)) {
+            notice("电话号码不能为空");
+        }
         if (!is_mobile($mobile)) {
             notice("电话号码有误");
         }
@@ -146,6 +137,6 @@ class UserModel extends Model {
 //        $this->_checkCode($mobile);
         $this->password = $this->_checkPassword();
         $where = array('mobile' => $mobile);
-        $user = $this->where($where)->save();
+        $this->where($where)->save();
     }
 }

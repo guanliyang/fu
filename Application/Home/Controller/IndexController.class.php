@@ -10,11 +10,6 @@ class IndexController extends Controller {
 
     // 注册视图
     public function registerView() {
-        $where = array(
-            'level' => 1
-        );
-        $province = M('Area')->where($where)->getField('id, areaName');
-        $this->assign('province', $province);
         $this->display();
     }
 
