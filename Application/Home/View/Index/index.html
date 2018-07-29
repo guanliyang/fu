@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<include file="public/head" />
 登录页面
-<form action="/Home/User/ajaxLogin/" method="post">
+<form action="/Home/Index/ajaxLogin/" method="post">
     <p>电话: <input type="text" name="mobile" /></p>
     <p>密码: <input type="text" name="password" /></p>
     <input type="submit" value="登录" />
@@ -14,8 +8,7 @@
 
 
 
-<a href="/Home/User/registerView">注册页面</a>
-<script src="/Public/js/jquery.min.js"></script>
+<a href="/Home/Index/registerView">注册页面</a>
 
 </body>
 </html>

@@ -4,7 +4,7 @@ use Think\Controller;
 class HomeController extends Controller {
     public $user;
 
-    public function checkoutLogin() {
+    public function _initialize() {
         $uid = cookie('uid');
         if (empty($uid)) {
             redirect("/index.php");

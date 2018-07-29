@@ -1,0 +1,24 @@
+<include file="public/head" />
+<script type="text/javascript" src="/Public/js/address.js"></script>
+注册页面
+<form action="/Home/Index/register/" method="post">
+    <p>姓名: <input type="text" name="name" /></p>
+    <p>电话: <input type="text" name="mobile" /></p>
+    <p>密码: <input type="text" name="password" /></p>
+
+    <p>联系地址:
+
+        <select id="cmbProvince" name="cmbProvince"></select>
+        <select id="cmbCity" name="cmbCity"></select>
+        <select id="cmbArea" name="cmbArea"></select>
+    </p>
+
+    <p>详细地址: </p>
+
+</form>
+
+<script type="text/javascript">
+    addressInit('cmbProvince', 'cmbCity', 'cmbArea');
+</script>
+
+<include file="public/foot" />
