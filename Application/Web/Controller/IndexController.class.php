@@ -1,5 +1,5 @@
 <?php
-namespace Home\Controller;
+namespace Web\Controller;
 use Think\Controller;
 class IndexController extends Controller {
     // 首页登录页面
@@ -25,11 +25,11 @@ class IndexController extends Controller {
         // 超过5次 电话验证码登录
         $input_password_num = cookie('input_password_num');
         if ($input_password_num > 5) {
-            notice('密码输入错误超过5次', 2, array('url' => '/Home/Index/mobileLogin'));
+            redirect('/Home/Index/mobileLogin');
         }
 
         $user->ajaxLogin();
-        notice('登录成功', 0, array('url' => '/Home/Message/index'));
+        redirect('/Home/Message/index');
     }
 
     //电话验证码登录

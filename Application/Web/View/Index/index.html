@@ -2,24 +2,19 @@
 登录页面
 <form action="/Home/Index/ajaxLogin/" method="post">
     <p>电话: <input type="text" name="mobile" /></p>
-
     <p>密码: <input type="text" name="password" /></p>
-
+    <input type="submit" value="登录" />
 </form>
 
-<button id="t_submit" data-placement="top" data-toggle="popover" data-content="大幅度" type="button">Click Me!</button>
+<button id="t_submit" type="button">Click Me!</button>
 
-
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;地方大幅度发</span>
-</button>
 
 <a href="/Home/Index/registerView">注册页面</a>
-
 <script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
-<script type="text/javascript" src="/Public/bootstrap/js/t_submit.js"></script>
 <script type="text/javascript">
-t_submit('/Home/Index/ajaxLogin');
+    $("#t_submit").on('click tap',function(){
+       alert("asdf");
+    });
 </script>
 
 <include file="public/foot" />

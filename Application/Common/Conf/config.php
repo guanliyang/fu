@@ -9,4 +9,6 @@ return  array(
         'name'                =>  'SESSION_NAME',                    //设置session名
         'expire'              =>  31536000,                      //SESSION过期时间，单位秒
     ),
+
+//    'MODULE_ALLOW_LIST' => array('Home','Web'),
 );

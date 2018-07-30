@@ -10,6 +10,8 @@ class UserModel extends Model {
     // session有效时间
     protected $sessionTime = 31536000;
 
+    //输入错误密码 计数cookie 的有效时间 半小时
+    protected $wrongPasswordTime = 1800;
 
     public function register() {
         $this->real_name = $this->_checkName();
@@ -71,8 +73,7 @@ class UserModel extends Model {
 
         if (! $user =  $this->where($where)->find()) {
             $input_password_num = intval(cookie('input_password_num')) + 1;
-            cookie('input_password_num', $input_password_num);
-            var_dump($input_password_num);
+            cookie('input_password_num', $input_password_num, $this->wrongPasswordTime);
             notice("密码输入错误，请重新填写");
         }
         session('uid', $user['id']);

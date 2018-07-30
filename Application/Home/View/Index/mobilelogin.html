@@ -1,8 +1,13 @@
 <include file="public/head" />
 电话验证码登录
-<form action="/Home/Index/ajaxMobileLogin/" method="post">
     <p>电话: <input type="text" name="mobile" /></p>
     <p>验证码: <input type="text" name="password" /></p>
-    <input type="submit" value="登录" />
-</form>
+    <input id="t_submit" type="submit" value="登录" />
+
+<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/bootstrap/js/t_submit.js"></script>
+<script type="text/javascript">
+    t_submit('/Home/Index/ajaxMobileLogin');
+</script>
+
 <include file="public/foot" />
