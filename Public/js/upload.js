@@ -13,7 +13,7 @@ function addImg(e) {
     addImgPreview(imgurl)
     e.target.value = '' // 清除input数据
     //
-    $("#showimg").attr('src', imgurl);
+    $("#showimg").attr('src', dataURLtoBlob(imgurl));
 }
 
 function addImgPreview(file) {
