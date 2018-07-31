@@ -2,7 +2,6 @@
 <title>的看法</title>
 <script type="text/javascript" src="/Public/js/address.js"></script>
 注册页面
-<form action="/Home/Index/register/" method="post">
     <p>姓名: <input type="text" name="name" /></p>
     <p>电话: <input type="text" name="mobile" /></p>
     <p>密码: <input type="text" name="password" /></p>
@@ -18,12 +17,14 @@
     <p>上传图片：    <input type="file" id="fileinput" class="inputfile" multiple accept="image/*;">
         <img id="showimg" src="" alt="">
     </p>
-    <input type="submit" value="注册" />
-</form>
+    <input id="t_submit" type="submit" value="注册" />
 
 <script type="text/javascript" src="/Public/js/upload.js"></script>
+<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/bootstrap/js/t_submit.js"></script>
 <script type="text/javascript">
     addressInit('cmbProvince', 'cmbCity', 'cmbArea');
+    t_submit('/Home/Index/register/');
 </script>
 
 <include file="public/foot" />

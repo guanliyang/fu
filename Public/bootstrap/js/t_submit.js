@@ -10,6 +10,14 @@ function t_submit(url) {
             }
         });
 
+        $("select option:selected").each(function(){
+            var key = $(this).attr('name');
+            var val = $(this).val() ;
+            if (key && val) {
+                data = data + key + "=" + val + "&";
+            }
+        });
+
         $.ajax({
             type: 'POST',
             url: url,
