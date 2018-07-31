@@ -24,7 +24,7 @@ function base64_image_content($base64_image_content, $path = 'Public/user_img'){
 
         if(!file_exists($new_file)){
             //检查是否有该文件夹，如果没有就创建，并给予最高权限
-            mkdir($new_file, 0700);
+            mkdir($new_file, 7777);
         }
         $new_file = $new_file.time().".{$type}";
         $file_content = base64_decode(str_replace($result[1], '', $base64_image_content));
