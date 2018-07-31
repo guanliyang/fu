@@ -19,9 +19,21 @@ class UserModel extends Model {
         //$this->_checkCode($this->mobile);
         $this->_checkMobileExisted($this->mobile);
         $this->password = $this->_checkPassword();
+        $this->company_name = I('request.company_name');
+        $this->province = I('request.province');
+        $this->city = I('request.city');
+        $this->area = I('request.area');
+        $this->address = I('request.address');
+        $this->img = $this->getImg();
+
         $this->add();
     }
 
+
+    private function getImg() {
+        $src = I('request.src');
+        return base64_image_content($src);
+    }
     private function _checkMobileExisted($mobile) {
         $where = array('mobile' => $mobile);
         $existed = $this->where($where)->find();

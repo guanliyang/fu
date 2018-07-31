@@ -39,7 +39,7 @@ function addImgPreview(file) {
                     return
                 }catch(error){
                     compressAfterImgSize = base64Url
-                    alert("上传的图片过大，无法压缩，使用原图");
+                    //alert("上传的图片过大，无法压缩，使用原图");
                 }
                 let img = document.querySelector('#showimg')
                 img.src = compressAfterImgSize

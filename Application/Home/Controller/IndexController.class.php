@@ -48,7 +48,7 @@ class IndexController extends Controller {
     public function register() {
         $user = new \Home\Model\UserModel();
         $user->register();
-        redirect('/Home/Index/registerSuccessView');
+        notice('注册成功', 0, array('url' => '/Home/Index/registerSuccessView'));
     }
 
     // 注册成功

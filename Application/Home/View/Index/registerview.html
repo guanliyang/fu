@@ -1,26 +1,28 @@
 <include file="public/head" />
-<title>的看法</title>
 <script type="text/javascript" src="/Public/js/address.js"></script>
 注册页面
-
     <p>姓名: <input type="text" name="name" /></p>
     <p>电话: <input type="text" name="mobile" /></p>
     <p>密码: <input type="text" name="password" /></p>
 
+
+    <hr/>
+
+    <p>营业执照：    <input type="file" id="fileinput" class="inputfile" multiple accept="image/*;">
+        <img id="showimg" src="" alt="">
+    </p>
+    <p>公司名称 <input type="text" name="company_name" /></p>
     <p>联系地址:
 
-        <select id="cmbProvince" name="cmbProvince"></select>
-        <select id="cmbCity" name="cmbCity"></select>
-        <select id="cmbArea" name="cmbArea"></select>
+        <select id="cmbProvince" name="province"></select>
+        <select id="cmbCity" name="city"></select>
+        <select id="cmbArea" name="area"></select>
     </p>
+    <p>详细地址: <input type="text" name="address" /></p>
+    <input type="submit" id="t_submit" value="注册" />
 
-    <p>详细地址: </p>
-    <p>上传图片：    <input type="file" id="fileinput" class="inputfile" multiple accept="image/*;">
-        <img id="showimg" src="" alt=""/>
-    </p>
-    <input id="t_submit" type="submit" value="注册" />
-<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="/Public/js/upload.js"></script>
+<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="/Public/bootstrap/js/t_submit.js"></script>
 <script type="text/javascript">
     addressInit('cmbProvince', 'cmbCity', 'cmbArea');

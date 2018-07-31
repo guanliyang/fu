@@ -19,8 +19,10 @@ function t_submit(url) {
         });
 
         // 上传图片
-        var src = $("#showimg").attr('src');
-        data = data + "src=" + src;
+        if ($("#showimg").length > 0) {
+            var src = $("#showimg").attr('src');
+            data = data + "src=" + src;
+        }
 
         $.ajax({
             type: 'POST',
