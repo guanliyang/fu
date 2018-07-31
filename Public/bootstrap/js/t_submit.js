@@ -20,9 +20,7 @@ function t_submit(url) {
 
         // 上传图片
         var src = $("#showimg").attr('src');
-        var alt = ("#showimg").attr('alt');
         data = data + "src=" + src + "&alt=" + alt;
-
 
         $.ajax({
             type: 'POST',

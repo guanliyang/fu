@@ -12,6 +12,8 @@ function addImg(e) {
     const imgurl = files[0]
     addImgPreview(imgurl)
     e.target.value = '' // 清除input数据
+    //
+    $("#showimg").attr('src', imgurl);
 }
 
 function addImgPreview(file) {
@@ -55,9 +57,8 @@ function compressImg(img){  // 压缩图片
     const maxSize = 200 * 1024; //200K
     const maxWidth = 640; //设置最大宽度
     const maxHeight = maxWidth; //设置最大高度
-    let canvas = document.createElement('canvas')
-    let ctx = canvas.getContext('2d')
-    const maxSize = 200 * 1024   //200KB
+    let canvas = document.createElement('canvas');
+    let ctx = canvas.getContext('2d');
 
     if (img.height > maxHeight) {
         //按最大高度等比缩放
