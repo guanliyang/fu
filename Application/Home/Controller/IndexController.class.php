@@ -4,6 +4,10 @@ use Think\Controller;
 class IndexController extends Controller {
     // 首页登录页面
     public function index(){
+
+        if (session('uid')) {
+            redirect('/Home/Message/index');
+        }
         $this->display();
     }
 

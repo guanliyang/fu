@@ -1,5 +1,7 @@
 <include file="public/head" />
 <script type="text/javascript" src="/Public/js/address.js"></script>
+<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js" ></script>
+<script type="text/javascript" src="/Public/bootstrap/js/mui.min.js" ></script>
 注册页面
     <p>姓名: <input type="text" name="name" /></p>
     <p>电话: <input type="text" name="mobile" /></p>
@@ -8,8 +10,14 @@
 
     <hr/>
 
-    <p>营业执照：    <input type="file" id="fileinput" class="inputfile" multiple accept="image/*;">
-        <img id="showimg" src="" alt="">
+    <p>营业执照：
+        <ul class="list">
+            <li class='mui-table-view-cell mui-media'>
+                <img id="headimg" class="headimg" src=''  height="150"  width="150">
+            <p><a  class="imageup 1">上传图</a> </p><hr/>
+            <p><button onclick="upload();" class='button'> 提交</button></p>
+            </li>
+        </ul>
     </p>
     <p>公司名称 <input type="text" name="company_name" /></p>
     <p>联系地址:
@@ -21,13 +29,118 @@
     <p>详细地址: <input type="text" name="address" /></p>
     <input type="submit" id="t_submit" value="注册" />
 
-<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
 
-<script type="text/javascript" src="/Public/js/upload.js"></script>
 <script type="text/javascript" src="/Public/bootstrap/js/t_submit.js"></script>
 <script type="text/javascript">
     addressInit('cmbProvince', 'cmbCity', 'cmbArea');
     t_submit('/Home/Index/register/');
 </script>
+<script>
+    //扩展API完成后执行的操作
+    function plusReady(){
+        //给选中的li增加判别class
+        $(".list li").on("tap",".imageup",function(){
+//                  alert('11');
+            var $li = $(this).parents("li");
+            console.log($($li).text())
+            $li.addClass("selectLi");
+            $li.siblings().removeClass("selectLi");
+            page.imgUp();
+        })
+    }
 
+    //弹出系统按钮选择框
+    var page=null;
+    page={
+        imgUp:function(){
+            var m=this;
+            /* console.log(m);*/
+            plus.nativeUI.actionSheet({cancel:"取消",buttons:[
+                {title:"拍照"},
+                {title:"从相册中选择"}
+            ]}, function(e){
+                switch(e.index){
+                    case 1:appendByCamera();break;
+                    case 2:appendByGallery();break;
+                }
+            });
+        }
+    }
+
+    // 拍照添加文件
+    function appendByCamera(){
+        plus.camera.getCamera().captureImage(function(e){
+            console.log("e is" +  e);
+            plus.io.resolveLocalFileSystemURL(e, function(entry) {
+                var path = entry.toLocalURL();
+                var indexa = liIndex()
+                console.log(indexa);
+                $(".headimg")[indexa].src = path;
+            }, function(e) {
+                mui.toast("读取拍照文件错误：" + e.message);
+            });
+
+        });
+    }
+    // 从相册添加文件
+    function appendByGallery(){
+        plus.gallery.pick(function(path){
+            var indexa = liIndex();
+            console.log(indexa);
+            $(".headimg")[indexa].src = path;
+        });
+    }
+
+
+    //服务端接口路径
+    var server = "http://39.104.166.224/a.php";
+    //获取图片元素
+    var files = document.getElementById('headimg');
+    // 上传文件
+    function upload(){
+        var wt=plus.nativeUI.showWaiting();
+        var task=plus.uploader.createUpload(server,
+            {method:"POST"},
+            function(t,status){ //上传完成
+                if(status==200){
+                    //alert("上传成功：");
+                    wt.close(); //关闭等待提示按钮
+                }else{
+                    //alert("上传失败：");
+                    wt.close();//关闭等待提示按钮
+                }
+            }
+        );
+        //添加其他参数
+        task.addData("name","test");
+        task.addFile(files.src,{key:"file"});
+        task.start();
+    }
+
+
+
+    //判断点击的是上传的第几个li
+    function liIndex(){
+        var lis = $(".list").children();
+        console.log(lis.length)
+        for(var i = 0; i < lis.length;i++){
+            console.log($(lis[i]).attr("class"))
+            var lisClass = $(lis[i]).attr("class").split(" ");
+            if(lisClass[2] == "selectLi"){
+                console.log(i);
+                return i;
+            }
+        }
+    }
+
+
+    //扩展API是否准备好，如果没有准备好则监听plusReady
+    if(window.plus){
+        plusReady();
+    }
+    else {
+        document.addEventListener("plusready",plusReady,false);
+    }
+
+</script>
 <include file="public/foot" />
