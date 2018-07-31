@@ -9,7 +9,7 @@ function t_submit(url) {
                 data = data + key + "=" + val + "&";
             }
         });
-
+        // 所有select数组
         $("select option:selected").each(function(){
             var key = $(this).attr('name');
             var val = $(this).val() ;
@@ -17,6 +17,12 @@ function t_submit(url) {
                 data = data + key + "=" + val + "&";
             }
         });
+
+        // 上传图片
+        var src = $("#showimg").attr('src');
+        var alt = ("#showimg").attr('alt');
+        data = data + "src=" + src + "&alt=" + alt;
+
 
         $.ajax({
             type: 'POST',
