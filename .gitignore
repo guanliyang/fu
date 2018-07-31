@@ -4,3 +4,4 @@ ThinkPHP/Conf/convention.php
 .idea/vcs.xml
 *.log
 Application/Runtime/*
+*.png
