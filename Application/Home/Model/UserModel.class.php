@@ -31,7 +31,7 @@ class UserModel extends Model {
 
 
     private function getImg() {
-        return I('request.src');
+        return 't';//I('request.src');
         //return base64_image_content($src);
     }
     private function _checkMobileExisted($mobile) {
