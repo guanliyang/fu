@@ -16,6 +16,13 @@ class SellController extends HomeController {
     // 添加卖货信息
     public function addBill() {
         $user = new \Home\Model\SBillModel();
-        $user->ajaxAdd();
+
+        if ($user->ajaxAdd($this->user['id'])) {
+            notice('添加成功', 0, array('url' => '/Home/Sell/sellBillInfo'));
+        }
+    }
+
+    public function sellBillInfo() {
+        $this->display();
     }
 }
