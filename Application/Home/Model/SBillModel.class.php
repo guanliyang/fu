@@ -3,8 +3,12 @@ namespace Home\Model;
 use Think\Model;
 class SBillModel extends Model {
     protected $trueTableName = 's_bill';
-
     protected $data = array();
+
+    public function getInfo() {
+        $id = I("request.id", 0, 'intval');
+        return $this->where(array('id' => $id))->find();
+    }
 
     public function ajaxAdd($uid) {
         $this->_getG();
