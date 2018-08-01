@@ -10,7 +10,7 @@
 </p>
 
 <p>等级：
-    <select name="gl_name">
+    <select name="gl_id">
     <volist name="level" id="vo">
         <option value="{$vo.gl_id}">{$vo.gl_name}</option>
     </volist>
@@ -18,7 +18,7 @@
 </p>
 
 <p>产地：
-    <select name="gp_name">
+    <select name="gp_id">
     <volist name="place" id="vo">
         <option value="{$vo.gp_id}">{$vo.gp_name}</option>
     </volist>
@@ -26,7 +26,7 @@
 </p>
 
 <p>容重：
-    <select name="rz">
+    <select name="gr_id">
     <volist name="rz" id="vo">
         <option value="{$vo.gr_id}">{$vo.gr_name}</option>
     </volist>
@@ -34,7 +34,7 @@
 </p>
 
 <p>出产年份 ：
-    <select name="year">
+    <select name="gy_id">
     <volist name="year" id="vo">
         <option value="{$vo.gy_id}">{$vo.gy_id}</option>
     </volist>
