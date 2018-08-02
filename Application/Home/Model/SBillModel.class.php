@@ -5,9 +5,24 @@ class SBillModel extends Model {
     protected $trueTableName = 's_bill';
     protected $data = array();
 
+    public function changePrice() {
+        $id = I("request.id", 0, 'intval');
+        $price = I("request.b_pri1", 0, 'intval');
+        $status = self::where(array('b_id' => $id))->save(array('b_pri1' => $price));
+        if ($status) {
+            notice('修改成功', 0);
+        }
+        else {
+            notice('修改失败');
+        }
+    }
     public function getInfo() {
         $id = I("request.id", 0, 'intval');
-        return $this->where(array('id' => $id))->find();
+
+        $bill = $this->where(array('b_id' => $id))->find();
+
+        $bill_item = M('s_bill_item')->where(array('b_id' => $id))->select();
+        return array('bill' => $bill, 'bill_item' => $bill_item);
     }
 
     public function ajaxAdd($uid) {

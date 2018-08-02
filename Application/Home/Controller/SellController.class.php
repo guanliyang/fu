@@ -22,11 +22,23 @@ class SellController extends HomeController {
         }
     }
 
+    // 卖粮详情
     public function sellBillInfo() {
         $SBill = new \Home\Model\SBillModel();
         $info = $SBill->getInfo();
         dump($info);
         $this->assign('SBill', $info);
         $this->display();
+    }
+
+    //修改价格 页面
+    public function changePrice() {
+        $this->display();
+    }
+
+    //修改价格操作
+    public function ajaxChangePrice() {
+        $SBill = new \Home\Model\SBillModel();
+        $SBill->changePrice();
     }
 }

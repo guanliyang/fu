@@ -1,0 +1,13 @@
+<include file="public/head" />
+<p>价格修改页面</p>
+
+修改价格: <input type="text" name="b_pri1" />
+<input type="hidden" name="id" value="53">
+<input id="t_submit" type="submit" value="点击修改价格" />
+
+<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/bootstrap/js/t_submit.js"></script>
+<script type="text/javascript">
+    t_submit('/Home/Sell/ajaxChangePrice');
+</script>
+<include file="public/foot" />
