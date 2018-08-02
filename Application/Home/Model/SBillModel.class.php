@@ -5,6 +5,19 @@ class SBillModel extends Model {
     protected $trueTableName = 's_bill';
     protected $data = array();
 
+    const STATUS_DEL = -9;
+    const STATUS_ON = 9;
+    const STATUS_CHECK = 0;
+    const STATUS_FINISH = 10;
+
+    //在售粮源
+    public function getList() {
+        $where = array('b_status' => self::STATUS_ON);
+
+        return self::where($where)->select();
+    }
+
+    //修改价格
     public function changePrice() {
         $id = I("request.id", 0, 'intval');
         $price = I("request.b_pri1", 0, 'intval');
