@@ -4,9 +4,39 @@ use Think\Model;
 class CartModel extends Model {
     protected $trueTableName = 'b_cart';
 
+    const STATUS_DEL = -9;
+    const STATUS_NORMAL = 1;
+    const STATUS_FORMAL = 9;
+
+    //查询购物车
+    public function getByUid($uid) {
+        $list = self::where(array(
+            'u_id' => $uid,
+            'c_status' => self::STATUS_NORMAL
+        ))->select();
+        $list = $this->changeList($list);
+        return $list;
+    }
+
+    // 获取货物详细信息
+    private function changeList($list) {
+        $data = array();
+        dump($list);
+        if (!empty($list) && is_array($list)) {
+            foreach ($list as $key => $cart) {
+                $data = M('s_bill_item')->where(array('bi_id' => $cart['bi_id']))->find();
+            }
+        }
+
+        return $data;
+    }
+
+    // 添加到购物车
     public function addCart($uid) {
         $data['bi_id'] = $this->getBiId();
         $data['u_id'] = $uid;
+        $data['c_ctime'] = time();
+        $data['c_status'] = self::STATUS_NORMAL;
         return self::data($data)->add();
     }
 
