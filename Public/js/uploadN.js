@@ -172,6 +172,6 @@ function uploadImg (formData) {
             }
         }
     };
-    xhr.open('POST', 'a.php' , true);
+    xhr.open('POST', '/a.php' , true);
     xhr.send(formData);
 }
