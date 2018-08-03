@@ -8,6 +8,45 @@ class CartModel extends Model {
     const STATUS_NORMAL = 1;
     const STATUS_FORMAL = 9;
 
+    // 订单结算
+    public function finish() {
+        $bi_id_str = I('get.bi_id_str');
+        $bi_id_list = explode(',', $bi_id_str);
+        // 由于是url传输过来的，做二次判断
+        $this->choseBiIdStr($bi_id_list);
+
+        $data = array();
+        foreach ($bi_id_list as $bi_id) {
+            $bill_item = M('s_bill_item')->where(array('bi_id' => $bi_id))->find();
+            $b_id = $bill_item['b_id'];
+            $s_bill = M('s_bill')->where(array('b_id' => $b_id))->find();
+
+            // 父
+            if (empty($data[$b_id])) {
+                $data[$b_id] = $s_bill;
+            }
+
+            // 子
+            $data[$b_id]['bill_item'][] = $bill_item;
+        }
+        return $data;
+    }
+
+    // 选择跳转
+    public function choseBiId() {
+        $bi_id_list = I('bi_id');
+
+        return $this->choseBiIdStr($bi_id_list);
+    }
+
+    // 判断id是否合法
+    private function choseBiIdStr($bi_id_list) {
+        if (empty($bi_id_list)) {
+            notice('请勾选货物');
+        }
+        return implode(',', $bi_id_list);
+    }
+
     //查询购物车
     public function getByUid($uid) {
         $list = self::where(array(
@@ -21,13 +60,21 @@ class CartModel extends Model {
     // 获取货物详细信息
     private function changeList($list) {
         $data = array();
-        dump($list);
         if (!empty($list) && is_array($list)) {
             foreach ($list as $key => $cart) {
-                $data = M('s_bill_item')->where(array('bi_id' => $cart['bi_id']))->find();
+                $bill_item = M('s_bill_item')->where(array('bi_id' => $cart['bi_id']))->find();
+                $b_id = $bill_item['b_id'];
+                $s_bill = M('s_bill')->where(array('b_id' => $b_id))->find();
+
+                // 父
+                if (empty($data[$b_id])) {
+                    $data[$b_id] = $s_bill;
+                }
+
+                // 子
+                $data[$b_id]['bill_item'][] = $bill_item;
             }
         }
-
         return $data;
     }
 
