@@ -164,11 +164,11 @@ function uploadImg (formData) {
         if (xhr.readyState === 4) {
             const result = JSON.parse(xhr.responseText);
             if (xhr.status === 200) {
-                // 上传成功
+                alert('success');
 
 
             } else {
-                // 上传失败
+                alert('fial');
             }
         }
     };
