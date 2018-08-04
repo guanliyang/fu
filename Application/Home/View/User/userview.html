@@ -1,5 +1,4 @@
 <include file="public/head" />
-<script type="text/javascript" src="/Public/js/address.js"></script>
 用户详细信息
 
 <p>姓名: <input type="text" name="name" value="{$user.real_name}"/></p>
@@ -13,10 +12,16 @@
 <p>联系地址 {$user.province} - {$user.city} - {$user.area} - {$user.address}</p>
 <p>修改地址:
     <select id="cmbProvince" name="province">
+        <option value="">{$user.province}</option>
+        <volist name="province" id="vo">
+            <option value="{$vo.id}">{$vo.areaName}</option>
+        </volist>
     </select>
     <select id="cmbCity" name="city">
+        <option value="">{$user.city}</option>
     </select>
     <select id="cmbArea" name="area">
+        <option value="">{$user.area}</option>
     </select>
 </p>
 <p>详细地址: <input type="text" name="address" value="{$user.address}"/></p>
@@ -28,8 +33,8 @@
 
 <script type="text/javascript" src="/Public/bootstrap/js/t_submit.js"></script>
 <script type="text/javascript">
-    addressInit('cmbProvince', 'cmbCity', 'cmbArea');
     t_submit('/Home/User/ajaxSaveUser/');
 </script>
-
+<script type="text/javascript" src="/Public/js/address.js" ></script>
+<script type="text/javascript" src="/Public/js/upload.js" ></script>
 <include file="public/foot" />

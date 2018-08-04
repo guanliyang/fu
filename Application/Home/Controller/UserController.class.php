@@ -10,6 +10,8 @@ class UserController extends HomeController {
 
     // 用户详细信息
     public function userView() {
+        $province = M('area')->where(array('level' => 1))->select();
+        $this->assign('province', $province);
         dump($this->user);
         $this->assign('user', $this->user);
         $this->display();

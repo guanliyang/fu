@@ -13,6 +13,8 @@ class IndexController extends Controller {
 
     // 注册视图
     public function registerView() {
+        $province = M('area')->where(array('level' => 1))->select();
+        $this->assign('province', $province);
         $this->display();
     }
 
@@ -73,5 +75,31 @@ class IndexController extends Controller {
     // 上传方法
     public function uploadImg() {
         save_file();
+    }
+
+    // 返回二级城市列表
+    public function getCity() {
+        $pId = I('request.province');
+        $province = M('area')->where(array('parentId' => $pId))->select();
+        $str = '<option>请选择城市</option>';
+        if (!empty($province)) {
+            foreach ($province as $value) {
+                $str .= '<option value="'.$value['id'].' "> '.$value['areaName'].'</option>';
+            }
+        }
+        die(json_encode(array('city' => $str)));
+    }
+
+    // 返回三级市区
+    public function getArea() {
+        $cid = I('request.city');
+        $province = M('area')->where(array('parentId' => $cid))->select();
+        $str = '';
+        if (!empty($province)) {
+            foreach ($province as $value) {
+                $str .= '<option value="'.$value['id'].' "> '.$value['areaName'].'</option>';
+            }
+        }
+        die(json_encode(array('city' => $str)));
     }
 }
