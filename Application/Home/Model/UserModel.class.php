@@ -24,8 +24,9 @@ class UserModel extends Model {
         $this->city = I('request.city');
         $this->area = I('request.area');
         $this->address = I('request.address');
-        if (!empty(cookie('user_img'))) {
-            $this->img = cookie('user_img');
+        $user_img = cookie('user_img');
+        if (!empty($user_img)) {
+            $this->img = $user_img;
             cookie('user_img', null);
         }
 
