@@ -24,7 +24,7 @@ class UserModel extends Model {
         $this->city = I('request.city');
         $this->area = I('request.area');
         $this->address = I('request.address');
-        $this->img = $this->getImg();
+        $this->img = I('request.src');
 
         $this->add();
     }
