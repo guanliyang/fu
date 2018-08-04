@@ -37,7 +37,7 @@ function save_file($path = 'Public/user_img'){
     $status = move_uploaded_file($file["tmp_name"], $src);
     if ($status) {
         // 地址存cookie里面,不二次上传
-        cookie('user_img', $src);
+        cookie('user_img', '/'.$src);
         die(json_encode(array('url' => '/'.$src)));
     }
     else {

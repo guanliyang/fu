@@ -10,6 +10,8 @@ class UserController extends HomeController {
 
     // 用户详细信息
     public function userView() {
+        dump($this->user);
+        $this->assign('user', $this->user);
         $this->display();
     }
 
@@ -18,5 +20,11 @@ class UserController extends HomeController {
         $user = new \Home\Model\UserModel();
         $user->changePassword($this->user['mobile']);
         notice("修改成功", 0);
+    }
+
+    // 保存修改
+    public function ajaxSaveUser() {
+        $user = new \Home\Model\UserModel();
+        $user->saveUser($this->user);
     }
 }

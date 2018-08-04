@@ -33,11 +33,35 @@ class UserModel extends Model {
         $this->add();
     }
 
+    //用户修改信息
+    public function saveUser($user) {
+        $this->real_name = $this->_checkName();
+        $this->mobile = $this->_checkMobile();
+        if ($this->mobile != $user['mobile']) {
+            $this->_checkMobileExisted($this->mobile);
+        }
 
-    private function getImg() {
-        return 't';//I('request.src');
-        //return base64_image_content($src);
+        $this->company_name = I('request.company_name');
+        $this->province = I('request.province');
+        $this->city = I('request.city');
+        $this->area = I('request.area');
+        $this->address = I('request.address');
+
+        $user_img = cookie('user_img');
+        if (!empty($user_img)) {
+            $this->img = $user_img;
+            cookie('user_img', null);
+        }
+
+        $status = $this->where(array('id'=>$user['id']))->save();
+        if ($status) {
+            notice('修改成功');
+        }
+        else {
+            notice('修改失败');
+        }
     }
+
     private function _checkMobileExisted($mobile) {
         $where = array('mobile' => $mobile);
         $existed = $this->where($where)->find();
@@ -138,6 +162,10 @@ class UserModel extends Model {
         $smsLog->message = "您的验证码是".$code;
         $smsLog->ctime = time();
         $smsLog->add();
+
+    }
+
+    private function _changeMobile() {
 
     }
 
