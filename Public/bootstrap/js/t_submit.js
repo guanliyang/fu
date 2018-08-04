@@ -18,12 +18,6 @@ function t_submit(url) {
             }
         });
 
-        // 上传图片
-        if ($("#showimg").length > 0) {
-            var src = $("#showimg").attr('src');
-            data = data + "src=" + src;
-        }
-
         $.ajax({
             type: 'POST',
             url: url,
