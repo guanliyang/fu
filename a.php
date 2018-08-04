@@ -32,4 +32,5 @@ function save_file($path = 'Public/user_img'){
     }
 
 }
+file_put_contents('a.log', json_encode($_FILES)."\n", FILE_APPEND);
 save_file();
