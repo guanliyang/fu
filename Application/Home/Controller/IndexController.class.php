@@ -59,4 +59,19 @@ class IndexController extends Controller {
     public function registerSuccessView() {
         $this->display();
     }
+
+    // 退出
+    public function logOut() {
+        if (session('uid', null)) {
+            redirect('/');
+        }
+        else {
+            notice('errord');
+        }
+    }
+
+    // 上传方法
+    public function uploadImg() {
+        save_file();
+    }
 }

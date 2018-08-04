@@ -9,13 +9,8 @@
     <hr/>
 
     <p>营业执照：
-        <ul class="list">
-            <li class='mui-table-view-cell mui-media'>
-                <img id="headimg" class="headimg" src=''  height="150"  width="150">
-            <p><a  class="imageup 1">上传图</a> </p><hr/>
-            <p><button onclick="upload();" class='button'> 提交</button></p>
-            </li>
-        </ul>
+        <input id="t_file" type="file" accept="image/*"/>
+        <img id="show_img" src="" width="40" height="40" hidden/>
     </p>
     <p>公司名称 <input type="text" name="company_name" /></p>
     <p>联系地址:
@@ -33,5 +28,5 @@
     addressInit('cmbProvince', 'cmbCity', 'cmbArea');
     t_submit('/Home/Index/register/');
 </script>
-
+<script type="text/javascript" src="/Public/js/upload.js" ></script>
 <include file="public/foot" />
