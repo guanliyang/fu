@@ -12,6 +12,7 @@ function notice($message, $code = 1, $data = array()) {
  * 保存图片
  */
 function save_file($path = 'Public/user_img'){
+    file_put_contents('a.log', json_encode($_FILES)."\n", FILE_APPEND);
     $size = 1024 * 1000 * 1; // 1M
     $file = $_FILES["file"];
 
