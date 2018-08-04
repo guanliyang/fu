@@ -20,9 +20,24 @@ class UserModel extends Model {
         $this->_checkMobileExisted($this->mobile);
         $this->password = $this->_checkPassword();
         $this->company_name = I('request.company_name');
-        $this->province = I('request.province');
-        $this->city = I('request.city');
-        $this->area = I('request.area');
+
+        // 地址设置
+        $province = I('request.province');
+        if (!empty($province)) {
+            $this->province = $this->getAreaNameById($province);
+        }
+
+        $city = I('request.city');
+        if (!empty($city)) {
+            $this->city = $this->getAreaNameById($city);
+        }
+
+        $area = I('request.area');
+        if (!empty($area)) {
+            $this->area = $this->getAreaNameById($area);
+        }
+
+
         $this->address = I('request.address');
         $user_img = cookie('user_img');
         if (!empty($user_img)) {
@@ -42,9 +57,22 @@ class UserModel extends Model {
         }
 
         $this->company_name = I('request.company_name');
-        $this->province = I('request.province');
-        $this->city = I('request.city');
-        $this->area = I('request.area');
+
+        $province = I('request.province');
+        if (!empty($province)) {
+            $this->province = $this->getAreaNameById($province);
+        }
+
+        $city = I('request.city');
+        if (!empty($city)) {
+            $this->city = $this->getAreaNameById($city);
+        }
+
+        $area = I('request.area');
+        if (!empty($area)) {
+            $this->area = $this->getAreaNameById($area);
+        }
+
         $this->address = I('request.address');
 
         $user_img = cookie('user_img');
@@ -210,5 +238,9 @@ class UserModel extends Model {
         return array(
             's_bill' => $SBill
         );
+    }
+
+    private function getAreaNameById($id) {
+        return M('area')->where(array('id' => $id))->getField('areaName');
     }
 }
