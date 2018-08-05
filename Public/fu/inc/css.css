@@ -38,7 +38,7 @@ a{color:#807050;}
 
 .reg{text-align:left;margin-left:80px;}
 #show_img{position:absolute; width:90px;height:90px;}
-
+#t_file{display:none;}
 .pboard{width:500px;height:90px;background:#B5A67E;border:2px solid #EFEFEF;color:#E5E0D2;}
 .pboard b{color:#FFF;margin:0px 5px;}
 .pboard h2{margin:10px 0px 0px 20px;}
