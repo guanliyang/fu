@@ -220,13 +220,15 @@ class UserModel extends Model {
 
     public function changePassword($user_mobile) {
         $mobile = $this->_checkMobile();
-        if ($user_mobile != $mobile) {
-            notice("您填写的电话不是你自己的");
-        }
+
 //        $this->_checkCode($mobile);
-        $this->password = $this->_checkPassword();
+        $password = $this->_checkPassword();
         $where = array('mobile' => $mobile);
-        $this->where($where)->save();
+        $user = $this->where($where)->find();
+        if (empty($user)) {
+            notice('此电话号码还没有注册');
+        }
+        $this->where($where)->save(array('password' => $password));
     }
 
     /**

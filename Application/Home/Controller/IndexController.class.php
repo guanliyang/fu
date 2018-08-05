@@ -2,6 +2,18 @@
 namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
+    // 密码重置
+    public function changePasswordView() {
+        $this->display();
+    }
+
+    // 设置新密码
+    public function changePassword() {
+        $user = new \Home\Model\UserModel();
+        $user->changePassword($this->user['mobile']);
+        notice("修改成功", 0);
+    }
+
     // 首页登录页面
     public function index(){
 
