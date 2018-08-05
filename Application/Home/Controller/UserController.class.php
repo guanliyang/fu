@@ -4,7 +4,6 @@ class UserController extends HomeController {
 
     // 密码重置
     public function changePasswordView() {
-
         $this->display();
     }
 

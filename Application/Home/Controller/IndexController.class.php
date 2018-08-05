@@ -30,7 +30,7 @@ class IndexController extends Controller {
 
         // 超过5次 电话验证码登录
         $input_password_num = cookie('input_password_num');
-        if ($input_password_num > 5) {
+        if ($input_password_num > 4) {
             notice('密码输入错误超过5次', 2, array('url' => '/Home/Index/mobileLogin'));
         }
 
@@ -47,7 +47,7 @@ class IndexController extends Controller {
     public function ajaxMobileLogin() {
         $user = new \Home\Model\UserModel();
         $user->mobileLogin();
-        redirect('/Home/Message/index');
+        notice('登录成功', 0, array('url' => '/'));
     }
 
     // 注册
@@ -64,12 +64,8 @@ class IndexController extends Controller {
 
     // 退出
     public function logOut() {
-        if (session('uid', null)) {
-            redirect('/');
-        }
-        else {
-            notice('errord');
-        }
+        session('uid', null);
+        redirect('/');
     }
 
     // 上传方法

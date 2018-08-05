@@ -86,7 +86,7 @@ class UserModel extends Model {
             notice('修改成功');
         }
         else {
-            notice('修改失败');
+            notice('未修改信息');
         }
     }
 
@@ -230,13 +230,16 @@ class UserModel extends Model {
     }
 
     /**
-     * 用户首页信息 包括用户信息还买 卖 , 预售信息
+     * 用户首页信息 包括用户信息和 买 卖 , 预购信息
      */
     public function getMessageInfo($uid) {
         $where = array('u_id' => $uid);
         $SBill = M('s_bill')->where($where)->select();
+
+        $ROffer = M('r_offer')->where($where)->select();
         return array(
-            's_bill' => $SBill
+            's_bill' => $SBill,
+            'r_offer' => $ROffer,
         );
     }
 

@@ -16,11 +16,12 @@ class SellController extends HomeController {
     public function sellBillList() {
         $SBill = new \Home\Model\SBillModel();
         $list = $SBill->getList();
-        dump($list);
         $this->putG();
 
         $this->assign('list', $list);
         $this->display();
+        dump($list);
+
     }
 
     // 卖粮页面
@@ -50,9 +51,10 @@ class SellController extends HomeController {
     public function sellBillInfo() {
         $SBill = new \Home\Model\SBillModel();
         $info = $SBill->getInfo();
-        dump($info);
         $this->assign('SBill', $info);
         $this->display();
+        dump($info);
+
     }
 
     //修改价格 页面

@@ -14,6 +14,13 @@ class OfferController extends HomeController {
 
     // 提交预约信息
     public function addOffer() {
-        notice('还没写好');
+        $offer = new \Home\Model\ROfferModel();
+        $status = $offer->addOffer($this->user['id']);
+        if ($status) {
+            notice('成功');
+        }
+        else {
+            notice('写入出错!');
+        }
     }
 }

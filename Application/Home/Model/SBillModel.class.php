@@ -13,6 +13,11 @@ class SBillModel extends Model {
     //在售粮源
     public function getList() {
         $where = array('b_status' => self::STATUS_ON);
+        $gc_id = I('request.gc_id', 0, 'intval');
+        if (!empty($gc_id)) {
+            $where += array('gc_id' => $gc_id);
+        }
+        dump($where);
 
         return self::where($where)->select();
     }
@@ -39,7 +44,7 @@ class SBillModel extends Model {
     }
 
     public function ajaxAdd($uid) {
-        $this->_getG();
+        $this->getG();
         $this->_getHan();
         $this->_getPrice();
         $this->_getFrei();
@@ -51,7 +56,7 @@ class SBillModel extends Model {
     }
 
     // 五个从表里面取得值
-    private function _getG() {
+    public function getG() {
         $this->data['gc_id'] = I('request.gc_id', 0, 'intval');
         $where = array('gc_id' => $this->data['gc_id']);
         $this->data['b_name'] = M('g_class')->where($where)->getField('gc_name');
@@ -86,6 +91,8 @@ class SBillModel extends Model {
         if (empty($this->data['b_level'])) {
             notice('等级有误');
         }
+
+        return $this->data;
     }
 
     // 四个汉字百分比

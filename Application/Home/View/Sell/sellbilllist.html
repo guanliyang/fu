@@ -40,6 +40,21 @@
     </select>
 </p>
 
+<button id="t_search">查找粮源  --  粮源搜索按钮</button>
 
+<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $("#t_search").on('click tap',function() {
+        // 获取所有input数组
+        var data = '';
+        $(":input").each(function () {
+            var key = $(this).attr('name');
+            var val = $(this).val();
+            if (key && val) {
+                data = data + key + "=" + val + "&";
+            }
+        });
 
-<include file="public/foot" />
+        window.location.href = "/Home/Sell/sellBillList?" + data ;
+    });
+</script>
