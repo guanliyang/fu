@@ -7,7 +7,7 @@ class MessageController extends HomeController {
         $info = $user->getMessageInfo($this->user['id']);
 //        dump($this->user);
 //        dump($info);
-        $this->assign('user', $this->user);
+
         $this->assign('info', $info);
         $this->display();
     }

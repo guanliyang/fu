@@ -14,6 +14,6 @@ class HomeController extends Controller {
         if (!empty($uid)) {
             $this->user = M('User')->find($uid);
         }
-
+        $this->assign('user', $this->user);
     }
 }
