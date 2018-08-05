@@ -10,16 +10,43 @@ class SBillModel extends Model {
     const STATUS_CHECK = 0;
     const STATUS_FINISH = 10;
 
+    public function getP() {
+        $page = I('request.page', 1, 'intval');
+        $page = $page < 1 ? 1 : $page;
+        $limit = I('request.limit', 10, 'intval');
+
+        return $page. ',' . $limit;
+    }
     //在售粮源
     public function getList() {
         $where = array('b_status' => self::STATUS_ON);
+
         $gc_id = I('request.gc_id', 0, 'intval');
         if (!empty($gc_id)) {
             $where += array('gc_id' => $gc_id);
         }
-        dump($where);
 
-        return self::where($where)->select();
+        $gc_id = I('request.gl_id', 0, 'intval');
+        if (!empty($gc_id)) {
+            $where += array('gl_id' => $gc_id);
+        }
+
+        $gc_id = I('request.gp_id', 0, 'intval');
+        if (!empty($gc_id)) {
+            $where += array('gp_id' => $gc_id);
+        }
+
+        $gc_id = I('request.gr_id', 0, 'intval');
+        if (!empty($gc_id)) {
+            $where += array('gr_id' => $gc_id);
+        }
+
+        $gc_id = I('request.gy_id', 0, 'intval');
+        if (!empty($gc_id)) {
+            $where += array('gy_id' => $gc_id);
+        }
+
+        return self::where($where)->order('b_ctime desc')->page($this->getP())->select();
     }
 
     //修改价格
