@@ -14,7 +14,7 @@
         <div class="reg">
             　　　 姓名：<input name="name" value="{$user.real_name}" type="text"/><br/>
             手机号/帐号：{$user.mobile}　　<input class="bt bt_s" value="重置密码" type="button"/><br/>
-            　 帐号状态： {$user.status}
+            　 帐号状态： {$user.status|getUserStatus}
         </div>
         <hr>
         <div class="reg">

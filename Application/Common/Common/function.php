@@ -46,3 +46,13 @@ function save_file($path = 'Public/user_img'){
     }
 
 }
+
+// 用户状态
+function getUserStatus($status) {
+    $list =
+        array(
+        0 => '待审核',
+        1 => '审核通过'
+    );
+    return $list[$status];
+}
