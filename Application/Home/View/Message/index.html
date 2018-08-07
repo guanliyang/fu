@@ -12,17 +12,19 @@
             <h1>1,700</h1>
         </div>
         <div class="uboard">
-            <h3>成交订单： 12,380 笔</h3>
-            <h3>注册会员： 32,181 人</h3>
+            <h3>成交订单： {$info.order_count} 笔</h3>
+            <h3>注册会员： {$info.user_count} 人</h3>
             <div>
-                <a href=""><img src="/Public/fu/img/bt_buy.png"/></a>
+                <a href="/Home/Sell/sellBill"><img src="/Public/fu/img/bt_buy.png"/></a>
                 <a href=""><img src="/Public/fu/img/bt_sal.png"/></a>
             </div>
         </div>
     </div>
     <div class="content">
         <div class="list_item">
-            您好，<a href="">{$user.real_name}</a>。你有 <a href="">8条待处理</a> 信息;  <a href="">8组待购买</a> 货物。
+            您好，<a href="#">{$user.real_name}</a>。你有
+ <a href="/Home/SysMsg/index">{$info.message_count}条待处理</a>信息;
+ <a href="">{$info.cart_count}组待购买</a>货物。
             <div class="item">
                 <a href="">卖粮货单(3)</a>
                 <a href="">预购约单(1)</a>

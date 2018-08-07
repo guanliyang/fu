@@ -9,66 +9,21 @@
         <div class="list_item">
             <label>:: 系统通知 ::</label>
             <div class="item">
-                <a href="">已读通知</a>
-                <a href="" class="hot">新通知(4)</a>
+                <a href="/Home/SysMsg/is_read" <if condition="$is_read"> class="hot" </if> >已读通知</a>
+                <a href="/Home/SysMsg/index" <if condition="!$is_read"> class="hot" </if>>新通知({$data.not_read_list_count})</a>
             </div>
         </div>
         <div class="list">
             <table>
+                <volist name="data.list" id="vo">
                 <tr>
-                    <td class="cool">订单号：B101101101</a></td>
-                    <td class="cool">2018年07月19日 12:21:35</td>
-                    <td class="tdlock">待办事项：请支付货款(<label>42,500</label>元/利息(<label>50</label>元)，到合同指定帐号。</td>
-                    <td><a href="">查看订单详情...</a></td>
+                    <td class="cool">订单号：{$vo.rsource_id}</a></td>
+                    <td class="cool">{$vo.ctime|date='Y年m月d日 H:i:s',###}</td>
+                    <td class="tdlock">{$vo.sm_content}</td>
+                    <td><a href="/Home/Order/info/?o_id={$vo.o_id}">查看订单详情...</a></td>
                 </tr>
-                <tr>
-                    <td class="cool">订单号：B101101101</a></td>
-                    <td class="cool">2018年07月19日 12:21:35</td>
-                    <td class="tdlock">待办事项：请支付货款(<label>42,500</label>元/利息(<label>50</label>元)，到合同指定帐号。</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
-                <tr>
-                    <td class="cool">订单号：B101101101</a></td>
-                    <td class="cool">2018年07月19日 12:21:35</td>
-                    <td class="tdlock">待办事项：请支付货款(<label>42,500</label>元/利息(<label>50</label>元)，到合同指定帐号。</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
-                <tr>
-                    <td class="cool">订单号：B101101101</a></td>
-                    <td class="cool">2018年07月19日 12:21:35</td>
-                    <td class="tdlock">待办事项：请支付货款(<label>42,500</label>元/利息(<label>50</label>元)，到合同指定帐号。</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
-                <tr>
-                    <td class="cool">订单号：B101101101</a></td>
-                    <td class="cool">2018年07月19日 12:21:35</td>
-                    <td class="tdlock">待办事项：请支付货款(<label>42,500</label>元/利息(<label>50</label>元)，到合同指定帐号。</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
-                <tr>
-                    <td class="cool">订单号：B101101101</a></td>
-                    <td class="cool">2018年07月19日 12:21:35</td>
-                    <td class="tdlock">待办事项：请支付货款(<label>42,500</label>元/利息(<label>50</label>元)，到合同指定帐号。</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
-                <tr>
-                    <td class="cool">订单号：B101101101</a></td>
-                    <td class="cool">2018年07月19日 12:21:35</td>
-                    <td class="tdlock">待办事项：请支付货款(<label>42,500</label>元/利息(<label>50</label>元)，到合同指定帐号。</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
-                <tr>
-                    <td class="cool">订单号：B101101101</a></td>
-                    <td class="cool">2018年07月19日 12:21:35</td>
-                    <td class="tdlock">待办事项：请支付货款(<label>42,500</label>元/利息(<label>50</label>元)，到合同指定帐号。</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
-                <tr>
-                    <td class="cool">订单号：B101101101</a></td>
-                    <td class="cool">2018年07月19日 12:21:35</td>
-                    <td class="tdlock">待办事项：请支付货款(<label>42,500</label>元/利息(<label>50</label>元)，到合同指定帐号。</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
+                </volist>
+
                 <tr>
                     <td class="cool">订单号：B101101101</a></td>
                     <td class="cool">2018年07月19日 12:21:35</td>
@@ -76,7 +31,7 @@
                     <td><a href="">查看订单详情...</a></td>
                 </tr>
             </table>
-            <div class="list_page"><a href="" class="hot">1</a><a href="">2</a><a href="">3</a><a href="">4</a><a href="">5</a><a href="">>></a></div>
+            <div class="list_page">{$data.page}</div>
         </div>
     </div>
 </div>

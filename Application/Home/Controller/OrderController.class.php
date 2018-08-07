@@ -9,4 +9,7 @@ class OrderController extends HomeController {
         notice("success");
     }
 
+    public function info() {
+        notice('order info');
+    }
 }
