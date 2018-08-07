@@ -6,7 +6,7 @@ class OrderController extends HomeController {
     public function add() {
         $order = new \Home\Model\OrderModel();
         $order->addOrder();
-        die("生成订单");
+        notice("success");
     }
 
 }

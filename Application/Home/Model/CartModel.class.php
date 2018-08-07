@@ -36,7 +36,8 @@ class CartModel extends Model {
     public function choseBiId() {
         $bi_id_list = I('bi_id');
 
-        return $this->choseBiIdStr($bi_id_list);
+        //$this->choseBiIdStr($bi_id_list);
+        notice('选择成功', '0', array('url' => '/Home/Cart/finish'));
     }
 
     // 判断id是否合法

@@ -6,7 +6,6 @@ class UserController extends HomeController {
     public function userView() {
         $province = M('area')->where(array('level' => 1))->select();
         $this->assign('province', $province);
-        dump($this->user);
         $this->assign('user', $this->user);
         $this->display();
     }

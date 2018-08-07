@@ -20,7 +20,7 @@ class SellController extends HomeController {
 
         $this->assign('list', $list);
         $this->display();
-        dump($list);
+        //dump($list);
 
     }
 

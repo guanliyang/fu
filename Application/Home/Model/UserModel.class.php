@@ -51,10 +51,6 @@ class UserModel extends Model {
     //用户修改信息
     public function saveUser($user) {
         $this->real_name = $this->_checkName();
-        $this->mobile = $this->_checkMobile();
-        if ($this->mobile != $user['mobile']) {
-            $this->_checkMobileExisted($this->mobile);
-        }
 
         $this->company_name = I('request.company_name');
 
