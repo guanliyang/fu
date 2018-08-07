@@ -15,4 +15,9 @@ class UserController extends HomeController {
         $user = new \Home\Model\UserModel();
         $user->saveUser($this->user);
     }
+
+    // 密码重置
+    public function changePassword() {
+        $this->display('Index/changepasswordview');
+    }
 }

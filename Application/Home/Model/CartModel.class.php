@@ -34,10 +34,10 @@ class CartModel extends Model {
 
     // 选择跳转
     public function choseBiId() {
-        $bi_id_list = I('bi_id');
+        $bi_id_list = I('buyid');
 
-        //$this->choseBiIdStr($bi_id_list);
-        notice('选择成功', '0', array('url' => '/Home/Cart/finish'));
+        $bi_id_str = $this->choseBiIdStr($bi_id_list);
+        notice('选择成功', '0', array('url' => '/Home/Cart/finish?bi_id_str='.$bi_id_str));
     }
 
     // 判断id是否合法
@@ -54,6 +54,7 @@ class CartModel extends Model {
             'u_id' => $uid,
             'c_status' => self::STATUS_NORMAL
         ))->select();
+
         $list = $this->changeList($list);
         return $list;
     }

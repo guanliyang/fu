@@ -28,7 +28,6 @@ class CartController extends HomeController {
     public function index() {
         $cart = new \Home\Model\CartModel();
         $list = $cart->getByUid($this->user['id']);
-        dump($list);
         $this->assign('list', $list);
         $this->display();
     }
