@@ -46,9 +46,10 @@ class SellController extends HomeController {
     // 添加卖货信息
     public function addBill() {
         $SBill = new \Home\Model\SBillModel();
+        $b_id = $SBill->ajaxAdd($this->user['id']);
 
-        if ($SBill->ajaxAdd($this->user['id'])) {
-            notice('添加成功', 0, array('url' => '/Home/Sell/sellBillInfo'));
+        if ($b_id) {
+            notice('添加成功', 0, array('url' => '/Home/Sell/sellBillInfo?b_id='.$b_id));
         }
     }
 
@@ -64,6 +65,9 @@ class SellController extends HomeController {
 
     //修改价格 页面
     public function changePrice() {
+        $SBill = new \Home\Model\SBillModel();
+        $info = $SBill->getInfo();
+        $this->assign('SBill', $info);
         $this->display();
     }
 
@@ -71,5 +75,11 @@ class SellController extends HomeController {
     public function ajaxChangePrice() {
         $SBill = new \Home\Model\SBillModel();
         $SBill->changePrice();
+    }
+
+    //货组详情
+    public function billItemInfo() {
+        $bi_id = I('request.bi_id');
+        $this->display();
     }
 }

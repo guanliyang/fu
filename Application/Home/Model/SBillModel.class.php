@@ -61,7 +61,7 @@ class SBillModel extends HomeModel {
         }
     }
     public function getInfo() {
-        $id = I("request.id", 0, 'intval');
+        $id = I("request.b_id", 0, 'intval');
 
         $bill = $this->where(array('b_id' => $id))->find();
 
@@ -79,6 +79,8 @@ class SBillModel extends HomeModel {
         $this->_getAdd();
         $this->_getDefault();
         $this->data['u_id'] = $uid;
+        $this->data['b_photo'] = $this->getImagePath();
+        $this->data['b_add'] = $this->getAddress($uid);
         return $this->data($this->data)->add();
     }
 
@@ -179,12 +181,6 @@ class SBillModel extends HomeModel {
 
     // 联系人信息
     private function _getAdd() {
-        $b_add = I('request.b_add');
-        if (empty($b_add)) {
-            notice('装货详细地址不能为空');
-        }
-        $this->data['b_add'] = $b_add;
-
         $b_cont = I('request.b_cont');
         if (empty($b_cont)) {
             notice('联系人不能为空');

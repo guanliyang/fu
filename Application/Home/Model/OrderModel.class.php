@@ -29,7 +29,7 @@ class OrderModel extends HomeModel {
         // 收货方式
         $this->getDeliType();
         // 收货地址
-        $this->getAddress($uid);
+        $this->data['o_deli_add'] = $this->getAddress($uid);
 
         //收货人信息
         $this->getUser();
@@ -54,16 +54,6 @@ class OrderModel extends HomeModel {
 
         $this->data['o_deli_cont'] = $user_name;
         $this->data['o_deli_mobi'] = $mobile;
-    }
-    // 获取收货地址
-    public function getAddress($uid) {
-        $area = new \Home\Model\AreaModel();
-        $area_address = $area->getAddress($uid);
-        $address = I('request.address');
-        if (empty($address)) {
-            notice('请认真填写地址');
-        }
-        $this->data['o_deli_add'] = $area_address . $address;
     }
 
     public function getDeliType() {

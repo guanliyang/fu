@@ -2,6 +2,7 @@
 namespace Home\Model;
 use Think\Model;
 class HomeModel extends Model {
+    //是否阅读合同
     public function checkContract() {
         $contract = I('request.contract', 0);
         if (empty($contract)) {
@@ -28,5 +29,25 @@ class HomeModel extends Model {
         }
 
         return $bi_id_list;
+    }
+
+    // 获取上传图片地址
+    public function getImagePath() {
+        $user_img = cookie('user_img');
+        if (!empty($user_img)) {
+            cookie('user_img', null);
+        }
+        return $user_img;
+    }
+
+    // 获取收货地址
+    public function getAddress($uid) {
+        $area = new \Home\Model\AreaModel();
+        $area_address = $area->getAddress($uid);
+        $address = I('request.address');
+        if (empty($address)) {
+            notice('请认真填写地址');
+        }
+        return $area_address . $address;
     }
 }

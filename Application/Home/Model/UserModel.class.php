@@ -1,7 +1,6 @@
 <?php
 namespace Home\Model;
-use Think\Model;
-class UserModel extends Model {
+class UserModel extends HomeModel {
     protected $trueTableName = 'user';
 
     // 二维码有效期10分钟
@@ -37,13 +36,8 @@ class UserModel extends Model {
             $this->area = $this->getAreaNameById($area);
         }
 
-
         $this->address = I('request.address');
-        $user_img = cookie('user_img');
-        if (!empty($user_img)) {
-            $this->img = $user_img;
-            cookie('user_img', null);
-        }
+        $this->img = $this->getImagePath();
 
         $this->add();
     }

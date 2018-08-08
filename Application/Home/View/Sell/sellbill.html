@@ -69,7 +69,12 @@
             <table>
                 <tr>
                     <td width="30" rowspan="5"></td>
-                    <td width="230" rowspan="5"><img src="" width="200" height="200" /><br/>　粮食近照　　　　(点击上传)</td>
+                    <td width="230" rowspan="5">
+                        <img id="show_img" src="" width="200" height="200" /><br/>　粮食近照　　　　
+                        <a href="#" onclick="$('#t_file').click()">(点击上传)</a>
+                        <input id="t_file" type="file" accept="image/*"/>
+                        　　　　　　　
+                    </td>
                     <td>品名：
                         <select name="gc_id">
                             <volist name="class" id="vo">
