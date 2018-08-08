@@ -6,7 +6,16 @@ class CartController extends HomeController {
     public function finish() {
         $car = new \Home\Model\CartModel();
         $bill = $car->finish();
-        dump($bill);
+
+        $province = M('area')->where(array('level' => 1))->select();
+        $this->assign('province', $province);
+        $this->assign('user', $this->user);
+
+        $this->assign('list', $bill);
+
+        $all_price = (new \Home\Model\SBillItemModel())->getPrice(I('get.bi_id_str'));
+
+        $this->assign('all_price', $all_price);
 
         $this->display();
     }

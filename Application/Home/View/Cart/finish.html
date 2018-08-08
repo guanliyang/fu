@@ -72,24 +72,20 @@
         <div class="list">
             <<a href="">返回购物车</a>>
             <table>
-                <tr>
-                    <th width="60"></th>
-                    <th class="tdlock">玉米　2018年　辽宁　一等　容重720g/l　单价：<label>1,700</label>元</th>
-                    <th>1组　(2箱　净重：50吨)</th>
-                    <th width="150" class="tdright"><label>85,000</label>元</th>
-                </tr>
-                <tr>
-                    <th width="60"></th>
-                    <th>玉米　2016年　吉林　一等　容重715g/l　单价：<label>1,690</label>元</th>
-                    <th>2组　(4箱　净重：100吨)</th>
-                    <th width="150" class="tdright"><label>169,000</label>元</th>
-                </tr>
+                <foreach name="list" item="vo">
+                    <tr>
+                        <th width="60"></th>
+                        <th class="tdlock">{$vo.b_name}　{$vo.b_year}年　{$vo.b_place}　一等　容重{$vo.b_rz}g/l　单价：<label>{$vo.b_pri1}</label>元</th>
+                        <th>{$vo.bill_item|count}组　({$vo.bill_item|array_column='bi_sum'|array_sum}箱　净重：{$vo.bill_item|array_column='bi_nwei'|array_sum}吨)</th>
+                        <th width="150" class="tdright"><label>{$vo.bill_item|array_column='bi_dpay'|array_sum}</label>元</th>
+                    </tr>
+                </foreach>
             </table>
             <table>
                 <tr>
                     <td width="60"></td>
                     <td colspan="6" class="tdright">订单货款合计：</td>
-                    <td width="150" class="tdright"><label id="total">254,000</label>元</td>
+                    <td width="150" class="tdright"><label id="total">{$all_price}</label>元</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -120,14 +116,28 @@
                 <tr id="trRadd">
                     <td></td>
                     <td>收货地址：</td>
-                    <td colspan="5"><select><option>辽宁</option></select>　<select><option>沈阳</option></select>　<select><option>和平区</option></select>　<input name="cpaddress" value="xx街道xx号" type="text" class="inpbig" /></td>
+                    <td colspan="5">
+                        <select id="cmbProvince" name="province">
+                            <option value="">{$user.province}</option>
+                            <volist name="province" id="vo">
+                                <option value="{$vo.id}">{$vo.areaName}</option>
+                            </volist>
+                        </select>
+                        <select id="cmbCity" name="city">
+                            <option value="">{$user.city}</option>
+                        </select>
+                        <select id="cmbArea" name="area">
+                            <option value="">{$user.area}</option>
+                        </select>
+                        <input type="text" name="address" value="{$user.address}" class="inpbig"/>
+                        </td>
                 </tr>
                 <tr id="trRcon">
                     <td width="60"></td>
                     <td width="90">　联系人：</td>
-                    <td colspan="2"><input name="cpaddress" value="赵钱孙" type="text"/></td>
+                    <td colspan="2"><input name="user_name" value="{$user.real_name}" type="text"/></td>
                     <td width="90">　手机号：</td>
-                    <td colspan="2"><input name="cpaddress" value="13910533527" type="text"/></td>
+                    <td colspan="2"><input name="mobile" value="{$user.mobile}" type="text"/></td>
                 </tr>
             </table>
             <table>
@@ -137,7 +147,8 @@
                     <td width="150" class="tdright"><label id="pay">0</label>元</td>
                 </tr>
             </table>
-            <<a href="">预览购买合同</a>>　　　　<input type="checkbox" class="bt_s"/> 我已阅读并了解合同详细内容，同意签属并确认其法律效力。
+            <input type="hidden" name="bi_id_str" value="{$_GET['bi_id_str']}">
+            <<a href="">预览购买合同</a>>　　　　<input type="checkbox" name="contract" class="bt_s"/> 我已阅读并了解合同详细内容，同意签属并确认其法律效力。
             <div class="list_page">
                 <input class="bt bt_s" id="t_submit" value="正式提交订单" type="button"/>
             </div>
@@ -147,6 +158,7 @@
 
 
 <script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/js/address.js" ></script>
 <script type="text/javascript" src="/Public/bootstrap/js/t_submit.js"></script>
 <script type="text/javascript">
     t_submit('/Home/Order/add');

@@ -1,7 +1,6 @@
 <?php
 namespace Home\Model;
-use Think\Model;
-class CartModel extends Model {
+class CartModel extends HomeModel {
     protected $trueTableName = 'b_cart';
 
     const STATUS_DEL = -9;
@@ -11,10 +10,7 @@ class CartModel extends Model {
     // 订单结算
     public function finish() {
         $bi_id_str = I('get.bi_id_str');
-        $bi_id_list = explode(',', $bi_id_str);
-        // 由于是url传输过来的，做二次判断
-        $this->choseBiIdStr($bi_id_list);
-
+        $bi_id_list = $this->checkBiIdStr($bi_id_str);
         $data = array();
         foreach ($bi_id_list as $bi_id) {
             $bill_item = M('s_bill_item')->where(array('bi_id' => $bi_id))->find();
@@ -34,9 +30,9 @@ class CartModel extends Model {
 
     // 选择跳转
     public function choseBiId() {
-        $bi_id_list = I('buyid');
+        $bi_id_str = implode(',', I('buyid'));
 
-        $bi_id_str = $this->choseBiIdStr($bi_id_list);
+        $this->checkBiIdStr($bi_id_str);
         notice('选择成功', '0', array('url' => '/Home/Cart/finish?bi_id_str='.$bi_id_str));
     }
 

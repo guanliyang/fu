@@ -1,16 +1,44 @@
 function t_submit(url) {
     $("#t_submit").on('click tap',function(){
-        // 获取所有input数组
+        // 获取所有input text 数组
         var data = '';
-        $(":input").each(function(){
+        $("input:text").each(function(){
             var key = $(this).attr('name');
             var val = $(this).val() ;
             if (key && val) {
                 data = data + key + "=" + val + "&";
             }
         });
+
+        // 获取所有input hidden 数组
+        $("input:hidden").each(function(){
+            var key = $(this).attr('name');
+            var val = $(this).val() ;
+            if (key && val) {
+                data = data + key + "=" + val + "&";
+            }
+        });
+
         // 所有select数组
-        $("select option:selected").each(function(){
+        $("select").each(function(){
+            var key = $(this).attr('name');
+            var val = $(this).find('option:selected').val() ;
+            if (key && val) {
+                data = data + key + "=" + val + "&";
+            }
+        });
+
+        // checkbox
+        $("input:checkbox:checked").each(function(){
+            var key = $(this).attr('name');
+            var val = $(this).val() ;
+            if (key && val) {
+                data = data + key + "=" + val + "&";
+            }
+        });
+
+        // radio
+        $("input:radio:checked").each(function(){
             var key = $(this).attr('name');
             var val = $(this).val() ;
             if (key && val) {

@@ -27,18 +27,20 @@
             <a href="#" onclick="$('#t_file').click()">(重新上传)</a><br/><br/><br/>
             公司名称：<input name="company_name" value="{$user.company_name}" type="text"/><br/>
             联系地址：
+            <span class="my_select">
             <select id="cmbProvince" name="province">
-            <option value="">{$user.province}</option>
-            <volist name="province" id="vo">
-                <option value="{$vo.id}">{$vo.areaName}</option>
-            </volist>
-        </select>
+                <option value="">{$user.province}</option>
+                <volist name="province" id="vo">
+                    <option value="{$vo.id}">{$vo.areaName}</option>
+                </volist>
+            </select>
             <select id="cmbCity" name="city">
                 <option value="">{$user.city}</option>
             </select>
             <select id="cmbArea" name="area">
                 <option value="">{$user.area}</option>
             </select>
+            </span>
             <br/>
             　　　　　<input type="text" name="address" value="{$user.address}"/><br/><br/>
             　　　　　<input class="bt " id="t_submit" value="保存修改" type="button"/>
