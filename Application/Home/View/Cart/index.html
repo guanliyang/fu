@@ -19,7 +19,7 @@
         var selpay = 0;
         var selsum = 0;
         for (var i=0;i<eventdx.length;i++){
-            if(eventdx[i].checked){
+            if(eventdx[i].name=='buyid' && eventdx[i].checked){
                 document.getElementById('tr'+eventdx[i].value).setAttribute('class', 'selc');
                 selsum++;
                 selpay += eval(document.getElementById('pay'+eventdx[i].value).innerText.replace(',', ''));
@@ -87,9 +87,9 @@
                     <td width="120"></td>
                 </tr>
             </table>
-            <div class="list_page">
-                <input class="bt bt_s" id="t_submit" value="进入订单结算" type="button"/>
-            </div>
+        </div>
+        <div class="list_page">
+            <input class="bt bt_s" id="t_submit" value="进入订单结算" type="button"/>
         </div>
     </div>
 </div>
