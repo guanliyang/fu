@@ -13,7 +13,8 @@ class CartController extends HomeController {
 
         $this->assign('list', $bill);
 
-        $all_price = (new \Home\Model\SBillItemModel())->getPrice(I('get.bi_id_str'));
+        $bill_item = new \Home\Model\SBillItemModel();
+        $all_price = $bill_item->getPrice(I('get.bi_id_str'));
 
         $this->assign('all_price', $all_price);
 

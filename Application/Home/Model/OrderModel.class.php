@@ -95,7 +95,8 @@ class OrderModel extends HomeModel {
 
     // 支付价格
     public function getAllPrice($pay_type) {
-        $all_price = (new \Home\Model\SBillItemModel())->getPrice(I('request.bi_id_str'));
+        $bill_item = new \Home\Model\SBillItemModel();
+        $all_price = $bill_item->getPrice(I('request.bi_id_str'));
         $this->data['o_pay'] = $all_price;
         if ($pay_type == self::PAY_PART) {
             $this->data['o_pay_f'] = $all_price * 0.2;
