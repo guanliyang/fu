@@ -57,7 +57,8 @@ class OrderModel extends HomeModel {
     }
     // 获取收货地址
     public function getAddress($uid) {
-        $area_address = (new \Home\Model\AreaModel())->getAddress($uid);
+        $area = new \Home\Model\AreaModel();
+        $area_address = $area->getAddress($uid);
         $address = I('request.address');
         if (empty($address)) {
             notice('请认真填写地址');
