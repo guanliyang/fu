@@ -1,7 +1,6 @@
 <?php
 namespace Home\Model;
-use Think\Model;
-class SBillModel extends Model {
+class SBillModel extends HomeModel {
     protected $trueTableName = 's_bill';
     protected $data = array();
 
@@ -71,6 +70,7 @@ class SBillModel extends Model {
     }
 
     public function ajaxAdd($uid) {
+        $this->checkContract();
         $this->getG();
         $this->_getHan();
         $this->_getPrice();

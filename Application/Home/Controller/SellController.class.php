@@ -27,6 +27,11 @@ class SellController extends HomeController {
     // 卖粮页面
     public function sellBill() {
         $this->putG();
+        $this->assign('user', $this->user);
+
+        $province = M('area')->where(array('level' => 1))->select();
+        $this->assign('province', $province);
+
         $this->display();
     }
 
