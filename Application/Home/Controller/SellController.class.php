@@ -14,11 +14,13 @@ class SellController extends HomeController {
 
     // 在售粮源
     public function sellBillList() {
-        $SBill = new \Home\Model\SBillModel();
-        $list = $SBill->getList();
         $this->putG();
 
-        $this->assign('list', $list);
+
+        $SBill = new \Home\Model\SBillModel();
+        $info = $SBill->getList();
+dump($info);
+        $this->assign('info', $info);
         $this->display();
         //dump($list);
 

@@ -45,7 +45,14 @@ class SBillModel extends HomeModel {
             $where += array('gy_id' => $gc_id);
         }
 
-        return self::where($where)->order('b_ctime desc')->page($this->getP())->select();
+        $count = self::where($where)->count();
+        $page = $this->getPageShow($count);
+        $list = self::where($where)->order('b_ctime desc')->limit($page['str'])->select();
+
+        return array(
+            'list' => $list,
+            'page' => $page['show']
+        );
     }
 
     //修改价格

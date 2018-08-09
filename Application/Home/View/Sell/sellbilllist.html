@@ -1,61 +1,191 @@
 <include file="public/head" />
-<h1><p>在售粮源</p></h1>
+<script type="text/javascript">
+    pSet('1');
+</script>
+<div class="bdiv cont">
+    <div class="content">
+        <div class="list">
+            <table>
+                <tr>
+                    <th width="30"></th>
+                    <th colspan="2">品名：　　
+                        <select class="gc_id" name="gc_id">
+                            <volist name="class" id="vo">
+                                <option <if condition="$vo.gc_id eq $_GET['gc_id']">selected</if> value="{$vo.gc_id}">{$vo.gc_name}</option>
+                            </volist>
+                        </select></th>
+                    <th colspan="7">等级：　　
+                        <select class="gl_id" name="gl_id">
+                            <volist name="level" id="vo">
+                                <option <if condition="$vo.gl_id eq $_GET['gl_id']">selected</if> value="{$vo.gl_id}">{$vo.gl_name}</option>
+                            </volist>
+                        </select>
+                    </th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th colspan="9">年份：　　
+                        <label class="hotitem"><a href="?">全部</a></label>　　
+                        <volist name="year" id="vo">
+                            <a href="?gy_id={$vo.gy_id}">{$vo.gy_id}</a>　　
+                        </volist>
+                        <a href="?">其他</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th colspan="9">产地：　　
+                        <label class="hotitem"><a href="?">全部</a></label>　　
+                        <volist name="place" id="vo">
+                            <a href="?gp_id={$vo.gp_id}">{$vo.gp_name}</a>　　
+                        </volist>
+                        <a href="?">其他</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th colspan="9">排序：　　
+                        <a href="?order=b_rz" class="clkitem">容重<img src="/Public/fu/img/ob_a.png"></a>　　
+                        <a href="?order=b_weig" class="clkitem">净重<img src="/Public/fu/img/ob_a.png"></a>　　
+                        <a href="?order=b_pri1" class="clkitem">单价<img src="/Public/fu/img/ob_a.png"></a>　　
+                        <a href="?order=b_stime" class="clkitem">上架时间<img src="/Public/fu/img/ob_a.png"></a>　　
+                    </td>
+                </tr>
+                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
+                    <td></td>
+                    <td width="120">容重：720g/l</td>
+                    <td width="110">净重：100吨</td>
+                    <td width="110">1,700元/吨</td>
+                    <td width="200">2018年07月19日 12:21:35</td>
+                    <td>玉米</td>
+                    <td>2018年</td>
+                    <td>辽宁</td>
+                    <td>一等</td>
+                    <td><a href="salebill.php"><查看详情></a></td>
+                </tr>
+                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
+                    <td></td>
+                    <td width="120">容重：720g/l</td>
+                    <td width="110">净重：100吨</td>
+                    <td width="110">1,700元/吨</td>
+                    <td width="200">2018年07月19日 12:21:35</td>
+                    <td>玉米</td>
+                    <td>2018年</td>
+                    <td>辽宁</td>
+                    <td>一等</td>
+                    <td><a href="salebill.php"><查看详情></a></td>
+                </tr>
+                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
+                    <td></td>
+                    <td width="120">容重：720g/l</td>
+                    <td width="110">净重：100吨</td>
+                    <td width="110">1,700元/吨</td>
+                    <td width="200">2018年07月19日 12:21:35</td>
+                    <td>玉米</td>
+                    <td>2018年</td>
+                    <td>辽宁</td>
+                    <td>一等</td>
+                    <td><a href="salebill.php"><查看详情></a></td>
+                </tr>
+                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
+                    <td></td>
+                    <td width="120">容重：720g/l</td>
+                    <td width="110">净重：100吨</td>
+                    <td width="110">1,700元/吨</td>
+                    <td width="200">2018年07月19日 12:21:35</td>
+                    <td>玉米</td>
+                    <td>2018年</td>
+                    <td>辽宁</td>
+                    <td>一等</td>
+                    <td><a href="salebill.php"><查看详情></a></td>
+                </tr>
+                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
+                    <td></td>
+                    <td width="120">容重：720g/l</td>
+                    <td width="110">净重：100吨</td>
+                    <td width="110">1,700元/吨</td>
+                    <td width="200">2018年07月19日 12:21:35</td>
+                    <td>玉米</td>
+                    <td>2018年</td>
+                    <td>辽宁</td>
+                    <td>一等</td>
+                    <td><a href="salebill.php"><查看详情></a></td>
+                </tr>
+                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
+                    <td></td>
+                    <td width="120">容重：720g/l</td>
+                    <td width="110">净重：100吨</td>
+                    <td width="110">1,700元/吨</td>
+                    <td width="200">2018年07月19日 12:21:35</td>
+                    <td>玉米</td>
+                    <td>2018年</td>
+                    <td>辽宁</td>
+                    <td>一等</td>
+                    <td><a href="salebill.php"><查看详情></a></td>
+                </tr>
+                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
+                    <td></td>
+                    <td width="120">容重：720g/l</td>
+                    <td width="110">净重：100吨</td>
+                    <td width="110">1,700元/吨</td>
+                    <td width="200">2018年07月19日 12:21:35</td>
+                    <td>玉米</td>
+                    <td>2018年</td>
+                    <td>辽宁</td>
+                    <td>一等</td>
+                    <td><a href="salebill.php"><查看详情></a></td>
+                </tr>
+                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
+                    <td></td>
+                    <td width="120">容重：720g/l</td>
+                    <td width="110">净重：100吨</td>
+                    <td width="110">1,700元/吨</td>
+                    <td width="200">2018年07月19日 12:21:35</td>
+                    <td>玉米</td>
+                    <td>2018年</td>
+                    <td>辽宁</td>
+                    <td>一等</td>
+                    <td><a href="salebill.php"><查看详情></a></td>
+                </tr>
+                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
+                    <td></td>
+                    <td width="120">容重：720g/l</td>
+                    <td width="110">净重：100吨</td>
+                    <td width="110">1,700元/吨</td>
+                    <td width="200">2018年07月19日 12:21:35</td>
+                    <td>玉米</td>
+                    <td>2018年</td>
+                    <td>辽宁</td>
+                    <td>一等</td>
+                    <td><a href="salebill.php"><查看详情></a></td>
+                </tr>
+                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
+                    <td></td>
+                    <td width="120">容重：720g/l</td>
+                    <td width="110">净重：100吨</td>
+                    <td width="110">1,700元/吨</td>
+                    <td width="200">2018年07月19日 12:21:35</td>
+                    <td>玉米</td>
+                    <td>2018年</td>
+                    <td>辽宁</td>
+                    <td>一等</td>
+                    <td><a href="salebill.php"><查看详情></a></td>
+                </tr>
+            </table>
+            <div class="list_page">
+                {$info.page}
+            </div>
+        </div>
+    </div>
+</div>
 
-<p>品名： <select name="gc_id">
-    <volist name="class" id="vo">
-        <option value="{$vo.gc_id}">{$vo.gc_name}</option>
-    </volist>
-</select>
-</p>
-
-<p>等级：
-    <select name="gl_id">
-        <volist name="level" id="vo">
-            <option value="{$vo.gl_id}">{$vo.gl_name}</option>
-        </volist>
-    </select>
-</p>
-
-<p>产地：
-    <select name="gp_id">
-        <volist name="place" id="vo">
-            <option value="{$vo.gp_id}">{$vo.gp_name}</option>
-        </volist>
-    </select>
-</p>
-
-<p>容重：
-    <select name="gr_id">
-        <volist name="rz" id="vo">
-            <option value="{$vo.gr_id}">{$vo.gr_name}</option>
-        </volist>
-    </select>
-</p>
-
-<p>出产年份 ：
-    <select name="gy_id">
-        <volist name="year" id="vo">
-            <option value="{$vo.gy_id}">{$vo.gy_id}</option>
-        </volist>
-    </select>
-</p>
-
-<button id="t_search">查找粮源  --  粮源搜索按钮</button>
-
+<include file="public/foot" />
 <script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript">
-    $("#t_search").on('click tap',function() {
-        // 获取所有input数组
-        var data = '';
-        $(":input").each(function () {
-            var key = $(this).attr('name');
-            var val = $(this).val();
-            if (key && val) {
-                data = data + key + "=" + val + "&";
-            }
-        });
-
-        window.location.href = "/Home/Sell/sellBillList?" + data ;
+    $(".gc_id").on('change', function(){
+        window.location.href = "/Home/Sell/sellBillList?gc_id=" + $(this).val() ;
+    });
+    $(".gl_id").on('change', function(){
+        window.location.href = "/Home/Sell/sellBillList?gl_id=" + $(this).val() ;
     });
 </script>
-<include file="public/foot" />

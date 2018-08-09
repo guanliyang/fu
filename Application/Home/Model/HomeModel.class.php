@@ -2,6 +2,7 @@
 namespace Home\Model;
 use Think\Model;
 class HomeModel extends Model {
+    protected $limit = 3;
     //是否阅读合同
     public function checkContract() {
         $contract = I('request.contract', 0);
@@ -49,5 +50,16 @@ class HomeModel extends Model {
             notice('请认真填写地址');
         }
         return $area_address . $address;
+    }
+
+    // 分页
+    public function getPageShow($count) {
+        $Page       = new \Think\Page($count, $this->limit);
+        $show       = $Page->show();
+        $limitStr = $Page->firstRow.','.$Page->listRows;
+        return array(
+            'show' => $show,
+            'str' => $limitStr
+        );
     }
 }

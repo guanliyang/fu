@@ -1,7 +1,6 @@
 <?php
 namespace Home\Model;
-use Think\Model;
-class SysMsgModel extends Model {
+class SysMsgModel extends HomeModel {
     protected $trueTableName = 'sys_msg';
     const IS_READ = 1;
     const NOT_READ = 0;
@@ -15,15 +14,14 @@ class SysMsgModel extends Model {
         );
         $count = self::where($where)->count();
 
-        $Page       = new \Think\Page($count, $this->limit);
-        $show       = $Page->show();
+        $page = $this->getPageShow($count);
 
-        $not_read_list = self::where($where)->limit($Page->firstRow.','.$Page->listRows)->select();
+        $not_read_list = self::where($where)->limit($page['str'])->select();
 
         return array(
             'list' => $not_read_list,
             'not_read_list_count' => $count,
-            'page' => $show
+            'page' => $page['show'],
         );
     }
 
@@ -32,11 +30,9 @@ class SysMsgModel extends Model {
             'u_id' => $uid,
             'sm_status' => self::IS_READ
         );
-        $read_list = self::where($where)->select();
         $count = self::where($where)->count();
-
-        $Page       = new \Think\Page($count, $this->limit);
-        $show       = $Page->show();
+        $page       = $page = $this->getPageShow($count);
+        $read_list = self::where($where)->limit($page['str'])->select();
 
 
         $not_read_list_count = self::where(array(
@@ -47,7 +43,7 @@ class SysMsgModel extends Model {
         return array(
             'list' => $read_list,
             'not_read_list_count' => $not_read_list_count,
-            'page' => $show
+            'page' => $page['show']
         );
     }
 }
