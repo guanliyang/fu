@@ -26,7 +26,9 @@ class SellController extends HomeController {
 
     // 在售粮源详情
     public function onLineBillInfo() {
-        dump(I('request.b_id'));
+        $bill = new \Home\Model\SBillModel();
+        $info = $bill->getInfo($bill::STATUS_ON);
+        $this->assign('info', $info);
         $this->display();
     }
 

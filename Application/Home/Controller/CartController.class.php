@@ -32,6 +32,7 @@ class CartController extends HomeController {
     public function ajaxAdd() {
         $cart = new \Home\Model\CartModel();
         $cart->addCart($this->user['id']);
+        notice('成功', 0, array('url' => '/Home/cart/index'));
     }
 
     //购物车列表

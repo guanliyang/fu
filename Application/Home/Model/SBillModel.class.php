@@ -73,12 +73,16 @@ class SBillModel extends HomeModel {
             notice('修改失败');
         }
     }
-    public function getInfo() {
+    public function getInfo($bi_status = null) {
         $id = I("request.b_id", 0, 'intval');
 
         $bill = $this->where(array('b_id' => $id))->find();
 
-        $bill_item = M('s_bill_item')->where(array('b_id' => $id))->select();
+        $where = array('b_id' => $id);
+        if (!empty($bi_status)) {
+            $where += array('bi_status' => $bi_status);
+        }
+        $bill_item = M('s_bill_item')->where($where)->select();
         return array('bill' => $bill, 'bill_item' => $bill_item);
     }
 

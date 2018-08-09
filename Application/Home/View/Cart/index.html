@@ -19,7 +19,7 @@
         var selpay = 0;
         var selsum = 0;
         for (var i=0;i<eventdx.length;i++){
-            if(eventdx[i].name=='buyid' && eventdx[i].checked){
+            if(eventdx[i].name=='buyid[]' && eventdx[i].checked){
                 document.getElementById('tr'+eventdx[i].value).setAttribute('class', 'selc');
                 selsum++;
                 selpay += eval(document.getElementById('pay'+eventdx[i].value).innerText.replace(',', ''));
@@ -66,7 +66,7 @@
                         <th width="60"></th>
                         <th class="tdlock">{$vo.b_name}　{$vo.b_year}年　{$vo.b_place}　{$vo.b_level}　容重{$vo.b_rz}g/l</th>
                         <th>单价：<label>{$vo.b_pri1}</label>元</th>
-                        <th width="120"><a href="">查看粮源详情</a></th>
+                        <th width="120"><a href="/Home/Sell/onLineBillInfo/b_id/{$vo.b_id}">查看粮源详情</a></th>
                     </tr>
                     <foreach name="vo.bill_item" item="item">
                         <tr id="tr{$item.bi_id}" class="selc cool" onclick="iSel({$item.bi_id});">

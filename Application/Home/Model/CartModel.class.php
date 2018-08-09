@@ -36,14 +36,6 @@ class CartModel extends HomeModel {
         notice('选择成功', '0', array('url' => '/Home/Cart/finish?bi_id_str='.$bi_id_str));
     }
 
-    // 判断id是否合法
-    private function choseBiIdStr($bi_id_list) {
-        if (empty($bi_id_list)) {
-            notice('请勾选货物');
-        }
-        return implode(',', $bi_id_list);
-    }
-
     //查询购物车
     public function getByUid($uid) {
         $list = self::where(array(
@@ -78,28 +70,31 @@ class CartModel extends HomeModel {
 
     // 添加到购物车
     public function addCart($uid) {
-        $data['bi_id'] = $this->getBiId();
-        $data['u_id'] = $uid;
-        $data['c_ctime'] = time();
-        $data['c_status'] = self::STATUS_NORMAL;
-        return self::data($data)->add();
+        $bi_id_list = I('request.bi_id');
+        $this->checkBiIdList($bi_id_list);
+        $this->checkExist($bi_id_list, $uid);
+        $data = array();
+        foreach ($bi_id_list as $bi_id) {
+            $data['bi_id'] = $bi_id;
+            $data['u_id'] = $uid;
+
+            $data['c_ctime'] = time();
+            $data['c_status'] = self::STATUS_NORMAL;
+            $status = self::data($data)->add();
+        }
+        return $status;
     }
 
-    // 获取bid
-    private function getBiId() {
-        $bi_id = I('request.bi_id');
-        if (empty($bi_id)) {
-            notice('bi_id为空');
+    // 判断购物车中是否存在
+    public function checkExist($bi_id_list, $uid) {
+        foreach ($bi_id_list as $bi_id) {
+            $data['bi_id'] = $bi_id;
+            $data['u_id'] = $uid;
+            $exist = self::where($data)->find();
+            if ($exist) {
+                notice("货组编号".$bi_id."已存在于您的购物车中,请重新选择");
+            }
         }
-        $billItem = M('s_bill_item')->where(array('bi_id' => $bi_id))->find();
-        if (empty($billItem)) {
-            notice('bi_id有误');
-        }
-
-        if ($billItem['bi_status'] != SBillItemModel::STATUS_ON) {
-            notice($bi_id. '- 此订单不是在售状态, 请重新选择');
-        }
-
-        return $bi_id;
+        return true;
     }
 }

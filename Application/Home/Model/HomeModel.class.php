@@ -2,13 +2,24 @@
 namespace Home\Model;
 use Think\Model;
 class HomeModel extends Model {
-    protected $limit = 3;
+    protected $l = 3;
     //是否阅读合同
     public function checkContract() {
         $contract = I('request.contract', 0);
         if (empty($contract)) {
             notice('请仔选中阅读合同');
         }
+    }
+
+    // 判断id是否合法
+    public function checkBiIdList($bi_id_list) {
+        $bi_id_list = array_filter($bi_id_list);
+
+        if (empty($bi_id_list)) {
+            notice('请勾选货物');
+        }
+        $bi_id_str = implode(',', $bi_id_list);
+        return $this->checkBiIdStr($bi_id_str);
     }
 
     // 检查 bi_id_str 的合法性
@@ -21,11 +32,11 @@ class HomeModel extends Model {
         foreach ($bi_id_list as $bi_id) {
             $bill_item = M('s_bill_item')->where(array('bi_id' => $bi_id))->find();
             if (empty($bill_item)) {
-                notice('bi_id='.$bi_id.' 有误');
+                notice('货组编号'.$bi_id.' 有误');
             }
 
             if ($bill_item['bi_status'] != SBillItemModel::STATUS_ON) {
-                notice('bi_id='.$bi_id.' 有误, 可能已被购买,请到购物车重新选择');
+                notice('货组编号'.$bi_id.' 有误, 可能已被购买,请到购物车重新选择');
             }
         }
 
@@ -54,7 +65,7 @@ class HomeModel extends Model {
 
     // 分页
     public function getPageShow($count) {
-        $Page       = new \Think\Page($count, $this->limit);
+        $Page       = new \Think\Page($count, $this->l);
         $show       = $Page->show();
         $limitStr = $Page->firstRow.','.$Page->listRows;
         return array(

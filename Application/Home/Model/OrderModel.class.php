@@ -13,11 +13,12 @@ class OrderModel extends HomeModel {
 
     protected $data  = array();
 
+    //生成订单
     public function addOrder($uid) {
         // 检查合同
         $this->checkContract();
         //检查bi_id
-        $this->checkBiIdStr(I('request.bi_id_str'));
+        $bi_id_list = $this->checkBiIdStr(I('request.bi_id_str'));
         // 支付方式
         $pay_type = $this->getPayType();
         // 价格
@@ -33,11 +34,34 @@ class OrderModel extends HomeModel {
 
         //收货人信息
         $this->getUser();
-        $status = self::data($this->data)->add();
-        if (!$status) {
+        // 购物车状态改成 转成正式订单
+        $this->updateCat($bi_id_list, $uid);
+
+        //order 表里插入信息
+        $o_id = self::data($this->data)->add();
+        // b_order_item 表插入信息
+        $order_item = new \Home\Model\OrderItemModel();
+        $order_item->addList($bi_id_list, $o_id);
+        if (!$o_id) {
             notice('生成订单出错');
         }
-        return $status;
+        return $o_id;
+    }
+
+    // 购物车转成正式订单
+    public function updateCat($bi_id_list, $uid) {
+        if (!empty($bi_id_list) && is_array($bi_id_list)) {
+            foreach ($bi_id_list as $bi_id) {
+                $where = array(
+                    'uid' => $uid,
+                    'bi_id' => $bi_id
+                );
+                $data = array(
+                    'c_status' => CartModel::STATUS_FORMAL
+                );
+                M('b_cart')->where($where)->save($data);
+            }
+        }
     }
 
     // 收货联系人信息
