@@ -10,7 +10,6 @@ class OrderItemModel extends Model {
             $bill_item = M('s_bill_item')->where(array('bi_id'=>$bi_id))->find();
             $data['o_id'] = $o_id;
             $data['bi_id'] = $bi_id;
-            $data['oi_dtime'] = time();
             $data['oi_dpay'] = $bill_item['bi_dpay'];
             $data['oi_status'] = 0;
             self::data($data)->add();

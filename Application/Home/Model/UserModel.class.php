@@ -238,16 +238,10 @@ class UserModel extends HomeModel {
     public function getMessageForWeb($uid) {
         $order_count = M('b_order')->where(array('o_status' => OrderModel::STATUS_FINISH))->count();
         $user_count = M('user')->count();
-        $message_count = M('sys_msg')->where(array('u_id' => $uid, 'sm_status' => SysMsgModel::NOT_READ))->count();
-
-        $cart_count = M('b_cart')->where(array('u_id' => $uid, 'c_status' => CartModel::STATUS_NORMAL))->count();
-
 
         return array(
             'order_count' => $order_count,
-            'user_count' => $user_count,
-            'message_count' => $message_count,
-            'cart_count' => $cart_count
+            'user_count' => $user_count
         );
     }
 
