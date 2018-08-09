@@ -86,3 +86,4 @@ a{color:#807050;}
 .list_page .hot{background:#807050;color:#FFF;}
 #show_img{position:absolute; width:90px;height:90px;}
 #t_file{display:none;}
+.current{margin:5px;padding:0px 8px;border:1px solid #CCC;text-decoration:none; background:#807050;color:#FFF;}

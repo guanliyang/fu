@@ -45,9 +45,15 @@ class SBillModel extends HomeModel {
             $where += array('gy_id' => $gc_id);
         }
 
+        $order = 'b_ctime desc';
+        $searce_order = I('request.order');
+        if (!empty($searce_order)) {
+            $order = $searce_order.' desc';
+        }
+
         $count = self::where($where)->count();
         $page = $this->getPageShow($count);
-        $list = self::where($where)->order('b_ctime desc')->limit($page['str'])->select();
+        $list = self::where($where)->order($order)->limit($page['str'])->select();
 
         return array(
             'list' => $list,

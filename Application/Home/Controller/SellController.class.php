@@ -19,11 +19,15 @@ class SellController extends HomeController {
 
         $SBill = new \Home\Model\SBillModel();
         $info = $SBill->getList();
-dump($info);
         $this->assign('info', $info);
         $this->display();
-        //dump($list);
 
+    }
+
+    // 在售粮源详情
+    public function onLineBillInfo() {
+        dump(I('request.b_id'));
+        $this->display();
     }
 
     // 卖粮页面

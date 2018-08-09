@@ -25,152 +25,46 @@
                 <tr>
                     <th></th>
                     <th colspan="9">年份：　　
-                        <label class="hotitem"><a href="?">全部</a></label>　　
+                        <label class="hotitem"><a href="/Home/Sell/sellBillList">全部</a></label>　　
                         <volist name="year" id="vo">
-                            <a href="?gy_id={$vo.gy_id}">{$vo.gy_id}</a>　　
+                            <a href="/Home/Sell/sellBillList/gy_id/{$vo.gy_id}">{$vo.gy_id}</a>　　
                         </volist>
-                        <a href="?">其他</a>
+                        <a href="/Home/Sell/sellBillList">其他</a>
                     </td>
                 </tr>
                 <tr>
                     <th></th>
                     <th colspan="9">产地：　　
-                        <label class="hotitem"><a href="?">全部</a></label>　　
+                        <label class="hotitem"><a href="/Home/Sell/sellBillList">全部</a></label>　　
                         <volist name="place" id="vo">
-                            <a href="?gp_id={$vo.gp_id}">{$vo.gp_name}</a>　　
+                            <a href="/Home/Sell/sellBillList/gp_id/{$vo.gp_id}">{$vo.gp_name}</a>　　
                         </volist>
-                        <a href="?">其他</a>
+                        <a href="/Home/Sell/sellBillList">其他</a>
                     </td>
                 </tr>
                 <tr>
                     <th></th>
                     <th colspan="9">排序：　　
-                        <a href="?order=b_rz" class="clkitem">容重<img src="/Public/fu/img/ob_a.png"></a>　　
-                        <a href="?order=b_weig" class="clkitem">净重<img src="/Public/fu/img/ob_a.png"></a>　　
-                        <a href="?order=b_pri1" class="clkitem">单价<img src="/Public/fu/img/ob_a.png"></a>　　
-                        <a href="?order=b_stime" class="clkitem">上架时间<img src="/Public/fu/img/ob_a.png"></a>　　
+                        <a href="/Home/Sell/sellBillList/order/b_rz" class="clkitem">容重<img src="/Public/fu/img/ob_a.png"></a>　　
+                        <a href="/Home/Sell/sellBillList/order=b_weig" class="clkitem">净重<img src="/Public/fu/img/ob_a.png"></a>　　
+                        <a href="/Home/Sell/sellBillList/order=b_pri1" class="clkitem">单价<img src="/Public/fu/img/ob_a.png"></a>　　
+                        <a href="/Home/Sell/sellBillList/order=b_stime" class="clkitem">上架时间<img src="/Public/fu/img/ob_a.png"></a>　　
                     </td>
                 </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td></td>
-                    <td width="120">容重：720g/l</td>
-                    <td width="110">净重：100吨</td>
-                    <td width="110">1,700元/吨</td>
-                    <td width="200">2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td><a href="salebill.php"><查看详情></a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td></td>
-                    <td width="120">容重：720g/l</td>
-                    <td width="110">净重：100吨</td>
-                    <td width="110">1,700元/吨</td>
-                    <td width="200">2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td><a href="salebill.php"><查看详情></a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td></td>
-                    <td width="120">容重：720g/l</td>
-                    <td width="110">净重：100吨</td>
-                    <td width="110">1,700元/吨</td>
-                    <td width="200">2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td><a href="salebill.php"><查看详情></a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td></td>
-                    <td width="120">容重：720g/l</td>
-                    <td width="110">净重：100吨</td>
-                    <td width="110">1,700元/吨</td>
-                    <td width="200">2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td><a href="salebill.php"><查看详情></a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td></td>
-                    <td width="120">容重：720g/l</td>
-                    <td width="110">净重：100吨</td>
-                    <td width="110">1,700元/吨</td>
-                    <td width="200">2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td><a href="salebill.php"><查看详情></a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td></td>
-                    <td width="120">容重：720g/l</td>
-                    <td width="110">净重：100吨</td>
-                    <td width="110">1,700元/吨</td>
-                    <td width="200">2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td><a href="salebill.php"><查看详情></a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td></td>
-                    <td width="120">容重：720g/l</td>
-                    <td width="110">净重：100吨</td>
-                    <td width="110">1,700元/吨</td>
-                    <td width="200">2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td><a href="salebill.php"><查看详情></a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td></td>
-                    <td width="120">容重：720g/l</td>
-                    <td width="110">净重：100吨</td>
-                    <td width="110">1,700元/吨</td>
-                    <td width="200">2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td><a href="salebill.php"><查看详情></a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td></td>
-                    <td width="120">容重：720g/l</td>
-                    <td width="110">净重：100吨</td>
-                    <td width="110">1,700元/吨</td>
-                    <td width="200">2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td><a href="salebill.php"><查看详情></a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td></td>
-                    <td width="120">容重：720g/l</td>
-                    <td width="110">净重：100吨</td>
-                    <td width="110">1,700元/吨</td>
-                    <td width="200">2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td><a href="salebill.php"><查看详情></a></td>
-                </tr>
+                <volist name="info.list" id="vo">
+                    <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
+                        <td></td>
+                        <td width="120">容重：{$vo.b_rz}g/l</td>
+                        <td width="110">净重：{$vo.b_weig}吨</td>
+                        <td width="110">{$vo.b_pri1}元/吨</td>
+                        <td width="200">{$vo.b_stime|date='Y年m月d日 H:i:s',###}</td>
+                        <td>{$vo.b_name}</td>
+                        <td>{$vo.b_year}年</td>
+                        <td>{$vo.b_place}</td>
+                        <td>{$vo.b_level}</td>
+                        <td><a href="/Home/Sell/onLineBillInfo/b_id/{$vo.b_id}"><查看详情></a></td>
+                    </tr>
+                </volist>
             </table>
             <div class="list_page">
                 {$info.page}
@@ -183,9 +77,9 @@
 <script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript">
     $(".gc_id").on('change', function(){
-        window.location.href = "/Home/Sell/sellBillList?gc_id=" + $(this).val() ;
+        window.location.href = "/Home/Sell/sellBillList/gc_id/" + $(this).val() ;
     });
     $(".gl_id").on('change', function(){
-        window.location.href = "/Home/Sell/sellBillList?gl_id=" + $(this).val() ;
+        window.location.href = "/Home/Sell/sellBillList/gl_id/" + $(this).val() ;
     });
 </script>
