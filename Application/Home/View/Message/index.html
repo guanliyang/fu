@@ -43,7 +43,7 @@
             <a href="/Home/Cart/index">{$cart_count}组待购买</a>货物。
             <div class="item">
                 <a href="/Home/Message/index/?item=3" id="item3">卖粮货单({$info.bill.count})</a>
-                <a href="/Home/Message/index/?item=2" id="item2">预购约单(2)</a>
+                <a href="/Home/Message/index/?item=2" id="item2">预购约单({$info.offer.count})</a>
                 <a href="/Home/Message/index/?item=1" id="item1">买粮订单({$info.order.order_count})</a>
             </div>
         </div>
@@ -71,31 +71,24 @@
         </div>
         <div class="list" id="list2">
             <table>
+                <volist name="info.offer.list" id="vo">
                 <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">预约号：R101101101</a></td>
-                    <td>2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td>容重：720g/l</td>
-                    <td>100吨</td>
+                    <td><a href="">预约号：{$vo.f_code}</a></td>
+                    <td>{$vo.f_ctime|date='Y年m月d日 H:i:s',###}</td>
+                    <td>{$vo.f_name}</td>
+                    <td>{$vo.f_year}年</td>
+                    <td>{$vo.f_place}</td>
+                    <td>{$vo.f_level}</td>
+                    <td>容重：{$vo.f_rz}g/l</td>
+                    <td>{$vo.f_weig}吨</td>
                     <td></td>
-                    <td><a href="">预约采购中...</a></td>
+                    <td><a href="/Home/Offer/offerInfo/f_id/{$vo.f_id}">预约采购中...</a></td>
                 </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">预约号：R101101102</a></td>
-                    <td>2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td>容重：720g/l</td>
-                    <td>100吨</td>
-                    <td></td>
-                    <td><a href="" class="hot">待支付预约金...</a></td>
-                </tr>
+                </volist>
             </table>
+            <div class="list_page">
+                {$info.offer.page}
+            </div>
         </div>
         <div class="list" id="list3">
             <table>
@@ -110,7 +103,7 @@
                     <td>容重：{$vo.b_rz}g/l</td>
                     <td>{$vo.b_weig}吨</td>
                     <td>{$vo.b_pri1}元/吨</td>
-                    <td><a href="">查看货单详情...</a></td>
+                    <td><a href="/Home/Sell/sellBillInfo/b_id/{$vo.b_id}">查看货单详情...</a></td>
                 </tr>
                 </volist>
             </table>

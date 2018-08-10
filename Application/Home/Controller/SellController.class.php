@@ -59,7 +59,6 @@ class SellController extends HomeController {
         $info = $SBill->getInfo();
         $this->assign('SBill', $info);
         $this->display();
-        dump($info);
 
     }
 

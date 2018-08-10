@@ -247,11 +247,16 @@ class UserModel extends HomeModel {
         $bill = new \Home\Model\SBillModel();
         $bill = $bill->getUserList($uid);
 
+        // 预购约单
+        $offer = new \Home\Model\ROfferModel();
+        $offer = $offer->getUserList($uid);
+
         return array(
             'all_order_count' => $all_order_count,
             'user_count' => $user_count,
             'order' => $order,
-            'bill' => $bill
+            'bill' => $bill,
+            'offer' => $offer
         );
     }
 
