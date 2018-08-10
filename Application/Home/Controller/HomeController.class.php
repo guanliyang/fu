@@ -23,4 +23,12 @@ class HomeController extends Controller {
         $this->assign('msg_count', $msg_count);
         $this->assign('cart_count', $cart_count);
     }
+
+    public function putG() {
+        $this->assign('place', M('g_place')->select());
+        $this->assign('class', M('g_class')->select());
+        $this->assign('level', M('g_level')->select());
+        $this->assign('rz', M('g_rz')->select());
+        $this->assign('year', M('g_year')->select());
+    }
 }

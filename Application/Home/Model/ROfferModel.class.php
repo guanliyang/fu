@@ -1,14 +1,17 @@
 <?php
 namespace Home\Model;
-use Think\Model;
-class ROfferModel extends Model {
+class ROfferModel extends HomeModel {
     protected $trueTableName = 'r_offer';
+
+    const PERCENTAGE = 0.01;
 
     protected $data = array();
     public function addOffer($uid) {
+        $this->checkContract();
         $this->getG();
-        $this->_getPrice();
         $this->_getWeig();
+
+        $this->_getPrice();
         $this->data['u_id'] = $uid;
         $this->_getDefault();
         return $this->data($this->data)->add();
@@ -62,6 +65,10 @@ class ROfferModel extends Model {
             notice('[出售单价]非法输入，请通过 +, -按钮调整价格');
         }
         $this->data['f_pric'] = $this->data['f_pric'];
+
+        //预约金额
+        $this->data['f_pay'] = ($this->data['f_pric'] * $this->data['f_weig']) * self::PERCENTAGE;
+
     }
 
     //重量
@@ -80,5 +87,10 @@ class ROfferModel extends Model {
         $this->f_code = 'R'.date('YW').rand(10000000, 99999999);
         // 合同编号
         $this->f_contcode = 'RC'.date('YW').rand(10000000, 99999999);
+    }
+
+    public function getInfo() {
+        $f_id = I('request.f_id');
+        return self::where(array('f_id' => $f_id))->find();
     }
 }

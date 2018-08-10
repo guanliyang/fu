@@ -7,59 +7,5 @@
 <body>
 <h1>预约购粮 的 页面</h1>
 
-<p>品名： <select name="gc_id">
-    <volist name="class" id="vo">
-        <option value="{$vo.gc_id}">{$vo.gc_name}</option>
-    </volist>
-</select>
-</p>
 
-<p>等级：
-    <select name="gl_id">
-        <volist name="level" id="vo">
-            <option value="{$vo.gl_id}">{$vo.gl_name}</option>
-        </volist>
-    </select>
-</p>
-
-<p>产地：
-    <select name="gp_id">
-        <volist name="place" id="vo">
-            <option value="{$vo.gp_id}">{$vo.gp_name}</option>
-        </volist>
-    </select>
-</p>
-
-<p>容重：
-    <select name="gr_id">
-        <volist name="rz" id="vo">
-            <option value="{$vo.gr_id}">{$vo.gr_name}</option>
-        </volist>
-    </select>
-</p>
-
-<p>出产年份 ：
-    <select name="gy_id">
-        <volist name="year" id="vo">
-            <option value="{$vo.gy_id}">{$vo.gy_id}</option>
-        </volist>
-    </select>
-</p>
-
-<p>
-    预约单价: <input type="text" name="f_pric">
-</p>
-<p>
-    预购重量: <input type="text" name="f_weig">
-</p>
-<p>
-    缴纳预约金: <input type="text" name="f_pay">
-</p>
-<input id="t_submit" type="submit" value="提交预约" />
-
-<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
-<script type="text/javascript" src="/Public/bootstrap/js/t_submit.js"></script>
-<script type="text/javascript">
-    t_submit('/Home/Offer/addOffer');
-</script>
 <include file="public/foot" />

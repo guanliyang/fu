@@ -51,8 +51,18 @@ function save_file($path = 'Public/user_img'){
 function getUserStatus($status) {
     $list =
         array(
-        0 => '待审核',
-        1 => '审核通过'
+            0 => '待审核',
+            1 => '审核通过'
     );
+    return $list[$status];
+}
+
+function getOfferStatus($status) {
+    $list =
+        array(
+            0 => '待审核',
+            1 => '预约确认',
+            10 => '已转正式订单'
+        );
     return $list[$status];
 }
