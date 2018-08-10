@@ -5,7 +5,9 @@ class OfferController extends HomeController {
     // 线上 预约购粮 列表
     public function offerList() {
         $this->putG();
-
+        $SBill = new \Home\Model\ROfferModel();
+        $info = $SBill->getOnLineList();
+        $this->assign('info', $info);
         $this->display();
     }
 

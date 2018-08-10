@@ -4,8 +4,58 @@ class ROfferModel extends HomeModel {
     protected $trueTableName = 'r_offer';
 
     const PERCENTAGE = 0.01;
+    const STATUS_DEL = -9;
+    const STATUS_ON = 1;
+    const STATUS_OFF = 0;
+    const STATUS_PASS = 10;
+
 
     protected $data = array();
+
+    public function getOnLineList() {
+        $where = array('f_status' => self::STATUS_ON);
+
+        $gc_id = I('request.gc_id', 0, 'intval');
+        if (!empty($gc_id)) {
+            $where += array('gc_id' => $gc_id);
+        }
+
+        $gc_id = I('request.gl_id', 0, 'intval');
+        if (!empty($gc_id)) {
+            $where += array('gl_id' => $gc_id);
+        }
+
+        $gc_id = I('request.gp_id', 0, 'intval');
+        if (!empty($gc_id)) {
+            $where += array('gp_id' => $gc_id);
+        }
+
+        $gc_id = I('request.gr_id', 0, 'intval');
+        if (!empty($gc_id)) {
+            $where += array('gr_id' => $gc_id);
+        }
+
+        $gc_id = I('request.gy_id', 0, 'intval');
+        if (!empty($gc_id)) {
+            $where += array('gy_id' => $gc_id);
+        }
+
+        $order = 'f_ctime desc';
+        $search_order = I('request.order');
+        if (!empty($search_order)) {
+            $order = $search_order.' desc';
+        }
+
+        $count = self::where($where)->count();
+        $page = $this->getPageShow($count);
+        $list = self::where($where)->order($order)->limit($page['str'])->select();
+
+        return array(
+            'list' => $list,
+            'page' => $page['show']
+        );
+    }
+
     public function addOffer($uid) {
         $this->checkContract();
         $this->getG();

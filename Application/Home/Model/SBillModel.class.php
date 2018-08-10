@@ -46,9 +46,9 @@ class SBillModel extends HomeModel {
         }
 
         $order = 'b_ctime desc';
-        $searce_order = I('request.order');
-        if (!empty($searce_order)) {
-            $order = $searce_order.' desc';
+        $search_order = I('request.order');
+        if (!empty($search_order)) {
+            $order = $search_order.' desc';
         }
 
         $count = self::where($where)->count();
