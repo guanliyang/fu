@@ -13,6 +13,19 @@ class OrderModel extends HomeModel {
 
     protected $data  = array();
 
+    // 用户 订单列表信息
+    public function getUserOrderList($uid) {
+        $where = array('u_id' => $uid);
+        $count = self::where($where)->count();
+        $page = $this->getPageShow($count);
+        $list = self::where($where)->order('o_id desc')->limit($page['str'])->select();
+        return array(
+            'order_count' => $count,
+            'list' => $list,
+            'page' => $page['show']
+        );
+    }
+
     //生成订单
     public function addOrder($uid) {
         // 检查合同
@@ -31,6 +44,9 @@ class OrderModel extends HomeModel {
         $this->getDeliType();
         // 收货地址
         $this->data['o_deli_add'] = $this->getAddress($uid);
+
+        // b_id 获取
+        $this->data['b_id'] = M('s_bill_item')->where(array('bi_id' => $bi_id_list[0]))->getField('b_id');
 
         //收货人信息
         $this->getUser();

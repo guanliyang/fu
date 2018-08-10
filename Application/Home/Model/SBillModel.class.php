@@ -16,8 +16,8 @@ class SBillModel extends HomeModel {
 
         return $page. ',' . $limit;
     }
-    //在售粮源
-    public function getList() {
+    // 在售粮源
+    public function getOnLineList() {
         $where = array('b_status' => self::STATUS_ON);
 
         $gc_id = I('request.gc_id', 0, 'intval');
@@ -56,6 +56,20 @@ class SBillModel extends HomeModel {
         $list = self::where($where)->order($order)->limit($page['str'])->select();
 
         return array(
+            'list' => $list,
+            'page' => $page['show']
+        );
+    }
+
+    // 用户卖货列表
+    public function getUserList($uid) {
+        $where = array('u_id' => $uid);
+        $count = self::where($where)->count();
+        $page = $this->getPageShow($count, $str = '?item=3');
+        $list = self::where($where)->order('b_id desc')->limit($page['str'])->select();
+
+        return array(
+            'count' => $count,
             'list' => $list,
             'page' => $page['show']
         );

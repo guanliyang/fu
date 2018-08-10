@@ -18,7 +18,7 @@ class SellController extends HomeController {
 
 
         $SBill = new \Home\Model\SBillModel();
-        $info = $SBill->getList();
+        $info = $SBill->getOnLineList();
         $this->assign('info', $info);
         $this->display();
 

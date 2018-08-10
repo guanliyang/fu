@@ -28,7 +28,7 @@
             <h1>1,700</h1>
         </div>
         <div class="uboard">
-            <h3>成交订单： {$info.order_count} 笔</h3>
+            <h3>成交订单： {$info.all_order_count} 笔</h3>
             <h3>注册会员： {$info.user_count} 人</h3>
             <div>
                 <a href="/Home/Sell/sellBillList"><img src="/Public/fu/img/bt_buy.png"/></a>
@@ -38,20 +38,21 @@
     </div>
     <div class="content">
         <div class="list_item">
-            您好，<a href="">{$user.real_name}</a>(<a href="">设置</a>)。
+            您好，<a href="/Home/User/userView">{$user.real_name}</a>(<a href="">设置</a>)。
             <a href="/Home/SysMsg/index">{$msg_count}条待处理</a>信息;
             <a href="/Home/Cart/index">{$cart_count}组待购买</a>货物。
             <div class="item">
-                <a href="?item=3" id="item3">卖粮货单(4)</a>
-                <a href="?item=2" id="item2">预购约单(2)</a>
-                <a href="?item=1" id="item1">买粮订单(56)</a>
+                <a href="/Home/Message/index/?item=3" id="item3">卖粮货单({$info.bill.count})</a>
+                <a href="/Home/Message/index/?item=2" id="item2">预购约单(2)</a>
+                <a href="/Home/Message/index/?item=1" id="item1">买粮订单({$info.order.order_count})</a>
             </div>
         </div>
         <div class="list" id="list1">
             <table>
+                <volist name="info.order.list" id="vo">
                 <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">订单号：B101101101</a></td>
-                    <td>2018年07月19日 12:21:35</td>
+                    <td><a href="">订单号：{$vo.o_code}</a></td>
+                    <td>{$vo.o_ctime|date='Y年m月d日 H:i:s',###}</td>
                     <td>玉米</td>
                     <td>2018年</td>
                     <td>辽宁</td>
@@ -61,116 +62,12 @@
                     <td>1,700元/吨</td>
                     <td><a href="">查看订单详情...</a></td>
                 </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">订单号：B101101101</a></td>
-                    <td>2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td>容重：720g/l</td>
-                    <td>100吨</td>
-                    <td>1,700元/吨</td>
-                    <td><a href="" class="hot">待办事项(2)...</a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">订单号：B101101101</a></td>
-                    <td>2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td>容重：720g/l</td>
-                    <td>100吨</td>
-                    <td>1,700元/吨</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">订单号：B101101101</a></td>
-                    <td>2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td>容重：720g/l</td>
-                    <td>100吨</td>
-                    <td>1,700元/吨</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">订单号：B101101101</a></td>
-                    <td>2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td>容重：720g/l</td>
-                    <td>100吨</td>
-                    <td>1,700元/吨</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">订单号：B101101101</a></td>
-                    <td>2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td>容重：720g/l</td>
-                    <td>100吨</td>
-                    <td>1,700元/吨</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">订单号：B101101101</a></td>
-                    <td>2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td>容重：720g/l</td>
-                    <td>100吨</td>
-                    <td>1,700元/吨</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">订单号：B101101101</a></td>
-                    <td>2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td>容重：720g/l</td>
-                    <td>100吨</td>
-                    <td>1,700元/吨</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">订单号：B101101101</a></td>
-                    <td>2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td>容重：720g/l</td>
-                    <td>100吨</td>
-                    <td>1,700元/吨</td>
-                    <td><a href="" class="hot">待办事项(2)...</a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">订单号：B101101101</a></td>
-                    <td>2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td>容重：720g/l</td>
-                    <td>100吨</td>
-                    <td>1,700元/吨</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
+                </volist>
+
             </table>
-            <div class="list_page"><a href="" class="hot">1</a><a href="">2</a><a href="">3</a><a href="">4</a><a href="">5</a><a href="">>></a></div>
+            <div class="list_page">
+                {$info.order.page}
+            </div>
         </div>
         <div class="list" id="list2">
             <table>
@@ -202,55 +99,24 @@
         </div>
         <div class="list" id="list3">
             <table>
+                <volist name="info.bill.list" id="vo">
                 <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">货单号：S101101101</a></td>
-                    <td>2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td>容重：720g/l</td>
-                    <td>100吨</td>
-                    <td>1,700元/吨</td>
+                    <td><a href="">货单号：{$vo.b_code}</a></td>
+                    <td>{$vo.b_ctime|date='Y年m月d日 H:i:s',###}</td>
+                    <td>{$vo.b_name}</td>
+                    <td>{$vo.b_year}年</td>
+                    <td>{$vo.b_place}</td>
+                    <td>{$vo.b_level}</td>
+                    <td>容重：{$vo.b_rz}g/l</td>
+                    <td>{$vo.b_weig}吨</td>
+                    <td>{$vo.b_pri1}元/吨</td>
                     <td><a href="">查看货单详情...</a></td>
                 </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">货单号：S101101102</a></td>
-                    <td>2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td>容重：720g/l</td>
-                    <td>100吨</td>
-                    <td>1,700元/吨</td>
-                    <td><a href="" class="hot">待办事项(2)...</a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">货单号：S101101103</a></td>
-                    <td>2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td>容重：720g/l</td>
-                    <td>100吨</td>
-                    <td>1,700元/吨</td>
-                    <td><a href="">查看订单详情...</a></td>
-                </tr>
-                <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">货单号：S101101104</a></td>
-                    <td>2018年07月19日 12:21:35</td>
-                    <td>玉米</td>
-                    <td>2018年</td>
-                    <td>辽宁</td>
-                    <td>一等</td>
-                    <td>容重：720g/l</td>
-                    <td>100吨</td>
-                    <td>1,700元/吨</td>
-                    <td><a href="" class="hot">待办事项(2)...</a></td>
-                </tr>
+                </volist>
             </table>
+            <div class="list_page">
+                {$info.bill.page}
+            </div>
         </div>
     </div>
 </div>

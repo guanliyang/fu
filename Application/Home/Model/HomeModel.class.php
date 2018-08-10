@@ -2,7 +2,7 @@
 namespace Home\Model;
 use Think\Model;
 class HomeModel extends Model {
-    protected $l = 3;
+    protected $l = 10;
     //是否阅读合同
     public function checkContract() {
         $contract = I('request.contract', 0);
@@ -64,9 +64,11 @@ class HomeModel extends Model {
     }
 
     // 分页
-    public function getPageShow($count) {
+    public function getPageShow($count, $str = '') {
         $Page       = new \Think\Page($count, $this->l);
-        $show       = $Page->show();
+
+        $show       = $Page->show($str);
+
         $limitStr = $Page->firstRow.','.$Page->listRows;
         return array(
             'show' => $show,

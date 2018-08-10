@@ -236,12 +236,22 @@ class UserModel extends HomeModel {
     }
 
     public function getMessageForWeb($uid) {
-        $order_count = M('b_order')->where(array('o_status' => OrderModel::STATUS_FINISH))->count();
+        $all_order_count = M('b_order')->where(array('o_status' => OrderModel::STATUS_FINISH))->count();
         $user_count = M('user')->count();
 
+        // 买粮订单
+        $order = new \Home\Model\OrderModel();
+        $order = $order->getUserOrderList($uid);
+
+        // 卖粮货单
+        $bill = new \Home\Model\SBillModel();
+        $bill = $bill->getUserList($uid);
+
         return array(
-            'order_count' => $order_count,
-            'user_count' => $user_count
+            'all_order_count' => $all_order_count,
+            'user_count' => $user_count,
+            'order' => $order,
+            'bill' => $bill
         );
     }
 

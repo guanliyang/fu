@@ -73,12 +73,12 @@ class Page{
      * 组装分页链接
      * @return string
      */
-    public function show() {
+    public function show($str = '') {
         if(0 == $this->totalRows) return '';
 
         /* 生成URL */
         $this->parameter[$this->p] = '[PAGE]';
-        $this->url = U(ACTION_NAME, $this->parameter);
+        $this->url = U(ACTION_NAME, $this->parameter). $str;
         /* 计算分页信息 */
         $this->totalPages = ceil($this->totalRows / $this->listRows); //总页数
         if(!empty($this->totalPages) && $this->nowPage > $this->totalPages) {
