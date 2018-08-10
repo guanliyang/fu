@@ -5,7 +5,7 @@ class OrderItemModel extends Model {
     protected $trueTableName = 'b_order_item';
 
     public function addList($bi_id_list, $o_id) {
-        $data = [];
+        $data = array();
         foreach ($bi_id_list as $bi_id) {
             $bill_item = M('s_bill_item')->where(array('bi_id'=>$bi_id))->find();
             $data['o_id'] = $o_id;
