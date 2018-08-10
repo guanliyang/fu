@@ -10,6 +10,14 @@ function t_submit(url) {
             }
         });
 
+        $("input:password").each(function(){
+            var key = $(this).attr('name');
+            var val = $(this).val() ;
+            if (key && val) {
+                data = data + key + "=" + val + "&";
+            }
+        });
+
         // 获取所有input hidden 数组
         $("input:hidden").each(function(){
             var key = $(this).attr('name');
