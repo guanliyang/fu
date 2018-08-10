@@ -10,7 +10,6 @@ class OrderController extends HomeController {
     }
 
     public function info() {
-
         $this->display();
     }
 }
