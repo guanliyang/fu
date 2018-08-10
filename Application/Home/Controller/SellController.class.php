@@ -16,7 +16,6 @@ class SellController extends HomeController {
     public function sellBillList() {
         $this->putG();
 
-
         $SBill = new \Home\Model\SBillModel();
         $info = $SBill->getOnLineList();
         $this->assign('info', $info);
