@@ -6,35 +6,35 @@
 <div class="bdiv cont">
     <div class="content">
         <div class="list_item">
-            <label>:: 货单号：S101101101 ::</label>　　<<a href="javascript:;" onClick="javascript :history.back(-1);">返回</a>>
+            <label>:: 货单号：{$_GET['b_code']} ::</label>　　<<a href="javascript:;" onClick="javascript :history.back(-1);">返回</a>>
         </div>
         <div class="list">
-            货组编号：2121213 - <label>[已售-待付结算费用]</label>
+            货组编号：{$info.bi_id} - <label>[已售-待付结算费用]</label>
             <table>
                 <tr>
                     <th width="30" rowspan="2"></th>
-                    <th rowspan="2" width="110"><img src="" width="80" height="80"/><br/></th>
-                    <th rowspan="2" width="110"><img src="" width="80" height="80"/><br/></th>
-                    <th>箱号：315112</th>
+                    <th rowspan="2" width="110"><img src="{$info.bi_cnum1_pho}" width="80" height="80"/><br/></th>
+                    <th rowspan="2" width="110"><img src="{$info.bi_snum1_pho}" width="80" height="80"/><br/></th>
+                    <th>箱号：{$info.bi_cnum1}</th>
                     <th width="30" rowspan="2"></th>
-                    <th rowspan="2" width="110"><img src="" width="80" height="80"/><br/></th>
-                    <th rowspan="2" width="110"><img src="" width="80" height="80"/><br/></th>
-                    <th>箱号：315213</th>
+                    <th rowspan="2" width="110"><img src="{$info.bi_cnum2_pho}" width="80" height="80"/><br/></th>
+                    <th rowspan="2" width="110"><img src="{$info.bi_snum2_pho}" width="80" height="80"/><br/></th>
+                    <th>箱号：{$info.bi_cnum2}</th>
                 </tr>
                 <tr>
-                    <th>封号：865231</th>
-                    <th>封号：865398</th>
+                    <th>封号：{$info.bi_snum1}</th>
+                    <th>封号：{$info.bi_snum2}</th>
                 </tr>
                 <tr>
                     <th></th>
-                    <th colspan="7">封箱: 2箱　　　毛重: 60吨　　　皮重: 10吨　　　净重: 50吨　　　货款：84,500元(1,690元/吨)　　　<a href=""><下载装货视频></a></th>
+                    <th colspan="7">封箱: {$info.bi_sum}箱　　　毛重: {$info.bi_gwei}吨　　　皮重: {$info.bi_tare}吨　　　净重: {$info.bi_nwei}吨　　　货款：{$info.bi_dpay}元({$info.bi_dpri}元/吨)　　　<a href=""><下载装货视频></a></th>
                 </tr>
             </table>
             <table>
                 <tr>
                     <td></td>
                     <td>物流信息：</td>
-                    <td>2018年7月10日  09:12:23 [装车]</td>
+                    <td width="320">2018年7月10日  09:12:23 [装车]</td>
                     <td colspan="2"></td>
                 </tr>
                 <tr>

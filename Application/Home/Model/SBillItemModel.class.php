@@ -18,4 +18,9 @@ class SBillItemModel extends HomeModel {
         }
         return $all_price;
     }
+
+    public function getInfo() {
+        $bi_id = I('request.bi_id');
+        return self::where(array('bi_id' => $bi_id))->find();
+    }
 }

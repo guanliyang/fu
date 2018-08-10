@@ -87,6 +87,8 @@ class SBillModel extends HomeModel {
             notice('修改失败');
         }
     }
+
+    // 获取卖单 详情
     public function getInfo($bi_status = null) {
         $id = I("request.b_id", 0, 'intval');
 
@@ -96,8 +98,13 @@ class SBillModel extends HomeModel {
         if (!empty($bi_status)) {
             $where += array('bi_status' => $bi_status);
         }
-        $bill_item = M('s_bill_item')->where($where)->select();
-        return array('bill' => $bill, 'bill_item' => $bill_item);
+
+        return array(
+                'bill' => $bill,
+                'check_bill_item' => M('s_bill_item')->where($where + array('bi_status' => SBillItemModel::STATUS_CHECK))->select(),
+                'on_bill_item' => M('s_bill_item')->where($where + array('bi_status' => SBillItemModel::STATUS_ON))->select(),
+                'finish_bill_item' => M('s_bill_item')->where($where + array('bi_status' => SBillItemModel::STATUS_FINISH))->select(),
+            );
     }
 
     public function ajaxAdd($uid) {

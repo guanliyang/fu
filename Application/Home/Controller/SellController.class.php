@@ -57,9 +57,9 @@ class SellController extends HomeController {
     public function sellBillInfo() {
         $SBill = new \Home\Model\SBillModel();
         $info = $SBill->getInfo();
-        $this->assign('SBill', $info);
-        $this->display();
 
+        $this->assign('info', $info);
+        $this->display();
     }
 
     //修改价格 页面
@@ -78,7 +78,9 @@ class SellController extends HomeController {
 
     //货组详情
     public function billItemInfo() {
-        $bi_id = I('request.bi_id');
+        $bill_item = new \Home\Model\SBillItemModel();
+        $info = $bill_item->getInfo();
+        $this->assign('info', $info);
         $this->display();
     }
 }
