@@ -30,7 +30,7 @@
 
     <if condition="$user">
         <div class="uind">
-            <a href="/Home/User/userView">用户名</a>
+            <a href="/">{$user.real_name}</a>
             <a href="/Home/SysMsg/index">系统通知({$msg_count})</a>
             <a href="/Home/Cart/index">购物车({$cart_count})</a> |
             <a href="/Home/Index/logOut">退出</a>

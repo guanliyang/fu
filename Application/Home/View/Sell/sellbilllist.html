@@ -8,29 +8,26 @@
             <table>
                 <tr>
                     <th width="30"></th>
-                    <th colspan="2">品名：　　
-                        <select class="gc_id" name="gc_id">
-                            <volist name="class" id="vo">
-                                <option <if condition="$vo.gc_id eq $_GET['gc_id']">selected</if> value="{$vo.gc_id}">{$vo.gc_name}</option>
-                            </volist>
-                        </select></th>
-                    <th colspan="7">等级：　　
-                        <select class="gl_id" name="gl_id">
-                            <volist name="level" id="vo">
-                                <option <if condition="$vo.gl_id eq $_GET['gl_id']">selected</if> value="{$vo.gl_id}">{$vo.gl_name}</option>
-                            </volist>
-                        </select>
-                    </th>
+                    <th colspan="2" width="230">品名：　　玉米</th>
+                    <th colspan="7">等级：　　一等</th>
                 </tr>
                 <tr>
                     <th></th>
                     <th colspan="9">年份：　　
-                        <label class="hotitem"><a href="/Home/Sell/sellBillList">全部</a></label>　　
+                        <if condition="$_GET['gy_id']">
+                            <a href="/Home/Sell/sellBillList">全部</a>　　
+                            <else />
+                            <label class="hotitem">全部</label>　　
+                        </if>
                         <volist name="year" id="vo">
-                            <a href="/Home/Sell/sellBillList/gy_id/{$vo.gy_id}">{$vo.gy_id}</a>　　
+                            <if condition="$_GET['gy_id'] eq $vo['gy_id']">
+                                <label class="hotitem">{$vo.gy_id}</label>　　
+                                <else />
+                                <a href="/Home/Sell/sellBillList?gy_id={$vo.gy_id}">{$vo.gy_id}</a>　　
+                            </if>
                         </volist>
                         <a href="/Home/Sell/sellBillList">其他</a>
-                    </td>
+                    </th>
                 </tr>
                 <tr>
                     <th></th>
@@ -51,6 +48,7 @@
                         <a href="/Home/Sell/sellBillList/order=b_stime" class="clkitem">上架时间<img src="/Public/fu/img/ob_a.png"></a>　　
                     </td>
                 </tr>
+                <if condition="$info['list']">
                 <volist name="info.list" id="vo">
                     <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
                         <td></td>
@@ -65,6 +63,20 @@
                         <td><a href="/Home/Sell/onLineBillInfo/b_id/{$vo.b_id}"><查看详情></a></td>
                     </tr>
                 </volist>
+                    <else/>
+                    <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
+                        <td></td>
+                        <td width="120">暂无数据</td>
+                        <td width="110"></td>
+                        <td width="110"></td>
+                        <td width="200"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </if>
             </table>
             <div class="list_page">
                 {$info.page}

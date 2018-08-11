@@ -7,7 +7,7 @@
 <div class="bdiv cont">
     <div class="content">
         <div class="list_item">
-            <label>:: 货单号：{$info.bill.b_code} ::</label>　　<<a href="">下载电子合同</a>>
+            <label>:: 货单号：{$info.bill.b_code} - {$info.bill.b_status|getBillStatus} :: </label>　　<<a href="">下载电子合同</a>>
         </div>
         <div class="list">
             <table>
@@ -55,7 +55,7 @@
                     <volist name="info.check_bill_item" id="vo">
                         <tr>
                             <td></td>
-                            <td>货组编号：{$vo.bi_id}</td>
+                            <td>货组编号：{$vo.bi_id} </td>
                             <td width="90">{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
                             <td width="180">{$vo.bi_dpay}元</td>
                             <td width="60">已回款：</td>

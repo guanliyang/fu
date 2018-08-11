@@ -8,54 +8,50 @@
             <table>
                 <tr>
                     <th width="30"></th>
-                    <th colspan="2">品名：　　
-                        <select class="gc_id" name="gc_id">
-                            <volist name="class" id="vo">
-                                <option <if condition="$vo.gc_id eq $_GET['gc_id']">selected</if> value="{$vo.gc_id}">{$vo.gc_name}</option>
-                            </volist>
-                        </select></th>
-                    <th colspan="7">等级：　　
-                        <select class="gl_id" name="gl_id">
-                            <volist name="level" id="vo">
-                                <option <if condition="$vo.gl_id eq $_GET['gl_id']">selected</if> value="{$vo.gl_id}">{$vo.gl_name}</option>
-                            </volist>
-                        </select>
+                    <th colspan="2" width="170">品名：　　玉米</th>
+                    <th colspan="8">等级：　　一等</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th colspan="10">年份：　　
+                        <if condition="$_GET['gy_id']">
+                            <a href="/Home/Offer/offerList">全部</a>　　
+                            <else />
+                            <label class="hotitem">全部</label>　　
+                        </if>
+                        <volist name="year" id="vo">
+                            <if condition="$_GET['gy_id'] eq $vo['gy_id']">
+                                <label class="hotitem">{$vo.gy_id}</label>　　
+                                <else />
+                                <a href="/Home/Offer/offerList?gy_id={$vo.gy_id}">{$vo.gy_id}</a>　　
+                            </if>
+                        </volist>
+                        <a href="/Home/Offer/offerList">其他</a>
                     </th>
                 </tr>
                 <tr>
                     <th></th>
-                    <th colspan="9">年份：　　
-                        <label class="hotitem"><a href="/Home/Sell/sellBillList">全部</a></label>　　
-                        <volist name="year" id="vo">
-                            <a href="/Home/Offer/offerList/gy_id/{$vo.gy_id}">{$vo.gy_id}</a>　　
-                        </volist>
-                        <a href="/Home/Sell/sellBillList">其他</a>
-                    </td>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th colspan="9">产地：　　
+                    <th colspan="10">产地：　　
                         <label class="hotitem"><a href="/Home/Sell/sellBillList">全部</a></label>　　
                         <volist name="place" id="vo">
                             <a href="/Home/Offer/offerList/gp_id/{$vo.gp_id}">{$vo.gp_name}</a>　　
                         </volist>
-                        <a href="/Home/Sell/sellBillList">其他</a>
-                    </td>
+                    </th>
                 </tr>
                 <tr>
                     <th></th>
-                    <th colspan="9">排序：　　
+                    <th colspan="10">排序：　　
                         <a href="/Home/Offer/offerList/order/b_rz" class="clkitem">容重<img src="/Public/fu/img/ob_a.png"></a>　　
                         <a href="/Home/Offer/offerList/order=b_weig" class="clkitem">净重<img src="/Public/fu/img/ob_a.png"></a>　　
                         <a href="/Home/Offer/offerList/order=b_pri1" class="clkitem">单价<img src="/Public/fu/img/ob_a.png"></a>　　
                         <a href="/Home/Offer/offerList/order=b_stime" class="clkitem">上架时间<img src="/Public/fu/img/ob_a.png"></a>　　
                     </td>
                 </tr>
+                <if condition="$info['list']">
                 <volist name="info.list" id="vo">
                 <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
                     <td></td>
                     <td width="60"><b>求购:</b></td>
-
                     <td width="110">容重：{$vo.f_rz}g/l</td>
                     <td width="110">净重：{$vo.f_weig}吨</td>
                     <td width="100">{$vo.f_pric}元/吨</td>
@@ -64,10 +60,16 @@
                     <td>{$vo.f_year}年</td>
                     <td>{$vo.f_place}</td>
                     <td>{$vo.f_level}</td>
-
-                    <td width="100"><a href="#"><我有粮源></a></td>
+                    <td width="100"><a href="/Home/Sell/sellBill/f_id={$vo.f_id}"><我有粮源></a></td>
                 </tr>
                 </volist>
+                    <else/>
+                    <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
+                        <td></td>
+                        <td width="280" colspan="2">暂无数据</td>
+                        <td colspan="7"></td>
+                    </tr>
+                </if>
             </table>
             <div class="list_page">
               {$info.page}

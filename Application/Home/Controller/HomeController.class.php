@@ -29,6 +29,6 @@ class HomeController extends Controller {
         $this->assign('class', M('g_class')->select());
         $this->assign('level', M('g_level')->select());
         $this->assign('rz', M('g_rz')->select());
-        $this->assign('year', M('g_year')->select());
+        $this->assign('year', M('g_year')->order('gy_id desc')->select());
     }
 }

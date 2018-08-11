@@ -61,8 +61,20 @@ function getOfferStatus($status) {
     $list =
         array(
             0 => '待审核',
-            1 => '预约确认',
+            1 => '预约确认', //
+            5 => '预约确认(推荐)',
             10 => '已转正式订单'
+        );
+    return $list[$status];
+}
+
+function getBillStatus($status) {
+    $list =
+        array(
+            -9 => '删除',
+            0 => '待审核',
+            9 => '在售',
+            10 => '已结单'
         );
     return $list[$status];
 }

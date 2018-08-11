@@ -38,7 +38,7 @@
     </div>
     <div class="content">
         <div class="list_item">
-            您好，<a href="/Home/User/userView">{$user.real_name}</a>(<a href="">设置</a>)。
+            您好，{$user.real_name}(<a href="/Home/User/userView">设置</a>)。
             <a href="/Home/SysMsg/index">{$msg_count}条待处理</a>信息;
             <a href="/Home/Cart/index">{$cart_count}组待购买</a>货物。
             <div class="item">
@@ -51,8 +51,8 @@
             <table>
                 <volist name="info.order.list" id="vo">
                 <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">订单号：{$vo.o_code}</a></td>
-                    <td>{$vo.o_ctime|date='Y年m月d日 H:i:s',###}</td>
+                    <td width="220"><a href="">订单号：{$vo.o_code}</a></td>
+                    <td width="150">{$vo.o_ctime|date='Y/m/d H:i',###}</td>
                     <td>玉米</td>
                     <td>2018年</td>
                     <td>辽宁</td>
@@ -73,8 +73,8 @@
             <table>
                 <volist name="info.offer.list" id="vo">
                 <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">预约号：{$vo.f_code}</a></td>
-                    <td>{$vo.f_ctime|date='Y年m月d日 H:i:s',###}</td>
+                    <td width="220"><a href="">预约号：{$vo.f_code}</a></td>
+                    <td width="150">{$vo.f_ctime|date='Y/m/d H:i',###}</td>
                     <td>{$vo.f_name}</td>
                     <td>{$vo.f_year}年</td>
                     <td>{$vo.f_place}</td>
@@ -94,16 +94,16 @@
             <table>
                 <volist name="info.bill.list" id="vo">
                 <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
-                    <td><a href="">货单号：{$vo.b_code}</a></td>
-                    <td>{$vo.b_ctime|date='Y年m月d日 H:i:s',###}</td>
+                    <td width="220"><a href="">货单号：{$vo.b_code}</a></td>
+                    <td width="150">{$vo.b_ctime|date='Y/m/d H:i',###}</td>
                     <td>{$vo.b_name}</td>
                     <td>{$vo.b_year}年</td>
                     <td>{$vo.b_place}</td>
                     <td>{$vo.b_level}</td>
                     <td>容重：{$vo.b_rz}g/l</td>
                     <td>{$vo.b_weig}吨</td>
-                    <td>{$vo.b_pri1}元/吨</td>
-                    <td><a href="/Home/Sell/sellBillInfo/b_id/{$vo.b_id}">查看货单详情...</a></td>
+                    <td width="110">{$vo.b_pri1|intval}元/吨</td>
+                    <td width="120"><a href="/Home/Sell/sellBillInfo/b_id/{$vo.b_id}">查看货单详情...</a></td>
                 </tr>
                 </volist>
             </table>

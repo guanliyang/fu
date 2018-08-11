@@ -12,11 +12,14 @@
 
         }else{
             document.getElementById('pri1').innerText =  i2s3(npri);
-            document.getElementById('b_pri1').value = i2s3(npri);
+            //document.getElementById('b_pri1').value = i2s3(npri);
         }
         ctotal();
     }
     function cwei(){
+        document.getElementById('pri1').innerText =  document.getElementById('rpri').innerText;
+
+
         var weig = document.getElementById('sweight').value;
         var bsum = Math.ceil(weig/26);
         document.getElementById('bsum').innerText = bsum;
@@ -28,6 +31,7 @@
         ctotal();
     }
     function ctotal(){
+        document.getElementById('b_pri1').value =  document.getElementById('pri1').innerText.replace(',', '');
         var pri1 = eval(document.getElementById('pri1').innerText.replace(',', ''));
         var weig = document.getElementById('sweight').value;
         var total = pri1*weig;
@@ -70,7 +74,7 @@
                 <tr>
                     <td width="30" rowspan="5"></td>
                     <td width="230" rowspan="5">
-                        <img id="show_img" src="" width="200" height="200" /><br/>　粮食近照　　　　
+                        <img id="show_img" src="" style="max-height: 200px;max-width: 200px;" /><br/>　粮食近照　　　　
                         <a href="#" onclick="$('#t_file').click()">(点击上传)</a>
                         <input id="t_file" type="file" accept="image/*"/>
                         　　　　　　　
@@ -116,8 +120,8 @@
                     <td>
 
                         　出售单价：<input class="bt inpss" value="-" type="button" onclick="cpri(-1);"/>
-                        <label id="pri1">1,700</label>
-                        <input type="hidden" name="b_pri0" id="b_pri1" value="1700">
+                        <label id="pri1">0</label>
+                        <input type="hidden" name="b_pri0" id="b_pri1" value="0">
                         <input class="bt inpss" value="+" type="button" onclick="cpri(1);"/> 元/吨　　　　　　　　
                         今日市场参考价：<br/>　　　　　（提交后也可以随时调价）　　　　　　　<label class="fontbig" id="rpri">1,700</label> 元/吨</td>
                 </tr>
@@ -160,7 +164,7 @@
                 </tr>
             </table>
         </div>
-        <<a href="viewcont.php">预览出售合同</a>>　　　　
+        <<a href="/Home/Contract/index/">预览出售合同</a>>　　　　
           <input type="checkbox" name="contract" class="bt_s"/>我已阅读并了解合同详细内容，同意签属并确认其法律效力。
         <div class="list_page">
             <input class="bt bt_s" id="t_submit" value="正式提交货单" type="button"/>
