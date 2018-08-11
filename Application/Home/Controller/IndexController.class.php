@@ -10,7 +10,7 @@ class IndexController extends Controller {
     // 设置新密码
     public function changePassword() {
         $user = new \Home\Model\UserModel();
-        $user->changePassword($this->user['mobile']);
+        $user->changePassword();
         notice("修改成功", 0);
     }
 

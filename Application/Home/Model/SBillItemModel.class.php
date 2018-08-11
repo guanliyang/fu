@@ -1,6 +1,5 @@
 <?php
 namespace Home\Model;
-use Think\Model;
 class SBillItemModel extends HomeModel {
     protected $trueTableName = 's_bill_item';
 

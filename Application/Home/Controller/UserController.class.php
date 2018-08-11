@@ -18,6 +18,13 @@ class UserController extends HomeController {
 
     // 密码重置
     public function changePassword() {
-        $this->display('Index/changepasswordview');
+        $this->display();
+    }
+
+    // 设置新密码
+    public function ajaxChangePassword() {
+        $user = new \Home\Model\UserModel();
+        $user->changePassword($this->user['mobile']);
+        notice("修改成功");
     }
 }

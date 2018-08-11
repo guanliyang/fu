@@ -57,6 +57,7 @@ function getUserStatus($status) {
     return $list[$status];
 }
 
+//预购状态
 function getOfferStatus($status) {
     $list =
         array(
@@ -68,6 +69,7 @@ function getOfferStatus($status) {
     return $list[$status];
 }
 
+// 售货单状态
 function getBillStatus($status) {
     $list =
         array(
@@ -79,6 +81,16 @@ function getBillStatus($status) {
     return $list[$status];
 }
 
+// 购物车状态
+function getCartStatus($status) {
+    $list =
+        array(
+            -9 => '删除',
+            1 => '正常',
+            9 => '已售',
+        );
+    return $list[$status];
+}
 if (!function_exists('array_column')) {
     function array_column(array $array, $column_key, $index_key=null){
         $result = array();

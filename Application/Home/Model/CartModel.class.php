@@ -7,6 +7,14 @@ class CartModel extends HomeModel {
     const STATUS_NORMAL = 1;
     const STATUS_FORMAL = 9;
 
+    public function delByUid($uid) {
+        $bi_id = I('request.bi_id');
+        if (!empty($bi_id)) {
+            $status = self::where(array('u_id' => $uid, 'bi_id' => $bi_id))->delete();
+        }
+        return $status;
+
+    }
     // 订单结算
     public function finish() {
         $bi_id_str = I('get.bi_id_str');
@@ -72,7 +80,8 @@ class CartModel extends HomeModel {
     public function addCart($uid) {
         $bi_id_list = I('request.bi_id');
         $this->checkBiIdList($bi_id_list);
-        $this->checkExist($bi_id_list, $uid);
+        $bi_id_list = $this->checkExist($bi_id_list, $uid);
+
         $data = array();
         foreach ($bi_id_list as $bi_id) {
             $data['bi_id'] = $bi_id;
@@ -87,14 +96,14 @@ class CartModel extends HomeModel {
 
     // 判断购物车中是否存在
     public function checkExist($bi_id_list, $uid) {
-        foreach ($bi_id_list as $bi_id) {
+        foreach ($bi_id_list as $key => $bi_id) {
             $data['bi_id'] = $bi_id;
             $data['u_id'] = $uid;
             $exist = self::where($data)->find();
             if ($exist) {
-                notice("货组编号".$bi_id."已存在于您的购物车中,请重新选择");
+                unset($bi_id_list[$key]);
             }
         }
-        return true;
+        return $bi_id_list;
     }
 }

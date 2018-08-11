@@ -104,6 +104,8 @@
                     </volist>
                 </if>
             </table>
+            <!-- 状态大于0时显示 -->
+            <if condition="$info['bill']['b_status'] gt 0">
             <table>
                 <tr>
                     <th width="30"></th>
@@ -127,6 +129,7 @@
                     <td colspan="3"><br/>(其中:17,000元，今日支付结算后可退。)</td>
                 </tr>
             </table>
+            </if>
         </div>
     </div>
 </div>

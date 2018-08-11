@@ -42,4 +42,11 @@ class CartController extends HomeController {
         $this->assign('list', $list);
         $this->display();
     }
+
+    // 单个删除购物车 货物
+    public function delItem() {
+        $cart = new \Home\Model\CartModel();
+        $cart->delByUid($this->user['id']);
+        $this->redirect('/Home/cart/index');
+    }
 }

@@ -208,7 +208,7 @@ class UserModel extends HomeModel {
         return rand(100000, 999999);
     }
 
-    public function changePassword($user_mobile) {
+    public function changePassword($user_mobile = '') {
         $mobile = $this->_checkMobile();
 
 //        $this->_checkCode($mobile);
@@ -217,6 +217,11 @@ class UserModel extends HomeModel {
         $user = $this->where($where)->find();
         if (empty($user)) {
             notice('此电话号码还没有注册');
+        }
+
+        // 已登录修改密码时,判断是不是自己的电话
+        if ($user_mobile && $user_mobile != $mobile) {
+            notice('请填写自己的电话号码');
         }
         $this->where($where)->save(array('password' => $password));
     }
