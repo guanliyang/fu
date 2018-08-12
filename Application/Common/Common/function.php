@@ -8,6 +8,18 @@ function notice($message, $code = 1, $data = array()) {
     die(json_encode(array('code' => $code, 'msg' => $message, 'ts' => time()) + $data));
 }
 
+// 获取二维数组键值, ,分隔
+function getArrayV($list, $v_key) {
+    if (empty($list) && !is_array($list)) {
+        return false;
+    }
+
+    $str = '';
+    foreach ($list as $key => $value) {
+        $str .= $value[$v_key].',';
+    }
+    return trim($str, ',');
+}
 /**
  * 保存图片
  */
@@ -91,6 +103,55 @@ function getCartStatus($status) {
         );
     return $list[$status];
 }
+
+// 订单状态
+function getOrderStatus($status) {
+    $list =
+        array(
+            -9 => '删除',
+            0 => '审核中',
+            10 => '已结单',
+        );
+    return $list[$status];
+}
+
+// 订单 order_item 状态 1离岸/2海运在途/3到岸/4待收货/5待确认/9已确认
+function getOrderItemStatus($status) {
+    $list =
+        array(
+            0 => '审核中',
+            1 => '离岸',
+            2 => '海运在途',
+            3 => '到岸',
+            4 => '待收货',
+            5 => '待确认',
+            9 => '已确认',
+        );
+    return $list[$status];
+}
+
+// 订单收货方式
+function getDeliType($type) {
+    $list =
+        array(
+            0 => '空',
+            1 => '平台物流到门',
+            2 => '自提',
+        );
+    return $list[$type];
+}
+
+//支付方式
+function getPayType($type) {
+    $list =
+        array(
+            0 => '空',
+            1 => '20%首付',
+            2 => '全款',
+        );
+    return $list[$type];
+}
+
 if (!function_exists('array_column')) {
     function array_column(array $array, $column_key, $index_key=null){
         $result = array();

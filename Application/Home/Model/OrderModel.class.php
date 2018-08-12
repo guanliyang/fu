@@ -1,6 +1,7 @@
 <?php
 namespace Home\Model;
 
+
 class OrderModel extends HomeModel {
     protected $trueTableName = 'b_order';
 
@@ -12,6 +13,83 @@ class OrderModel extends HomeModel {
     const PAY_ALL = 2;
 
     protected $data  = array();
+
+    // 订单 每箱详情
+    public function getBillItemInfo() {
+        $oi_id = I('request.oi_id', 0, 'intval');
+        if (empty($oi_id)) {
+            $this->noticeView('oi_id有误');
+        }
+        $orderItem = M('b_order_item')->where(array('oi_id' => $oi_id))->find();
+        if (empty($oi_id)) {
+            $this->noticeView('order_item信息无法获取');
+        }
+
+        $bill_item = M('s_bill_item')->where(array('bi_id' => $orderItem['bi_id']))->find();
+
+        return array(
+            'order_item' => $orderItem,
+            'bill_item' => $bill_item,
+            'order' => $this->getOrderById()
+        );
+    }
+
+    //订单货组详情
+    public function getBillInfo() {
+        $b_id = I('request.b_id', 0, 'intval');
+        $bill = M('s_bill')->where(array('b_id' => $b_id))->find();
+        $order = $this->getOrderById();
+        $bi_id_str = I('request.bi_id');
+        $bi_id_str = str_replace(',', ' / ', $bi_id_str);
+        return array(
+            'order' => $order,
+            'bill' => $bill,
+            'bi_id_str' => $bi_id_str
+        );
+    }
+
+    // 用户的订单详情页面
+    public function getInfo() {
+        $order = $this->getOrderById();
+        $order_item_list = M('b_order_item')->where(array('o_id' => $order['o_id']))->select();
+
+        $bill_list = array();
+        if (!empty($order_item_list) && is_array($order_item_list)) {
+            foreach ($order_item_list as $key => $order_item) {
+                $bill_item = M('s_bill_item')->where(array('bi_id' => $order_item['bi_id']))->find();
+
+                $b_id = $bill_item['b_id'];
+                // 父数组不存在, 去查
+                if (empty($bill_list[$b_id])) {
+                    $bill = M('s_bill')->where(array('b_id' => $b_id))->find();
+                    $bill_list[$b_id] = $bill;
+                }
+                $bill_list[$b_id]['bill_item'][] = $bill_item +
+                    array(
+                        'oi_status' => $order_item['oi_status'],
+                        'oi_id' => $order_item['oi_id']
+                    );
+            }
+        }
+
+        return array(
+            'order' => $order,
+            'bill' => $bill_list
+        );
+    }
+
+    private function getOrderById() {
+        $o_id = I('request.o_id', 0, 'intval');
+        if (empty($o_id)) {
+            $this->noticeView('订单id不能为空');
+        }
+
+        $order = self::where(array('o_id' => $o_id))->find();
+        if (empty($order)) {
+            $this->noticeView('订单id有误');
+        }
+        return $order;
+    }
 
     // 用户 订单列表信息
     public function getUserOrderList($uid) {
@@ -53,6 +131,9 @@ class OrderModel extends HomeModel {
         // 购物车状态改成 转成正式订单
         $this->updateCat($bi_id_list, $uid);
 
+        // bill_item 表改成已成交
+        $this->updateBillItem($bi_id_list);
+
         //order 表里插入信息
         $o_id = self::data($this->data)->add();
         // b_order_item 表插入信息
@@ -62,6 +143,21 @@ class OrderModel extends HomeModel {
             notice('生成订单出错');
         }
         return $o_id;
+    }
+
+    // item 转变成已成交
+    public function updateBillItem($bi_id_list) {
+        if (!empty($bi_id_list) && is_array($bi_id_list)) {
+            foreach ($bi_id_list as $bi_id) {
+                $where = array(
+                    'bi_id' => $bi_id
+                );
+                $data = array (
+                    'bi_status' => SBillItemModel::STATUS_FINISH
+                );
+                M('s_bill_item')->where($where)->save($data);
+            }
+        }
     }
 
     // 购物车转成正式订单

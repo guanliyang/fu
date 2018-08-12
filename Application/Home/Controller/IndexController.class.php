@@ -2,6 +2,10 @@
 namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
+    public function errorView($message = '') {
+        $this->assign('message', $message);
+        $this->display('/public/error');
+    }
     // 密码重置
     public function changePasswordView() {
         $this->display();

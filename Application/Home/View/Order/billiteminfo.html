@@ -6,28 +6,33 @@
 <div class="bdiv cont">
     <div class="content">
         <div class="list_item">
-            <label>:: 订单号：B101101101 ::</label>　　<<a href="">返回</a>>
+            <label>:: 订单号：{$info.order.o_code} - {$info.order.o_status|getOrderStatus}) ::</label>　　<<a href="javascript:;" onClick="javascript:history.back(-1);">返回</a>>
         </div>
         <div class="list">
-            货组编号：2121112 - <label>[到岸待付款]</label>
+            货组编号：{$info.order_item.bi_id} - <label>[{$info.order_item.oi_status|getOrderItemStatus}]</label>
             <table>
                 <tr>
                     <th width="30" rowspan="2"></th>
-                    <th rowspan="2" width="110"><img src="" width="80" height="80"/><br/></th>
-                    <th rowspan="2" width="110"><img src="" width="80" height="80"/><br/></th>
-                    <th>箱号：315112</th>
+                    <th rowspan="2" width="110"><img src="{$info.order_item.bi_cnum1_pho}" width="80" height="80"/><br/></th>
+                    <th rowspan="2" width="110"><img src="{$info.order_item.bi_snum1_pho}" width="80" height="80"/><br/></th>
+                    <th>箱号：{$info.order_item.bi_cnum1}</th>
                     <th width="30" rowspan="2"></th>
-                    <th rowspan="2" width="110"><img src="" width="80" height="80"/><br/></th>
-                    <th rowspan="2" width="110"><img src="" width="80" height="80"/><br/></th>
-                    <th>箱号：315213</th>
+                    <th rowspan="2" width="110"><img src="{$info.order_item.bi_cnum2_pho}" width="80" height="80"/><br/></th>
+                    <th rowspan="2" width="110"><img src="{$info.order_item.bi_snum2_pho}" width="80" height="80"/><br/></th>
+                    <th>箱号：{$info.order_item.bi_cnum2}</th>
                 </tr>
                 <tr>
-                    <th>封号：865231</th>
-                    <th>封号：865398</th>
+                    <th>封号：{$info.order_item.bi_snum1}</th>
+                    <th>封号：{$info.order_item.bi_snum2}</th>
                 </tr>
                 <tr>
                     <th></th>
-                    <th colspan="7">封箱: 2箱　　　毛重: 60吨　　　皮重: 10吨　　　净重: 50吨　　　货款：85,000元(1,700元/吨)　　　<a href=""><下载装货视频></a></th>
+                    <th colspan="7">
+                        封箱: {$info.order_item.bi_sum}箱　　　
+                        毛重: {$info.order_item.bi_gwei}吨　　　
+                        皮重: {$info.order_item.bi_tare}吨　　　
+                        净重: {$info.order_item.bi_nwei}吨　　　
+                        货款：{$info.order_item.bi_dpay}元({$info.order_item.bi_dpri}元/吨)　　　<a href=""><下载装货视频></a></th>
                 </tr>
             </table>
             <table>

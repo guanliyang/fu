@@ -1,8 +1,18 @@
 <?php
 namespace Home\Model;
 use Think\Model;
+use Home\Controller\IndexController;
+
+
 class HomeModel extends Model {
     protected $l = 10;
+
+    public function noticeView($message) {
+        $index = new IndexController();
+        $index->errorView($message);
+        die;
+    }
+
     //是否阅读合同
     public function checkContract() {
         $contract = I('request.contract', 0);
@@ -35,7 +45,7 @@ class HomeModel extends Model {
                 notice('货组编号'.$bi_id.' 有误');
             }
 
-            if ($bill_item['bi_status'] != SBillItemModel::STATUS_ON) {
+            if ($bill_item['bi_status'] == SBillItemModel::STATUS_FINISH) {
                 notice('货组编号'.$bi_id.' 有误, 可能已被购买,请到购物车重新选择');
             }
         }

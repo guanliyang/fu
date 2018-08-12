@@ -11,18 +11,28 @@ class OrderController extends HomeController {
 
     // 订单详情
     public function info() {
+        $order = new \Home\Model\OrderModel();
+        $info = $order->getInfo();
+        $this->assign('info', $info);
         $this->display();
     }
 
 
     // 订单 bill 详情
-
     public function billInfo() {
+        $order = new \Home\Model\OrderModel();
+        $info = $order->getBillInfo();
+
+        $this->assign('info', $info);
         $this->display();
     }
 
     // 订单 item 货组详情
     public function billItemInfo() {
+        $order = new \Home\Model\OrderModel();
+        $info = $order->getBillItemInfo();
+
+        $this->assign('info', $info);
         $this->display();
     }
 }
