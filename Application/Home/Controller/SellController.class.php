@@ -76,8 +76,9 @@ class SellController extends HomeController {
     public function ajaxChangePrice() {
         $SBill = new \Home\Model\SBillModel();
         $status = $SBill->changePrice();
+        $b_id = I("request.b_id", 0, 'intval');
         if ($status) {
-            notice('修改成功', 0, array('url' => '/Home/Sell/sellBillInfo/b_id/'.I("request.b_id", 0, 'intval')));
+            notice('修改成功', 0, array('url' => '/Home/Sell/sellBillInfo/b_id/'.$b_id));
         }
         else {
             notice('未修改');

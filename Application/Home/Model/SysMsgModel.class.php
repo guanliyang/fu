@@ -5,6 +5,11 @@ class SysMsgModel extends HomeModel {
     const IS_READ = 1;
     const NOT_READ = 0;
 
+    // 消息类型声明
+    const TYPE_ORDER = 0;
+    const TYPE_BILL = 1;
+    const TYPE_OFFER = 2;
+
     protected $limit = 1;
 
     public function getMsgNotRead($uid) {

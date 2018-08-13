@@ -1,8 +1,33 @@
 <?php
+
+// 获取 系统信息 文字显示
+function getMsgText($type) {
+    $list =
+        array(
+            0 => '订单号',
+            1 => '货单号',
+            2 => '预约单',
+        );
+    return $list[$type];
+}
+
+// 获取 系统信息
+function getMsgUrl($type) {
+    $list =
+        array(
+            0 => '/Home/Order/info/o_id/',
+            1 => '/Home/Sell/sellBillInfo/b_id/',
+            2 => '/Home/Offer/offerInfo/f_id/',
+        );
+    return $list[$type];
+}
+
+// 判断是否是电话
 function is_mobile($mobile) {
     return preg_match("/^1\d{10}$/", $mobile);
 }
 
+//警告信息
 function notice($message, $code = 1, $data = array()) {
     header('Content-type: application/json;charset=utf-8');
     die(json_encode(array('code' => $code, 'msg' => $message, 'ts' => time()) + $data));
