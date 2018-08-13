@@ -28,12 +28,14 @@
     function cpri(cval){
         var epri = eval(document.getElementById('rpri').innerText.replace(',', ''))+20;
         var pri1 = eval(document.getElementById('pri1').innerText.replace(',', ''));
+
         var npri = pri1+(cval*5);
         if(npri>epri) {
             alert('定价上限不得超出市场价格合理范围。');
 
         }else{
             document.getElementById('pri1').innerText =  i2s3(npri);
+            document.getElementById('b_pri1').value = npri;
         }
         iSet();
     }
@@ -64,48 +66,40 @@
 <div class="bdiv cont">
     <div class="content">
         <div class="list_item">
-            <label>:: 货单号：S101101101 - 修改单价 ::</label>　　<<a href="javascript:;" onClick="javascript :history.back(-1);">返回</a>>
+            <label>:: 货单号：{$info.bill.b_code} - 修改单价 ::</label>　　<<a href="javascript:;" onClick="javascript :history.back(-1);">返回</a>>
         </div>
         <div class="list">
             <table>
                 <tr>
                     <th></th>
-                    <th>(2) 在售货组：</th>
-                    <th colspan="4">出售单价：<input class="bt inpss" value="-" type="button" onclick="cpri(-1);"/> <label id="pri1">1,690</label> <input class="bt inpss" value="+" type="button" onclick="cpri(1);"/> 元/吨</th>
+                    <th>({$info.on_bill_item|count}) 在售货组：</th>
+                    <th colspan="4">出售单价：
+                        <input class="bt inpss" value="-" type="button" onclick="cpri(-1);"/>
+                        <label id="pri1">{$info.bill.b_pri1|number_format}</label>
+                        <input class="bt inpss" value="+" type="button" onclick="cpri(1);"/> 元/吨</th>
+                    <input type="hidden" id="b_pri1" value="{$info.bill.b_pri1}" name="b_pri1" />
                     <th>今日市场参考价：<label class="fontbig" id="rpri">1,700</label> 元/吨</th>
                 </tr>
+                <volist name="info.on_bill_item" id="vo">
                 <tr>
                     <td></td>
-                    <td>货组编号：2121112</td>
-                    <td width="90"><label id="wei2121112">50</label>吨(2箱)</td>
-                    <td width="180"><label id="sum2121112">0</label>元</td>
+                    <td>货组编号：{$vo.bi_id}</td>
+                    <td width="90"><label id="wei{$vo.bi_id}">{$vo.bi_gwei}</label>吨({$vo.bi_sum}箱)</td>
+                    <td width="180"><label id="sum{$vo.bi_id}">0</label>元</td>
                     <td width="60">已回款：</td>
-                    <td><label id="rem2121112">85,000</label>元 (计息85元)</td>
-                    <td id="diff2121112">0</td>
+                    <td><label id="rem{$vo.bi_id}">85,000</label>元 (计息85元)</td>
+                    <td id="diff{$vo.bi_id}">0</td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td>货组编号：2121115</td>
-                    <td><label id="wei2121115">50</label>吨(2箱)</td>
-                    <td><label id="sum2121115">0</label>元</td>
-                    <td>已回款：</td>
-                    <td><label id="rem2121115">85,000</label>元 (计息85元)</td>
-                    <td id="diff2121115">0</td>
-                </tr>
+                </volist>
             </table>
         </div>
+        <input type="hidden" name="b_id" value="{$info.bill.b_id}">
         <div class="list_page">
-            <input class="bt bt_s" value="保存修改" type="button"/>
+            <input class="bt bt_s" id="t_submit" value="保存修改" type="button"/>
             <a href="javascript:;" onClick="javascript :history.back(-1);"><input class="bt bt_s" value="取消返回" type="button"/></a>
         </div>
     </div>
 </div>
-
-<p>价格修改页面</p>
-
-修改价格: <input type="text" name="b_pri1" />
-<input type="hidden" name="id" value="53">
-<input id="t_submit" type="submit" value="点击修改价格" />
 
 <script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="/Public/bootstrap/js/t_submit.js"></script>

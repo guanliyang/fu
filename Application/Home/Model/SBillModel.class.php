@@ -77,15 +77,10 @@ class SBillModel extends HomeModel {
 
     //修改价格
     public function changePrice() {
-        $id = I("request.id", 0, 'intval');
+        $id = I("request.b_id", 0, 'intval');
         $price = I("request.b_pri1", 0, 'intval');
         $status = self::where(array('b_id' => $id))->save(array('b_pri1' => $price));
-        if ($status) {
-            notice('修改成功', 0);
-        }
-        else {
-            notice('修改失败');
-        }
+        return $status;
     }
 
     // 获取卖单 详情

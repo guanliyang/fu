@@ -68,14 +68,20 @@ class SellController extends HomeController {
         $this->checkoutUserLogin();
         $SBill = new \Home\Model\SBillModel();
         $info = $SBill->getInfo();
-        $this->assign('SBill', $info);
+        $this->assign('info', $info);
         $this->display();
     }
 
     //修改价格操作
     public function ajaxChangePrice() {
         $SBill = new \Home\Model\SBillModel();
-        $SBill->changePrice();
+        $status = $SBill->changePrice();
+        if ($status) {
+            notice('修改成功', 0, array('url' => '/Home/Sell/sellBillInfo/b_id/'.I("request.b_id", 0, 'intval')));
+        }
+        else {
+            notice('未修改');
+        }
     }
 
     //货组详情
