@@ -12,13 +12,14 @@ class OfferController extends HomeController {
     }
 
     public function addOffer() {
+        $this->checkoutUserLogin();
         $this->putG();
         $this->display();
     }
     // 提交预约信息
     public function ajaxAddOffer() {
         $offer = new \Home\Model\ROfferModel();
-        $status = $offer->addOffer($this->user['id']);
+        $status = $offer->addOffer($this->getUid());
         if ($status) {
             notice('成功', 0, array('url' => '/Home/Offer/offerInfo?f_id='.$status));
         }
@@ -28,6 +29,7 @@ class OfferController extends HomeController {
     }
 
     public function offerInfo() {
+        $this->checkoutUserLogin();
         $offer = new \Home\Model\ROfferModel();
         $info = $offer->getInfo();
         $this->assign('info', $info);

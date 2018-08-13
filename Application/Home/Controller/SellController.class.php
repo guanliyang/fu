@@ -7,8 +7,8 @@ class SellController extends HomeController {
         $bill = M('s_bill')->where(array('bi_id' => I('request.id')))->select();
         $billItem = M('s_bill_item')->where(array('bi_id' => I('request.id')))->select();
 
-        dump($bill);
-        dump($billItem);
+//        dump($bill);
+//        dump($billItem);
         $this->display();
     }
 
@@ -45,15 +45,16 @@ class SellController extends HomeController {
     // 添加卖货信息
     public function addBill() {
         $SBill = new \Home\Model\SBillModel();
-        $b_id = $SBill->ajaxAdd($this->user['id']);
+        $b_id = $SBill->ajaxAdd($this->getUid());
 
         if ($b_id) {
             notice('添加成功', 0, array('url' => '/Home/Sell/sellBillInfo?b_id='.$b_id));
         }
     }
 
-    // 卖粮详情
+    // 个人中心  卖粮详情
     public function sellBillInfo() {
+        $this->checkoutUserLogin();
         $SBill = new \Home\Model\SBillModel();
         $info = $SBill->getInfo();
 
@@ -63,6 +64,7 @@ class SellController extends HomeController {
 
     //修改价格 页面
     public function changePrice() {
+        $this->checkoutUserLogin();
         $SBill = new \Home\Model\SBillModel();
         $info = $SBill->getInfo();
         $this->assign('SBill', $info);
@@ -77,6 +79,7 @@ class SellController extends HomeController {
 
     //货组详情
     public function billItemInfo() {
+        $this->checkoutUserLogin();
         $bill_item = new \Home\Model\SBillItemModel();
         $info = $bill_item->getInfo();
         $this->assign('info', $info);

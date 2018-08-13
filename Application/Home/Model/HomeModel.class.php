@@ -1,5 +1,6 @@
 <?php
 namespace Home\Model;
+use Home\Controller\HomeController;
 use Think\Model;
 use Home\Controller\IndexController;
 
@@ -8,7 +9,7 @@ class HomeModel extends Model {
     protected $l = 10;
 
     public function noticeView($message) {
-        $index = new IndexController();
+        $index = new HomeController();
         $index->errorView($message);
         die;
     }

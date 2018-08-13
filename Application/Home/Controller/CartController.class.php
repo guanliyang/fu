@@ -4,6 +4,7 @@ namespace Home\Controller;
 class CartController extends HomeController {
     // 进入订单结算
     public function finish() {
+        $this->checkoutUserLogin();
         $car = new \Home\Model\CartModel();
         $bill = $car->finish();
 
@@ -31,14 +32,15 @@ class CartController extends HomeController {
     // 添加到购物车
     public function ajaxAdd() {
         $cart = new \Home\Model\CartModel();
-        $cart->addCart($this->user['id']);
+        $cart->addCart($this->getUid());
         notice('成功', 0, array('url' => '/Home/cart/index'));
     }
 
     //购物车列表
     public function index() {
+        $this->checkoutUserLogin();
         $cart = new \Home\Model\CartModel();
-        $list = $cart->getByUid($this->user['id']);
+        $list = $cart->getByUid($this->getUid());
         $this->assign('list', $list);
         $this->display();
     }
@@ -46,7 +48,7 @@ class CartController extends HomeController {
     // 单个删除购物车 货物
     public function delItem() {
         $cart = new \Home\Model\CartModel();
-        $cart->delByUid($this->user['id']);
+        $cart->delByUid($this->getUid());
         $this->redirect('/Home/cart/index');
     }
 }
