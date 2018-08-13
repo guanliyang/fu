@@ -41,16 +41,16 @@
             <a href="#" onclick="$('#t_file').click()">(点击上传)</a><br/><br/><br/>
             公司名称：<input name="company_name" value="" type="text"/><br/>
             联系地址：
-            <select name="province">
+            <select name="province" class="t_address">
             <option >请选择省份</option>
             <volist name="province" id="vo">
                 <option value="{$vo.id}">{$vo.areaName}</option>
             </volist>
         </select>
-            <select id="cmbCity" name="city">
+            <select id="cmbCity" name="city" class="t_address">
                 <option >请选择城市</option>
             </select>
-            <select id="cmbArea" name="area">
+            <select id="cmbArea" name="area" class="t_address">
                 <option >请选择区县</option>
             </select>
             <br/>
