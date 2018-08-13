@@ -33,6 +33,7 @@ class SellController extends HomeController {
 
     // 卖粮页面
     public function sellBill() {
+        $this->checkoutUserLogin();
         $this->putG();
         $this->assign('user', $this->user);
 
