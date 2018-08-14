@@ -177,6 +177,7 @@ function getPayType($type) {
     return $list[$type];
 }
 
+// 二维数组 某键值
 if (!function_exists('array_column')) {
     function array_column(array $array, $column_key, $index_key=null){
         $result = array();

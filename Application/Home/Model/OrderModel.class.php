@@ -110,35 +110,47 @@ class OrderModel extends HomeModel {
         $this->checkContract();
         //检查bi_id
         $bi_id_list = $this->checkBiIdStr(I('request.bi_id_str'));
-        // 支付方式
-        $pay_type = $this->getPayType();
-        // 价格
-        $this->getAllPrice($pay_type);
 
-        //编号 和默认信息 的设置
-        $this->getDefault();
-        $this->data['u_id'] = $uid;
-        // 收货方式
-        $this->getDeliType();
-        // 收货地址
-        $this->data['o_deli_add'] = $this->getAddress($uid);
+        // 生成多个订单
+        $s_bill_item = new \Home\Model\SBillItemModel();
+        $bill_list = $s_bill_item->getBidList($bi_id_list);
 
-        // b_id 获取
-        $this->data['b_id'] = M('s_bill_item')->where(array('bi_id' => $bi_id_list[0]))->getField('b_id');
+        foreach ($bill_list as $bill) {
+            // 支付方式
+            $pay_type = $this->getPayType();
 
-        //收货人信息
-        $this->getUser();
+
+            //编号 和默认信息 的设置
+            $this->getDefault();
+            $this->data['u_id'] = $uid;
+            // 收货方式
+            $this->getDeliType();
+            // 收货地址
+            $this->data['o_deli_add'] = $this->getAddress($uid);
+
+            //收货人信息
+            $this->getUser();
+
+
+            $all_price = array_sum((array_column($bill['bill_item'], 'bi_dpay')));
+            // 价格
+            $this->getAllPrice($pay_type, $all_price);
+
+            //order 表里插入信息
+            $o_id = self::data($this->data)->add();
+            // b_order_item 表插入信息
+            $son_bi_id_list = array_column($bill['bill_item'], 'bi_id');
+            $order_item = new \Home\Model\OrderItemModel();
+            $order_item->addList($son_bi_id_list, $o_id);
+        }
+
         // 购物车状态改成 转成正式订单
         $this->updateCat($bi_id_list, $uid);
 
         // bill_item 表改成已成交
         $this->updateBillItem($bi_id_list);
 
-        //order 表里插入信息
-        $o_id = self::data($this->data)->add();
-        // b_order_item 表插入信息
-        $order_item = new \Home\Model\OrderItemModel();
-        $order_item->addList($bi_id_list, $o_id);
+
         if (!$o_id) {
             notice('生成订单出错');
         }
@@ -220,9 +232,7 @@ class OrderModel extends HomeModel {
     }
 
     // 支付价格
-    public function getAllPrice($pay_type) {
-        $bill_item = new \Home\Model\SBillItemModel();
-        $all_price = $bill_item->getPrice(I('request.bi_id_str'));
+    public function getAllPrice($pay_type, $all_price) {
         $this->data['o_pay'] = $all_price;
         if ($pay_type == self::PAY_PART) {
             $this->data['o_pay_f'] = $all_price * 0.2;
