@@ -200,3 +200,28 @@ if (!function_exists('array_column')) {
         return $result;
     }
 }
+
+//根据id和类型获取被截断的消息内容
+function getMessageById($resource_id, $type = 0) {
+    $where = array(
+        'type' => $type,
+        'resource_id' => $resource_id
+    );
+
+    $msg = M('sys_msg')->where($where)->order('ctime desc')->find();
+
+    return subtext($msg['sm_content'], 6);
+}
+
+/*字符串截断函数+省略号*/
+function subtext($text, $length)
+{
+    $dian = '...';
+    if(mb_strlen($text, 'utf8') > $length) {
+        return mb_substr($text, 0, $length, 'utf8').$dian;
+    }
+    if (empty($text)) {
+        return $dian;
+    }
+    return $text;
+}

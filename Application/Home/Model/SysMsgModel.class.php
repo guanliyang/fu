@@ -5,9 +5,11 @@ class SysMsgModel extends HomeModel {
     const IS_READ = 1;
     const NOT_READ = 0;
 
-    // 消息类型声明
+    // 消息类型声明 order
     const TYPE_ORDER = 0;
+    // bill
     const TYPE_BILL = 1;
+    //offer
     const TYPE_OFFER = 2;
 
     protected $limit = 1;

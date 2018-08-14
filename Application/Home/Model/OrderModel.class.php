@@ -97,6 +97,7 @@ class OrderModel extends HomeModel {
         $count = self::where($where)->count();
         $page = $this->getPageShow($count);
         $list = self::where($where)->order('o_id desc')->limit($page['str'])->select();
+
         return array(
             'order_count' => $count,
             'list' => $list,
