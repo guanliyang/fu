@@ -49,7 +49,7 @@ class CartController extends HomeController {
         $this->assign('list', $list);
 
         // 传过来的刚刚勾选的
-        $bi_id_list = explode(',', I('request.bi_id_str', []));
+        $bi_id_list = explode(',', I('request.bi_id_str', array()));
         $this->assign('bi_id_list', $bi_id_list);
 
         $this->display();
