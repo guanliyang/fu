@@ -17,8 +17,34 @@ class IndexController extends Controller {
     // 首页登录页面
     public function index(){
 
-        if (session('uid')) {
-            redirect('/Home/Message/index');
+        if ($uid = session('uid')) {
+            //买
+            $order = M('b_order')->where(array('u_id' => $uid))->order('o_ctime desc')->find();
+            $order_time = 0;
+            if (!empty($order)) {
+                $order_time = $order['o_ctime'];
+            }
+
+            // 预约
+            $offer = M('r_offer')->where(array('u_id' => $uid))->order('f_id desc')->find();
+            $offer_time = 0;
+            if (!empty($offer)) {
+                $offer_time = $offer['f_ctime'];
+            }
+
+            //卖
+            $bill = M('s_bill')->where(array('u_id' => $uid))->order('b_id desc')->find();
+            $bill_time = 0;
+            if (!empty($bill)) {
+                $bill_time = $bill['b_ctime'];
+            }
+
+            // 取最大值拿到键值
+            $list = array($order_time, $offer_time, $bill_time);
+            $key = array_search(max($list), $list);
+
+            $item = $key + 1;
+            redirect('/Home/Message/index?item='.$item);
         }
         $this->display();
     }
