@@ -33,7 +33,12 @@ class CartController extends HomeController {
     public function ajaxAdd() {
         $cart = new \Home\Model\CartModel();
         $cart->addCart($this->getUid());
-        notice('成功', 0, array('url' => '/Home/cart/index'));
+
+        // 刚刚勾选的传入下一页
+        $bi_id_list = I('request.bi_id');
+        $bi_id_str = implode(',', $bi_id_list);
+
+        notice('成功', 0, array('url' => '/Home/cart/index/bi_id_str/'.$bi_id_str));
     }
 
     //购物车列表
@@ -42,6 +47,11 @@ class CartController extends HomeController {
         $cart = new \Home\Model\CartModel();
         $list = $cart->getByUid($this->getUid());
         $this->assign('list', $list);
+
+        // 传过来的刚刚勾选的
+        $bi_id_list = explode(',', I('request.bi_id_str', []));
+        $this->assign('bi_id_list', $bi_id_list);
+
         $this->display();
     }
 

@@ -74,7 +74,7 @@
                                 <td><input type="checkbox" disabled="disabled" name="buyid[]" class="bt_s" value="{$item.bi_id}" ></td>
                             <else/>
                             <tr id="tr{$item.bi_id}" class="selc cool" onclick="iSel({$item.bi_id});">
-                            <td><input type="checkbox" name="buyid[]" id="{$item.bi_id}" class="bt_s" value="{$item.bi_id}" onclick="iSel({$item.bi_id});"></td>
+                            <td><input type="checkbox" <if condition="in_array($item['bi_id'], $bi_id_list)">checked="checked" </if> name="buyid[]" id="{$item.bi_id}" class="bt_s" value="{$item.bi_id}" onclick="iSel({$item.bi_id});"></td>
                         </if>
 
                             <td>{$item.bi_sum}箱　(毛重：{$item.bi_gwei}吨　皮重：{$item.bi_tare}吨　净重：{$item.bi_nwei}吨)</td>
