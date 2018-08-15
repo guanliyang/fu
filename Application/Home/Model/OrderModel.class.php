@@ -18,12 +18,17 @@ class OrderModel extends HomeModel {
     public function getBillItemInfo() {
         $oi_id = I('request.oi_id', 0, 'intval');
         if (empty($oi_id)) {
-            $this->noticeView('oi_id有误');
+            $this->noticeView('货组编号不能为空');
         }
         $orderItem = M('b_order_item')->where(array('oi_id' => $oi_id))->find();
-        if (empty($oi_id)) {
-            $this->noticeView('order_item信息无法获取');
+        if (empty($orderItem)) {
+            $this->noticeView('货组id有误');
         }
+
+        if ($orderItem['o_id'] != I('request.o_id', 0, 'intval')) {
+            $this->noticeView('货组id和订单id不对应');
+        }
+
 
         $bill_item = M('s_bill_item')->where(array('bi_id' => $orderItem['bi_id']))->find();
 
@@ -88,6 +93,15 @@ class OrderModel extends HomeModel {
         if (empty($order)) {
             $this->noticeView('订单id有误');
         }
+
+        if ($order['u_id'] != $this->getModelUid()) {
+            $this->noticeView('此订单不属于您!');
+        }
+
+        if ($order['o_status'] == OrderModel::STATUS_DEL) {
+            $this->noticeView('此订单已被删除!');
+        }
+
         return $order;
     }
 

@@ -98,10 +98,10 @@ function getUserStatus($status) {
 function getOfferStatus($status) {
     $list =
         array(
-            0 => '待审核',
-            1 => '预约确认', //
+            0 => '待生效',
+            1 => '预约中', //
             5 => '预约确认(推荐)',
-            10 => '已转正式订单'
+            10 => '预约成功'
         );
     return $list[$status];
 }
@@ -134,7 +134,9 @@ function getOrderStatus($status) {
     $list =
         array(
             -9 => '删除',
-            0 => '审核中',
+            0 => '待付款',
+            1 => '待收货',
+            9 => '已收货',
             10 => '已结单',
         );
     return $list[$status];
@@ -144,16 +146,38 @@ function getOrderStatus($status) {
 function getOrderItemStatus($status) {
     $list =
         array(
-            0 => '审核中',
-            1 => '离岸',
-            2 => '海运在途',
-            3 => '到岸',
-            4 => '待收货',
-            5 => '待确认',
-            9 => '已确认',
+            0 => '',
+            1 => '[海运在途]',
+            2 => '[待付尾款]',
+            3 => '[待付其他费用]',
+            4 => '[物流待发货]',
+            5 => '[待到港提货]',
+            6 => '[物流配送中]',
+            7 => '[待确认收货]',
+            8 => '[已确认收货]',
+            // 当OrderStatus 状态是10 已结单时  item 不显示状态
+            9 => '',
         );
     return $list[$status];
 }
+
+// 物流信息
+function getWuLiuMessage($status) {
+    if ($status == 4) {
+        return '正在派单';
+    }
+
+    if ($status == 6) {
+        return '运送途中请准备收货';
+    }
+
+    if ($status >= 7) {
+        return '物流配送完成';
+    }
+
+    return '暂无';
+}
+
 
 // 订单收货方式
 function getDeliType($type) {
@@ -224,4 +248,22 @@ function subtext($text, $length)
         return $dian;
     }
     return $text;
+}
+
+function getDateTime($time) {
+    if (empty($time)) {
+        return '暂无';
+    }
+    return date("Y年m月d日 H:i:s", $time);
+}
+
+
+// 待付货款
+function getDaifuMoney() {
+
+}
+
+// 获取已结利息
+function getKnot() {
+
 }

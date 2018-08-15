@@ -141,8 +141,25 @@ class ROfferModel extends HomeModel {
 
     //获取详情
     public function getInfo() {
-        $f_id = I('request.f_id');
-        return self::where(array('f_id' => $f_id))->find();
+        $f_id = I('request.f_id', 0, 'intval');
+        if (empty($f_id)) {
+            $this->noticeView('未获取到预约单id');
+        }
+        $info = self::where(array('f_id' => $f_id))->find();
+
+        if (empty($info)) {
+            $this->noticeView('此预约单不存在');
+        }
+
+        if ($this->getModelUid() != $info['u_id']) {
+            $this->noticeView('此预约单不是您的');
+        }
+
+        if ($info['f_status'] == ROfferModel::STATUS_DEL) {
+            $this->noticeView('此预约单已被删除');
+        }
+
+        return $info;
     }
 
     // 用户获取自己的列表

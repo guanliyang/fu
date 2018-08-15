@@ -14,6 +14,15 @@ class HomeModel extends Model {
         die;
     }
 
+    // model 中获取uid
+    public function getModelUid() {
+        $uid = session('uid');
+        if (empty($uid)) {
+            $this->noticeView('您还没有登录, 请点击<会员中心>进行登录');
+        }
+        return $uid;
+    }
+
     //是否阅读合同
     public function checkContract() {
         $contract = I('request.contract', 0);

@@ -22,7 +22,7 @@
                     <volist name="vo.bill_item" id="item">
                         <tr>
                         <td></td>
-                        <td>货组编号：{$item.bi_id}　<label>[{$item.oi_status|getOrderItemStatus}]</label></td>
+                        <td>货组编号：{$item.bi_id}　<label>{$item.oi_status|getOrderItemStatus}</label></td>
                         <td>　　　{$item.bi_sum}箱　净重：{$item.bi_nwei}吨</td>
                         <td class="tdright">84,500元</td>
                         <td>计息{$item.bi_inte}元(5天)</td>
@@ -43,7 +43,8 @@
                     <td colspan="5">收货地址：{$info.order.o_deli_add}　　　联系人：{$info.order.o_deli_cont}　　　手机号：{$info.order.o_deli_mobi}</td>
                 </tr>
             </table>
-            <if condition="$info['order']['o_status'] gt 0">
+            <!-- 20%首付时显示 -->
+            <if condition="$info['order']['o_pay_type'] eq 1">
             <table>
                 <tr>
                     <th width="30"></th>
