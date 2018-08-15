@@ -116,10 +116,10 @@ function getOfferShow($offer, $number = 0) {
     $str = '';
     if ($offer['f_status'] == 0) {
         if ($number == 2) {
-            $str = '待付预约金'.$offer['f_pay'].'元';
+            $str = '待付预约金<label>'.$offer['f_pay'].'</label>元';
         }
         if ($number == 3) {
-            $str = '待付服务费'.$offer['f_service_price'].'元';
+            $str = '待付服务费<label>'.$offer['f_service_price'].'</label>元';
         }
         if ($number == 4) {
             $str = '支付预约金与服务费后，预约单立即生效。<br/>生效后，因您的原因取消预约单，服务费将不退还。因平台原因取消，则退还全部费用。';
@@ -136,10 +136,10 @@ function getOfferShow($offer, $number = 0) {
 
     if ($offer['f_status'] == 1) {
         if ($number == 2) {
-            $str = '已付预约金'.$offer['f_pay'].'元';
+            $str = '已付预约金<label>'.$offer['f_pay'].'</label>元';
         }
         if ($number == 3) {
-            $str = '已付服务费'.$offer['f_service_price'].'元';
+            $str = '已付服务费<label>'.$offer['f_service_price'].'</label>元';
         }
         if ($number == 4) {
             $str = '支付预约金与服务费后，预约单立即生效。<br/>生效后，因您的原因取消预约单，服务费将不退还。因平台原因取消，则退还全部费用。';
@@ -156,10 +156,10 @@ function getOfferShow($offer, $number = 0) {
 
     if ($offer['f_status'] == 10) {
         if ($number == 2) {
-            $str = '已付预约金'.$offer['f_pay'].'元';
+            $str = '已付预约金<label>'.$offer['f_pay'].'</label>元';
         }
         if ($number == 3) {
-            $str = '已付服务费'.$offer['f_service_price'].'元';
+            $str = '已付服务费<label>'.$offer['f_service_price'].'</label>元';
         }
         if ($number == 4) {
             $str = '预约已成功。生成购买订单，<a href="/Home/Order/info/o_id/'.$offer['o_id'].'">点击链接查看订单详情</a>';
@@ -182,11 +182,45 @@ function getBillStatus($status) {
         array(
             -9 => '删除',
             0 => '待审核',
-            9 => '在售',
+            1 => '待付保证金和运费', // 待付款
+            2 => '待装货',
+            3 => '待上架',
+            5 => '在售',
+            9 => '已成交',
             10 => '已结单'
         );
     return $list[$status];
 }
+
+// 货组状态
+function getBillItemStatus($status) {
+    $list =
+        array(
+            -9 => '删除',
+            0 => '待审核',
+            1 => '已封箱', // 待付款
+            2 => '物流运送中',
+            3 => '货物已入港',
+            5 => '在售',
+            6 => '买家已下单',
+            7 => '已成交',
+            8 => '待付利息及其他',
+            9 => '已结算'
+        );
+    return $list[$status];
+}
+
+// 显示货组状态
+function getBillItemStatusByBill($bill, $status) {
+    $str = '';
+    if (in_array($bill['b_status'], array(3, 5, 9))) {
+        $status_text = getBillItemStatus($status);
+        $str = ' <label>['.$status_text.']</label>';
+    }
+
+    return $str;
+}
+
 
 // 购物车状态
 function getCartStatus($status) {
@@ -248,6 +282,50 @@ function getWuLiuMessage($status) {
     return '暂无';
 }
 
+// 总价格
+function getAllPrice($bill) {
+    return number_format($bill['b_pri1'] * $bill['b_weig']);
+}
+
+//应交保证金
+function getDepo($bill) {
+    $str = '';
+    if ($bill['b_status'] == 0) {
+        $str = '需缴保险金：'.$bill['b_depo'].'元';
+    }
+
+    if ($bill['b_status'] == 1) {
+        $str = '已付保险金：'.$bill['b_depo'].'元';
+    }
+
+    if ($bill['b_status'] > 1) {
+        $str = '待付保险金：'.$bill['b_depo'].'元';
+    }
+
+    return $str;
+}
+
+//一共几车
+function getCartNumber($info) {
+    return count($info['on_bill_item']) + count($info['finish_bill_item']);
+}
+// 需付运费
+function getFrei($bill) {
+    $str = '';
+    if ($bill['b_status'] == 0) {
+        $str = '需缴运费：'.$bill['b_frei'].'元';
+    }
+
+    if ($bill['b_status'] == 1) {
+        $str = '已付运费：'.$bill['b_frei'].'元';
+    }
+
+    if ($bill['b_status'] > 1) {
+        $str = '待付运费：'.$bill['b_frei'].'元';
+    }
+
+    return $str;
+}
 
 // 订单收货方式
 function getDeliType($type) {

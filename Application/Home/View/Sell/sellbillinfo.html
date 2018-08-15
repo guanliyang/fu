@@ -25,45 +25,28 @@
                     <td></td>
                     <td width="200">初始单价：{$info.bill.b_pri0}元/吨</td>
                     <td width="200">净重总计：{$info.bill.b_weig}吨</td>
-                    <td>运费：{$info.bill.b_frei}元 (1,200元/车*4车)</td>
+                    <td>{$info.bill|getFrei} (200元/车*{$info|getCartNumber}车)</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>初始总价：340,000元</td>
-                    <td>已缴保证金：68,000元</td>
+                    <td>初始总价：{$info.bill|getAllPrice}元</td>
+                    <td>{$info.bill|getDepo}</td>
                     <td></td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td>货款已回：340,000元</td>
-                    <td colspan="2">回款时间：2018年7月15日 11:21:35 (距今5天)</td>
-                </tr>
+                <if condition="$info['bill']['b_status'] gt 3">
+                    <tr>
+                        <td></td>
+                        <td>货款已回：340,000元</td>
+                        <td colspan="2">回款时间：2018年7月15日 11:21:35 (距今5天)</td>
+                    </tr>
+                </if>
+
                 <tr>
                     <td></td>
                     <td colspan="3">装货地址：{$info.bill.b_add}　　联系人：{$info.bill.b_cont}　　手机号：{$info.bill.b_mobi}</td>
                 </tr>
             </table>
             <table>
-                <if condition="$info['check_bill_item']">
-                    <tr>
-                        <th width="30"></th>
-                        <th>({$info.check_bill_item|count}) 待审核货组：</th>
-                        <th colspan="3"><label>{$info.bill.b_pri1}</label>元/吨 <a href="/Home/Sell/changePrice?b_id={$_GET['b_id']}"><修改单价></a></th>
-                        <th width="150"></th>
-                        <th width="90"></th>
-                    </tr>
-                    <volist name="info.check_bill_item" id="vo">
-                        <tr>
-                            <td></td>
-                            <td>货组编号：{$vo.bi_id} </td>
-                            <td width="90">{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
-                            <td width="180">{$vo.bi_dpay}元</td>
-                            <td width="60">已回款：</td>
-                            <td>85,000元 (计息85元)</td>
-                            <td><a href="/Home/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.bill.b_code}"><货组详情></a></td>
-                        </tr>
-                    </volist>
-                </if>
                 <if condition="$info['on_bill_item']">
                     <tr>
                         <th width="30"></th>
@@ -75,7 +58,7 @@
                     <volist name="info.on_bill_item" id="vo">
                         <tr>
                         <td></td>
-                        <td>货组编号：{$vo.bi_id}</td>
+                        <td>货组编号：{$vo.bi_id} {$info.bill|getBillItemStatusByBill=$vo['bi_status']}</td>
                         <td width="90">{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
                         <td width="180">{$vo.bi_dpay}元</td>
                         <td width="60">已回款：</td>
@@ -94,7 +77,7 @@
                     <volist name="info.finish_bill_item" id="vo">
                         <tr>
                             <td></td>
-                            <td>货组编号：{$vo.bi_id}</td>
+                            <td>货组编号：{$vo.bi_id} {$info.bill|getBillItemStatusByBill=$vo['bi_status']}</td>
                             <td width="90">{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
                             <td width="180">{$vo.bi_dpay}元</td>
                             <td width="60">已回款：</td>
@@ -104,14 +87,17 @@
                     </volist>
                 </if>
             </table>
-            <!-- 状态大于0时显示 -->
-            <if condition="$info['bill']['b_status'] gt 0">
+
             <table>
+                <if condition="$info['bill']['b_status'] gt 3">
                 <tr>
                     <th width="30"></th>
                     <th width="200">今日须支付：<label><b>585<b></label> 元</th>
                     <th colspan="5">其中：待付利息 <label><b>85</b></label> 元，待付跌价差价 <label><b>500</b></label> 元，请按合同说明方式付款至平台指定帐号。</th>
                 </tr>
+                </if>
+
+                <if condition="$info['bill']['b_status'] gt 2">
                 <tr>
                     <td></td>
                     <td></td>
@@ -128,8 +114,9 @@
                     <td class="tdright">17,000元<br/>51,000元</td>
                     <td colspan="3"><br/>(其中:17,000元，今日支付结算后可退。)</td>
                 </tr>
+                </if>
+
             </table>
-            </if>
         </div>
     </div>
 </div>

@@ -84,24 +84,48 @@ class SBillModel extends HomeModel {
     }
 
     // 获取卖单 详情
-    public function getInfo($bi_status = null) {
-        $id = I("request.b_id", 0, 'intval');
+    public function getInfo() {
+        $bill = $this->getBId();
 
-        $bill = $this->where(array('b_id' => $id))->find();
+        $where = array('b_id' => $bill['b_id']);
 
-        $where = array('b_id' => $id);
-        if (!empty($bi_status)) {
-            $where += array('bi_status' => $bi_status);
-        }
+        $on_where = $where + array(
+                'bi_status' => array('GT', 0),
+                'bi_status' => array('LT', 6),
+            );
+
+        $finish_where = $where + array(
+                'bi_status' => array('GT', 5),
+            );
 
         return array(
                 'bill' => $bill,
-                'check_bill_item' => M('s_bill_item')->where($where + array('bi_status' => SBillItemModel::STATUS_CHECK))->select(),
-                'on_bill_item' => M('s_bill_item')->where($where + array('bi_status' => SBillItemModel::STATUS_ON))->select(),
-                'finish_bill_item' => M('s_bill_item')->where($where + array('bi_status' => SBillItemModel::STATUS_FINISH))->select(),
+                'on_bill_item' => M('s_bill_item')->where($on_where)->select(),
+                'finish_bill_item' => M('s_bill_item')->where($finish_where)->select(),
             );
     }
 
+    public function getBId() {
+        $id = I("request.b_id", 0, 'intval');
+        if (empty($id)) {
+            $this->noticeView('未获取到货单号');
+        }
+
+        $bill = $this->where(array('b_id' => $id))->find();
+        if (empty($bill)) {
+            $this->noticeView('货单号有误');
+        }
+
+        if ($bill['b_status'] == SBillModel::STATUS_DEL) {
+            $this->noticeView('货单号已被删除');
+        }
+
+        if ($bill['u_id'] != $this->getModelUid()) {
+            $this->noticeView('此货单不属于您');
+        }
+
+        return $bill;
+    }
     public function ajaxAdd($uid) {
         $this->checkContract();
         $this->getG();
