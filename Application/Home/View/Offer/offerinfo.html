@@ -6,7 +6,8 @@
 <div class="bdiv cont">
     <div class="content">
         <div class="list_item">
-            <label>:: 预约单：{$info.f_code}-[{$info.f_status|getOfferStatus}] ::</label>　　　<<a href="javascript:;" onClick="javascript:history.back(-1);">返回</a>>
+            <label>:: 预约单：{$info.f_code}-[{$info.f_status|getOfferStatus}] ::</label>　<<a href="javascript:;" onClick="javascript:history.back(-1);">返回</a>>　　
+            {$info|getOfferShow=6}
         </div>
         <div class="list">
             <table>
@@ -26,17 +27,17 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>需缴预约金：<label>{$info.f_pay}</label> 元 (待支付)</td>
-                    <td>需缴服务费：<label>1,700</label> 元 (待支付)</td>
+                    <td>需缴预约金：<label>{$info|getOfferShow=2}</label></td>
+                    <td>需缴服务费：<label>{$info|getOfferShow=3}</label></td>
                 </tr>
                 <tr>
                     <th></th>
-                    <th colspan="2">支付预约金与服务费后，预约单立即生效。<br/>生效后，因您的原因取消预约单，服务费将不退还。因平台原因取消，则退还全部费用。</th>
+                    <th colspan="2">{$info|getOfferShow=4}</th>
                 </tr>
             </table>
         </div>
         <div class="list_page">
-            <input class="bt bt_s" onclick="disp_confirm()" value="取消预购" type="button"/>
+            {$info|getOfferShow=5}
             <input type="hidden" id="f_id" value="{$info.f_id}" />
         </div>
     </div>

@@ -106,6 +106,76 @@ function getOfferStatus($status) {
     return $list[$status];
 }
 
+/**
+ * 根据预约状态返回不同的值
+ * number是想要获取内容的位置,对应文档中的2,3,4,5,6
+ * @param $offer  预约信息
+ * @param int $number
+ */
+function getOfferShow($offer, $number = 0) {
+    $str = '';
+    if ($offer['f_status'] == 0) {
+        if ($number == 2) {
+            $str = '待付预约金'.$offer['f_pay'].'元';
+        }
+        if ($number == 3) {
+            $str = '待付服务费'.$offer['f_service_price'].'元';
+        }
+        if ($number == 4) {
+            $str = '支付预约金与服务费后，预约单立即生效。<br/>生效后，因您的原因取消预约单，服务费将不退还。因平台原因取消，则退还全部费用。';
+        }
+
+        if ($number == 5) {
+            $str = '<input class="bt bt_s" onclick="disp_confirm()" value="取消预购" type="button"/>';
+        }
+
+        if ($number == 6) {
+            $str = '';
+        }
+    }
+
+    if ($offer['f_status'] == 1) {
+        if ($number == 2) {
+            $str = '已付预约金'.$offer['f_pay'].'元';
+        }
+        if ($number == 3) {
+            $str = '已付服务费'.$offer['f_service_price'].'元';
+        }
+        if ($number == 4) {
+            $str = '支付预约金与服务费后，预约单立即生效。<br/>生效后，因您的原因取消预约单，服务费将不退还。因平台原因取消，则退还全部费用。';
+        }
+
+        if ($number == 5) {
+            $str = '';
+        }
+
+        if ($number == 6) {
+            $str = '下载电子要约';
+        }
+    }
+
+    if ($offer['f_status'] == 10) {
+        if ($number == 2) {
+            $str = '已付预约金'.$offer['f_pay'].'元';
+        }
+        if ($number == 3) {
+            $str = '已付服务费'.$offer['f_service_price'].'元';
+        }
+        if ($number == 4) {
+            $str = '预约已成功。生成购买订单，<a href="/Home/Order/info/o_id/'.$offer['o_id'].'">点击链接查看订单详情</a>';
+        }
+        if ($number == 5) {
+            $str = '';
+        }
+        if ($number == 6) {
+            $str = '下载电子要约';
+        }
+    }
+
+    return $str;
+}
+
+
 // 售货单状态
 function getBillStatus($status) {
     $list =
