@@ -9,8 +9,8 @@ class OrderModel extends HomeModel {
     const STATUS_CHECK = 0;
     const STATUS_FINISH = 10;
 
-    const PAY_PART = 1;
-    const PAY_ALL = 2;
+    const PAY_PART = 1; // 首付
+    const PAY_ALL = 2; //全款
 
     protected $data  = array();
 

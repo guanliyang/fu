@@ -66,14 +66,14 @@
                 <tr>
                     <th width="30"></th>
                     <th width="90">待付货款：</th>
-                    <th width="220"><label><b>84,500</b></label> 元</th>
+                    <th width="220"><label><b>{$info.order|getOrderItemPendingMoney=$info['order_item']}</b></label> </th>
                     <th width="90">可结利息：</th>
-                    <th><label><b>84.5</b></label> 元 (84500x0.0002x5) 成交至今5天。</th>
+                    <th><label><b>{$info.order|getKnot=$info['order_item']}</b></label> 元 ({$info.order_item.oi_dpay}x{$Think.config.RATE}x{$info.order|getPastDay}) 成交至今{$info.order|getPastDay}天。</th>
                 </tr>
                 <tr>
                     <th></th>
                     <th>滞箱费：</th>
-                    <th colspan="3"><label><b>0</b></label>元 (到岸14天内免费，超出时间按50元/天.箱收取)</th>
+                    <th colspan="3"><label><b>{$info.order_item.oi_depay}</b></label>元 (到岸14天内免费，超出时间按50元/天.箱收取)</th>
                 </tr>
             </table>
         </div>

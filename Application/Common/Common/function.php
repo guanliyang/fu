@@ -258,12 +258,92 @@ function getDateTime($time) {
 }
 
 
-// 待付货款
-function getDaifuMoney() {
+/**
+ * 待付货款
+ * @param $pay_type 支付方式
+ * @param $oi_status  货组状态
+ * @param $o_pay_t 尾款
+ * @param $o_pay_f 首付款
+ * @param $oi_dpay 本组货款
+ */
+function getOrderItemPendingMoney($order, $order_item) {
+    $pay_type = $order['o_pay_type'];
+    $oi_status = $order_item['oi_status'];
+    $o_pay_t = $order['o_pay_t'];
+    $o_pay_f = $order['o_pay_f'];
+    $oi_dpay = $order_item['oi_dpay'];
 
+    $str = '--';
+    // 全付
+    if ($pay_type == \Home\Model\OrderModel::PAY_ALL) {
+        $str = '已付货款';
+    }
+
+    // 20首付
+    if ($pay_type == \Home\Model\OrderModel::PAY_PART) {
+        if ($oi_status > 2) {
+            $str = '已付货款';
+        }
+        else {
+            // 计算公式算出待付货款
+            $str = number_format(getPendingMoney($o_pay_f, $o_pay_t, $oi_dpay)).'元';
+            if (empty($str)) {
+                $str = '已付货款';
+            }
+        }
+    }
+
+    return $str;
 }
 
-// 获取已结利息
-function getKnot() {
+// 公式计算出待付货款
+function getPendingMoney($o_pay_f, $o_pay_t, $oi_dpay) {
+    $numb = 0;
+    if ($o_pay_f - $o_pay_t >= $oi_dpay) {
+        $numb = $oi_dpay;
+    }
+    elseif ($o_pay_t > $o_pay_f) {
+        $numb = $o_pay_t - $o_pay_f;
+    }
+    return $numb;
+}
 
+/**
+ * 可结息 -  获取已结利息
+ * @param $pay_type 支付方式
+ * @param $oi_status  货组状态
+ * @param $oi_dpay 本组货款
+ */
+function getKnot($order, $order_item) {
+    $pay_type = $order['o_pay_type'];
+    $oi_status = $order_item['oi_status'];
+    $o_pay_t = $order['o_pay_t'];
+    $o_pay_f = $order['o_pay_f'];
+    $oi_dpay = $order_item['oi_dpay'];
+
+    $rate = C('RATE');
+
+    // 全付
+    if ($pay_type == \Home\Model\OrderModel::PAY_ALL) {
+        $str = '';
+    }
+
+    // 20首付
+    if ($pay_type == \Home\Model\OrderModel::PAY_PART) {
+        if ($oi_status > 2) {
+            $str = '已结利息';
+        }
+        else {
+            $pendMoney = getPendingMoney($o_pay_f, $o_pay_t, $oi_dpay);
+            $day = getPastDay($order);
+            $str = $pendMoney * $rate * $day;
+        }
+    }
+    return $str;
+}
+
+//已成交天数
+function getPastDay($order) {
+    $day = (int)((time() - $order['o_dtime']) / (60*60*24));
+    return $day;
 }

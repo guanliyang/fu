@@ -10,5 +10,6 @@ return  array(
         'expire'              =>  31536000,                      //SESSION过期时间，单位秒
     ),
 
+    'RATE' => 0.0002,  // 滞箱费 日利率
 //    'MODULE_ALLOW_LIST' => array('Home','Web'),
 );
