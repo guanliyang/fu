@@ -405,6 +405,16 @@ function getDateTime($time) {
     return date("Y年m月d日 H:i:s", $time);
 }
 
+function getBillItemPayStatus($billItem) {
+    $str = '-';
+    if (in_array($billItem['bi_status'], array(5, 6, 7, 8))) {
+        $str = '待';
+    }
+    if ($billItem['bi_status'] == 9) {
+        $str = '已';
+    }
+    return $str;
+}
 
 /**
  * 待付货款

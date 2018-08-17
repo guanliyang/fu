@@ -22,7 +22,31 @@ class SBillItemModel extends HomeModel {
     // 获取单条详细内容
     public function getInfo() {
         $bi_id = I('request.bi_id');
-        return self::where(array('bi_id' => $bi_id))->find();
+        if (empty($bi_id)) {
+            $this->noticeView('货组编号不能为空');
+        }
+        $bill_item = self::where(array('bi_id' => $bi_id))->find();
+        if (empty($bill_item)) {
+            $this->noticeView('货组编号不存在');
+        }
+
+        $bill = M('s_bill')->where(array('b_id' => $bill_item['b_id']))->find();
+        if ($bill['u_id'] != $this->getModelUid()) {
+            $this->noticeView('此货组不属于您');
+        }
+
+        if ($bill_item['bi_status'] < 0) {
+            $this->noticeView('此货组已删除');
+        }
+
+        $order_item = array();
+        if ($bill_item['bi_status'] > 1) {
+            $order_item = M('b_order_item')->where(array('bi_id' => $bi_id))->order('oi_id desc')->find();
+        }
+        return array(
+            'bill_item' => $bill_item,
+            'order_item' => $order_item
+        );
     }
 
     // 由bi_id_list  获取

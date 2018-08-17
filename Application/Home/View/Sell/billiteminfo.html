@@ -9,68 +9,75 @@
             <label>:: 货单号：{$_GET['b_code']} ::</label>　　<<a href="javascript:;" onClick="javascript :history.back(-1);">返回</a>>
         </div>
         <div class="list">
-            货组编号：{$info.bi_id} - <label>[已售-待付结算费用]</label>
+            货组编号：{$info.bill_item.bi_id} - <label>[{$info.bill_item.bi_status|getBillItemStatus}]</label>
             <table>
                 <tr>
                     <th width="30" rowspan="2"></th>
-                    <th rowspan="2" width="110"><img src="{$info.bi_cnum1_pho}" width="80" height="80"/><br/></th>
-                    <th rowspan="2" width="110"><img src="{$info.bi_snum1_pho}" width="80" height="80"/><br/></th>
-                    <th>箱号：{$info.bi_cnum1}</th>
+                    <th rowspan="2" width="110"><img src="{$info.bill_item.bi_cnum1_pho}" width="80" height="80"/><br/></th>
+                    <th rowspan="2" width="110"><img src="{$info.bill_item.bi_snum1_pho}" width="80" height="80"/><br/></th>
+                    <th>箱号：{$info.bill_item.bi_cnum1}</th>
                     <th width="30" rowspan="2"></th>
-                    <th rowspan="2" width="110"><img src="{$info.bi_cnum2_pho}" width="80" height="80"/><br/></th>
-                    <th rowspan="2" width="110"><img src="{$info.bi_snum2_pho}" width="80" height="80"/><br/></th>
-                    <th>箱号：{$info.bi_cnum2}</th>
+                    <th rowspan="2" width="110"><img src="{$info.bill_item.bi_cnum2_pho}" width="80" height="80"/><br/></th>
+                    <th rowspan="2" width="110"><img src="{$info.bill_item.bi_snum2_pho}" width="80" height="80"/><br/></th>
+                    <th>箱号：{$info.bill_item.bi_cnum2}</th>
                 </tr>
                 <tr>
-                    <th>封号：{$info.bi_snum1}</th>
-                    <th>封号：{$info.bi_snum2}</th>
+                    <th>封号：{$info.bill_item.bi_snum1}</th>
+                    <th>封号：{$info.bill_item.bi_snum2}</th>
                 </tr>
                 <tr>
                     <th></th>
-                    <th colspan="7">封箱: {$info.bi_sum}箱　　　毛重: {$info.bi_gwei}吨　　　皮重: {$info.bi_tare}吨　　　净重: {$info.bi_nwei}吨　　　货款：{$info.bi_dpay}元({$info.bi_dpri}元/吨)　　　<a href=""><下载装货视频></a></th>
+                    <th colspan="7">封箱: {$info.bill_item.bi_sum}箱　　　毛重: {$info.bill_item.bi_gwei}吨　　　皮重: {$info.bill_item.bi_tare}吨　　　净重: {$info.bill_item.bi_nwei}吨　　　货款：{$info.bill_item.bi_dpay}元({$info.bill_item.bi_dpri}元/吨)　　　<a href=""><下载装货视频></a></th>
                 </tr>
             </table>
+            <if condition="$info['bill_item']['bi_status'] gt 1">
             <table>
                 <tr>
                     <td></td>
                     <td>物流信息：</td>
-                    <td width="320">2018年7月10日  09:12:23 [装车]</td>
+                    <td width="320">{$info.order_item.oi_otime}2018年7月10日  09:12:23 [装车]</td>
                     <td colspan="2"></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>入港时间：</td>
-                    <td width="220">2018年7月10日  12:20:55</td>
+                    <td width="220">{$info.order_item.bi_itime|getDateTime} </td>
                     <td width="90">入港名称：</td>
-                    <td>锦州港</td>
+                    <td>{$info.order_item.bi_pname}</td>
                 </tr>
                 <tr>
                     <td width="30"></td>
                     <td width="90">上架时间：</td>
-                    <td colspan="3">2018年7月11日  10:12:32</td>
+                    <td colspan="3">{$info.order_item.bi_stime|getDateTime} </td>
                 </tr>
                 <tr>
                     <td width="30"></td>
                     <td width="90">成交时间：</td>
-                    <td colspan="3">2018年7月15日  11:55:12 (在售5天)</td>
+                    <td colspan="3">{$info.order_item.bi_dtime|getDateTime} </td>
                 </tr>
             </table>
+            </if>
+
+            <if condition="$info['bill_item']['bi_status'] gt 3">
             <table>
                 <tr>
                     <th width="30"></th>
-                    <th width="90">待结回款：</th>
-                    <th width="300"><label>85,000</label> 元</th>
-                    <th width="90">待付利息：</th>
-                    <th><label><b>85</b></label> 元 (回款85000元 x 日利率0.0002 x 在售5天)</th>
+                    <th width="90">{$info.bill_item|getBillItemPayStatus}结回款：</th>
+                    <th width="300">
+                        <label>{$info.bill_item.bi_rpay}</label> 元
+                    </th>
+                    <th width="90">{$info.bill_item|getBillItemPayStatus}付利息：</th>
+                    <th><label><b>{$info.order_item.oi_id}</b></label> 元 (回款85000元 x 日利率0.0002 x 在售5天)</th>
                 </tr>
                 <tr>
                     <th></th>
-                    <th>待补跌价：</th>
+                    <th>{$info.bill_item|getBillItemPayStatus}补跌价：</th>
                     <th><label><b>500</b></label>元 (回款85000元-成交货款84500元)</th>
-                    <th>待退保证金：</th>
+                    <th>{$info.bill_item|getBillItemPayStatus}退保证金：</th>
                     <th><label><b>17,000</b></label>元 (付清结算费用后，即退。)</th>
                 </tr>
             </table>
+            </if>
         </div>
     </div>
 </div>
