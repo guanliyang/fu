@@ -105,6 +105,41 @@ class SBillModel extends HomeModel {
             );
     }
 
+    /**
+     * 重写获取卖单详情
+     * 包括itme 已售货组和未售货组信息
+     * 根据b_status 获取
+     */
+    public function getBillInfo() {
+        $bill = $this->getBId();
+        // 根据b_status 获取item信息
+        $where = array('b_id' => $bill['b_id']);
+        if ($bill['b_status'] == 3) {
+            $where += array('bi_status' => array('in','1, 2, 3'));
+            // 待上架货组
+            $bill['wait'] = M('s_bill_item')->where($where)->select();
+        }
+        // 在售
+        if ($bill['b_status'] == 5) {
+            $where += array('bi_status' => array('in','5, 6'));
+            $bill['on_sell'] = M('s_bill_item')->where($where)->select();
+
+            $where = array(
+                'b_id' => $bill['b_id'],
+                'bi_status' => array('in','7')
+            );
+            $bill['finish_sell'] = M('s_bill_item')->where($where)->select();
+        }
+
+        //已售
+        if ($bill['b_status'] == 9) {
+            $where += array('bi_status' => array('in','7, 8, 9'));
+            $bill['finish_sell'] = M('s_bill_item')->where($where)->select();
+        }
+
+        return $bill;
+    }
+
     public function getBId() {
         $id = I("request.b_id", 0, 'intval');
         if (empty($id)) {

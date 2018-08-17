@@ -66,21 +66,21 @@
 <div class="bdiv cont">
     <div class="content">
         <div class="list_item">
-            <label>:: 货单号：{$info.bill.b_code} - 修改单价 ::</label>　　<<a href="javascript:;" onClick="javascript :history.back(-1);">返回</a>>
+            <label>:: 货单号：{$info.b_code} - 修改单价 ::</label>　　<<a href="javascript:;" onClick="javascript :history.back(-1);">返回</a>>
         </div>
         <div class="list">
             <table>
                 <tr>
                     <th></th>
-                    <th>({$info.on_bill_item|count}) 在售货组：</th>
+                    <th>({$info.on_sell|count}) 在售货组：</th>
                     <th colspan="4">出售单价：
                         <input class="bt inpss" value="-" type="button" onclick="cpri(-1);"/>
-                        <label id="pri1">{$info.bill.b_pri1|number_format}</label>
+                        <label id="pri1">{$info.b_pri1|number_format}</label>
                         <input class="bt inpss" value="+" type="button" onclick="cpri(1);"/> 元/吨</th>
-                    <input type="hidden" id="b_pri1" value="{$info.bill.b_pri1}" name="b_pri1" />
+                    <input type="hidden" id="b_pri1" value="{$info.b_pri1}" name="b_pri1" />
                     <th>今日市场参考价：<label class="fontbig" id="rpri">1,700</label> 元/吨</th>
                 </tr>
-                <volist name="info.on_bill_item" id="vo">
+                <volist name="info.on_sell" id="vo">
                 <tr>
                     <td></td>
                     <td>货组编号：{$vo.bi_id}</td>
@@ -93,7 +93,7 @@
                 </volist>
             </table>
         </div>
-        <input type="hidden" name="b_id" value="{$info.bill.b_id}">
+        <input type="hidden" name="b_id" value="{$info.b_id}">
         <div class="list_page">
             <input class="bt bt_s" id="t_submit" value="保存修改" type="button"/>
             <a href="javascript:;" onClick="javascript :history.back(-1);"><input class="bt bt_s" value="取消返回" type="button"/></a>

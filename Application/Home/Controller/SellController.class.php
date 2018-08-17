@@ -7,8 +7,6 @@ class SellController extends HomeController {
         $bill = M('s_bill')->where(array('bi_id' => I('request.id')))->select();
         $billItem = M('s_bill_item')->where(array('bi_id' => I('request.id')))->select();
 
-//        dump($bill);
-//        dump($billItem);
         $this->display();
     }
 
@@ -26,7 +24,8 @@ class SellController extends HomeController {
     // 在售粮源详情
     public function onLineBillInfo() {
         $bill = new \Home\Model\SBillModel();
-        $info = $bill->getInfo();
+        $info = $bill->getBillInfo();
+
         $this->assign('info', $info);
         $this->display();
     }
@@ -57,8 +56,7 @@ class SellController extends HomeController {
     public function sellBillInfo() {
         $this->checkoutUserLogin();
         $SBill = new \Home\Model\SBillModel();
-        $info = $SBill->getInfo();
-
+        $info = $SBill->getBillInfo();
         $this->assign('info', $info);
         $this->display();
     }
@@ -67,7 +65,7 @@ class SellController extends HomeController {
     public function changePrice() {
         $this->checkoutUserLogin();
         $SBill = new \Home\Model\SBillModel();
-        $info = $SBill->getInfo();
+        $info = $SBill->getBillInfo();
         $this->assign('info', $info);
         $this->display();
     }

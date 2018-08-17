@@ -7,33 +7,33 @@
 <div class="bdiv cont">
     <div class="content">
         <div class="list_item">
-            <label>:: 货单号：{$info.bill.b_code} - {$info.bill.b_status|getBillStatus} :: </label>　　<<a href="">下载电子合同</a>>
+            <label>:: 货单号：{$info.b_code} - {$info.b_status|getBillStatus} :: </label>　　<<a href="">下载电子合同</a>>
         </div>
         <div class="list">
             <table>
                 <tr>
                     <td width="30" rowspan="6"></td>
-                    <td width="230" rowspan="6"><img src="{$info.bill.b_photo}" width="200" height="200" /></td>
+                    <td width="230" rowspan="6"><img src="{$info.b_photo}" width="200" height="200" /></td>
                     <td width="20"></td>
-                    <td colspan="3">品名：{$info.bill.b_name}　　年份：{$info.bill.b_year}　　产地：{$info.bill.b_place}　　等级：{$info.bill.b_level}　　容重：{$info.bill.b_rz}g/l</td>
+                    <td colspan="3">品名：{$info.b_name}　　年份：{$info.b_year}　　产地：{$info.b_place}　　等级：{$info.b_level}　　容重：{$info.b_rz}g/l</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td colspan="3">霉变：{$info.bill.b_mb}%　　水份：{$info.bill.b_sf}%　　杂质：{$info.bill.b_zz}%　　呕吐毒素：{$info.bill.b_ot}μg/kg</td>
+                    <td colspan="3">霉变：{$info.b_mb}%　　水份：{$info.b_sf}%　　杂质：{$info.b_zz}%　　呕吐毒素：{$info.b_ot}μg/kg</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td width="200">初始单价：{$info.bill.b_pri0}元/吨</td>
-                    <td width="200">净重总计：{$info.bill.b_weig}吨</td>
-                    <td>{$info.bill|getFrei} (200元/车*{$info|getCartNumber}车)</td>
+                    <td width="200">初始单价：{$info.b_pri0}元/吨</td>
+                    <td width="200">净重总计：{$info.b_weig}吨</td>
+                    <td>{$info|getFrei} (200元/车*{$info|getCartNumber}车)</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>初始总价：{$info.bill|getAllPrice}元</td>
-                    <td>{$info.bill|getDepo}</td>
+                    <td>初始总价：{$info|getAllPrice}元</td>
+                    <td>{$info|getDepo}</td>
                     <td></td>
                 </tr>
-                <if condition="$info['bill']['b_status'] gt 3">
+                <if condition="$info['b_status'] gt 3">
                     <tr>
                         <td></td>
                         <td>货款已回：340,000元</td>
@@ -43,53 +43,75 @@
 
                 <tr>
                     <td></td>
-                    <td colspan="3">装货地址：{$info.bill.b_add}　　联系人：{$info.bill.b_cont}　　手机号：{$info.bill.b_mobi}</td>
+                    <td colspan="3">装货地址：{$info.b_add}　　联系人：{$info.b_cont}　　手机号：{$info.b_mobi}</td>
                 </tr>
             </table>
             <table>
-                <if condition="$info['on_bill_item']">
+                <if condition="$info['wait']">
                     <tr>
                         <th width="30"></th>
-                        <th>({$info.on_bill_item|count}) 在售货组：</th>
-                        <th colspan="3"><label>{$info.bill.b_pri1}</label>元/吨 <a href="/Home/Sell/changePrice?b_id={$_GET['b_id']}"><修改单价></a></th>
+                        <th>({$info.wait|count}) 待上架货组：</th>
+                        <th colspan="3"><label>{$info.b_pri1}</label>元/吨 <a href="/Home/Sell/changePrice?b_id={$_GET['b_id']}"><修改单价></a></th>
                         <th width="150"></th>
                         <th width="90"></th>
                     </tr>
-                    <volist name="info.on_bill_item" id="vo">
-                        <tr>
-                        <td></td>
-                        <td>货组编号：{$vo.bi_id} {$info.bill|getBillItemStatusByBill=$vo['bi_status']}</td>
-                        <td width="90">{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
-                        <td width="180">{$vo.bi_dpay}元</td>
-                        <td width="60">已回款：</td>
-                        <td>85,000元 (计息85元)</td>
-                        <td><a href="/Home/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.bill.b_code}"><货组详情></a></td>
-                    </tr>
-                    </volist>
-                </if>
-                <if condition="$info['finish_bill_item']">
-                    <tr>
-                        <th></th>
-                        <th colspan="4">({$info.finish_bill_item|count}) 已售货组：</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <volist name="info.finish_bill_item" id="vo">
+                    <volist name="info.wait" id="vo">
                         <tr>
                             <td></td>
-                            <td>货组编号：{$vo.bi_id} {$info.bill|getBillItemStatusByBill=$vo['bi_status']}</td>
+                            <td>货组编号：{$vo.bi_id} {$info|getBillItemStatusByBill=$vo['bi_status']}</td>
                             <td width="90">{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
                             <td width="180">{$vo.bi_dpay}元</td>
                             <td width="60">已回款：</td>
                             <td>85,000元 (计息85元)</td>
-                            <td><a href="/Home/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.bill.b_code}"><货组详情></a></td>
+                            <td><a href="/Home/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}"><货组详情></a></td>
+                        </tr>
+                    </volist>
+                </if>
+
+                <if condition="$info['on_sell']">
+                    <tr>
+                        <th width="30"></th>
+                        <th>({$info.on_sell|count}) 在售货组：</th>
+                        <th colspan="3"><label>{$info.b_pri1}</label>元/吨 <a href="/Home/Sell/changePrice?b_id={$_GET['b_id']}"><修改单价></a></th>
+                        <th width="150"></th>
+                        <th width="90"></th>
+                    </tr>
+                    <volist name="info.on_sell" id="vo">
+                        <tr>
+                        <td></td>
+                        <td>货组编号：{$vo.bi_id} {$info|getBillItemStatusByBill=$vo['bi_status']}</td>
+                        <td width="90">{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
+                        <td width="180">{$vo.bi_dpay}元</td>
+                        <td width="60">已回款：</td>
+                        <td>85,000元 (计息85元)</td>
+                        <td><a href="/Home/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}"><货组详情></a></td>
+                    </tr>
+                    </volist>
+                </if>
+
+                <if condition="$info['finish_sell']">
+                    <tr>
+                        <th></th>
+                        <th colspan="4">({$info.finish_sell|count}) 已售货组：</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <volist name="info.finish_sell" id="vo">
+                        <tr>
+                            <td></td>
+                            <td>货组编号：{$vo.bi_id} {$info|getBillItemStatusByBill=$vo['bi_status']}</td>
+                            <td width="90">{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
+                            <td width="180">{$vo.bi_dpay}元</td>
+                            <td width="60">已回款：</td>
+                            <td>85,000元 (计息85元)</td>
+                            <td><a href="/Home/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}"><货组详情></a></td>
                         </tr>
                     </volist>
                 </if>
             </table>
 
             <table>
-                <if condition="$info['bill']['b_status'] gt 3">
+                <if condition="$info['b_status'] gt 3">
                 <tr>
                     <th width="30"></th>
                     <th width="200">今日须支付：<label><b>585<b></label> 元</th>
@@ -97,7 +119,7 @@
                 </tr>
                 </if>
 
-                <if condition="$info['bill']['b_status'] gt 2">
+                <if condition="$info['b_status'] gt 2">
                 <tr>
                     <td></td>
                     <td></td>
