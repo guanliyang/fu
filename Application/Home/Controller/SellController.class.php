@@ -2,14 +2,6 @@
 namespace Home\Controller;
 
 class SellController extends HomeController {
-    // 在售粮源 选择单个加入购物车页面
-    public function choseBill() {
-        $bill = M('s_bill')->where(array('bi_id' => I('request.id')))->select();
-        $billItem = M('s_bill_item')->where(array('bi_id' => I('request.id')))->select();
-
-        $this->display();
-    }
-
     // 在售粮源
     public function sellBillList() {
         $this->putG();

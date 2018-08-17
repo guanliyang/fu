@@ -83,28 +83,6 @@ class SBillModel extends HomeModel {
         return $status;
     }
 
-    // 获取卖单 详情
-    public function getInfo() {
-        $bill = $this->getBId();
-
-        $where = array('b_id' => $bill['b_id']);
-
-        $on_where = $where + array(
-                'bi_status' => array('GT', 0),
-                'bi_status' => array('LT', 6),
-            );
-
-        $finish_where = $where + array(
-                'bi_status' => array('GT', 5),
-            );
-
-        return array(
-                'bill' => $bill,
-                'on_bill_item' => M('s_bill_item')->where($on_where)->select(),
-                'finish_bill_item' => M('s_bill_item')->where($finish_where)->select(),
-            );
-    }
-
     /**
      * 重写获取卖单详情
      * 包括itme 已售货组和未售货组信息
