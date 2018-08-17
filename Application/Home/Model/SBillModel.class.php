@@ -110,8 +110,8 @@ class SBillModel extends HomeModel {
      * 包括itme 已售货组和未售货组信息
      * 根据b_status 获取
      */
-    public function getBillInfo() {
-        $bill = $this->getBId();
+    public function getBillInfo($getMyBill = true) {
+        $bill = $this->getBId($getMyBill);
         // 根据b_status 获取item信息
         $where = array('b_id' => $bill['b_id']);
         if ($bill['b_status'] == 3) {
@@ -140,7 +140,7 @@ class SBillModel extends HomeModel {
         return $bill;
     }
 
-    public function getBId() {
+    public function getBId($getMyBill = true) {
         $id = I("request.b_id", 0, 'intval');
         if (empty($id)) {
             $this->noticeView('未获取到货单号');
@@ -155,7 +155,7 @@ class SBillModel extends HomeModel {
             $this->noticeView('货单号已被删除');
         }
 
-        if ($bill['u_id'] != $this->getModelUid()) {
+        if ($getMyBill && $bill['u_id'] != $this->getModelUid()) {
             $this->noticeView('此货单不属于您');
         }
 

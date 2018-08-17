@@ -56,25 +56,25 @@
 <div class="bdiv cont">
     <div class="content">
         <div class="list_item">
-            <label>:: 货单号：{$info.bill.b_code} ::</label>　　<<a href="javascript:;" onClick="javascript :history.back(-1);">返回</a>>
+            <label>:: 货单号：{$info.b_code} ::</label>　　<<a href="javascript:;" onClick="javascript :history.back(-1);">返回</a>>
         </div>
         <div class="list">
             <table>
                 <tr>
                     <th width="30" rowspan="5"></th>
                     <th width="230" rowspan="5">
-                        <img src="{$info.bill.b_photo}" width="200" height="200" /></th>
+                        <img src="{$info.b_photo}" width="200" height="200" /></th>
                     <th width="20"></th>
-                    <th colspan="3">品名：{$info.bill.b_name}　　年份：{$info.bill.b_year}　　产地：{$info.bill.b_place}　　等级：{$info.bill.b_level}　　</th>
+                    <th colspan="3">品名：{$info.b_name}　　年份：{$info.b_year}　　产地：{$info.b_place}　　等级：{$info.b_level}　　</th>
                 </tr>
                 <tr>
                     <th></th>
-                    <th colspan="3">容重：{$info.bill.b_rz}g/l　　霉变：{$info.bill.b_mb}%　　水份：{$info.bill.b_sf}%　　杂质：{$info.bill.b_zz}%　　呕吐毒素：{$info.bill.b_ot}μg/kg</th>
+                    <th colspan="3">容重：{$info.b_rz}g/l　　霉变：{$info.b_mb}%　　水份：{$info.b_sf}%　　杂质：{$info.b_zz}%　　呕吐毒素：{$info.b_ot}μg/kg</th>
                 </tr>
                 <tr>
                     <th></th>
-                    <th width="200">单价：<label class="hot">{$info.bill.b_pri1}</label> 元/吨</th>
-                    <th width="200">净重：<label class="hot">{$info.bill.b_weig}</label> 吨</th>
+                    <th width="200">单价：<label class="hot">{$info.b_pri1}</label> 元/吨</th>
+                    <th width="200">净重：<label class="hot">{$info.b_weig}</label> 吨</th>
                     <th></th>
                 </tr>
                 <tr>
@@ -84,7 +84,7 @@
                     <th></th>
                     <th colspan="3"><a href=""><下载装货视频></a></th>
                 </tr>
-                <volist name="info.wait" id="vo">
+                <volist name="info.on_sell" id="vo">
                 <tr id="tr{$vo.bi_id}" class="selc cool" onclick="iSel({$vo.bi_id});">
                     <td></td>
                     <td><input type="checkbox" name="bi_id[]" id="{$vo.bi_id}" class="bt_s" value="{$vo.bi_id}" onclick="iSel({$vo.bi_id});">　　货组编号：{$vo.bi_id}</td>
