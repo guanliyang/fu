@@ -5,7 +5,7 @@ class SBillModel extends HomeModel {
     protected $data = array();
 
     const STATUS_DEL = -9;
-    const STATUS_ON = 9;
+    const STATUS_ON = 5;
     const STATUS_CHECK = 0;
     const STATUS_FINISH = 10;
 
