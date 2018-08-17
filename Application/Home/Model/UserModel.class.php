@@ -151,12 +151,12 @@ class UserModel extends HomeModel {
 
     // 由电话对比验证码是否正确
     private function _checkCode($mobile) {
-        $userCode = I('request.code');
+        $userCode = I('request.mobi_code');
         $smsLog = M('SmsLog');
         $where = array('mobile' => $mobile);
         $sms = $smsLog->where($where)->order('id desc')->find();
         if (empty($sms)) {
-            notice('未查询到数据');
+            notice('未获取到发送的验证码');
         }
         $code = $sms['code'];
         $time = $sms['ctime'];
@@ -180,10 +180,6 @@ class UserModel extends HomeModel {
         $smsLog->message = "您的验证码是".$code;
         $smsLog->ctime = time();
         $smsLog->add();
-
-    }
-
-    private function _changeMobile() {
 
     }
 

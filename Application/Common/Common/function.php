@@ -210,6 +210,16 @@ function getBillItemStatus($status) {
     return $list[$status];
 }
 
+//在售天数
+function getSellDays($bill_item) {
+    $days = 0;
+    if ($bill_item['bi_status'] == 5 && $bill_item['bi_stime']) {
+        $days = (int)(time() - $bill_item['bi_stime'] ) / (3600 * 24);
+    }
+    return $days;
+}
+
+
 // 显示货组状态
 function getBillItemStatusByBill($bill, $status) {
     $str = '';
@@ -414,6 +424,15 @@ function getBillItemPayStatus($billItem) {
         $str = '已';
     }
     return $str;
+}
+
+function getDiffText($bill_item) {
+    if ($bill_item['bi_diff'] > 0) {
+        return '补溢价';
+    }
+    else {
+        return '退跌价';
+    }
 }
 
 /**

@@ -24,7 +24,7 @@
                         <td></td>
                         <td>货组编号：{$item.bi_id}　<label>{$item.oi_status|getOrderItemStatus}</label></td>
                         <td>　　　{$item.bi_sum}箱　净重：{$item.bi_nwei}吨</td>
-                        <td class="tdright">84,500元</td>
+                        <td class="tdright">{$item.bi_dpay}元</td>
                         <td>计息{$item.bi_inte}元(5天)</td>
                         <td class="tdright"><a href="/Home/Order/billItemInfo/oi_id/{$item.oi_id}/o_id/{$info.order.o_id}"><货组详情></a></td>
                     </tr>
@@ -35,7 +35,7 @@
                 <tr>
                     <td width="30"></td>
                     <td width="200">付款方式：{$info.order.o_pay_type|getPayType}</td>
-                    <td colspan="5">货款合计：{$info.order.o_pay}元 (首付{$info.order.o_pay_f}元　尾款{$info.order.o_pay_t}元　日利率0.0002)　　　　运费：{$info.order.o_frei}元</td>
+                    <td colspan="5">货款合计：{$info.order.o_pay}元 (首付{$info.order.o_pay_f}元　尾款{$info.order.o_pay_t}元　日利率{$Think.config.RATE})　　　　运费：{$info.order.o_frei}元</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -49,7 +49,7 @@
                 <tr>
                     <th width="30"></th>
                     <th width="200">今日须支付：<label><b>85,084.5<b></label> 元</th>
-                    <th colspan="5">其中：待付货款 <label><b>84,500</b></label> 元，待付利息 <label><b>84.5</b></label> 元，请按合同说明方式付款至平台指定帐号。</th>
+                    <th colspan="5">其中：待付货款 <label><b>{$info.order.o_pay_t}</b></label> 元，待付利息 <label><b>84.5</b></label> 元，请按合同说明方式付款至平台指定帐号。</th>
                 </tr>
                 <tr>
                     <td></td>
