@@ -14,6 +14,7 @@ class OrderController extends HomeController {
         $this->checkoutUserLogin();
         $order = new \Home\Model\OrderModel();
         $info = $order->getInfo();
+
         $this->assign('info', $info);
         $this->display();
     }

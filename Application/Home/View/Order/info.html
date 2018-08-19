@@ -13,10 +13,16 @@
                 <volist name="info.bill" id="vo">
                     <tr>
                         <th></th>
-                        <th>{$vo.b_name}　{$vo.b_year}年　{$vo.b_place}　一等　容重{$vo.b_rz}g/l</th>
-                        <th>{$vo.bill_item|count}组　({$vo.bill_item|array_column='bi_sum'|array_sum}箱　净重：{$vo.bill_item|array_column='bi_nwei'|array_sum}吨)</th>
+                        <th>{$vo.b_name}　
+                            {$vo.b_year}年　
+                            {$vo.b_place}　一等　
+                            容重{$vo.b_rz}g/l
+                        </th>
+                        <th>{$vo.bill_item|count}组　
+                            ({$vo.bill_item|array_column='bi_sum'|array_sum}箱　
+                            净重：{$vo.bill_item|array_column='bi_nwei'|array_sum}吨)</th>
                         <th class="tdright"><label>{$vo.bill_item|array_column='bi_dpay'|array_sum}</label>元</th>
-                        <th>(<label>{$vo.b_pri1|number_format}</label>元/吨)</th>
+                        <th>(<label>{$info.order.o_pri1|formatMoney}</label>元/吨)</th>
                         <th class="tdright"><a href="/Home/Order/billInfo/b_id/{$vo.b_id}/o_id/{$info.order.o_id}/bi_id/{$vo.bill_item|getArrayV='bi_id'}">...</a></th>
                     </tr>
                     <volist name="vo.bill_item" id="item">

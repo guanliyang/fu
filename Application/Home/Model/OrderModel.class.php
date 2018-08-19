@@ -113,6 +113,24 @@ class OrderModel extends HomeModel {
         $page = $this->getPageShow($count);
         $list = self::where($where)->order('o_id desc')->limit($page['str'])->select();
 
+        if (!empty($list) && is_array($list)) {
+            // 循环订单列表
+            foreach ($list as $key => $order) {
+                // 每个订单 item 的列表
+                $order_item_list = M('b_order_item')->where(array('o_id' => $order['o_id']))->select();
+                $bi_nwei = 0;
+                // 每个bill_item 的净重量和
+                foreach ($order_item_list as $order_item_key => $order_item_value) {
+                    $bill_item = M('s_bill_item')->where(array('bi_id' => $order_item_value['bi_id']))->find();
+                    $bi_nwei += $bill_item['bi_nwei'];
+                }
+                // 每个bill信息
+                $list[$key]['bill'] = M('s_bill')->where(array('b_id' => $bill_item['b_id']))->find();
+                $list[$key]['bill']['all_nwei'] = $bi_nwei;
+            }
+
+        }
+
         return array(
             'order_count' => $count,
             'list' => $list,
@@ -150,7 +168,7 @@ class OrderModel extends HomeModel {
 
             $all_price = array_sum((array_column($bill['bill_item'], 'bi_dpay')));
             // 价格
-            $this->getAllPrice($pay_type, $all_price);
+            $this->getAllPrice($pay_type, $all_price, $bill);
 
             //order 表里插入信息
             $o_id = self::data($this->data)->add();
@@ -248,7 +266,7 @@ class OrderModel extends HomeModel {
     }
 
     // 支付价格
-    public function getAllPrice($pay_type, $all_price) {
+    public function getAllPrice($pay_type, $all_price, $bill) {
         $this->data['o_pay'] = $all_price;
         if ($pay_type == self::PAY_PART) {
             $this->data['o_pay_f'] = $all_price * 0.2;
@@ -261,5 +279,8 @@ class OrderModel extends HomeModel {
 
         // 运费暂时为空
         $this->data['o_frei'] = 0;
+
+        // 货物单价 *元/吨
+        $this->data['o_pri1'] = $bill['b_pri1'];
     }
 }

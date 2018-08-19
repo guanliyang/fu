@@ -243,7 +243,6 @@ class UserModel extends HomeModel {
         // 买粮订单
         $order = new \Home\Model\OrderModel();
         $order = $order->getUserOrderList($uid);
-
         // 卖粮货单
         $bill = new \Home\Model\SBillModel();
         $bill = $bill->getUserList($uid);
