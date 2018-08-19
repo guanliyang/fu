@@ -214,7 +214,9 @@ function getBillItemStatus($status) {
 function getSellDays($bill_item) {
     $days = 0;
     if ($bill_item['bi_status'] == 5 && $bill_item['bi_stime']) {
-        $days = (int)(time() - $bill_item['bi_stime'] ) / (3600 * 24);
+        $today = strtotime(date('Y-m-d',time()));
+        $rtimeDay = strtotime(date("Y-m-d", $bill_item['bi_stime']));
+        $days = ($today - $rtimeDay) / 86400 + 1;
     }
     return $days;
 }
