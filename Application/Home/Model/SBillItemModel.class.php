@@ -43,9 +43,11 @@ class SBillItemModel extends HomeModel {
         if ($bill_item['bi_status'] > 1) {
             $order_item = M('b_order_item')->where(array('bi_id' => $bi_id))->order('oi_id desc')->find();
         }
+
         return array(
             'bill_item' => $bill_item,
-            'order_item' => $order_item
+            'order_item' => $order_item,
+            'bill' => $bill
         );
     }
 

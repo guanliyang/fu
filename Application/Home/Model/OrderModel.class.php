@@ -79,7 +79,8 @@ class OrderModel extends HomeModel {
 
         return array(
             'order' => $order,
-            'bill' => $bill_list
+            'bill' => $bill_list,
+            'order_item' => $order_item_list
         );
     }
 

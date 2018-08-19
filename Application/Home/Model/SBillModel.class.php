@@ -104,15 +104,21 @@ class SBillModel extends HomeModel {
 
             $where = array(
                 'b_id' => $bill['b_id'],
-                'bi_status' => array('in','7')
+                'bi_status' => array('in','7, 8, 9')
             );
             $bill['finish_sell'] = M('s_bill_item')->where($where)->select();
         }
 
-        //已售
+        //已成交
         if ($bill['b_status'] == 9) {
             $where += array('bi_status' => array('in','7, 8, 9'));
             $bill['finish_sell'] = M('s_bill_item')->where($where)->select();
+        }
+
+        // 已结单
+        if ($bill['b_status'] == 10) {
+            $where += array('bi_status' => array('in','9'));
+            $bill['over_sell'] = M('s_bill_item')->where($where)->select();
         }
 
         return $bill;

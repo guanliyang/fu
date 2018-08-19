@@ -6,6 +6,7 @@ class ROfferModel extends HomeModel {
     const PERCENTAGE = 0.01;
     const STATUS_DEL = -9;
     const STATUS_ON = 1;
+    const STATUS_LINT = 5;
     const STATUS_OFF = 0;
     const STATUS_PASS = 10;
 
@@ -13,7 +14,7 @@ class ROfferModel extends HomeModel {
     protected $data = array();
 
     public function getOnLineList() {
-        $where = array('f_status' => self::STATUS_ON);
+        $where = array('f_status' => self::STATUS_LINT);
 
         $gc_id = I('request.gc_id', 0, 'intval');
         if (!empty($gc_id)) {

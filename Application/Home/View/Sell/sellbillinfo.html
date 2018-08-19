@@ -58,11 +58,10 @@
                     <volist name="info.wait" id="vo">
                         <tr>
                             <td></td>
-                            <td>货组编号：{$vo.bi_id} {$info|getBillItemStatusByBill=$vo['bi_status']}</td>
+                            <td>NO：{$vo.bi_id} {$info|getBillItemStatusByBill=$vo['bi_status']}</td>
                             <td width="90">{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
-                            <td width="180">{$vo.bi_dpay}元</td>
+                            <td width="180">{$vo.bi_dpay|formatMoney}元</td>
                             <td width="60">已回款：</td>
-                            <td>85,000元 (计息85元)</td>
                             <td><a href="/Home/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}"><货组详情></a></td>
                         </tr>
                     </volist>
@@ -73,17 +72,17 @@
                         <th width="30"></th>
                         <th>({$info.on_sell|count}) 在售货组：</th>
                         <th colspan="3"><label>{$info.b_pri1}</label>元/吨 <a href="/Home/Sell/changePrice?b_id={$_GET['b_id']}"><修改单价></a></th>
-                        <th width="150"></th>
+                        <th width="240"></th>
                         <th width="90"></th>
                     </tr>
                     <volist name="info.on_sell" id="vo">
                         <tr>
                         <td></td>
-                        <td>货组编号：{$vo.bi_id} {$info|getBillItemStatusByBill=$vo['bi_status']}</td>
+                        <td>NO：{$vo.bi_id} {$info|getBillItemStatusByBill=$vo['bi_status']}</td>
                         <td width="90">{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
-                        <td width="180">{$vo.bi_dpay}元</td>
+                        <td width="90">{$vo.bi_dpay|formatMoney}元</td>
                         <td width="60">已回款：</td>
-                        <td>85,000元 (计息85元)</td>
+                        <td>{$vo.bi_rpay|formatMoney}元 (计息{$info|getInte=$vo}元)</td>
                         <td><a href="/Home/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}"><货组详情></a></td>
                     </tr>
                     </volist>
@@ -99,11 +98,31 @@
                     <volist name="info.finish_sell" id="vo">
                         <tr>
                             <td></td>
-                            <td>货组编号：{$vo.bi_id} {$info|getBillItemStatusByBill=$vo['bi_status']}</td>
+                            <td>NO：{$vo.bi_id} {$info|getBillItemStatusByBill=$vo['bi_status']}</td>
                             <td width="90">{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
-                            <td width="180">{$vo.bi_dpay}元</td>
+                            <td width="180">{$vo.bi_dpay|formatMoney}元</td>
                             <td width="60">已回款：</td>
-                            <td>85,000元 (计息85元)</td>
+                            <td>{$vo.bi_rpay}元 (结息{$vo.bi_inte}元)</td>
+                            <td><a href="/Home/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}"><货组详情></a></td>
+                        </tr>
+                    </volist>
+                </if>
+
+                <if condition="$info['over_sell']">
+                    <tr>
+                        <th></th>
+                        <th colspan="4">({$info.over_sell|count}) 已结货组：</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <volist name="info.over_sell" id="vo">
+                        <tr>
+                            <td></td>
+                            <td>NO：{$vo.bi_id} {$info|getBillItemStatusByBill=$vo['bi_status']}</td>
+                            <td width="90">{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
+                            <td width="180">{$vo.bi_dpay|formatMoney}元</td>
+                            <td width="60">已回款：</td>
+                            <td>{$vo.bi_rpay}元 (结息{$vo.bi_inte}元)</td>
                             <td><a href="/Home/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}"><货组详情></a></td>
                         </tr>
                     </volist>
@@ -111,7 +130,7 @@
             </table>
 
             <table>
-                <if condition="$info['b_status'] gt 3">
+                <if condition="$info['b_status'] GT 3 AND $info['b_status'] LT 10">
                 <tr>
                     <th width="30"></th>
                     <th width="200">今日须支付：<label><b>585<b></label> 元</th>
@@ -119,22 +138,23 @@
                 </tr>
                 </if>
 
-                <if condition="$info['b_status'] gt 2">
+                <if condition="$info['b_status'] EGT 5">
                 <tr>
                     <td></td>
                     <td></td>
                     <td width="90">已结回款：<br/>待结回款：<br/>未结回款：</td>
-                    <td width="90" class="tdright">85,000元<br/>85,000元<br/>170,000元</td>
+                    <td width="90" class="tdright">
+                        {$info|alreadyPay}元<br/>{$info|waitPay}元<br/>{$info|notPay}元</td>
                     <td width="150" class="tdright">已付利息：<br/>待付利息：<br/>回款计息：</td>
-                    <td width="50" class="tdright">85元<br/>85元<br/>170元 </td>
-                    <td><br/><br/>(日利率{$Think.config.RATE}*5天)</td>
+                    <td width="90" class="tdright">{$info|alreadyPay='bi_inte'}元<br/>{$info|waitPay='bi_inte'}元<br/>{$info|getAllInte=$info['on_sell']}元 </td>
+                    <td><br/><br/>(日利率{$info.b_rrate|floatval})</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td></td>
                     <td>已退保证金：<br/>待退保证金：</td>
-                    <td class="tdright">17,000元<br/>51,000元</td>
-                    <td colspan="3"><br/>(其中:17,000元，今日支付结算后可退。)</td>
+                    <td class="tdright">{$info.b_id|getAllDepo}元<br/>{$info.b_id|getAllDepo=1}元</td>
+                    <td colspan="3"><br/>(其中:{$info.b_id|getAllDepo=1,8}元，今日支付结算后可退。)</td>
                 </tr>
                 </if>
 

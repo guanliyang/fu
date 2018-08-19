@@ -427,12 +427,34 @@ function getBillItemPayStatus($billItem) {
 }
 
 function getDiffText($bill_item) {
-    if ($bill_item['bi_diff'] > 0) {
-        return '补溢价';
+    if ($bill_item['bi_diff'] < 0) {
+        return '补跌价';
     }
     else {
-        return '退跌价';
+        return '退溢价';
     }
+}
+
+// 在售货组 回款计息  计算出的，不取数据库字段
+function getInte($bill, $bill_item) {
+    $today = strtotime(date('Y-m-d',time()));
+    $rtimeDay = strtotime(date("Y-m-d", $bill_item['bi_rtime']));
+
+    $days = ($today - $rtimeDay) / 86400 + 1;
+
+    return formatMoney($days * $bill['b_rrate'] * $bill_item['bi_rpay']);
+}
+
+// 回款计息
+function getAllInte($bill, $on_sell) {
+    $pay = 0;
+    if (!empty($on_sell) && is_array($on_sell)) {
+        foreach ($on_sell as $sell) {
+            $pay += getInte($bill, $sell);
+        }
+    }
+
+    return $pay;
 }
 
 /**
@@ -519,8 +541,209 @@ function getKnot($order, $order_item) {
     return $str;
 }
 
+
+function getSumKnot($order_item) {
+    $pay = 0;
+    if (!empty($order_item) && is_array($order_item)) {
+        foreach ($order_item as $item) {
+            $pay += $item['oi_knot'];
+        }
+    }
+
+    return $pay;
+}
 //已成交天数
 function getPastDay($order) {
-    $day = (int)((time() - $order['o_dtime']) / (60*60*24));
-    return $day;
+    $today = strtotime(date('Y-m-d',time()));
+    $rtimeDay = strtotime(date("Y-m-d", $order['o_dtime']));
+
+    $days = ($today - $rtimeDay) / 86400 + 1;
+
+    return $days;
+}
+
+// 尾款计息
+function getOrderInteT($order, $order_item) {
+    $days = getPastDay($order);
+    $pay_t = getOrderT($order_item);
+    return formatMoney($days * $order['o_rate'] * $pay_t);
+}
+
+//已结回款  利息 总数
+function alreadyPay($billItem, $m = 'bi_rpay') {
+    $finish_sell = $billItem['finish_sell'];
+    $over_sell = $billItem['over_sell'];
+    $pay = 0;
+    if (!empty($finish_sell) && is_array($finish_sell)) {
+        foreach ($finish_sell as $finish) {
+            if ($finish['bi_status'] == 9) {
+                $pay += $finish[$m] ;
+            }
+        }
+    }
+
+    if (!empty($over_sell) && is_array($over_sell)) {
+        foreach ($over_sell as $over) {
+            if ($over['bi_status'] == 9) {
+                $pay += $over[$m] ;
+            }
+        }
+    }
+
+    return formatMoney($pay);
+}
+
+//待结回款  利息 总数
+function waitPay($billItem, $m = 'bi_rpay') {
+    $finish_sell = $billItem['finish_sell']; // 已成交的货组的 - 待结回款
+    $pay = 0;
+    if (!empty($finish_sell) && is_array($finish_sell)) {
+        foreach ($finish_sell as $finish) {
+            if ($finish['bi_status'] == 8) {
+                $pay += $finish[$m] ;
+            }
+        }
+    }
+    return formatMoney($pay);
+}
+
+// 未结
+function notPay($billItem) {
+    $wait_sell = $billItem['wait'];
+    $pay = 0;
+    if (!empty($wait_sell) && is_array($wait_sell)) {
+        foreach ($wait_sell as $wait) {
+            if ($wait['bi_status'] < 8) {
+                $pay += $wait['bi_rpay'] ;
+            }
+        }
+    }
+
+    $finish_sell = $billItem['finish_sell'];
+    if (!empty($finish_sell) && is_array($finish_sell)) {
+        foreach ($finish_sell as $finish) {
+            if ($finish['bi_status'] < 8) {
+                $pay += $finish['bi_rpay'] ;
+            }
+        }
+    }
+
+    $on_sell = $billItem['on_sell'];
+    if (!empty($on_sell) && is_array($on_sell)) {
+        foreach ($on_sell as $on) {
+            if ($on['bi_status'] < 8) {
+                $pay += $on['bi_rpay'] ;
+            }
+        }
+    }
+
+    return formatMoney($pay);
+}
+
+//处理价格
+function formatMoney($number) {
+    return str_replace('.00', '', number_format(round($number, 2), 2));
+}
+
+
+/**
+ * 获取保证金
+ * @param $b_id
+ * @param int $status  2已退  1待退
+ * @return int
+ */
+function getAllDepo($b_id, $status = 2, $bi_status = 0) {
+    $bill_item_list = M('s_bill_item')->where(array('b_id' => $b_id))->select();
+    $money = 0;
+
+    // 其中可退的保证金
+    if ($bi_status == 8) {
+        if (!empty($bill_item_list) && is_array($bill_item_list)) {
+            foreach ($bill_item_list as $item) {
+                if ($item['bi_status'] == 8) {
+                    if ($item['bi_depo_status'] == 1) {
+                        $money += $item['bi_depo'];
+                    }
+                }
+
+            }
+        }
+        return formatMoney($money);
+    }
+
+
+    if (!empty($bill_item_list) && is_array($bill_item_list)) {
+        foreach ($bill_item_list as $item) {
+            if ($item['bi_depo_status'] == $status) {
+                $money += $item['bi_depo'];
+            }
+        }
+    }
+
+
+    return formatMoney($money);
+}
+
+// 成交货款
+function getClinch($bill, $bill_item) {
+    $pri1 = $bill['b_pri1'];
+    $nwei = $bill_item['bi_nwei'];
+    return formatMoney($pri1 * $nwei);
+}
+
+// 在售的时候  待退跌价
+function getBackMoney($bill, $bill_item) {
+    $pri1 = $bill['b_pri1'];
+    $nwei = $bill_item['bi_nwei'];
+    // 成交货款 - 回款
+    $clinck = $pri1 * $nwei;
+
+    return formatMoney($clinck - $bill_item['bi_rpay']);
+}
+
+// 待补待退
+function getBackMoneyText($bill, $bill_item) {
+    $str = '';
+    // 算
+    if (in_array($bill_item['bi_status'], array(5, 6, 7, 8))) {
+        $pri1 = $bill['b_pri1'];
+        $nwei = $bill_item['bi_nwei'];
+        // 成交货款 - 回款
+        $clinck = $pri1 * $nwei;
+
+        $money = $clinck - $bill_item['bi_rpay'];
+        if ($money > 0) {
+            $str = '退溢价';
+        }
+
+        if ($money < 0) {
+            $str = '补跌价';
+        }
+
+    }
+
+    // 读数据库
+    if ($bill_item['bi_status'] == 9) {
+        if ($bill_item['bi_diff'] > 0) {
+            $str = '退溢价';
+        }
+
+        if ($bill_item['bi_diff'] < 0) {
+            $str = '补跌价';
+        }
+    }
+    return $str;
+}
+
+// order 尾款
+function getOrderT($order_item, $status = 0) {
+    $pay = 0;
+    if (!empty($order_item) && is_array($order_item)) {
+        foreach ($order_item as $item) {
+            if ($item['oi_pay_t_status'] == $status) {
+                $pay += $item['oi_pay_t'];
+            }
+        }
+    }
+    return $pay;
 }
