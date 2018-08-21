@@ -116,11 +116,12 @@ function getOfferShow($offer, $number = 0) {
     $str = '';
     if ($offer['f_status'] == 0) {
         if ($number == 2) {
-            $str = '待付预约金<label>'.$offer['f_pay'].'</label>元';
+            $str = '待付';
         }
         if ($number == 3) {
-            $str = '待付服务费<label>'.$offer['f_service_price'].'</label>元';
+            $str = '待付';
         }
+
         if ($number == 4) {
             $str = '支付预约金与服务费后，预约单立即生效。<br/>生效后，因您的原因取消预约单，服务费将不退还。因平台原因取消，则退还全部费用。';
         }
@@ -134,13 +135,14 @@ function getOfferShow($offer, $number = 0) {
         }
     }
 
-    if ($offer['f_status'] == 1) {
+    if ($offer['f_status'] > 0) {
         if ($number == 2) {
-            $str = '已付预约金<label>'.$offer['f_pay'].'</label>元';
+            $str = '已付';
         }
         if ($number == 3) {
-            $str = '已付服务费<label>'.$offer['f_service_price'].'</label>元';
+            $str = '已付';
         }
+
         if ($number == 4) {
             $str = '支付预约金与服务费后，预约单立即生效。<br/>生效后，因您的原因取消预约单，服务费将不退还。因平台原因取消，则退还全部费用。';
         }

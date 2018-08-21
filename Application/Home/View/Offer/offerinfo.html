@@ -17,7 +17,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td width="500">预购单价：{$info.f_pric} 元/吨</td>
+                    <td width="500">预购单价：{$info.f_pric|formatMoney} 元/吨</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -27,8 +27,8 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>需缴预约金：{$info|getOfferShow=2}</td>
-                    <td>需缴服务费：{$info|getOfferShow=3}</td>
+                    <td>{$info|getOfferShow=2}预约金：<label>{$info.f_pay|formatMoney}</label>元</td>
+                    <td>{$info|getOfferShow=3}服务费：<label>{$info.f_service_price|formatMoney}</label>元</td>
                 </tr>
                 <tr>
                     <th></th>
