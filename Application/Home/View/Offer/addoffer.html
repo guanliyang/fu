@@ -3,11 +3,11 @@
     pSet('3');
     onload = function(){cpay();}
     function cpri(cval){
-        var epri = eval(document.getElementById('rpri').innerText.replace(',', ''))+20;
+        var epri = eval(document.getElementById('rpri').innerText.replace(',', ''))-20;
         var pri1 = eval(document.getElementById('pri1').innerText.replace(',', ''));
         var npri = pri1+(cval*5);
-        if(npri>epri) {
-            alert('定价上限不得超出市场价格合理范围。');
+        if(npri<epri) {
+            alert('报价下限不得低于市场价格合理范围。');
 
         }else{
             document.getElementById('pri1').innerText =  i2s3(npri);
@@ -15,6 +15,7 @@
         }
         cpay();
     }
+
     function cpay(){
         var pri1 = eval(document.getElementById('pri1').innerText.replace(',', ''));
         var weig = document.getElementById('sweight').value;
