@@ -12,14 +12,12 @@
 
         }else{
             document.getElementById('pri1').innerText =  i2s3(npri);
-            //document.getElementById('b_pri1').value = i2s3(npri);
+            document.getElementById('b_pri1').value = i2s3(npri);
         }
         ctotal();
     }
     function cwei(){
         document.getElementById('pri1').innerText =  document.getElementById('rpri').innerText;
-
-
         var weig = document.getElementById('sweight').value;
         var bsum = Math.ceil(weig/26);
         document.getElementById('bsum').innerText = bsum;
@@ -34,10 +32,13 @@
         document.getElementById('b_pri1').value =  document.getElementById('pri1').innerText.replace(',', '');
         var pri1 = eval(document.getElementById('pri1').innerText.replace(',', ''));
         var weig = document.getElementById('sweight').value;
+        var frei = eval(document.getElementById('freight').innerText.replace(',', ''));
         var total = pri1*weig;
         var depo = total*0.2;
+        var pay = depo + frei;
         document.getElementById('total').innerText = i2s3(total);
         document.getElementById('depo').innerText = i2s3(depo);
+        document.getElementById('pay').innerText = i2s3(pay);
     }
     function i2s3(intval){
         var reStr = '';
@@ -161,6 +162,13 @@
                     <td width="30"></td>
                     <td width="90">　手机号：</td>
                     <td><input name="b_mobi" value="{$user.mobile}" type="text"/></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td></td>
+                    <td width="150" class="tdright"><label>提交后需付款：</label></td>
+                    <td width="150" class="tdright"><label id="pay">0</label>元</td>
                 </tr>
             </table>
         </div>
