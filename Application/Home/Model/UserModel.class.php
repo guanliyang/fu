@@ -72,12 +72,7 @@ class UserModel extends HomeModel {
         }
 
         $status = $this->where(array('id'=>$user['id']))->save();
-        if ($status) {
-            notice('修改成功', 0, array('url' => '/'));
-        }
-        else {
-            notice('未修改信息');
-        }
+        return $status;
     }
 
     private function _checkMobileExisted($mobile) {

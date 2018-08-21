@@ -37,7 +37,7 @@ class HomeController extends Controller {
     // 检查是否登录,没登录去登录页面
     public function checkoutUserLogin() {
         if (empty($this->user)) {
-            redirect("/index.php");
+            redirect("/Wap");
         }
     }
 

@@ -23,8 +23,8 @@
 </script>
 <div class="cont">
     <div class="ind">
-        <label><a href="userinfo.php">赵钱孙</a></label>
-        <a href="sysmsg.php">系统通知(8)</a>
+        <label><a href="/Wap/User/userView">{$user.real_name}</a></label>
+        <a href="/Wap/SysMsg/index">系统通知({$msg_count})</a>
     </div>
     <div class="pboard">
         <h4>高品质玉米：</h4>
@@ -160,17 +160,18 @@
 </div>
 <div class="item_ft" id="footer">
     <div id="ft1">
-        <div><a href="salelist.php">在售粮源</a></div>
-        <div><a href="cart.php">购物车(8)</a></div>
+        <div><a href="/Wap/Sell/sellBillList">在售粮源</a></div>
+        <div><a href="/Wap/Cart/index">购物车(8)</a></div>
     </div>
     <div id="ft2">
-        <div><a href="offersub.php">我要预购</a></div>
+        <div><a href="/Wap/Offer/addOffer">我要预购</a></div>
     </div>
     <div id="ft3">
-        <div><a href="salesub.php">我要卖粮</a></div>
+        <div><a href="/Wap/Sell/sellBill">我要卖粮</a></div>
     </div>
 </div>
 <include file="public/foot" />
+
 <script type="text/javascript">
     footerM();
     window.onresize = function(){

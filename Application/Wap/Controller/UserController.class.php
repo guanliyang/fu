@@ -16,7 +16,13 @@ class UserController extends HomeController {
         $this->getUid();
         $user = new \Home\Model\UserModel();
         $this->getUid();
-        $user->saveUser($this->user);
+        $status = $user->saveUser($this->user);
+        if ($status) {
+            notice('修改成功', 0, array('url' => '/Wap'));
+        }
+        else {
+            notice('未修改信息');
+        }
     }
 
     // 密码重置

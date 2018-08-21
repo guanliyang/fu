@@ -43,7 +43,7 @@ class IndexController extends Controller {
             $key = array_search(max($list), $list);
 
             $item = $key + 1;
-//            redirect('/Home/Message/index?item='.$item);
+            redirect('/Wap/Message/index?item='.$item);
         }
         $this->display();
     }
@@ -84,7 +84,7 @@ class IndexController extends Controller {
     public function ajaxMobileLogin() {
         $user = new \Home\Model\UserModel();
         $user->mobileLogin();
-        notice('登录成功', 0, array('url' => '/'));
+        notice('登录成功', 0, array('url' => '/Wap/Message/index'));
     }
 
     // 注册
