@@ -1,0 +1,32 @@
+<include file="public/head" />
+
+<script type="text/javascript">
+    function iSet(iname){
+        document.getElementById(iname).value = '';
+        if(iname=='logpass') document.getElementById(iname).type = 'password';
+    }
+</script>
+<div class="cont">
+    <div class="logo">
+        <img src="/Public/app/img/logo.png"/>
+    </div>
+    <div class="login">
+        <input name="mobile" id="logname" value="请输入手机号(帐号)" type="text" onfocus="iSet('logname');" />
+        <input name="password" id="logpass" value="请输入密码" type="text" onfocus="iSet('logpass');" />
+        <input class="bt" value="会员登录" id="t_submit" type="button"/><br/>
+        [ <a href="/Wap/Index/changePasswordView">重置密码</a> ]
+        [ <a href="/Wap/Index/registerView">新会员注册</a> ]
+    </div>
+    <div class="cr">
+        Ver 1.11 - &copy;2018 版权所有
+    </div>
+</div>
+
+
+<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/bootstrap/js/t_submit.js"></script>
+<script type="text/javascript">
+    t_submit('/Wap/Index/ajaxLogin');
+</script>
+
+<include file="public/foot" />
