@@ -21,7 +21,7 @@ class OfferController extends HomeController {
         $offer = new \Home\Model\ROfferModel();
         $status = $offer->addOffer($this->getUid());
         if ($status) {
-            notice('成功', 0, array('url' => '/Home/Offer/offerInfo?f_id='.$status));
+            notice('成功', 0, array('url' => '/Wap/Offer/offerInfo?f_id='.$status));
         }
         else {
             notice('写入出错!');
@@ -46,7 +46,7 @@ class OfferController extends HomeController {
         $offer = M('r_offer')->where('f_id = '.$f_id)->save($data);
 
         if ($offer) {
-            notice('删除成功', 0, array('url' => '/Home/Message/index/?item=2'));
+            notice('删除成功', 0, array('url' => '/Wap/Message/index/?item=2'));
         }
         else {
             notice('删除出错');

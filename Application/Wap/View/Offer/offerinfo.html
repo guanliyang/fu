@@ -1,0 +1,49 @@
+<include file="public/head" />
+
+<div class="cont">
+    <div class="tit"><a href="#" onclick="window.history.go(-1);"><返回</a>订单详情</div>
+    <hr>
+    <div class="order_info"><label>预约单: {$info.f_code}</label><label>[{$info.f_status|getOfferStatus}]</label></div>
+    <div class="order_info"><label>{$info.f_name}　{$info.f_year}年　{$info.f_place}　{$info.f_level}　容重{$info.f_rz}g/l</label></div>
+    <div class="order_item">预购单价：<b>{$info.f_pric|formatMoney}</b>元/吨<label>预购重量：<b>{$info.f_weig}</b>吨</label></div>
+    <div class="order_item">
+        {$info|getOfferShow=2}付预约金：<span><b>{$info.f_pay|formatMoney}</b></span>元<label>
+        {$info|getOfferShow=3}付服务费：<span><b>{$info.f_service_price|formatMoney}</b></span>元</label></div>
+    <div class="order_info" style="text-align: left;">
+        支付预约金与服务费后，预约单立即生效。<br/>生效后，因您的原因取消预约单，服务费将不退还。因平台原因取消，则退还全部费用。
+    </div>
+    <hr>
+    <input class="bt bt_s" onclick="disp_confirm()" value="取消预购" type="button"/>
+    <input type="hidden" id="f_id" value="{$info.f_id}" />
+</div>
+
+<include file="public/foot" />
+<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript">
+    function disp_confirm()
+    {
+        var r=confirm("您确定要取消预购么?")
+        if (r==true)
+        {
+            var f_id = $("#f_id").val();
+            $.ajax({
+                type: 'POST',
+                url: '/Wap/Offer/del',
+                data: 'f_id='+f_id,
+                dataType: 'json',
+                timeout: 10000,
+                success: function(data){
+                    if(data.url) {
+                        window.location.href = data.url ;
+                    }
+                    else {
+                        alert(data.msg);
+                    }
+                },
+                error: function(xhr, type){
+                    alert('抱歉,加载失败!');
+                }
+            })
+        }
+    }
+</script>
