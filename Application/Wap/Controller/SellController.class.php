@@ -40,7 +40,7 @@ class SellController extends HomeController {
         $b_id = $SBill->ajaxAdd($this->getUid());
 
         if ($b_id) {
-            notice('添加成功', 0, array('url' => '/Home/Sell/sellBillInfo?b_id='.$b_id));
+            notice('添加成功', 0, array('url' => '/Wap/Sell/sellBillInfo?b_id='.$b_id));
         }
     }
 
@@ -68,7 +68,7 @@ class SellController extends HomeController {
         $status = $SBill->changePrice();
         $b_id = I("request.b_id", 0, 'intval');
         if ($status) {
-            notice('修改成功', 0, array('url' => '/Home/Sell/sellBillInfo/b_id/'.$b_id));
+            notice('修改成功', 0, array('url' => '/Wap/Sell/sellBillInfo/b_id/'.$b_id));
         }
         else {
             notice('未修改');

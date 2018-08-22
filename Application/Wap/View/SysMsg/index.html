@@ -21,34 +21,19 @@
 </div>
 <div class="cont">
     <div class="item_tit">
-        <a href="?item=1" id="item1">新通知(4)</a><a href="?item=2" id="item2">已读通知</a>
+        <a href="?item=1" id="item1">新通知({$data.not_read_list_count})</a><a href="?item=2" id="item2">已读通知</a>
     </div>
 </div>
+
 <div class="item_list" id="list1">
-    <div class="msgitem" onclick="location.href='buyinfo.php'">
+    <volist name="data.list" id="vo">
+    <div class="msgitem" onclick="location.href='{$vo.type|getMsgUrl}{$vo.resource_id}'">
         <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
+            {$vo.resource_id}<label>{$vo.ctime|date='Y年m月d日 H:i:s',###}</label>
         </div>
-        <div class="info2">待办事项：请支付货款(<label>42,500</label>元)/利息(<label>50</label>元)，到合同指定帐号。</div>
+        <div class="info2">{$vo.sm_content}</div>
     </div>
-    <div class="msgitem" onclick="location.href='saleinfo.php'">
-        <div class="info1">
-            S101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">待办事项：请支付保证金(<label>51,500</label>元)/运费(<label>3,600</label>元)，到合同指定帐号。</div>
-    </div>
-    <div class="msgitem" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            R101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">待办事项：请支付预约金(<label>42,500</label>元)/服务费(<label>1,500</label>元)，到合同指定帐号。</div>
-    </div>
-    <div class="msgitem" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">待办事项：请支付货款(<label>42,500</label>元)/利息(<label>50</label>元)，到合同指定帐号。</div>
-    </div>
+    </volist>
 </div>
 
 <div class="item_list" id="list2">

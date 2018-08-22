@@ -35,133 +35,52 @@
 </div>
 <div class="cont">
     <div class="item_tit">
-        <a href="?item=1" id="item1">买粮(56)</a><a href="?item=2" id="item2">预购(2)</a><a href="?item=3" id="item3">卖粮(4)</a>
+        <a href="/Wap/Message/index/?item=1" id="item1">买粮({$info.order.order_count})</a>
+        <a href="/Wap/Message/index/?item=2" id="item2">预购({$info.offer.count})</a>
+        <a href="/Wap/Message/index/?item=3" id="item3">卖粮({$info.bill.count})</a>
     </div>
 </div>
 <div class="item_list" id="list1">
-    <div class="item" onclick="location.href='buyinfo.php'">
+    <volist name="info.order.list" id="vo">
+    <div class="item" onclick="location.href='/Wap/Order/info/o_id/{$vo.o_id}'">
         <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
+            {$vo.o_code}<label>{$vo.o_ctime|date='Y/m/d H:i',###}</label>
         </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨　　<b>1,700</b>元/吨<label><b>待办事项...</b></label></div>
+        <div class="info2">{$vo.bill.b_name}　　{$vo.bill.b_year}年/{$vo.bill.b_place}/{$vo.bill.b_level}　　容重：{$vo.bill.b_rz}g/l</div>
+        <div class="info3"><b>{$vo.bill.all_nwei}</b>吨　　<b>{$vo.o_pri1|formatMoney}</b>元/吨<label><b>{$vo.o_id|getMessageById=0}</b></label></div>
     </div>
-    <div class="item" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨　　<b>1,700</b>元/吨<label>订单详情...</label></div>
-    </div>
-    <div class="item" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨　　<b>1,700</b>元/吨<label><b>待办事项...</b></label></div>
-    </div>
-    <div class="item" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨　　<b>1,700</b>元/吨<label>订单详情...</label></div>
-    </div>
-    <div class="item" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨　　<b>1,700</b>元/吨<label><b>待办事项...</b></label></div>
-    </div>
-    <div class="item" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨　　<b>1,700</b>元/吨<label>订单详情...</label></div>
-    </div>
-    <div class="item" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨　　<b>1,700</b>元/吨<label><b>待办事项...</b></label></div>
-    </div>
-    <div class="item" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨　　<b>1,700</b>元/吨<label>订单详情...</label></div>
-    </div>
-    <div class="item" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨　　<b>1,700</b>元/吨<label><b>待办事项...</b></label></div>
-    </div>
-    <div class="item" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨　　<b>1,700</b>元/吨<label>订单详情...</label></div>
-    </div>
+    </volist>
+
 </div>
 
 <div class="item_list" id="list2">
-    <div class="item" onclick="location.href='offerinfo.php'">
+    <volist name="info.offer.list" id="vo">
+    <div class="item" onclick="location.href='/Wap/Offer/offerInfo/f_id/{$vo.f_id}'">
         <div class="info1">
-            R101101101<label>2018/07/19 12:21:35</label>
+            {$vo.f_code}<label>{$vo.f_ctime|date='Y/m/d H:i',###}</label>
         </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨<label>预约采购中...</label></div>
+        <div class="info2">{$vo.f_name}　　{$vo.f_year}年/{$vo.f_place}/{$vo.f_level}　　容重：{$vo.f_rz}g/l</div>
+        <div class="info3"><b>{$vo.f_weig}</b>吨<label>{$vo.f_id|getMessageById=2}</label></div>
     </div>
-    <div class="item" onclick="location.href='offerinfo.php'">
-        <div class="info1">
-            R101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨<label><b>待支付预约金...</b></label></div>
-    </div>
+    </volist>
+
 </div>
 
 <div class="item_list" id="list3">
-    <div class="item" onclick="location.href='saleinfo.php'">
+    <volist name="info.bill.list" id="vo">
+    <div class="item" onclick="location.href='/Wap/Sell/sellBillInfo/b_id/{$vo.b_id}'">
         <div class="info1">
-            S101101101<label>2018/07/19 12:21:35</label>
+            {$vo.b_code}<label>{$vo.b_ctime|date='Y/m/d H:i',###}</label>
         </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨　　<b>1,700</b>元/吨<label><b>待办事项...</b></label></div>
+        <div class="info2">{$vo.b_name}　　{$vo.b_year}年/{$vo.b_place}/{$vo.b_level}　　容重：{$vo.b_rz}g/l</div>
+        <div class="info3"><b>{$vo.b_weig}</b>吨　　<b>{$vo.b_pri1|formatMoney}</b>元/吨<label><b>{$vo.b_id|getMessageById=1}</b></label></div>
     </div>
-    <div class="item" onclick="location.href='saleinfo.php'">
-        <div class="info1">
-            S101101102<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨　　<b>1,700</b>元/吨<label>货单详情...</label></div>
-    </div>
-    <div class="item" onclick="location.href='saleinfo.php'">
-        <div class="info1">
-            S101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨　　<b>1,700</b>元/吨<label><b>待办事项...</b></label></div>
-    </div>
-    <div class="item" onclick="location.href='saleinfo.php'">
-        <div class="info1">
-            S101101102<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info2">玉米　　2018年/辽宁/一等　　容重：720g/l</div>
-        <div class="info3"><b>100</b>吨　　<b>1,700</b>元/吨<label>货单详情...</label></div>
-    </div>
+    </volist>
 </div>
 <div class="item_ft" id="footer">
     <div id="ft1">
         <div><a href="/Wap/Sell/sellBillList">在售粮源</a></div>
-        <div><a href="/Wap/Cart/index">购物车(8)</a></div>
+        <div><a href="/Wap/Cart/index">购物车({$cart_count})</a></div>
     </div>
     <div id="ft2">
         <div><a href="/Wap/Offer/addOffer">我要预购</a></div>

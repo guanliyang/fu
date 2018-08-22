@@ -298,7 +298,7 @@ function getWuLiuMessage($status) {
 
 // 总价格
 function getAllPrice($bill) {
-    return number_format($bill['b_pri1'] * $bill['b_weig']);
+    return formatMoney($bill['b_pri1'] * $bill['b_weig']);
 }
 
 //应交保证金
@@ -327,15 +327,15 @@ function getCartNumber($info) {
 function getFrei($bill) {
     $str = '';
     if ($bill['b_status'] == 0) {
-        $str = '需缴运费：'.$bill['b_frei'].'元';
+        $str = '需缴运费：'.formatMoney($bill['b_frei']).'元';
     }
 
     if ($bill['b_status'] == 1) {
-        $str = '已付运费：'.$bill['b_frei'].'元';
+        $str = '已付运费：'.formatMoney($bill['b_frei']).'元';
     }
 
     if ($bill['b_status'] > 1) {
-        $str = '待付运费：'.$bill['b_frei'].'元';
+        $str = '待付运费：'.formatMoney($bill['b_frei']).'元';
     }
 
     return $str;
