@@ -1,7 +1,7 @@
 <include file="public/head" />
 
 <div class="cont">
-    <div class="tit"><a href="#" onclick="window.history.go(-1);"><返回</a>货单详情</div>
+    <div class="tit"><a href="javascript:;" onClick="javascript:history.back(-1);"><返回</a>货单详情</div>
     <hr>
     <div class="order_info"><label>货单号: {$info.b_code}</label><label>[{$info.b_status|getBillStatus}]</label></div>
     <div class="order_info"><label><span><b>今日须支付：85,084.5</b></span>元</label><br/>其中：待付利息 <span><b>85</b></span>元，待付跌价差价 <span><b>500</b></span>元，请按合同说明方式付款至平台指定帐号。</div>

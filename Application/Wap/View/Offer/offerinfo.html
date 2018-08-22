@@ -1,7 +1,7 @@
 <include file="public/head" />
 
 <div class="cont">
-    <div class="tit"><a href="#" onclick="window.history.go(-1);"><返回</a>订单详情</div>
+    <div class="tit"><a href="javascript:;" onClick="javascript:history.back(-1);"><返回</a>订单详情</div>
     <hr>
     <div class="order_info"><label>预约单: {$info.f_code}</label><label>[{$info.f_status|getOfferStatus}]</label></div>
     <div class="order_info"><label>{$info.f_name}　{$info.f_year}年　{$info.f_place}　{$info.f_level}　容重{$info.f_rz}g/l</label></div>
