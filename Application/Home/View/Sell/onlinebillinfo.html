@@ -73,7 +73,7 @@
                 </tr>
                 <tr>
                     <th></th>
-                    <th width="200">单价：<label class="hot">{$info.b_pri1}</label> 元/吨</th>
+                    <th width="200">单价：<label class="hot">{$info.b_pri1|formatMoney}</label> 元/吨</th>
                     <th width="200">净重：<label class="hot">{$info.b_weig}</label> 吨</th>
                     <th></th>
                 </tr>
@@ -90,7 +90,7 @@
                     <td><input type="checkbox" name="bi_id[]" id="{$vo.bi_id}" class="bt_s" value="{$vo.bi_id}" onclick="iSel({$vo.bi_id});">　　货组编号：{$vo.bi_id}</td>
                     <td></td>
                     <td colspan="2">{$vo.bi_sum}箱　(毛重：{$vo.bi_gwei}吨　皮重：{$vo.bi_tare}吨　净重：{$vo.bi_nwei}吨)</td>
-                    <td>货款：<label class="hot" id="pay{$vo.bi_id}">{$vo.bi_dpay}</label>元</td>
+                    <td>货款：<label class="hot" id="pay{$vo.bi_id}">{$vo.bi_dpay|formatMoney}</label>元</td>
                 </tr>
                 </volist>
 

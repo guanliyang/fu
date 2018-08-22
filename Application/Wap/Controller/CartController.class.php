@@ -26,7 +26,7 @@ class CartController extends HomeController {
     public function choseBiId() {
         $car = new \Home\Model\CartModel();
         $bi_id_str = $car->choseBiId();
-        notice('成功', 0, array('url' => '/Home/Cart/finish?bi_id_str='.$bi_id_str));
+        notice('成功', 0, array('url' => '/Wap/Cart/finish?bi_id_str='.$bi_id_str));
     }
 
     // 添加到购物车
@@ -38,7 +38,7 @@ class CartController extends HomeController {
         $bi_id_list = I('request.bi_id');
         $bi_id_str = implode(',', $bi_id_list);
 
-        notice('成功', 0, array('url' => '/Home/cart/index/bi_id_str/'.$bi_id_str));
+        notice('成功', 0, array('url' => '/Wap/cart/index/bi_id_str/'.$bi_id_str));
     }
 
     //购物车列表
@@ -59,6 +59,6 @@ class CartController extends HomeController {
     public function delItem() {
         $cart = new \Home\Model\CartModel();
         $cart->delByUid($this->getUid());
-        $this->redirect('/Home/cart/index');
+        $this->redirect('/Wap/cart/index');
     }
 }

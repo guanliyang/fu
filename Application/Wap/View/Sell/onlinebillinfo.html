@@ -17,7 +17,7 @@
         var selpay = 0;
         var selsum = 0;
         for (var i=0;i<eventdx.length;i++){
-            if(eventdx[i].name=='buyid[]' && eventdx[i].checked){
+            if(eventdx[i].name=='bi_id[]' && eventdx[i].checked){
                 document.getElementById('tr'+eventdx[i].value).setAttribute('class', 'bill_item');
                 selsum++;
                 selpay += eval(document.getElementById('pay'+eventdx[i].value).innerText.replace(',', ''));
@@ -52,31 +52,41 @@
     }
 </script>
 
-<div class="cont"  style="margin-bottom:60px;">
-    <div class="tit"><a href="#" onclick="window.history.go(-1);"><返回</a>购物车</div>
+<div class="cont" style="margin-bottom:60px;">
+    <div class="tit"><a href="#" onclick="window.history.go(-1);"><返回</a>在售粮源</div>
     <hr>
 
-    <foreach name="list" item="vo">
-        <div class="bill_info">
-            <label>{$vo.b_name}</label><label>{$vo.b_year}</label><label>{$vo.b_place}</label>
-            <label>{$vo.b_level}</label><label>{$vo.b_pri1|formatMoney}元/吨</label>
-        </div>
-        <foreach name="vo.bill_item" item="item">
-            <div class="bill_item cool" id="tr{$item.bi_id}" onclick="iSel({$item.bi_id});">
-                <input type="checkbox" name="buyid[]" id="{$item.bi_id}" class="bt_s" value="{$item.bi_id}" onclick="iSel({$item.bi_id});"/>
-                组号：{$item.bi_id}<label>
-                <b id="pay{$item.bi_id}">{$item.bi_dpay|formatMoney}</b>元</label><br/>
-                {$item.bi_sum}箱 (毛重：{$item.bi_gwei}吨　皮重：{$item.bi_tare}吨　净重：{$item.bi_nwei}吨)
-            </div>
-        </foreach>
-    </foreach>
+    <div class="bill_info">
+        <label>{$info.b_name}</label>
+        <label>{$info.b_year}</label>
+        <label>{$info.b_place}</label>
+        <label>{$info.b_level}</label><br/>
+        <img src="{$info.b_photo}"><br/><b>{$info.b_pri1|formatMoney}</b>元/吨</div>
+    <div class="bill_info">
+        货单号：{$info.b_code}　　　
+        <a href=""><装货视频></a></div>
+    <div class="bill_info">
+        <label>容重{$info.b_rz}g/l</label>
+        <label>霉变{$info.b_mb}%</label>
+        <label>水份{$info.b_sf}%</label>
+        <label>杂质{$info.b_zz}%</label>
+        <label>呕吐毒素{$info.b_ot}μg/kg</label>
+    </div>
 
+    <volist name="info.on_sell" id="vo">
+        <div class="bill_item cool" id="tr{$vo.bi_id}" onclick="iSel({$vo.bi_id});">
+        <input type="checkbox" name="bi_id[]" id="{$vo.bi_id}" class="bt_s" value="{$vo.bi_id}" onclick="iSel({$vo.bi_id});"/>
+            组号：{$vo.bi_id}<label>
+            <b id="pay{$vo.bi_id}">{$vo.bi_dpay|formatMoney}</b>元</label><br/>
+            {$vo.bi_sum}箱 (毛重：{$vo.bi_gwei}吨　皮重：{$vo.bi_tare}吨　净重：{$vo.bi_nwei}吨)
+    </div>
+    </volist>
 </div>
-
 
 <div class="bill_ft" id="footer">
     已选 <label id="selsum">0</label> 组货物<br/>货款合计：<label id="selpay" >0</label> 元　(首付 <label id="selpay0" >0</label> 元即可购买)<br/>
-    <input class="bt bt_s" id="t_submit" value="进入结算" type="button"/>
+    <input class="bt bt_s" id="t_submit" value="加入购物车" type="button"/>
+    <input class="bt bt_s" value="立即下单" type="button"/>
 </div>
 <include file="public/foot" />
 <script type="text/javascript">
@@ -92,5 +102,5 @@
 <script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="/Public/bootstrap/js/t_submit.js"></script>
 <script type="text/javascript">
-    t_submit('/Wap/Cart/choseBiId');
+    t_submit('/Wap/Cart/ajaxAdd');
 </script>

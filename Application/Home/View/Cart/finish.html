@@ -75,9 +75,9 @@
                 <foreach name="list" item="vo">
                     <tr>
                         <th width="60"></th>
-                        <th class="tdlock">{$vo.b_name}　{$vo.b_year}年　{$vo.b_place}　一等　容重{$vo.b_rz}g/l　单价：<label>{$vo.b_pri1}</label>元</th>
+                        <th class="tdlock">{$vo.b_name}　{$vo.b_year}年　{$vo.b_place}　{$vo.b_level}　容重{$vo.b_rz}g/l　单价：<label>{$vo.b_pri1|formatMoney}</label>元</th>
                         <th>{$vo.bill_item|count}组　({$vo.bill_item|array_column='bi_sum'|array_sum}箱　净重：{$vo.bill_item|array_column='bi_nwei'|array_sum}吨)</th>
-                        <th width="150" class="tdright"><label>{$vo.bill_item|array_column='bi_dpay'|array_sum}</label>元</th>
+                        <th width="150" class="tdright"><label>{$vo.bill_item|array_column='bi_dpay'|array_sum|formatMoney}</label>元</th>
                     </tr>
                 </foreach>
             </table>
@@ -85,7 +85,7 @@
                 <tr>
                     <td width="60"></td>
                     <td colspan="6" class="tdright">订单货款合计：</td>
-                    <td width="150" class="tdright"><label id="total">{$all_price}</label>元</td>
+                    <td width="150" class="tdright"><label id="total">{$all_price|formatMoney}</label>元</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -156,12 +156,10 @@
     </div>
 </div>
 
-
+<include file="public/foot" />
 <script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="/Public/js/address.js" ></script>
 <script type="text/javascript" src="/Public/bootstrap/js/t_submit.js"></script>
 <script type="text/javascript">
     t_submit('/Home/Order/add');
 </script>
-
-<include file="public/foot" />

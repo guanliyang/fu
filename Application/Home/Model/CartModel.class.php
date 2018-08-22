@@ -41,7 +41,7 @@ class CartModel extends HomeModel {
         $bi_id_str = implode(',', I('buyid'));
 
         $this->checkBiIdStr($bi_id_str);
-        notice('选择成功', '0', array('url' => '/Home/Cart/finish?bi_id_str='.$bi_id_str));
+        return $bi_id_str;
     }
 
     //查询购物车

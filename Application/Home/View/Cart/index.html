@@ -65,7 +65,7 @@
                     <tr>
                         <th width="60"></th>
                         <th class="tdlock">{$vo.b_name}　{$vo.b_year}年　{$vo.b_place}　{$vo.b_level}　容重{$vo.b_rz}g/l</th>
-                        <th>单价：<label>{$vo.b_pri1}</label>元</th>
+                        <th>单价：<label>{$vo.b_pri1|formatMoney}</label>元</th>
                         <th width="120"><a href="/Home/Sell/onLineBillInfo/b_id/{$vo.b_id}">查看粮源详情</a></th>
                     </tr>
                     <foreach name="vo.bill_item" item="item">
@@ -78,7 +78,7 @@
                         </if>
 
                             <td>{$item.bi_sum}箱　(毛重：{$item.bi_gwei}吨　皮重：{$item.bi_tare}吨　净重：{$item.bi_nwei}吨)</td>
-                            <td>货款：<label id="pay{$item.bi_id}">{$item.bi_dpay}</label>元</td>
+                            <td>货款：<label id="pay{$item.bi_id}">{$item.bi_dpay|formatMoney}</label>元</td>
                             <td>　<if condition="$item['bi_status'] gt 9">已售</if>　<a href="/Home/cart/delItem/bi_id/{$item.bi_id}"> 删除 </a></td>
                         </tr>
                     </foreach>
@@ -99,12 +99,10 @@
         </div>
     </div>
 </div>
-
+<include file="public/foot" />
 
 <script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="/Public/bootstrap/js/t_submit.js"></script>
 <script type="text/javascript">
     t_submit('/Home/Cart/choseBiId');
 </script>
-
-<include file="public/foot" />
