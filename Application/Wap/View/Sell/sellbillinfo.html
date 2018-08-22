@@ -17,29 +17,47 @@
     <hr>
 
     <if condition="$info['wait']">
-        <div class="order_info" style="text-align:left;">({$info.wait|count})待上架货组</div>
+        <div class="order_info" style="text-align:left;">({$info.wait|count})待上架货组　　<b>{$info.b_pri1}</b>元/吨　<a href="/Wap/Sell/changePrice?b_id={$_GET['b_id']}"><修改售价></a></div>
         <volist name="info.wait" id="vo">
-        <div class="order_item" onclick="location.href='/Wap/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}'">
-            &#8470;.{$vo.bi_id}<label><span><b>[{$vo.bi_status|getBillItemStatus}]</b></span>　(详情)</label><br/>货款：<b>{$vo.bi_dpay|formatMoney}</b>元 (1,690元/吨)<label>2箱　净重50吨</label><br/>回款：<b>85,000</b>元<label>回款结息：<span><b>85</b></span>元</label>
-        </div>
+            <div class="order_item" onclick="location.href='/Wap/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}'">
+                &#8470;.{$vo.bi_id}<label>
+                <span><b>[{$vo.bi_status|getBillItemStatus}]</b></span>　(详情)</label><br/>
+                货款：<b>{$vo.bi_dpay|formatMoney}</b>元
+                ({$info.b_pri0|formatMoney}元/吨)<label>
+                {$vo.bi_sum}箱　净重{$info.b_weig}吨</label><br/>
+                回款：<b>{$vo.bi_rpay}</b>元<label>
+                回款结息：<span><b>{$vo.bi_inte}</b></span>元</label>
+            </div>
         </volist>
     </if>
 
     <if condition="$info['on_sell']">
-        <div class="order_info" style="text-align:left;">({$info.on_sell|count})在售货组　　<b>1,690</b>元/吨　<a href="saleinfo_pri.php"><修改售价></a></div>
+        <div class="order_info" style="text-align:left;">({$info.on_sell|count})在售货组　　<b>{$info.b_pri1}</b>元/吨　<a href="/Wap/Sell/changePrice?b_id={$_GET['b_id']}"><修改售价></a></div>
         <volist name="info.on_sell" id="vo">
-        <div class="order_item" onclick="location.href='/Wap/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}'">
-            &#8470;.{$vo.bi_id}<label><span><b>[{$vo.bi_status|getBillItemStatus}]</b></span>　(详情)</label><br/>货款：<b>{$vo.bi_dpay|formatMoney}</b>元 (1,690元/吨)<label>2箱　净重50吨</label><br/>回款：<b>85,000</b>元<label>回款结息：<span><b>85</b></span>元</label>
-        </div>
+            <div class="order_item" onclick="location.href='/Wap/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}'">
+                &#8470;.{$vo.bi_id}<label>
+                <span><b>[{$vo.bi_status|getBillItemStatus}]</b></span>　(详情)</label><br/>
+                货款：<b>{$vo.bi_dpay|formatMoney}</b>元
+                ({$info.b_pri0|formatMoney}元/吨)<label>
+                {$vo.bi_sum}箱　净重{$info.b_weig}吨</label><br/>
+                回款：<b>{$vo.bi_rpay}</b>元<label>
+                回款结息：<span><b>{$vo.bi_inte}</b></span>元</label>
+            </div>
         </volist>
     </if>
 
     <if condition="$info['finish_sell']">
     <div class="order_info" style="text-align:left;">({$info.finish_sell|count})已售货组</div>
         <volist name="info.finish_sell" id="vo">
-        <div class="order_item" onclick="location.href='/Wap/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}'">
-            &#8470;.{$vo.bi_id}<label><span><b>[{$vo.bi_status|getBillItemStatus}]</b></span>　(详情)</label><br/>货款：<b>{$vo.bi_dpay|formatMoney}</b>元 (1,690元/吨)<label>2箱　净重50吨</label><br/>回款：<b>85,000</b>元<label>回款结息：<span><b>85</b></span>元</label>
-        </div>
+            <div class="order_item" onclick="location.href='/Wap/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}'">
+                &#8470;.{$vo.bi_id}<label>
+                <span><b>[{$vo.bi_status|getBillItemStatus}]</b></span>　(详情)</label><br/>
+                货款：<b>{$vo.bi_dpay|formatMoney}</b>元
+                ({$info.b_pri0|formatMoney}元/吨)<label>
+                {$vo.bi_sum}箱　净重{$info.b_weig}吨</label><br/>
+                回款：<b>{$vo.bi_rpay}</b>元<label>
+                回款结息：<span><b>{$vo.bi_inte}</b></span>元</label>
+            </div>
         </volist>
     </if>
 
@@ -47,7 +65,13 @@
     <div class="order_info" style="text-align:left;">({$info.over_sell|count})已结货组</div>
         <volist name="info.finish_sell" id="vo">
         <div class="order_item" onclick="location.href='/Wap/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}'">
-            &#8470;.{$vo.bi_id}<label><span><b>[{$vo.bi_status|getBillItemStatus}]</b></span>　(详情)</label><br/>货款：<b>{$vo.bi_dpay|formatMoney}</b>元 (1,690元/吨)<label>2箱　净重50吨</label><br/>回款：<b>85,000</b>元<label>回款结息：<span><b>85</b></span>元</label>
+            &#8470;.{$vo.bi_id}<label>
+            <span><b>[{$vo.bi_status|getBillItemStatus}]</b></span>　(详情)</label><br/>
+            货款：<b>{$vo.bi_dpay|formatMoney}</b>元
+            ({$info.b_pri0|formatMoney}元/吨)<label>
+            {$vo.bi_sum}箱　净重{$info.b_weig}吨</label><br/>
+            回款：<b>{$vo.bi_rpay}</b>元<label>
+            回款结息：<span><b>{$vo.bi_inte}</b></span>元</label>
         </div>
         </volist>
     </if>
@@ -56,6 +80,9 @@
     <div class="order_item">已退保证金：<b>{$info.b_id|getAllDepo}</b>元</div>
     <div class="order_item">待退保证金：<b>{$info.b_id|getAllDepo=1}</b>元<br/>(其中:<span><b>{$info.b_id|getAllDepo=1,8}</b></span> 元，今日支付结算后可退。)</div>
     <div class="order_info"><<a href="">查看电子合同</a>></div>
-    <label>上架时间：2018/07/19 12:21:35</label>
+
+    <if condition="$info['b_status'] gt 3">
+        <label>上架时间：{$info.b_stime|getDateTime}</label>
+    </if>
 </div>
 <include file="public/foot" />

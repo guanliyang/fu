@@ -79,6 +79,10 @@ class SBillModel extends HomeModel {
     public function changePrice() {
         $id = I("request.b_id", 0, 'intval');
         $price = I("request.b_pri1", 0, 'intval');
+        if(empty($price) || !is_int($price / 5 )) {
+            notice('[出售单价]非法输入，请通过 +, -按钮调整价格');
+        }
+
         $status = self::where(array('b_id' => $id))->save(array('b_pri1' => $price));
         return $status;
     }
