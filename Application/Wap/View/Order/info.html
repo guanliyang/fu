@@ -5,24 +5,57 @@
     <hr>
 
     <volist name="info.bill" id="vo">
-    <div class="order_info"><label>订单号: B20183225485965</label><label>[已生效]</label></div>
-    <div class="order_info"><label><span><b>今日须支付：85,084.5</b></span>元</label><br/>其中：待付货款 <span><b>84,500</b></span>元，待付利息 <span><b>84.5</b></span>元，请按合同说明方式付款至平台指定帐号。</div>
-    <div class="order_info" onclick="location.href='/Wap/Order/billInfo/b_id/{$vo.b_id}/o_id/{$info.order.o_id}/bi_id/{$vo.bill_item|getArrayV='bi_id'}'"><label>玉米　2018年　辽宁　一等　容重720g/l</label><br/><label><b>1,700</b>元/吨　　（查看）</label></div>
+    <div class="order_info"><label>订单号: {$info.order.o_code}</label><label>[{$info.order.o_status|getOrderStatus}]</label></div>
+
+    <div class="order_info">
+        <label><span><b>今日须支付：85,084.5</b></span>元</label><br/>
+        其中：待付货款 <span><b>84,500</b></span>元，
+        待付利息 <span><b>84.5</b></span>元，请按合同说明方式付款至平台指定帐号。
+    </div>
+
+    <div class="order_info" onclick="location.href='/Wap/Order/billInfo/b_id/{$vo.b_id}/o_id/{$info.order.o_id}/bi_id/{$vo.bill_item|getArrayV='bi_id'}'">
+        <label>
+            {$vo.b_name}　
+            {$vo.b_year}年　
+            {$vo.b_place}　
+            {$vo.b_level}　
+            容重{$vo.b_rz}g/l</label><br/>
+        <label><b>{$info.order.o_pri1|formatMoney}</b>元/吨　　（查看）</label></div>
+
         <volist name="vo.bill_item" id="item">
             <div class="order_item" onclick="location.href='/Wap/Order/billItemInfo/oi_id/{$item.oi_id}/o_id/{$info.order.o_id}'">
-                &#8470;.1021112<label><span><b>[待确认收货]</b></span>　(详情)</label><br/>2箱　净重50吨<label>85,000元　结息85元(5天)</label>
+                &#8470;.{$item.bi_id}<label>
+                <span><b>[{$item.oi_status|getOrderItemStatus}]</b></span>　
+                (详情)</label><br/>{$item.bi_sum}箱　净重{$item.bi_nwei}吨
+                <label>{$item.bi_dpay}元　结息{$item.bi_inte}元(5天)</label>
             </div>
         </volist>
 
     </volist>
 
     <div class="order_info"></div>
-    <div class="order_item">货款合计：<label><b>170,000</b> 元</label><br/>&nbsp;<label>(首付<b>34,000</b>元，尾款<b>136,000</b>元，日利0.0002)</label></div>
-    <div class="order_item">收货方式：物流到门<label>运费：<b>3,600</b>元</label><br/>收货地址：辽宁省沈阳市和平区xx街道xx号<br/>联系人：赵钱孙　　手机号：13910533527</div>
+    <div class="order_item">
+        货款合计：<label><b>{$info.order.o_pay|formatMoney}</b> 元</label><br/>&nbsp;
+        <label>
+            (首付<b>{$info.order.o_pay_f|formatMoney}</b>元，
+            尾款<b>{$info.order.o_pay_t|formatMoney}</b>元，
+            日利{$info.order.o_rate})</label>
+    </div>
+    <div class="order_item">
+        收货方式：{$info.order.o_deli_type|getDeliType}
+        <label>运费：<b>{$info.order.o_frei|formatMoney}</b>元</label><br/>
+        收货地址：{$info.order.o_deli_add}<br/>
+        联系人：{$info.order.o_deli_cont}　　
+        手机号：{$info.order.o_deli_mobi}
+    </div>
     <div class="order_info"></div>
-    <div class="order_item">已付尾款：<b>85,000</b>元<label>已付利息：<b>85</b>元</label></div>
-    <div class="order_item">待付尾款：<b>169,000</b>元<label>尾款计息：<b>85</b>元</label></div>
+    <div class="order_item">
+        已付尾款：<b>{$info.order_item|getOrderT=1}</b>元<label>
+        已付利息：<b>{$info.order_item|getSumKnot}</b>元</label></div>
+    <div class="order_item">
+        待付尾款：<b>{$info.order_item|getOrderT}</b>元<label>
+        尾款计息：<b>{$info.order|getOrderInteT=$info['order_item']}</b>元</label></div>
     <div class="order_info"><<a href="">查看电子合同</a>></div>
-    <label>成交时间：2018/07/19 12:21:35</label>
+    <label>成交时间：{$info.order.o_dtime|getDateTime}</label>
 </div>
 <include file="public/foot" />

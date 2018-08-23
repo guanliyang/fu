@@ -27,7 +27,7 @@
                 </tr>
                 <tr>
                     <th></th>
-                    <th colspan="7">封箱: {$info.bill_item.bi_sum}箱　　　毛重: {$info.bill_item.bi_gwei}吨　　　皮重: {$info.bill_item.bi_tare}吨　　　净重: {$info.bill_item.bi_nwei}吨　　　货款：{$info.bill_item.bi_dpay}元({$info.bill_item.bi_dpri}元/吨)　　　<a href=""><下载装货视频></a></th>
+                    <th colspan="7">封箱: {$info.bill_item.bi_sum}箱　　　毛重: {$info.bill_item.bi_gwei}吨　　　皮重: {$info.bill_item.bi_tare}吨　　　净重: {$info.bill_item.bi_nwei}吨　　　货款：{$info.bill_item.bi_dpay|formatMoney}元({$info.bill_item.bi_dpri}元/吨)　　　<a href=""><下载装货视频></a></th>
                 </tr>
             </table>
             <if condition="$info['bill_item']['bi_status'] gt 1">
@@ -35,7 +35,7 @@
                 <tr>
                     <td></td>
                     <td>物流信息：</td>
-                    <td width="320">{$info.order_item.oi_otime}2018年7月10日  09:12:23 [装车]</td>
+                    <td width="320">{$info.order_item.oi_otime|getDateTime} [装车]</td>
                     <td colspan="2"></td>
                 </tr>
                 <tr>
@@ -64,18 +64,24 @@
                     <th width="30"></th>
                     <th width="90">{$info.bill_item|getBillItemPayStatus}结回款：</th>
                     <th width="300">
-                        <label>{$info.bill_item.bi_rpay}</label> 元
+                        <label>{$info.bill_item.bi_rpay|formatMoney}</label> 元
                     </th>
                     <th width="90">{$info.bill_item|getBillItemPayStatus}付利息：</th>
-                    <th><label><b>{$info.order_item.oi_id}</b></label> 元 (回款{$info.bill_item.bi_rpay}元 x 日利率{$info.bill.b_rrate} x 在售{$info.bill_item|getSellDays}天)</th>
+                    <th>
+                        <label><b>{$info.order_item.oi_id}</b></label> 元 (回款
+                        {$info.bill_item.bi_rpay|formatMoney}元 x
+                        日利率{$info.bill.b_rrate} x
+                        在售{$info.bill_item|getSellDays}天)
+                    </th>
                 </tr>
                 <tr>
                     <th></th>
-                    <th>{$info.bill_item|getBillItemPayStatus}{$info.bill|getBackMoneyText=$info['bill_item']}：</th>
+                    <th>{$info.bill_item|getBillItemPayStatus}
+                        {$info.bill|getBackMoneyText=$info['bill_item']}：</th>
                     <th><label><b>{$info.bill|getBackMoney=$info['bill_item']}</b></label>元
                         (货款{$info.bill|getClinch=$info['bill_item']}元 - 回款{$info.bill_item.bi_rpay|formatMoney}元)</th>
                     <th>{$info.bill_item|getBillItemPayStatus}退保证金：</th>
-                    <th><label><b>{$info.bill_item.bi_depo}</b></label>元 (付清结算费用后，即退。)</th>
+                    <th><label><b>{$info.bill_item.bi_depo|formatMoney}</b></label>元 (付清结算费用后，即退。)</th>
                 </tr>
             </table>
             </if>

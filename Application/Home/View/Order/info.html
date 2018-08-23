@@ -15,14 +15,19 @@
                         <th></th>
                         <th>{$vo.b_name}　
                             {$vo.b_year}年　
-                            {$vo.b_place}　一等　
+                            {$vo.b_place}　
+                            {$vo.b_level}　
                             容重{$vo.b_rz}g/l
                         </th>
                         <th>{$vo.bill_item|count}组　
                             ({$vo.bill_item|array_column='bi_sum'|array_sum}箱　
                             净重：{$vo.bill_item|array_column='bi_nwei'|array_sum}吨)</th>
-                        <th class="tdright"><label>{$vo.bill_item|array_column='bi_dpay'|array_sum}</label>元</th>
-                        <th>(<label>{$info.order.o_pri1|formatMoney}</label>元/吨)</th>
+                        <th class="tdright">
+                            <label>{$vo.bill_item|array_column='bi_dpay'|array_sum}</label>元
+                        </th>
+                        <th>
+                            (<label>{$info.order.o_pri1|formatMoney}</label>元/吨)
+                        </th>
                         <th class="tdright"><a href="/Home/Order/billInfo/b_id/{$vo.b_id}/o_id/{$info.order.o_id}/bi_id/{$vo.bill_item|getArrayV='bi_id'}">...</a></th>
                     </tr>
                     <volist name="vo.bill_item" id="item">
@@ -41,12 +46,21 @@
                 <tr>
                     <td width="30"></td>
                     <td width="200">付款方式：{$info.order.o_pay_type|getPayType}</td>
-                    <td colspan="5">货款合计：{$info.order.o_pay}元 (首付{$info.order.o_pay_f}元　尾款{$info.order.o_pay_t}元　日利率{$info.order.o_rate})　　　　运费：{$info.order.o_frei}元</td>
+                    <td colspan="5">
+                        货款合计：{$info.order.o_pay|formatMoney}元
+                        (首付{$info.order.o_pay_f|formatMoney}元　
+                        尾款{$info.order.o_pay_t|formatMoney}元　
+                        日利率{$info.order.o_rate})　　　　
+                        运费：{$info.order.o_frei|formatMoney}元</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>收货方式：{$info.order.o_deli_type|getDeliType}</td>
-                    <td colspan="5">收货地址：{$info.order.o_deli_add}　　　联系人：{$info.order.o_deli_cont}　　　手机号：{$info.order.o_deli_mobi}</td>
+                    <td colspan="5">
+                        收货地址：{$info.order.o_deli_add}　　　
+                        联系人：{$info.order.o_deli_cont}　　　
+                        手机号：{$info.order.o_deli_mobi}
+                    </td>
                 </tr>
             </table>
             <!-- 20%首付时显示 -->
