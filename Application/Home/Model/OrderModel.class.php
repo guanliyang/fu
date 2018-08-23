@@ -112,7 +112,17 @@ class OrderModel extends HomeModel {
         $count = self::where($where)->count();
         $page = $this->getPageShow($count);
         $list = self::where($where)->order('o_id desc')->limit($page['str'])->select();
+        $list = $this->_changeOrderList($list);
+        $total_page = intval($count / $this->limit) + 1;
+        return array(
+            'order_count' => $count,
+            'list' => $list,
+            'page' => $page['show'],
+            'total_page' => $total_page
+        );
+    }
 
+    private function _changeOrderList($list) {
         if (!empty($list) && is_array($list)) {
             // 循环订单列表
             foreach ($list as $key => $order) {
@@ -130,12 +140,7 @@ class OrderModel extends HomeModel {
             }
 
         }
-
-        return array(
-            'order_count' => $count,
-            'list' => $list,
-            'page' => $page['show']
-        );
+        return $list;
     }
 
     //生成订单

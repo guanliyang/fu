@@ -33,6 +33,11 @@ function notice($message, $code = 1, $data = array()) {
     die(json_encode(array('code' => $code, 'msg' => $message, 'ts' => time()) + $data));
 }
 
+function message($message, $data = array() ) {
+    header('Content-type: application/json;charset=utf-8');
+    die(json_encode(array('list' => $message) + $data));
+}
+
 // 获取二维数组键值, ,分隔
 function getArrayV($list, $v_key) {
     if (empty($list) && !is_array($list)) {

@@ -42,15 +42,18 @@
 </div>
 <div class="item_list" id="list1">
     <volist name="info.order.list" id="vo">
-    <div class="item" onclick="location.href='/Wap/Order/info/o_id/{$vo.o_id}'">
-        <div class="info1">
-            {$vo.o_code}<label>{$vo.o_ctime|date='Y/m/d H:i',###}</label>
+        <div class="item" onclick="location.href='/Wap/Order/info/o_id/{$vo.o_id}'">
+            <div class="info1">
+                {$vo.o_code}<label>{$vo.o_ctime|date='Y/m/d H:i',###}</label>
+            </div>
+            <div class="info2">{$vo.bill.b_name}　　{$vo.bill.b_year}年/{$vo.bill.b_place}/{$vo.bill.b_level}　　容重：{$vo.bill.b_rz}g/l</div>
+            <div class="info3"><b>{$vo.bill.all_nwei}</b>吨　　
+                <b>{$vo.o_pri1|formatMoney}</b>元/吨
+                <label><b>{$vo.o_id|getMessageById=0}</b></label>
+            </div>
         </div>
-        <div class="info2">{$vo.bill.b_name}　　{$vo.bill.b_year}年/{$vo.bill.b_place}/{$vo.bill.b_level}　　容重：{$vo.bill.b_rz}g/l</div>
-        <div class="info3"><b>{$vo.bill.all_nwei}</b>吨　　<b>{$vo.o_pri1|formatMoney}</b>元/吨<label><b>{$vo.o_id|getMessageById=0}</b></label></div>
-    </div>
     </volist>
-
+    <div id="order_list_item_1"></div>
 </div>
 
 <div class="item_list" id="list2">
@@ -63,7 +66,7 @@
         <div class="info3"><b>{$vo.f_weig}</b>吨<label>{$vo.f_id|getMessageById=2}</label></div>
     </div>
     </volist>
-
+    <div id="order_list_item_2"></div>
 </div>
 
 <div class="item_list" id="list3">
@@ -76,6 +79,7 @@
         <div class="info3"><b>{$vo.b_weig}</b>吨　　<b>{$vo.b_pri1|formatMoney}</b>元/吨<label><b>{$vo.b_id|getMessageById=1}</b></label></div>
     </div>
     </volist>
+    <div id="order_list_item_3"></div>
 </div>
 <div class="item_ft" id="footer">
     <div id="ft1">
@@ -89,6 +93,18 @@
         <div><a href="/Wap/Sell/sellBill">我要卖粮</a></div>
     </div>
 </div>
+
+<input type="hidden" id="item_id" value="{$_GET['item']}"/>
+<input type="hidden" id="item_page" value="2" />
+
+<if condition="$_GET['item'] eq 1 OR !$_GET['item']">
+    <input type="hidden" class="item_total_page" value="{$info.order.total_page}" />
+<elseif condition="$_GET['item'] eq 2" />
+    <input type="hidden" class="item_total_page" value="{$info.offer.total_page}" />
+<elseif condition="$_GET['item'] eq 3" />
+    <input type="hidden" class="item_total_page" value="{$info.bill.total_page}" />
+</if>
+
 <include file="public/foot" />
 
 <script type="text/javascript">
@@ -102,4 +118,90 @@
         if(itemval==null) itemval=1;
         document.getElementById('list'+itemval).style['min-height'] = document.documentElement.clientHeight-230+'px';
     }
+</script>
+<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+<script>
+    // 当前第几个导航条
+    var item = $("#item_id").val();
+    if (item.length == 0) {
+        item = 1;
+    }
+    item = parseInt(item);
+
+    $(window).scroll(function(){
+        //判断是否滑动到页面底部
+        if($(window).scrollTop() === $(document).height() - $(window).height()){
+            //当前第几页
+            var page = $("#item_page").val();
+            $("#item_page").val(parseInt(page) + 1);
+
+            // 共几页
+            var total_page = parseInt($(".item_total_page").val());
+            if (page > total_page) {
+                return false;
+            }
+
+
+            if (item == 1) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Wap/Message/ajaxGetPageOrder?p=' + page,
+                    dataType: 'json',
+                    timeout: 10000,
+                    success: function(data){
+                        if (data.list == null) {
+                            return false;
+                        }
+                        else {
+                            $("#order_list_item_1").append(data.list);
+                        }
+                    },
+                    error: function(xhr, type){
+                        alert('抱歉,加载失败!');
+                    }
+                });
+
+            }
+
+            if (item == 2) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Wap/Message/ajaxGetPageOffer?p=' + page,
+                    dataType: 'json',
+                    timeout: 10000,
+                    success: function(data){
+                        if (data.list == null) {
+                            return false;
+                        }
+                        else {
+                            $("#order_list_item_2").append(data.list);
+                        }
+                    },
+                    error: function(xhr, type){
+                        alert('抱歉,加载失败!');
+                    }
+                });
+            }
+
+            if (item == 3) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Wap/Message/ajaxGetPageBill?p=' + page,
+                    dataType: 'json',
+                    timeout: 10000,
+                    success: function(data){
+                        if (data.list == null) {
+                            return false;
+                        }
+                        else {
+                            $("#order_list_item_3").append(data.list);
+                        }
+                    },
+                    error: function(xhr, type){
+                        alert('抱歉,加载失败!');
+                    }
+                });
+            }
+        }
+    });
 </script>

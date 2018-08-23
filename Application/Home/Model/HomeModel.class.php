@@ -6,7 +6,7 @@ use Home\Controller\IndexController;
 
 
 class HomeModel extends Model {
-    protected $l = 10;
+    protected $limit = 2;
 
     public function noticeView($message) {
         $index = new HomeController();
@@ -85,7 +85,7 @@ class HomeModel extends Model {
 
     // 分页
     public function getPageShow($count, $str = '') {
-        $Page       = new \Think\Page($count, $this->l);
+        $Page       = new \Think\Page($count, $this->limit);
 
         $show       = $Page->show($str);
 
