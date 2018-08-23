@@ -3,11 +3,23 @@
 <div class="cont">
     <div class="tit"><a href="javascript:;" onClick="javascript:history.back(-1);"><返回</a>订单粮源详情</div>
     <hr>
-    <div class="order_info"><label>订单号: B20183225485965</label></div>
-    <div class="order_info"><img src="" width="200" height="200" /></div>
-    <div class="order_info"><label>玉米　2018年　辽宁　一等　容重720g/l</label></div>
-    <div class="order_info"><label>霉变1.2%</label><label>水份13%</label><label>杂质2.2%</label><label>呕吐毒素1000μg/kg</label></div>
-    <div class="order_info"><label>成交单价：<b>1,690</b>元/吨</label><br/>成交货组：2121112 / 2151112</div>
+    <div class="order_info"><label>订单号: {$info.order.o_code}</label></div>
+    <div class="order_info"><img src="{$info.bill.b_photo}" width="200" height="200" /></div>
+    <div class="order_info"><label>
+        {$info.bill.b_name}　
+        {$info.bill.b_year}年　
+        {$info.bill.b_place}　
+        {$info.bill.b_level}　
+        容重{$info.bill.b_rz}g/l</label></div>
+    <div class="order_info">
+        <label>霉变{$info.bill.b_mb}%</label>
+        <label>水份{$info.bill.b_sf}%</label>
+        <label>杂质{$info.bill.b_zz}%</label>
+        <label>呕吐毒素{$info.bill.b_ot}μg/kg</label>
+    </div>
+    <div class="order_info">
+        <label>成交单价：<b>{$info.bill.b_pri1|formatMoney}</b>元/吨</label><br/>
+        成交货组：{$info.bi_id_str}</div>
 </div>
 
 <include file="public/foot" />
