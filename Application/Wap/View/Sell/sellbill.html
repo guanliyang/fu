@@ -88,11 +88,11 @@
         </select>
         g/l</div>
     <div class="bill_item">
-        霉变：<input name="b_mb" value="" type="text" class="inpss" />%　
-        水份：<input name="b_sf" value="" type="text" class="inpss" />%</div>
+        霉变：<input name="b_mb" type="number" value="" type="text" class="inpss" />%　
+        水份：<input name="b_sf" type="number" value="" type="text" class="inpss" />%</div>
     <div class="bill_item">
-        杂质：<input name="b_zz" value="" type="text" class="inpss" />%　
-        呕吐毒素：<input name="b_ot" value="" type="text" class="inpsm" />μg/kg</div>
+        杂质：<input name="b_zz" type="number" value="" type="text" class="inpss" />%　
+        呕吐毒素：<input name="b_ot" type="number" value="" type="text" class="inpsm" />μg/kg</div>
     <div class="bill_item">
         出售单价：<input class="bt inpss" value="-" type="button" onclick="cpri(-1);"/> <b>
         <span id="pri1">1,700</span></b>
@@ -102,7 +102,9 @@
         <br/>
         <label>市场参考价：<b id="rpri">1,700</b>元/吨</label><br/>(提交后也可以随时调价)</div>
     <div class="bill_item">
-        出售重量：<input name="b_weig" id="sweight" class="inpsm" value="" type="text" onchange="cwei();"/> 吨<label>(约需<b id="bsum">0</b>个集装箱)</label><br/>&nbsp;
+        出售重量：
+        <input name="b_weig" type="number" id="sweight" class="inpsm" value="" type="text" onchange="cwei();"/>吨
+        <label>(约需<b id="bsum">0</b>个集装箱)</label><br/>&nbsp;
         <label>入港运费：<b id="freight">0</b> 元</label><br/>&nbsp;<label>(<b id="tfrei">1,200</b> 元/车，需要 <b id="tsum">0</b> 车)</label></div>
     <div class="bill_item">需缴保证金：<label><b id="depo">0</b> 元</label><br/>(货款<b id="total">0</b>元的20%，成交后即退保证金)</div>
     <div class="bill_item">装货地址：
@@ -121,7 +123,7 @@
         <br/>　　　　　
         <input name="address" value="{$user.address}" type="text" /><br/>　
         联系人：<input name="b_cont" value="{$user.real_name}" type="text"/><br/>　
-        手机号：<input name="b_mobi" value="{$user.mobile}" type="text"/></div>
+        手机号：<input type="tel" name="b_mobi" value="{$user.mobile}" type="text"/></div>
     <div class="bill_item">提交后需付款：<label><b id="pay">0</b> 元</label></div>
 </div>
 <div class="cont">
