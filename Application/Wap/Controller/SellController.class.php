@@ -13,6 +13,29 @@ class SellController extends HomeController {
 
     }
 
+    // ajax 分页 获取售粮详情
+    public function ajaxGetPageSellBillList() {
+        $SBill = new \Home\Model\SBillModel();
+        $info = $SBill->getOnLineList();
+        $list = $info['list'];
+        $list = $this->ajaxChangeBillList($list);
+        message($list);
+    }
+
+    private function ajaxChangeBillList($list) {
+        $str = '';
+        if (!empty($list) && is_array($list)) {
+            foreach ($list as $bill) {
+                $str .= '<div class="list" onclick="location.href=\'/Wap/Sell/onLineBillInfo/b_id/'.$bill['b_id'].'\'">
+        <div class="info1">'.$bill['b_year'].'年 '.$bill['b_place'].' '.$bill['b_weig'].'吨<h3>'.formatMoney($bill['b_pri1']).'元/吨</h3></div>
+        <div class="info2"><label>容重'.$bill['b_rz'].'g/l</label><label>霉变'.$bill['b_mb'].'%</label><label>水份'.$bill['b_sf'].'%</label></div>
+        <div class="info2"><label>杂质'.$bill['b_zz'].'%</label><label>呕吐毒素'.$bill['b_ot'].'μg/kg</label></div>
+    </div>';
+            }
+        }
+        return $str;
+    }
+
     // 在售粮源详情
     public function onLineBillInfo() {
         $bill = new \Home\Model\SBillModel();

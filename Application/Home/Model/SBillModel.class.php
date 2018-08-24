@@ -57,9 +57,11 @@ class SBillModel extends HomeModel {
         $page = $this->getPageShow($count);
         $list = self::where($where)->order($order)->limit($page['str'])->select();
 
+        $total_page = intval($count / $this->limit) + 1;
         return array(
             'list' => $list,
-            'page' => $page['show']
+            'page' => $page['show'],
+            'total_page' => $total_page
         );
     }
 

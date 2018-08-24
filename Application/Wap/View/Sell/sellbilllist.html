@@ -69,11 +69,53 @@
 
 <input type="hidden" id="item_id" value="{$_GET['item']}"/>
 <input type="hidden" id="item_page" value="2" />
-<input type="hidden" class="item_total_page" value="{$total_page}" />
+<input type="hidden" class="item_total_page" value="{$info.total_page}" />
 
 <script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript">
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]); return null; //返回参数值
+}
+function isEmpty(v) {
+    switch (typeof v) {
+        case 'undefined':
+            return true;
+        case 'string':
+            if (v.replace(/(^[ \t\n\r]*)|([ \t\n\r]*$)/g, '').length == 0) return true;
+            break;
+        case 'boolean':
+            if (!v) return true;
+            break;
+        case 'number':
+            if (0 === v || isNaN(v)) return true;
+            break;
+        case 'object':
+            if (null === v || v.length === 0) return true;
+            for (var i in v) {
+                return false;
+            }
+            return true;
+    }
+    return false;
+}
+
+var url = '/Wap/Sell/sellBillList?';
+// 排序
 $(".clkitem").on('click tap',function(){
+    // 设置url  有年份和产地时 把年份和产地参数带上
+    var url_gy_id = getUrlParam('gy_id');
+    var url_gp_id = getUrlParam('gp_id');
+    if (!isEmpty(url_gy_id)) {
+        url = url + '&gy_id=' + url_gy_id;
+    }
+
+    if (!isEmpty(url_gp_id)) {
+        url = url + '&gp_id=' + url_gp_id;
+    }
+
+    // 重新设置排序属性
     var t_name = $(this).attr('t_name');
     var t_order = $(this).attr('t_order');
     if (t_order == 'desc') {
@@ -82,16 +124,88 @@ $(".clkitem").on('click tap',function(){
     else {
         s_order = 'desc';
     }
-    window.location.href = "/Wap/Sell/sellBillList?t_name=" + t_name + "&t_order=" + s_order ;
+    // 拼链接
+    window.location.href = url + "&t_name=" + t_name + "&t_order=" + s_order ;
 });
 
+// 年份
 $(".gy_id").on('change', function(){
-    window.location.href = "/Wap/Sell/sellBillList?gy_id=" + $(this).val() ;
+    // 地点链接
+    var url_gp_id = getUrlParam('gp_id');
+    if (!isEmpty(url_gp_id)) {
+        url = url + '&gp_id=' + url_gp_id;
+    }
+
+    //排序链接
+    var url_t_name = getUrlParam('t_name');
+    if (!isEmpty(url_t_name)) {
+        url = url + '&t_name=' + url_t_name;
+    }
+
+    var url_t_order = getUrlParam('t_order');
+    if (!isEmpty(url_t_order)) {
+        url = url + '&t_order=' + url_t_order;
+    }
+
+    var gy_id = $(this).val();
+    if (!isEmpty(gy_id)) {
+        window.location.href = url + "&gy_id=" + gy_id;
+    }
+    else {
+        window.location.href = url;
+    }
 });
 
+// 产地
 $(".gp_id").on('change', function(){
-    window.location.href = "/Wap/Sell/sellBillList?gp_id=" + $(this).val() ;
+    // 年份链接
+    var url_gy_id = getUrlParam('gy_id');
+    if (url_gy_id != null) {
+        url = url + '&gy_id=' + url_gy_id;
+    }
+
+    //排序链接
+    var url_t_name = getUrlParam('t_name');
+    if (url_t_name != null) {
+        url = url + '&t_name=' + url_t_name;
+    }
+
+    var url_t_order = getUrlParam('t_order');
+    if (url_t_order != null) {
+        url = url + '&t_order=' + url_t_order;
+    }
+
+    var gp_id = $(this).val();
+    if (!isEmpty(gp_id)) {
+        window.location.href = url + "&gp_id=" + gp_id;
+    }
+    else {
+        window.location.href = url;
+    }
 });
+
+
+// 声明参数 并添加筛选条件参数
+var ajaxUrl = '/Wap/Sell/ajaxGetPageSellBillList?';
+var url_gy_id = getUrlParam('gy_id');
+var url_gp_id = getUrlParam('gp_id');
+if (!isEmpty(url_gy_id)) {
+    ajaxUrl = ajaxUrl + '&gy_id=' + url_gy_id;
+}
+
+if (!isEmpty(url_gp_id)) {
+    ajaxUrl = ajaxUrl + '&gp_id=' + url_gp_id;
+}
+
+//排序链接
+var url_t_name = getUrlParam('t_name');
+if (!isEmpty(url_t_name)) {
+    ajaxUrl = ajaxUrl + '&t_name=' + url_t_name;
+}
+var url_t_order = getUrlParam('t_order');
+if (!isEmpty(url_t_order)) {
+    ajaxUrl = ajaxUrl + '&t_order=' + url_t_order;
+}
 
 $(window).scroll(function(){
     //判断是否滑动到页面底部
@@ -108,7 +222,7 @@ $(window).scroll(function(){
 
         $.ajax({
             type: 'POST',
-            url: '/Wap/Message/ajaxGetPageOrder?p=' + page,
+            url: ajaxUrl + '&p=' + page,
             dataType: 'json',
             timeout: 10000,
             success: function(data){
