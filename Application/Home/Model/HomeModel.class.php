@@ -44,7 +44,7 @@ class HomeModel extends Model {
 
     // 检查 bi_id_str 的合法性
     public function checkBiIdStr($bi_id_str) {
-        $bi_id_list = explode(',', $bi_id_str);
+        $bi_id_list = explode(',', trim($bi_id_str, ','));
         if (empty($bi_id_list) || !is_array($bi_id_list)) {
             notice('bi_id_str 不能为空');
         }
