@@ -6,7 +6,7 @@ class OrderController extends HomeController {
     public function add() {
         $order = new \Home\Model\OrderModel();
         $o_id = $order->addOrder($this->getUid());
-        notice('生成订单成功', 0, array('url'=>'/Home/Message/index?item=1'));
+        notice('生成订单成功', 0, array('url'=>'/Wap/Message/index?item=1'));
     }
 
     // 订单详情

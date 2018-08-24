@@ -41,7 +41,7 @@
                             <if condition="$_GET['gp_id'] eq $vo['gp_id']">
                                 <label class="hotitem">{$vo.gp_name}</label>　　
                             <else />
-                                <a href="/Home/Sell/sellBillList/gp_id/{$vo.gp_id}">{$vo.gp_name}</a>　　
+                                <a href="/Home/Sell/sellBillList?gp_id={$vo.gp_id}">{$vo.gp_name}</a>　　
                             </if>
                         </volist>
                     </td>

@@ -6,7 +6,7 @@ use Home\Controller\IndexController;
 
 
 class HomeModel extends Model {
-    protected $limit = 20;
+    protected $limit = 2;
 
     public function noticeView($message) {
         $index = new HomeController();
