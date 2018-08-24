@@ -15,7 +15,7 @@
                     <th></th>
                     <th colspan="9">年份：　　
                         <if condition="$_GET['gy_id']">
-                            <a href="/Home/Sell/sellBillList">全部</a>　　
+                            <a class="gy_click" href="#">全部</a>　　
                             <else />
                             <label class="hotitem">全部</label>　　
                         </if>
@@ -23,7 +23,7 @@
                             <if condition="$_GET['gy_id'] eq $vo['gy_id']">
                                 <label class="hotitem">{$vo.gy_id}</label>　　
                                 <else />
-                                <a href="/Home/Sell/sellBillList?gy_id={$vo.gy_id}">{$vo.gy_id}</a>　　
+                                <a href="#" value="{$vo.gy_id}" class="gy_click">{$vo.gy_id}</a>　　
                             </if>
                         </volist>
                         <a href="/Home/Sell/sellBillList">其他</a>
@@ -33,7 +33,7 @@
                     <th></th>
                     <th colspan="9">产地：　　
                         <if condition="$_GET['gp_id']">
-                            <a href="/Home/Sell/sellBillList">全部</a>　　
+                            <a href="#" class="gp_click">全部</a>　　
                             <else />
                             <label class="hotitem">全部</label>　　
                         </if>
@@ -41,7 +41,7 @@
                             <if condition="$_GET['gp_id'] eq $vo['gp_id']">
                                 <label class="hotitem">{$vo.gp_name}</label>　　
                             <else />
-                                <a href="/Home/Sell/sellBillList?gp_id={$vo.gp_id}">{$vo.gp_name}</a>　　
+                                <a href="#" value="{$vo.gp_id}" class="gp_click">{$vo.gp_name}</a>　　
                             </if>
                         </volist>
                     </td>
@@ -115,16 +115,114 @@
 <include file="public/foot" />
 <script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript">
-    $(".clkitem").on('click tap',function(){
-        var t_name = $(this).attr('t_name');
-        var t_order = $(this).attr('t_order');
-        if (t_order == 'desc') {
-            s_order = 'asc';
-        }
-        else {
-            s_order = 'desc';
-        }
-        window.location.href = "/Home/Sell/sellBillList?t_name=" + t_name + "&t_order=" + s_order ;
-    });
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]); return null; //返回参数值
+}
+function isEmpty(v) {
+    switch (typeof v) {
+        case 'undefined':
+            return true;
+        case 'string':
+            if (v.replace(/(^[ \t\n\r]*)|([ \t\n\r]*$)/g, '').length == 0) return true;
+            break;
+        case 'boolean':
+            if (!v) return true;
+            break;
+        case 'number':
+            if (0 === v || isNaN(v)) return true;
+            break;
+        case 'object':
+            if (null === v || v.length === 0) return true;
+            for (var i in v) {
+                return false;
+            }
+            return true;
+    }
+    return false;
+}
 
+var url = '/Home/Sell/sellBillList?';
+// 排序
+$(".clkitem").on('click tap',function(){
+    // 设置url  有年份和产地时 把年份和产地参数带上
+    var url_gy_id = getUrlParam('gy_id');
+    var url_gp_id = getUrlParam('gp_id');
+    if (!isEmpty(url_gy_id)) {
+        url = url + '&gy_id=' + url_gy_id;
+    }
+
+    if (!isEmpty(url_gp_id)) {
+        url = url + '&gp_id=' + url_gp_id;
+    }
+
+    // 重新设置排序属性
+    var t_name = $(this).attr('t_name');
+    var t_order = $(this).attr('t_order');
+    if (t_order == 'desc') {
+        s_order = 'asc';
+    }
+    else {
+        s_order = 'desc';
+    }
+    // 拼链接
+    window.location.href = url + "&t_name=" + t_name + "&t_order=" + s_order ;
+});
+
+//年份
+$(".gy_click").on('click tap',function(){
+    // 地点链接
+    var url_gp_id = getUrlParam('gp_id');
+    if (!isEmpty(url_gp_id)) {
+        url = url + '&gp_id=' + url_gp_id;
+    }
+
+    //排序链接
+    var url_t_name = getUrlParam('t_name');
+    if (!isEmpty(url_t_name)) {
+        url = url + '&t_name=' + url_t_name;
+    }
+
+    var url_t_order = getUrlParam('t_order');
+    if (!isEmpty(url_t_order)) {
+        url = url + '&t_order=' + url_t_order;
+    }
+
+    var gy_id = $(this).attr('value');
+    if (!isEmpty(gy_id)) {
+        window.location.href = url + "&gy_id=" + gy_id;
+    }
+    else {
+        window.location.href = url;
+    }
+})
+
+// 产地
+$(".gp_click").on('click tap', function() {
+    // 年份链接
+    var url_gy_id = getUrlParam('gy_id');
+    if (url_gy_id != null) {
+        url = url + '&gy_id=' + url_gy_id;
+    }
+
+    //排序链接
+    var url_t_name = getUrlParam('t_name');
+    if (url_t_name != null) {
+        url = url + '&t_name=' + url_t_name;
+    }
+
+    var url_t_order = getUrlParam('t_order');
+    if (url_t_order != null) {
+        url = url + '&t_order=' + url_t_order;
+    }
+
+    var gp_id = $(this).attr('value');
+    if (!isEmpty(gp_id)) {
+        window.location.href = url + "&gp_id=" + gp_id;
+    }
+    else {
+        window.location.href = url;
+    }
+})
 </script>

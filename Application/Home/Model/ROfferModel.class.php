@@ -41,11 +41,14 @@ class ROfferModel extends HomeModel {
             $where += array('gy_id' => $gc_id);
         }
 
+        // 排序相关
         $order = 'f_ctime desc';
-        $search_order = I('request.order');
-        if (!empty($search_order)) {
-            $order = $search_order.' desc';
+        $order_name = I('request.t_name');
+        $order_type = I('request.t_order');
+        if (!empty($order_name) && !empty($order_type) && in_array($order_type, array('desc', 'asc'))) {
+            $order = $order_name.' '.$order_type;
         }
+
 
         $count = self::where($where)->count();
         $page = $this->getPageShow($count);

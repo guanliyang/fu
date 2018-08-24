@@ -45,9 +45,8 @@ class SBillModel extends HomeModel {
             $where += array('gy_id' => $gc_id);
         }
 
-        $order = 'b_ctime desc';
-
         // 排序相关
+        $order = 'b_ctime desc';
         $order_name = I('request.t_name');
         $order_type = I('request.t_order');
         if (!empty($order_name) && !empty($order_type) && in_array($order_type, array('desc', 'asc'))) {
