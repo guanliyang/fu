@@ -23,10 +23,9 @@
                             <if condition="$_GET['gy_id'] eq $vo['gy_id']">
                                 <label class="hotitem">{$vo.gy_id}</label>　　
                                 <else />
-                                <a href="/Home/Offer/offerList?gy_id={$vo.gy_id}">{$vo.gy_id}</a>　　
+                                <a  value="{$vo.gy_id}" class="gy_click" href="#">{$vo.gy_id}</a>　　
                             </if>
                         </volist>
-                        <a href="/Home/Offer/offerList">其他</a>
                     </th>
                 </tr>
                 <tr>
@@ -41,7 +40,7 @@
                             <if condition="$_GET['gp_id'] eq $vo['gp_id']">
                                 <label class="hotitem">{$vo.gp_name}</label>　　
                                 <else/>
-                                <a href="/Home/Offer/offerList/gp_id/{$vo.gp_id}">{$vo.gp_name}</a>　　
+                                <a value="{$vo.gp_id}" class="gp_click" href="#">{$vo.gp_name}</a>　　
                             </if>
                         </volist>
                     </th>
