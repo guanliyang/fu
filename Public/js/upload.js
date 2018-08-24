@@ -1,4 +1,6 @@
 $("#t_file").change(function(){
+    // 预加载图片
+    $("#show_img").attr('src', "/Public/fu/img/timg.gif");
     var formData = new FormData();
     formData.append('file', $('#t_file')[0].files[0]);
     $.ajax({
