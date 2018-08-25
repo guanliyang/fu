@@ -12,15 +12,51 @@ function getMsgText($type) {
 }
 
 // 获取 系统信息
-function getMsgUrl($type) {
+function getMsgUrl($msg) {
+    $msg_type = $msg['type'];
     $list =
         array(
             0 => '/Home/Order/info/o_id/',
             1 => '/Home/Sell/sellBillInfo/b_id/',
             2 => '/Home/Offer/offerInfo/f_id/',
         );
+    $url = $list[$msg_type].$msg['resource_id'].'/msg_id/'.$msg['sm_id'];
+    return $url;
+}
+
+function getWapMsgUrl($msg) {
+    $msg_type = $msg['type'];
+    $list =
+        array(
+            0 => '/Wap/Order/info/o_id/',
+            1 => '/Wap/Sell/sellBillInfo/b_id/',
+            2 => '/Wap/Offer/offerInfo/f_id/',
+        );
+    $url = $list[$msg_type].$msg['resource_id'].'/msg_id/'.$msg['sm_id'];
+    return $url;
+}
+
+// 获取 系统信息 链接显示文本
+function getMsgUrlText($type) {
+    $list =
+        array(
+            0 => '查看订单详情',
+            1 => '查看货单详情',
+            2 => '查看预约单详情',
+        );
     return $list[$type];
 }
+
+// 由未读系统消息链接点击过来的  将消息设置成已读
+function setReadMsg() {
+    $status = 0;
+    $msg_id = I('request.msg_id', 0, 'intval');
+    if (!empty($msg_id)) {
+        $status = M('sys_msg')->where('sm_id='.$msg_id)->save(array('sm_status' => 1));
+    }
+    return $status;
+}
+
 
 // 判断是否是电话
 function is_mobile($mobile) {
@@ -421,7 +457,7 @@ function getDateTime($time) {
     if (empty($time)) {
         return '暂无';
     }
-    return date("Y年m月d日 H:i:s", $time);
+    return date("Y/m/d H:i:s", $time);
 }
 
 function getBillItemPayStatus($billItem) {

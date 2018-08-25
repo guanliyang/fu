@@ -12,8 +12,16 @@ class SysMsgModel extends HomeModel {
     //offer
     const TYPE_OFFER = 2;
 
-    protected $limit = 1;
 
+    public function getNotReadCount($uid) {
+        $where = array(
+            'u_id' => $uid,
+            'sm_status' => self::NOT_READ
+        );
+        $count = self::where($where)->count();
+        return $count;
+    }
+    //未读
     public function getMsgNotRead($uid) {
         $where = array(
             'u_id' => $uid,
@@ -23,15 +31,16 @@ class SysMsgModel extends HomeModel {
 
         $page = $this->getPageShow($count);
 
-        $not_read_list = self::where($where)->limit($page['str'])->select();
-
+        $list = self::where($where)->order('sm_id desc')->limit($page['str'])->select();
+        $total_page = intval($count / $this->limit) + 1;
         return array(
-            'list' => $not_read_list,
-            'not_read_list_count' => $count,
+            'list' => $list,
             'page' => $page['show'],
+            'total_page' => $total_page
         );
     }
 
+    // 已读
     public function getMsgIsRead($uid) {
         $where = array(
             'u_id' => $uid,
@@ -39,18 +48,13 @@ class SysMsgModel extends HomeModel {
         );
         $count = self::where($where)->count();
         $page       = $page = $this->getPageShow($count);
-        $read_list = self::where($where)->limit($page['str'])->select();
+        $list = self::where($where)->order('sm_id desc')->limit($page['str'])->select();
 
-
-        $not_read_list_count = self::where(array(
-            'u_id' => $uid,
-            'sm_status' => self::NOT_READ
-        ))->count();
-
+        $total_page = intval($count / $this->limit) + 1;
         return array(
-            'list' => $read_list,
-            'not_read_list_count' => $not_read_list_count,
-            'page' => $page['show']
+            'list' => $list,
+            'page' => $page['show'],
+            'total_page' => $total_page
         );
     }
 }

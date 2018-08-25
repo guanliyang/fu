@@ -5,6 +5,10 @@ class SysMsgController extends HomeController {
     public function _initialize() {
         parent::_initialize();
         $this->checkoutUserLogin();
+
+        $msg = new \Home\Model\SysMsgModel();
+        $count = $msg->getNotReadCount($this->getUid());
+        $this->assign('count', $count);
     }
     // 系统消息
     public function index() {

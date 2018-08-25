@@ -90,6 +90,7 @@ class HomeModel extends Model {
         $show       = $Page->show($str);
 
         $limitStr = $Page->firstRow.','.$Page->listRows;
+
         return array(
             'show' => $show,
             'str' => $limitStr

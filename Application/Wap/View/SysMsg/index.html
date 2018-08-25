@@ -17,73 +17,112 @@
     }
 </script>
 <div class="cont">
-    <div class="tit"><a href="javascript:;" onClick="javascript:history.back(-1);"><返回</a>系统通知</div>
+    <div class="tit"><a href="/Wap"><返回</a>系统通知</div>
 </div>
 <div class="cont">
     <div class="item_tit">
-        <a href="?item=1" id="item1">新通知({$data.not_read_list_count})</a><a href="?item=2" id="item2">已读通知</a>
+        <a href="?item=1" id="item1">新通知({$count})</a>
+        <a href="?item=2" id="item2">已读通知</a>
     </div>
 </div>
 
 <div class="item_list" id="list1">
-    <volist name="data.list" id="vo">
-    <div class="msgitem" onclick="location.href='{$vo.type|getMsgUrl}{$vo.resource_id}'">
+    <volist name="not_read.list" id="vo">
+    <div class="msgitem" onclick="location.href='{$vo|getWapMsgUrl}'">
         <div class="info1">
-            {$vo.resource_id}<label>{$vo.ctime|date='Y年m月d日 H:i:s',###}</label>
+            {$vo.type|getMsgText}：{$vo.resource_id}<label>{$vo.ctime|getDateTime}</label>
         </div>
         <div class="info2">{$vo.sm_content}</div>
     </div>
     </volist>
+    <div id="list_item_1"></div>
 </div>
 
 <div class="item_list" id="list2">
-    <div class="msgitem" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            R101101101<label>2018/07/19 12:21:35</label>
+    <volist name="read.list" id="vo">
+        <div class="msgitem" onclick="location.href='{$vo|getWapMsgUrl}'">
+            <div class="info1">
+                {$vo.type|getMsgText}：{$vo.resource_id}<label>{$vo.ctime|getDateTime}</label>
+            </div>
+            <div class="info2">{$vo.sm_content}</div>
         </div>
-        <div class="info4">待办事项：请支付预约金(<label>42,500</label>元)/服务费(<label>1,500</label>元)，到合同指定帐号。</div>
-    </div>
-    <div class="msgitem" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info4">待办事项：请支付货款(<label>42,500</label>元)/利息(<label>50</label>元)，到合同指定帐号。</div>
-    </div>
-    <div class="msgitem" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info4">待办事项：请支付货款(<label>42,500</label>元)/利息(<label>50</label>元)，到合同指定帐号。</div>
-    </div>
-    <div class="msgitem" onclick="location.href='saleinfo.php'">
-        <div class="info1">
-            S101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info4">待办事项：请支付保证金(<label>51,500</label>元)/运费(<label>3,600</label>元)，到合同指定帐号。</div>
-    </div>
-    <div class="msgitem" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            R101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info4">待办事项：请支付预约金(<label>42,500</label>元)/服务费(<label>1,500</label>元)，到合同指定帐号。</div>
-    </div>
-    <div class="msgitem" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info4">待办事项：请支付货款(<label>42,500</label>元)/利息(<label>50</label>元)，到合同指定帐号。</div>
-    </div>
-    <div class="msgitem" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            R101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info4">待办事项：请支付预约金(<label>42,500</label>元)/服务费(<label>1,500</label>元)，到合同指定帐号。</div>
-    </div>
-    <div class="msgitem" onclick="location.href='buyinfo.php'">
-        <div class="info1">
-            B101101101<label>2018/07/19 12:21:35</label>
-        </div>
-        <div class="info4">待办事项：请支付货款(<label>42,500</label>元)/利息(<label>50</label>元)，到合同指定帐号。</div>
-    </div>
+    </volist>
+    <div id="list_item_2"></div>
 </div>
+
+<input type="hidden" id="item_id" value="{$_GET['item']}"/>
+<input type="hidden" id="item_page" value="2" />
+
+<if condition="$_GET['item'] eq 1 OR !$_GET['item']">
+    <input type="hidden" class="item_total_page" value="{$not_read.total_page}" />
+    <elseif condition="$_GET['item'] eq 2" />
+    <input type="hidden" class="item_total_page" value="{$read.total_page}" />
+</if>
 <include file="public/foot" />
+
+<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+<script>
+    // 当前第几个导航条
+    var item = $("#item_id").val();
+    if (item.length == 0) {
+        item = 1;
+    }
+    item = parseInt(item);
+
+    $(window).scroll(function(){
+        //判断是否滑动到页面底部
+        if($(window).scrollTop() === $(document).height() - $(window).height()){
+            //当前第几页
+            var page = $("#item_page").val();
+            $("#item_page").val(parseInt(page) + 1);
+
+            // 共几页
+            var total_page = parseInt($(".item_total_page").val());
+            if (page > total_page) {
+                return false;
+            }
+
+
+            if (item == 1) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Wap/SysMsg/ajaxGetPageNotReadMsg?p=' + page,
+                    dataType: 'json',
+                    timeout: 10000,
+                    success: function(data){
+                        if (data.list == null) {
+                            return false;
+                        }
+                        else {
+                            $("#list_item_1").append(data.list);
+                        }
+                    },
+                    error: function(xhr, type){
+                        alert('抱歉,加载失败!');
+                    }
+                });
+
+            }
+
+            if (item == 2) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Wap/SysMsg/ajaxGetPageReadMsg?p=' + page,
+                    dataType: 'json',
+                    timeout: 10000,
+                    success: function(data){
+                        if (data.list == null) {
+                            return false;
+                        }
+                        else {
+                            $("#list_item_2").append(data.list);
+                        }
+                    },
+                    error: function(xhr, type){
+                        alert('抱歉,加载失败!');
+                    }
+                });
+            }
+        }
+    });
+</script>

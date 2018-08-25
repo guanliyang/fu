@@ -10,7 +10,7 @@
             <label>:: 系统通知 ::</label>
             <div class="item">
                 <a href="/Home/SysMsg/is_read" <if condition="$is_read"> class="hot" </if> >已读通知</a>
-                <a href="/Home/SysMsg/index" <if condition="!$is_read"> class="hot" </if>>新通知({$data.not_read_list_count})</a>
+                <a href="/Home/SysMsg/index" <if condition="!$is_read"> class="hot" </if>>新通知({$count})</a>
             </div>
         </div>
         <div class="list">
@@ -20,7 +20,7 @@
                     <td class="cool">{$vo.type|getMsgText}：{$vo.resource_id}</a></td>
                     <td class="cool">{$vo.ctime|date='Y年m月d日 H:i:s',###}</td>
                     <td class="tdlock">{$vo.sm_content}</td>
-                    <td><a href="{$vo.type|getMsgUrl}{$vo.resource_id}">查看订单详情...</a></td>
+                    <td><a href="{$vo|getMsgUrl}">{$vo.type|getMsgUrlText}</a></td>
                 </tr>
                 </volist>
 
