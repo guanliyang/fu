@@ -27,7 +27,14 @@
                 </tr>
                 <tr>
                     <th></th>
-                    <th colspan="7">封箱: {$info.bill_item.bi_sum}箱　　　毛重: {$info.bill_item.bi_gwei}吨　　　皮重: {$info.bill_item.bi_tare}吨　　　净重: {$info.bill_item.bi_nwei}吨　　　货款：{$info.bill_item.bi_dpay|formatMoney}元({$info.bill_item.bi_dpri}元/吨)　　　<a href=""><下载装货视频></a></th>
+                    <th colspan="7">
+                        封箱: {$info.bill_item.bi_sum}箱　　　
+                        毛重: {$info.bill_item.bi_gwei}吨　　　
+                        皮重: {$info.bill_item.bi_tare}吨　　　
+                        净重: {$info.bill_item.bi_nwei}吨　　　
+                        货款：{$info.bill_item.bi_dpay|formatMoney}元
+                        ({$info.bill_item.bi_dpri|formatMoney}元/吨)　　　
+                        <a href=""><下载装货视频></a></th>
                 </tr>
             </table>
             <if condition="$info['bill_item']['bi_status'] gt 1">

@@ -3,11 +3,46 @@
 <div class="cont">
     <div class="tit"><a href="javascript:;" onClick="javascript:history.back(-1);"><返回</a>订单货组详情</div>
     <hr>
-    <div class="order_info"><label>订单号: {$info.order.o_code}</label></div>
-    <div class="order_info"><label>货组编号：{$info.order_item.bi_id} - <span><b>[{$info.order_item.oi_status|getOrderItemStatus}]</b></span></label></div>
-    <div class="order_item">待付货款：<label><span><b>{$info.order|getOrderItemPendingMoney=$info['order_item']}</b></span>元</label></div>
-    <div class="order_item">可结利息：<label><span><b>{$info.order|getKnot=$info['order_item']}</b></span>元</label><br/>计息：{$info.order_item.oi_dpay}天(成交日开始)<label>({$info.order_item.oi_dpay}x{$info.order.o_rate}x{$info.order_item.oi_dpay})</label></div>
-    <div class="order_item">滞箱费：<label><span><b>{$info.order_item.oi_depay}</b></span>元</label><br/>(到岸14天内免费，超出时间按50元/天.箱收取)</div>
+    <div class="order_info">
+        <label>订单号: {$info.order.o_code}</label>
+    </div>
+
+    <div class="order_info">
+        <label>
+            货组编号：{$info.order_item.bi_id} -
+            <span>
+            <b>[{$info.order_item.oi_status|getOrderItemStatus}]</b>
+            </span>
+        </label>
+    </div>
+
+    <div class="order_item">待付货款：
+        <label>
+            <span>
+                <b>{$info.order|getOrderItemPendingMoney=$info['order_item']}</b>
+            </span>元
+        </label>
+    </div>
+    <div class="order_item">可结利息：
+        <label>
+            <span>
+                <b>{$info.order|getKnot=$info['order_item']}</b>
+            </span>元
+        </label>
+        <br/>计息：{$info.order_item.oi_dpay}天(成交日开始)
+        <label>
+            ({$info.order_item.oi_dpay}x{$info.order.o_rate}x{$info.order_item.oi_dpay})
+        </label>
+    </div>
+    <div class="order_item">
+        滞箱费：
+        <label>
+            <span>
+                <b>{$info.order_item.oi_depay|formatMoney}</b>
+            </span>元
+        </label>
+        <br/>(到岸14天内免费，超出时间按50元/天.箱收取)
+    </div>
     <div class="order_info"></div>
 
 
@@ -17,13 +52,19 @@
         皮重{$info.order_item.bi_tare}吨　
         净重{$info.order_item.bi_nwei}吨
     </div>
-    <div class="order_item">货款合计：<b>{$info.order_item.bi_dpay}</b>元
-        ({$info.order_item.bi_dpri}元/吨)</div>
+    <div class="order_item">
+        货款合计：<b>{$info.order_item.bi_dpay|formatMoney}</b>元
+        ({$info.order_item.bi_dpri}元/吨)
+    </div>
     <div class="order_item">成交时间：{$info.order_item.oi_dtime|getDateTime}</div>
-    <div class="order_item">离岸时间：{$info.order_item.oi_otime|getDateTime}<br/>
-        离港名称：{$info.order_item.oi_oname}</div>
-    <div class="order_item">到岸时间：{$info.order_item.oi_atime|getDateTime}<br/>
-        到港名称：{$info.order_item.oi_aname}</div>
+    <div class="order_item">
+        离岸时间：{$info.order_item.oi_otime|getDateTime}<br/>
+        离港名称：{$info.order_item.oi_oname}
+    </div>
+    <div class="order_item">
+        到岸时间：{$info.order_item.oi_atime|getDateTime}<br/>
+        到港名称：{$info.order_item.oi_aname}
+    </div>
     <div class="order_item">物流信息：{$info.order_item.oi_status|getWuLiuMessage}</div>
 
 

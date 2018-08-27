@@ -102,7 +102,7 @@
                             <td width="90">{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
                             <td width="180">{$vo.bi_dpay|formatMoney}元</td>
                             <td width="60">已回款：</td>
-                            <td>{$vo.bi_rpay}元 (结息{$vo.bi_inte}元)</td>
+                            <td>{$vo.bi_rpay}元 (结息{$vo.bi_inte|formatMoney}元)</td>
                             <td><a href="/Home/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}"><货组详情></a></td>
                         </tr>
                     </volist>
