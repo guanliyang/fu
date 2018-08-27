@@ -79,6 +79,16 @@
             // 共几页
             var total_page = parseInt($(".item_total_page").val());
             if (page > total_page) {
+                if (item == 1) {
+                    $("#list_item_1").empty();
+                    $("#list_item_1").append('已无更改数据');
+                }
+
+                if (item == 2) {
+                    $("#list_item_2").empty();
+                    $("#list_item_2").append('已无更改数据');
+                }
+
                 return false;
             }
 

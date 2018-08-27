@@ -216,6 +216,8 @@ $(window).scroll(function(){
         // 共几页
         var total_page = parseInt($(".item_total_page").val());
         if (page > total_page) {
+            $("#bill_list_item").empty();
+            $("#bill_list_item").append('已无更多数据');
             return false;
         }
 

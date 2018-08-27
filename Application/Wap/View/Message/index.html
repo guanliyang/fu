@@ -138,6 +138,18 @@
             // 共几页
             var total_page = parseInt($(".item_total_page").val());
             if (page > total_page) {
+                if (item == 1) {
+                    $("#order_list_item_1").empty();
+                    $("#order_list_item_1").append(data.list);
+                }
+                if (item == 2) {
+                    $("#order_list_item_2").empty();
+                    $("#order_list_item_2").append(data.list);
+                }
+                if (item == 3) {
+                    $("#order_list_item_3").empty();
+                    $("#order_list_item_3").append(data.list);
+                }
                 return false;
             }
 
