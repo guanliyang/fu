@@ -25,7 +25,7 @@
         <volist name="vo.bill_item" id="item">
             <div class="order_item" onclick="location.href='/Wap/Order/billItemInfo/oi_id/{$item.oi_id}/o_id/{$info.order.o_id}'">
                 &#8470;.{$item.bi_id}<label>
-                <span><b>[{$item.oi_status|getOrderItemStatus}]</b></span>　
+                <span><b>{$item.oi_status|getOrderItemStatus}</b></span>　
                 (详情)</label><br/>{$item.bi_sum}箱　净重{$item.bi_nwei}吨
                 <label>{$item.bi_dpay|formatMoney}元　结息{$item.bi_inte|formatMoney}元(5天)</label>
             </div>
@@ -49,13 +49,16 @@
         手机号：{$info.order.o_deli_mobi}
     </div>
     <div class="order_info"></div>
-    <div class="order_item">
-        已付尾款：<b>{$info.order_item|getOrderT=1}</b>元<label>
-        已付利息：<b>{$info.order_item|getSumKnot}</b>元</label></div>
-    <div class="order_item">
-        待付尾款：<b>{$info.order_item|getOrderT}</b>元<label>
-        尾款计息：<b>{$info.order|getOrderInteT=$info['order_item']}</b>元</label></div>
-    <div class="order_info"><<a href="">查看电子合同</a>></div>
+
+    <if condition="$info['order']['o_pay_type'] eq 1 AND $info['order']['o_status'] gt 0">
+        <div class="order_item">
+            已付尾款：<b>{$info.order_item|getOrderT=1}</b>元<label>
+            已付利息：<b>{$info.order_item|getSumKnot}</b>元</label></div>
+        <div class="order_item">
+            待付尾款：<b>{$info.order_item|getOrderT}</b>元<label>
+            尾款计息：<b>{$info.order|getOrderInteT=$info['order_item']}</b>元</label></div>
+        <div class="order_info"><<a href="">查看电子合同</a>></div>
+    </if>
     <label>成交时间：{$info.order.o_dtime|getDateTime}</label>
 </div>
 <include file="public/foot" />

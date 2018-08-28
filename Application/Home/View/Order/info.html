@@ -64,7 +64,7 @@
                 </tr>
             </table>
             <!-- 20%首付时显示 -->
-            <if condition="$info['order']['o_pay_type'] eq 1">
+            <if condition="$info['order']['o_pay_type'] eq 1 AND $info['order']['o_status'] gt 0">
             <table>
                 <tr>
                     <th width="30"></th>

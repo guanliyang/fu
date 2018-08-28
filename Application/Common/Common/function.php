@@ -503,19 +503,16 @@ function getAllInte($bill, $on_sell) {
 }
 
 /**
- * 待付货款
+ * 待付货款 文本显示
  * @param $pay_type 支付方式
  * @param $oi_status  货组状态
  * @param $o_pay_t 尾款
  * @param $o_pay_f 首付款
  * @param $oi_dpay 本组货款
  */
-function getOrderItemPendingMoney($order, $order_item) {
+function getOrderItemPendingMoneyText($order, $order_item) {
     $pay_type = $order['o_pay_type'];
     $oi_status = $order_item['oi_status'];
-    $o_pay_t = $order['o_pay_t'];
-    $o_pay_f = $order['o_pay_f'];
-    $oi_dpay = $order_item['oi_dpay'];
 
     $str = '--';
     // 全付
@@ -530,10 +527,38 @@ function getOrderItemPendingMoney($order, $order_item) {
         }
         else {
             // 计算公式算出待付货款
-            $str = number_format(getPendingMoney($o_pay_f, $o_pay_t, $oi_dpay)).'元';
+            $str = '待付货款';
             if (empty($str)) {
                 $str = '已付货款';
             }
+        }
+    }
+
+    return $str;
+}
+
+
+/**
+ * 待付货款
+ * @param $pay_type 支付方式
+ * @param $oi_status  货组状态
+ * @param $o_pay_t 尾款
+ * @param $o_pay_f 首付款
+ * @param $oi_dpay 本组货款
+ */
+function getOrderItemPendingMoney($order, $order_item) {
+    $pay_type = $order['o_pay_type'];
+    $oi_status = $order_item['oi_status'];
+    $o_pay_t = $order['o_pay_t'];
+    $o_pay_f = $order['o_pay_f'];
+    $oi_dpay = $order_item['oi_dpay'];
+
+    $str = formatMoney($oi_dpay).'元';
+
+    // 20首付
+    if ($pay_type == \Home\Model\OrderModel::PAY_PART) {
+        if ($oi_status < 3) {
+            $str = formatMoney(getPendingMoney($o_pay_f, $o_pay_t, $oi_dpay)).'元';
         }
     }
 

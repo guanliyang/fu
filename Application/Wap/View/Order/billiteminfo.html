@@ -11,18 +11,20 @@
         <label>
             货组编号：{$info.order_item.bi_id} -
             <span>
-            <b>[{$info.order_item.oi_status|getOrderItemStatus}]</b>
+            <b>{$info.order_item.oi_status|getOrderItemStatus}</b>
             </span>
         </label>
     </div>
 
-    <div class="order_item">待付货款：
+    <div class="order_item">{$info.order|getOrderItemPendingMoneyText=$info['order_item']}：
         <label>
             <span>
                 <b>{$info.order|getOrderItemPendingMoney=$info['order_item']}</b>
             </span>元
         </label>
     </div>
+
+    <if condition="$info['order']['o_pay_type'] eq 1">
     <div class="order_item">可结利息：
         <label>
             <span>
@@ -34,6 +36,8 @@
             ({$info.order_item.oi_dpay}x{$info.order.o_rate}x{$info.order_item.oi_dpay})
         </label>
     </div>
+    </if>
+
     <div class="order_item">
         滞箱费：
         <label>
