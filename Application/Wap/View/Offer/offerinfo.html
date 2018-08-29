@@ -10,10 +10,10 @@
         {$info|getOfferShow=2}付预约金：<span><b>{$info.f_pay|formatMoney}</b></span>元<label>
         {$info|getOfferShow=3}付服务费：<span><b>{$info.f_service_price|formatMoney}</b></span>元</label></div>
     <div class="order_info" style="text-align: left;">
-        支付预约金与服务费后，预约单立即生效。<br/>生效后，因您的原因取消预约单，服务费将不退还。因平台原因取消，则退还全部费用。
+        {$info|getOfferShow=4, Wap}
     </div>
     <hr>
-    <input class="bt bt_s" onclick="disp_confirm()" value="取消预购" type="button"/>
+    {$info|getOfferShow=5}
     <input type="hidden" id="f_id" value="{$info.f_id}" />
 </div>
 

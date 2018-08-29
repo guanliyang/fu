@@ -48,6 +48,8 @@
         货款合计：<b>{$info.bill_item.bi_dpay|formatMoney}</b>元
         ({$info.bill_item.bi_dpri}元/吨)
     </div>
+
+    <if condition="$info['bill_item']['bi_status'] gt 1">
     <div class="order_item">物流信息：{$info.order_item.oi_otime|getDateTime} [装车]</div>
     <div class="order_item">
         入港时间：{$info.order_item.bi_itime|getDateTime}<br/>
@@ -59,6 +61,8 @@
     <div class="order_item">
       成交时间：{$info.order_item.bi_dtime|getDateTime} (在售{$info.bill_item|getSellDays}天)
     </div>
+    </if>
+
     <div class="order_info">
         <label>箱号：{$info.bill_item.bi_cnum1}</label>
         <label>封号：{$info.bill_item.bi_snum1}</label><br/>

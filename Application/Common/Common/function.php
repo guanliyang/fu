@@ -153,14 +153,14 @@ function getOfferStatus($status) {
  * @param $offer  预约信息
  * @param int $number
  */
-function getOfferShow($offer, $number = 0) {
+function getOfferShow($offer, $number = 0, $url = 'Home') {
     $str = '';
     if ($offer['f_status'] == 0) {
         if ($number == 2) {
-            $str = '待付';
+            $str = '待';
         }
         if ($number == 3) {
-            $str = '待付';
+            $str = '待';
         }
 
         if ($number == 4) {
@@ -178,10 +178,10 @@ function getOfferShow($offer, $number = 0) {
 
     if ($offer['f_status'] > 0) {
         if ($number == 2) {
-            $str = '已付';
+            $str = '已';
         }
         if ($number == 3) {
-            $str = '已付';
+            $str = '已';
         }
 
         if ($number == 4) {
@@ -199,13 +199,13 @@ function getOfferShow($offer, $number = 0) {
 
     if ($offer['f_status'] == 10) {
         if ($number == 2) {
-            $str = '已付预约金<label>'.$offer['f_pay'].'</label>元';
+            $str = '已';
         }
         if ($number == 3) {
-            $str = '已付服务费<label>'.$offer['f_service_price'].'</label>元';
+            $str = '已';
         }
         if ($number == 4) {
-            $str = '预约已成功。生成购买订单，<a href="/Home/Order/info/o_id/'.$offer['o_id'].'">点击链接查看订单详情</a>';
+            $str = '预约已成功。生成购买订单，<a href="/'.$url.'/Order/info/o_id/'.$offer['o_id'].'">点击链接查看订单详情</a>';
         }
         if ($number == 5) {
             $str = '';
