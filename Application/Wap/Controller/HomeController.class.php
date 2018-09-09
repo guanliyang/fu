@@ -10,7 +10,7 @@ class HomeController extends Controller {
         // 用户信息
         $uid = session('uid');
         if (!empty($uid)) {
-            $this->user = M('User')->find($uid);
+            $this->user = M('sys_user')->find($uid);
         }
         $this->assign('user', $this->user);
 

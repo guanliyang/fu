@@ -233,7 +233,7 @@ class UserModel extends HomeModel {
 
     public function getMessageForWeb($uid) {
         $all_order_count = M('b_order')->where(array('o_status' => OrderModel::STATUS_FINISH))->count();
-        $user_count = M('user')->count();
+        $user_count = M('sys_user')->count();
 
         // 买粮订单
         $order = new \Home\Model\OrderModel();
