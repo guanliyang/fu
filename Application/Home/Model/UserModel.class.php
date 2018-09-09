@@ -1,7 +1,7 @@
 <?php
 namespace Home\Model;
 class UserModel extends HomeModel {
-    protected $trueTableName = 'user';
+    protected $trueTableName = 'sys_user';
 
     // 二维码有效期10分钟
     protected $codeTime = 600;
