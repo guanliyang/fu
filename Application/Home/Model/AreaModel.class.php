@@ -9,7 +9,7 @@ class AreaModel extends Model {
         $city = I('request.city', 0, 'intval');
         $area = I('request.area', 0, 'intval');
         if (empty($province) && empty($city) && empty($area)) {
-            $user = M('user')->where(array('u_id' => $uid))->find();
+            $user = M('sys_user')->where(array('u_id' => $uid))->find();
             return $user['province'].$user['city'].$user['area'];
         }
 
