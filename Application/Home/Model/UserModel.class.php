@@ -15,6 +15,11 @@ class UserModel extends HomeModel {
     public function register() {
         $this->real_name = $this->_checkName();
         $this->mobile = $this->_checkMobile();
+        // 开户银行信息
+        $this->bank_name = I('request.bank_name');
+        $this->bank_account = I('request.bank_account');
+        $this->bank_payee = I('request.bank_payee');
+
         //$this->_checkCode($this->mobile);
         $this->_checkMobileExisted($this->mobile);
         $this->password = $this->_checkPassword();
@@ -70,6 +75,11 @@ class UserModel extends HomeModel {
             $this->img = $user_img;
             cookie('user_img', null);
         }
+
+        // 开户银行信息
+        $this->bank_name = I('request.bank_name');
+        $this->bank_account = I('request.bank_account');
+        $this->bank_payee = I('request.bank_payee');
 
         $status = $this->where(array('id'=>$user['id']))->save();
         return $status;

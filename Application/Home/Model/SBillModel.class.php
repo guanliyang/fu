@@ -101,9 +101,10 @@ class SBillModel extends HomeModel {
         $bill = $this->getBId($getMyBill);
         // 根据b_status 获取item信息
         $where = array('b_id' => $bill['b_id']);
-        if ($bill['b_status'] == 3) {
+
+        // 待上架货组
+        if (in_array($bill['b_status'], array(3, 4, 6, 7))) {
             $where += array('bi_status' => array('in','1, 2, 3'));
-            // 待上架货组
             $bill['wait'] = M('s_bill_item')->where($where)->select();
         }
         // 在售
@@ -166,6 +167,8 @@ class SBillModel extends HomeModel {
         $this->data['u_id'] = $uid;
         $this->data['b_photo'] = $this->getImagePath();
         $this->data['b_add'] = $this->getAddress($uid);
+        // 港口
+        $this->data['b_port'] = I('request.b_port');
         return $this->data($this->data)->add();
     }
 

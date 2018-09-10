@@ -77,10 +77,18 @@ class OrderModel extends HomeModel {
             }
         }
 
+        // 海运公司名称
+        $mc_name = '';
+        $mc_id = M('oms_mari_order')->where(array('o_id' => $order['o_id']))->getField('mc_id');
+        if ($mc_id) {
+            $mc_name = M('sys_mari_co')->where(array('mc_id' => $mc_id))->getField('mc_name');
+        }
+
         return array(
             'order' => $order,
             'bill' => $bill_list,
-            'order_item' => $order_item_list
+            'order_item' => $order_item_list,
+            'mc_name' => $mc_name
         );
     }
 
@@ -171,9 +179,14 @@ class OrderModel extends HomeModel {
             $this->getUser();
 
 
-            $all_price = array_sum((array_column($bill['bill_item'], 'bi_dpay')));
+            $all_price = array_sum(array_column($bill['bill_item'], 'bi_dpay'));
             // 价格
             $this->getAllPrice($pay_type, $all_price, $bill);
+
+            // 订单净重合计
+            $this->data['o_nwei'] = array_sum(array_column($bill['bill_item'], 'bi_nwei'));
+            //单货数合计
+            $this->data['o_bsum'] = array_sum(array_column($bill['bill_item'], 'bi_sum'));
 
             //order 表里插入信息
             $o_id = self::data($this->data)->add();
@@ -245,7 +258,7 @@ class OrderModel extends HomeModel {
 
     public function getDeliType() {
         $deli_type = I('request.recmode', 0, 'intval');
-        if (!in_array($deli_type, array(1,2))) {
+        if (!in_array($deli_type, array(0,1))) {
             notice('收货方式有误');
         }
         $this->data['o_deli_type'] = $deli_type;

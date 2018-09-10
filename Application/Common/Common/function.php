@@ -224,11 +224,15 @@ function getBillStatus($status) {
     $list =
         array(
             -9 => '删除',
+            -1 => '退回',
             0 => '待审核',
             1 => '待付保证金和运费', // 待付款
             2 => '待装货',
-            3 => '待上架',
+            3 => '待填单',
+            4 => '待核费',
             5 => '在售',
+            6 => '待回款',
+            7 => '待上架',
             9 => '已成交',
             10 => '已结单'
         );
@@ -292,9 +296,16 @@ function getCartStatus($status) {
 function getOrderStatus($status) {
     $list =
         array(
-            -9 => '删除',
-            0 => '待付款',
-            1 => '待收货',
+            -9 => '已删除',
+            0 => '待核费(陆运)',
+            1 => '待核费(海运)',
+            2 => '待付款',
+            3 => '待离岸',
+            4 => '海运中',
+            5 => '已到岸',
+            6 => '待发货',
+            7 => '待收货',
+            8 => '待提货',
             9 => '已收货',
             10 => '已结单',
         );
@@ -431,11 +442,11 @@ if (!function_exists('array_column')) {
 //根据id和类型获取被截断的消息内容
 function getMessageById($resource_id, $type = 0) {
     $where = array(
-        'type' => $type,
-        'resource_id' => $resource_id
+        'sm_type' => $type,
+        'sm_rid' => $resource_id
     );
 
-    $msg = M('sys_msg')->where($where)->order('ctime desc')->find();
+    $msg = M('sys_msg')->where($where)->order('sm_ctime desc')->find();
 
     return subtext($msg['sm_content'], 6);
 }

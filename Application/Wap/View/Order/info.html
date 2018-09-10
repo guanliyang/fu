@@ -49,6 +49,12 @@
         手机号：{$info.order.o_deli_mobi}
     </div>
     <div class="order_info"></div>
+    <div class="order_item">
+        海运公司：{$info.mc_name}<br/>
+        海运单号：{$info.order.o_marnum}<br/>
+        海运运费：{$info.order.o_frei_m|formatMoney}元<br/>
+    </div>
+    <div class="order_info"></div>
 
     <if condition="$info['order']['o_pay_type'] eq 1 AND $info['order']['o_status'] gt 0">
         <div class="order_item">

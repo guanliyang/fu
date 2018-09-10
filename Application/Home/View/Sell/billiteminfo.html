@@ -13,12 +13,12 @@
             <table>
                 <tr>
                     <th width="30" rowspan="2"></th>
-                    <th rowspan="2" width="110"><img src="{$info.bill_item.bi_cnum1_pho}" width="80" height="80"/><br/></th>
-                    <th rowspan="2" width="110"><img src="{$info.bill_item.bi_snum1_pho}" width="80" height="80"/><br/></th>
+                    <th rowspan="2" width="110"><img src="{$Think.config.ADMIN_URL}{$Think.config.ADMIN_CN_UPLOAD}{$info.bill_item.bi_cnum2_pho}{$info.bill_item.bi_cnum1_pho}" width="80" height="80"/><br/></th>
+                    <th rowspan="2" width="110"><img src="{$Think.config.ADMIN_URL}{$Think.config.ADMIN_SN_UPLOAD}{$info.bill_item.bi_snum1_pho}" width="80" height="80"/><br/></th>
                     <th>箱号：{$info.bill_item.bi_cnum1}</th>
                     <th width="30" rowspan="2"></th>
-                    <th rowspan="2" width="110"><img src="{$info.bill_item.bi_cnum2_pho}" width="80" height="80"/><br/></th>
-                    <th rowspan="2" width="110"><img src="{$info.bill_item.bi_snum2_pho}" width="80" height="80"/><br/></th>
+                    <th rowspan="2" width="110"><img src="{$Think.config.ADMIN_URL}{$Think.config.ADMIN_CN_UPLOAD}{$info.bill_item.bi_cnum2_pho}" width="80" height="80"/><br/></th>
+                    <th rowspan="2" width="110"><img src="{$Think.config.ADMIN_URL}{$Think.config.ADMIN_SN_UPLOAD}{$info.bill_item.bi_snum2_pho}" width="80" height="80"/><br/></th>
                     <th>箱号：{$info.bill_item.bi_cnum2}</th>
                 </tr>
                 <tr>
@@ -34,7 +34,9 @@
                         净重: {$info.bill_item.bi_nwei}吨　　　
                         货款：{$info.bill_item.bi_dpay|formatMoney}元
                         ({$info.bill_item.bi_dpri|formatMoney}元/吨)　　　
-                        <a href=""><下载装货视频></a></th>
+                        <a href="{$Think.config.ADMIN_URL}{$Think.config.ADMIN_VIDEO_UPLOAD}{$info.bill_item.bi_video1}">A箱视频</a>　　
+                        <a href="{$Think.config.ADMIN_URL}{$Think.config.ADMIN_VIDEO_UPLOAD}{$info.bill_item.bi_video2}">B箱视频</a>
+                    </th>
                 </tr>
             </table>
             <if condition="$info['bill_item']['bi_status'] gt 1">

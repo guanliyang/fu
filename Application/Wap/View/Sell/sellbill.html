@@ -107,7 +107,16 @@
         <label>(约需<b id="bsum">0</b>个集装箱)</label><br/>&nbsp;
         <label>入港运费：<b id="freight">0</b> 元</label><br/>&nbsp;<label>(<b id="tfrei">1,200</b> 元/车，需要 <b id="tsum">0</b> 车)</label></div>
     <div class="bill_item">需缴保证金：<label><b id="depo">0</b> 元</label><br/>(货款<b id="total">0</b>元的20%，成交后即退保证金)</div>
-    <div class="bill_item">装货地址：
+    <div class="bill_item">
+        装货地址：
+        <select name="b_port">
+            <volist name="port" id="vo">
+                <option value="{$vo.bp_id}">{$vo.bp_name}</option>
+            </volist>
+        </select>
+    </div>
+    <div class="bill_item">
+        装货地址：
         <select id="cmbProvince" name="province">
             <option value="">{$user.province}</option>
             <volist name="province" id="vo">
@@ -124,8 +133,8 @@
         <input name="address" value="{$user.address}" type="text" /><br/>　
         联系人：<input name="b_cont" value="{$user.real_name}" type="text"/><br/>　
         手机号：<input name="b_mobi" value="{$user.mobile}" type="text"/></div>
-    <div class="bill_item">提交后需付款：<label><b id="pay">0</b> 元</label></div>
-</div>
+      <div class="bill_item">提交后需付款：<label><b id="pay">0</b> 元</label></div>
+    </div>
 <div class="cont">
     <<a href="viewcont.php">预览出售合同</a>><br/><input name="contract" type="checkbox" class="bt_s"/> 我已阅读并了解合同详细内容，同意签属并确认其法律效力。
     <hr>
