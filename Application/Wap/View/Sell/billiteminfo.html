@@ -66,13 +66,15 @@
     <div class="order_info">
         <label>箱号：{$info.bill_item.bi_cnum1}</label>
         <label>封号：{$info.bill_item.bi_snum1}</label><br/>
-        <img src="{$info.bill_item.bi_cnum1_pho}" class="simg" />
-        <img src="{$info.bill_item.bi_snum1_pho}" class="simg" /><br/>
-        <label>箱号：{$info.bill_item.bi_cnum2}</label><label>
-        封号：{$info.bill_item.bi_snum2}</label><br/>
-        <img src="{$info.bill_item.bi_cnum2_pho}" class="simg" />
-        <img src="{$info.bill_item.bi_cnum2_pho}" class="simg" /><br/>
-        <a href=""><查看装货视频></a></div>
+        <img src="{$Think.config.ADMIN_URL}{$Think.config.ADMIN_CN_UPLOAD}{$info.bill_item.bi_cnum1_pho}" class="simg" />
+        <img src="{$Think.config.ADMIN_URL}{$Think.config.ADMIN_SN_UPLOAD}{$info.bill_item.bi_snum1_pho}" class="simg" /><br/>
+        <label>箱号：{$info.bill_item.bi_cnum2}</label>
+        <label>封号：{$info.bill_item.bi_snum2}</label><br/>
+        <img src="{$Think.config.ADMIN_URL}{$Think.config.ADMIN_CN_UPLOAD}{$info.bill_item.bi_cnum2_pho}" class="simg" />
+        <img src="{$Think.config.ADMIN_URL}{$Think.config.ADMIN_SN_UPLOAD}{$info.bill_item.bi_cnum2_pho}" class="simg" /><br/>
+        <label><a href="{$Think.config.ADMIN_URL}{$Think.config.ADMIN_VIDEO_UPLOAD}{$info.bill_item.bi_video1}">A箱视频</a></label>
+        <label><a href="{$Think.config.ADMIN_URL}{$Think.config.ADMIN_VIDEO_UPLOAD}{$info.bill_item.bi_video2}">B箱视频</a></label>
+    </div>
 </div>
 
 <include file="public/foot" />

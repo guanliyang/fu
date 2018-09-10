@@ -137,6 +137,17 @@
             <table>
                 <tr>
                     <td width="40"></td>
+                    <td>卖粮港口：</td>
+                    <td colspan="5">
+                        <select name="b_port">
+                            <volist name="port" id="vo">
+                                <option value="{$vo.bp_id}">{$vo.bp_name}</option>
+                            </volist>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="40"></td>
                     <td>装货地址：</td>
                     <td colspan="5">
                         <select id="cmbProvince" name="province">

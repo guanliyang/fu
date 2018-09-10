@@ -63,6 +63,13 @@
                     </td>
                 </tr>
             </table>
+            <table>
+                <tr>
+                    <td>海运公司：{$info.mc_name}</td>
+                    <td>海运单号：{$info.order.o_marnum}</td>
+                    <td>海运运费：{$info.order.o_frei_m|formatMoney}元</td>
+                </tr>
+            </table>
             <!-- 20%首付时显示 -->
             <if condition="$info['order']['o_pay_type'] eq 1 AND $info['order']['o_status'] gt 0">
             <table>
