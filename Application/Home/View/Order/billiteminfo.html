@@ -9,77 +9,77 @@
             <label>:: 订单号：{$info.order.o_code} - {$info.order.o_status|getOrderStatus}) ::</label>　　<<a href="javascript:;" onClick="javascript:history.back(-1);">返回</a>>
         </div>
         <div class="list">
-            货组编号：{$info.order_item.bi_id}  <label>{$info.order_item.oi_status|getOrderItemStatus}</label>
+            货组编号：{$info.bill_item.bi_id}  <label>{$info.bill_item.oi_status|getOrderItemStatus}</label>
             <table>
                 <tr>
                     <th width="30" rowspan="2"></th>
-                    <th rowspan="2" width="110"><img src="{$info.order_item.bi_cnum1_pho}" width="80" height="80"/><br/></th>
-                    <th rowspan="2" width="110"><img src="{$info.order_item.bi_snum1_pho}" width="80" height="80"/><br/></th>
-                    <th>箱号：{$info.order_item.bi_cnum1}</th>
+                    <th rowspan="2" width="110"><img src="{$info.bill_item.bi_cnum1_pho}" width="80" height="80"/><br/></th>
+                    <th rowspan="2" width="110"><img src="{$info.bill_item.bi_snum1_pho}" width="80" height="80"/><br/></th>
+                    <th>箱号：{$info.bill_item.bi_cnum1}</th>
                     <th width="30" rowspan="2"></th>
-                    <th rowspan="2" width="110"><img src="{$info.order_item.bi_cnum2_pho}" width="80" height="80"/><br/></th>
-                    <th rowspan="2" width="110"><img src="{$info.order_item.bi_snum2_pho}" width="80" height="80"/><br/></th>
-                    <th>箱号：{$info.order_item.bi_cnum2}</th>
+                    <th rowspan="2" width="110"><img src="{$info.bill_item.bi_cnum2_pho}" width="80" height="80"/><br/></th>
+                    <th rowspan="2" width="110"><img src="{$info.bill_item.bi_snum2_pho}" width="80" height="80"/><br/></th>
+                    <th>箱号：{$info.bill_item.bi_cnum2}</th>
                 </tr>
                 <tr>
-                    <th>封号：{$info.order_item.bi_snum1}</th>
-                    <th>封号：{$info.order_item.bi_snum2}</th>
+                    <th>封号：{$info.bill_item.bi_snum1}</th>
+                    <th>封号：{$info.bill_item.bi_snum2}</th>
                 </tr>
                 <tr>
                     <th></th>
                     <th colspan="7">
-                        封箱: {$info.order_item.bi_sum}箱　　　
-                        毛重: {$info.order_item.bi_gwei}吨　　　
-                        皮重: {$info.order_item.bi_tare}吨　　　
-                        净重: {$info.order_item.bi_nwei}吨　　　
-                        货款：{$info.order_item.bi_dpay|formatMoney}元
-                        ({$info.order_item.bi_dpri|formatMoney}元/吨)　　　<a href=""><下载装货视频></a></th>
+                        封箱: {$info.bill_item.bi_sum}箱　　　
+                        毛重: {$info.bill_item.bi_gwei}吨　　　
+                        皮重: {$info.bill_item.bi_tare}吨　　　
+                        净重: {$info.bill_item.bi_nwei}吨　　　
+                        货款：{$info.bill_item.bi_dpay|formatMoney}元
+                        ({$info.bill_item.bi_dpri|formatMoney}元/吨)　　　<a href=""><下载装货视频></a></th>
                 </tr>
             </table>
             <table>
                 <tr>
                     <td width="30"></td>
                     <td width="90">成交时间：</td>
-                    <td colspan="3">{$info.order_item.oi_dtime|getDateTime}</td>
+                    <td colspan="3">{$info.bill_item.oi_dtime|getDateTime}</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>离岸时间：</td>
-                    <td width="220">{$info.order_item.oi_otime|getDateTime}</td>
+                    <td width="220">{$info.bill_item.oi_otime|getDateTime}</td>
                     <td width="90">离港名称：</td>
-                    <td>{$info.order_item.oi_oname}</td>
+                    <td>{$info.bill_item.oi_oname}</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>到岸时间：</td>
-                    <td>{$info.order_item.oi_atime|getDateTime}</td>
+                    <td>{$info.bill_item.oi_atime|getDateTime}</td>
                     <td>到港名称：</td>
-                    <td>{$info.order_item.oi_aname}</td>
+                    <td>{$info.bill_item.oi_aname}</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>物流信息：</td>
-                    <td>{$info.order_item.oi_status|getWuLiuMessage}</td>
+                    <td>{$info.bill_item.oi_status|getWuLiuMessage}</td>
                     <td colspan="2"></td>
                 </tr>
             </table>
             <table>
                 <tr>
                     <th width="30"></th>
-                    <th width="90">{$info.order|getOrderItemPendingMoneyText=$info['order_item']}：</th>
+                    <th width="90">{$info.order|getOrderItemPendingMoneyText=$info['bill_item']}：</th>
                     <th width="220">
-                        <label><b>{$info.order|getOrderItemPendingMoney=$info['order_item']}</b></label>
+                        <label><b>{$info.order|getOrderItemPendingMoney=$info['bill_item']}</b></label>
                     </th>
 
                     <if condition="$info['order']['o_pay_type'] eq 1">
                     <th width="90">可结利息：</th>
-                    <th><label><b>{$info.order|getKnot=$info['order_item']}</b></label> 元 ({$info.order_item.oi_dpay}x{$info.order.o_rate}x{$info.order|getPastDay}) 成交至今{$info.order|getPastDay}天。</th>
+                    <th><label><b>{$info.order|getKnot=$info['bill_item']}</b></label> 元 ({$info.bill_item.oi_dpay}x{$info.order.o_rate}x{$info.order|getPastDay}) 成交至今{$info.order|getPastDay}天。</th>
                     </if>
                 </tr>
                 <tr>
                     <th></th>
                     <th>滞箱费：</th>
-                    <th colspan="3"><label><b>{$info.order_item.oi_depay}</b></label>元 (到岸14天内免费，超出时间按50元/天.箱收取)</th>
+                    <th colspan="3"><label><b>{$info.bill_item.oi_depay}</b></label>元 (到岸14天内免费，超出时间按50元/天.箱收取)</th>
                 </tr>
             </table>
         </div>
