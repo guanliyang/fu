@@ -18,7 +18,7 @@
                 <volist name="data.list" id="vo">
                 <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
                     <td class="cool">{$vo.type|getMsgText}：{$vo.resource_id}</a></td>
-                    <td class="cool">{$vo.ctime|date='Y年m月d日 H:i:s',###}</td>
+                    <td class="cool">{$vo.sm_ctime|date='Y年m月d日 H:i:s',###}</td>
                     <td class="tdlock">{$vo.sm_content}</td>
                     <td><a href="{$vo|getMsgUrl}">{$vo.type|getMsgUrlText}</a></td>
                 </tr>
