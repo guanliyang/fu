@@ -13,7 +13,7 @@ function getMsgText($type) {
 
 // 获取 系统信息
 function getMsgUrl($msg) {
-    $msg_type = $msg['type'];
+    $msg_type = $msg['sm_type'];
     $list =
         array(
             0 => '/Home/Order/info/o_id/',
@@ -25,7 +25,7 @@ function getMsgUrl($msg) {
 }
 
 function getWapMsgUrl($msg) {
-    $msg_type = $msg['type'];
+    $msg_type = $msg['sm_type'];
     $list =
         array(
             0 => '/Wap/Order/info/o_id/',
