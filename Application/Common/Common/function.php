@@ -5,8 +5,8 @@ function getMsgText($type) {
     $list =
         array(
             0 => '订单号',
-            1 => '货单号',
-            2 => '预约单',
+            2 => '货单号',
+            1 => '预约单',
         );
     return $list[$type];
 }
@@ -17,10 +17,10 @@ function getMsgUrl($msg) {
     $list =
         array(
             0 => '/Home/Order/info/o_id/',
-            1 => '/Home/Sell/sellBillInfo/b_id/',
-            2 => '/Home/Offer/offerInfo/f_id/',
+            2 => '/Home/Sell/sellBillInfo/b_id/',
+            1 => '/Home/Offer/offerInfo/f_id/',
         );
-    $url = $list[$msg_type].$msg['resource_id'].'/msg_id/'.$msg['sm_id'];
+    $url = $list[$msg_type].$msg['sm_rid'].'/msg_id/'.$msg['sm_id'];
     return $url;
 }
 
@@ -29,10 +29,10 @@ function getWapMsgUrl($msg) {
     $list =
         array(
             0 => '/Wap/Order/info/o_id/',
-            1 => '/Wap/Sell/sellBillInfo/b_id/',
-            2 => '/Wap/Offer/offerInfo/f_id/',
+            2 => '/Wap/Sell/sellBillInfo/b_id/',
+            1 => '/Wap/Offer/offerInfo/f_id/',
         );
-    $url = $list[$msg_type].$msg['resource_id'].'/msg_id/'.$msg['sm_id'];
+    $url = $list[$msg_type].$msg['sm_rid'].'/msg_id/'.$msg['sm_id'];
     return $url;
 }
 
