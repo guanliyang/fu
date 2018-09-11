@@ -44,7 +44,7 @@ class SysMsgController extends HomeController {
             foreach ($list as $value) {
                 $str .= '<div class="msgitem" onclick="location.href=\''.getWapMsgUrl($value).'\'">
         <div class="info1">
-            '.getMsgText($value['type']).'：'.$value['resource_id'].'<label>'.getDateTime($value['ctime']).'</label>
+            '.getMsgText($value['type']).'：'.$value['resource_id'].'<label>'.getDateTime($value['sm_ctime']).'</label>
         </div>
         <div class="info2">'.$value['sm_content'].'</div>
     </div>';

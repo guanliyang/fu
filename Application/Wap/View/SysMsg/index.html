@@ -30,7 +30,7 @@
     <volist name="not_read.list" id="vo">
     <div class="msgitem" onclick="location.href='{$vo|getWapMsgUrl}'">
         <div class="info1">
-            {$vo.type|getMsgText}：{$vo.resource_id}<label>{$vo.ctime|getDateTime}</label>
+            {$vo.type|getMsgText}：{$vo.resource_id}<label>{$vo.sm_ctime|getDateTime}</label>
         </div>
         <div class="info2">{$vo.sm_content}</div>
     </div>
