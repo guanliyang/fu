@@ -41,8 +41,8 @@ function getMsgUrlText($type) {
     $list =
         array(
             0 => '查看订单详情',
-            1 => '查看货单详情',
-            2 => '查看预约单详情',
+            2 => '查看货单详情',
+            1 => '查看预约单详情',
         );
     return $list[$type];
 }
