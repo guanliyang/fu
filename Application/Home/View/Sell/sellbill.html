@@ -75,7 +75,7 @@
                 <tr>
                     <td width="30" rowspan="5"></td>
                     <td width="230" rowspan="5">
-                        <img id="show_img" src="" style="max-height: 200px;max-width: 200px;" /><br/>　粮食近照　　　　
+                        <img id="show_img" src="{$bill.b_photo}" style="max-height: 200px;max-width: 200px;" /><br/>　粮食近照　　　　
                         <a href="#" onclick="$('#t_file').click()">(点击上传)</a>
                         <input id="t_file" type="file" accept="image/*"/>
                         　　　　　　　
@@ -83,39 +83,39 @@
                     <td>品名：
                         <select name="gc_id">
                             <volist name="class" id="vo">
-                                <option value="{$vo.gc_id}">{$vo.gc_name}</option>
+                                <option value="{$vo.gc_id}" <if condition="$vo['gc_id'] eq $bill['gc_id']">selected</if>>{$vo.gc_name}</option>
                             </volist>
                         </select>
                         年份：
                         <select name="gy_id">
                             <volist name="year" id="vo">
-                                <option value="{$vo.gy_id}">{$vo.gy_id}</option>
+                                <option value="{$vo.gy_id}" <if condition="$vo['gy_id'] eq $bill['gy_id']">selected</if>>{$vo.gy_id}</option>
                             </volist>
                         </select>
                         　产地：
                         <select name="gp_id">
                             <volist name="place" id="vo">
-                                <option value="{$vo.gp_id}">{$vo.gp_name}</option>
+                                <option value="{$vo.gp_id}" <if condition="$vo['gp_id'] eq $bill['gp_id']">selected</if>>{$vo.gp_name}</option>
                             </volist>
                         </select>
                         　等级：
                         <select name="gl_id">
                             <volist name="level" id="vo">
-                                <option value="{$vo.gl_id}">{$vo.gl_name}</option>
+                                <option value="{$vo.gl_id}" <if condition="$vo['gl_id'] eq $bill['gl_id']">selected</if>>{$vo.gl_name}</option>
                             </volist>
                         </select>
                         　容重：
                         <select name="gr_id">
                             <volist name="rz" id="vo">
-                                <option value="{$vo.gr_id}">{$vo.gr_name}</option>
+                                <option value="{$vo.gr_id}" <if condition="$vo['gr_id'] eq $bill['gr_id']">selected</if>>{$vo.gr_name}</option>
                             </volist>
                         </select>g/l</td>
                 </tr>
                 <tr>
-                    <td>　霉变：<input name="b_mb" value="" type="text" class="inpss" /> %　
-                        水份：<input name="b_sf" value="" type="text" class="inpss" /> %　
-                        杂质：<input name="b_zz" value="" type="text" class="inpss" /> %　
-                        呕吐毒素：<input name="b_ot" value="" type="text" class="inpsm" /> μg/kg</td>
+                    <td>　霉变：<input name="b_mb" value="{$bill.b_mb}" type="text" class="inpss" /> %　
+                        水份：<input name="b_sf" value="{$bill.b_sf}" type="text" class="inpss" /> %　
+                        杂质：<input name="b_zz" value="{$bill.b_zz}" type="text" class="inpss" /> %　
+                        呕吐毒素：<input name="b_ot" value="{$bill.b_ot}" type="text" class="inpsm" /> μg/kg</td>
                 </tr>
                 <tr>
                     <td>
@@ -127,7 +127,7 @@
                         今日市场参考价：<br/>　　　　　（提交后也可以随时调价）　　　　　　　<label class="fontbig" id="rpri">1,700</label> 元/吨</td>
                 </tr>
                 <tr>
-                    <td>　出售重量：<input name="b_weig" id="sweight" class="inpsm" value="" type="text" onchange="cwei();"/> 吨 (约需 <label id="bsum">0</label> 个集装箱)　　　　
+                    <td>　出售重量：<input name="b_weig" id="sweight" class="inpsm" value="{$bill.b_weig}" type="text" onchange="cwei();"/> 吨 (约需 <label id="bsum">0</label> 个集装箱)　　　　
                         入港运费：<label id="freight">0</label> 元 (<label id="tfrei">1,200</label>元/车，需要<label id="tsum">0</label>车)</td>
                 </tr>
                 <tr>
@@ -141,7 +141,7 @@
                     <td colspan="5">
                         <select name="b_port">
                             <volist name="port" id="vo">
-                                <option value="{$vo.bp_id}">{$vo.bp_name}</option>
+                                <option value="{$vo.bp_id}" <if condition="$vo['bp_id'] eq $bill['b_port']">selected</if>>{$vo.bp_name}</option>
                             </volist>
                         </select>
                     </td>
@@ -169,10 +169,10 @@
                 <tr>
                     <td ></td>
                     <td width="90">　联系人：</td>
-                    <td width="200"><input name="b_cont" value="{$user.real_name}" type="text"/></td>
+                    <td width="200"><input name="b_cont" value="<if condition='$bill'>{$bill.b_cont}<else/>{$user.real_name}</if>" type="text"/></td>
                     <td width="30"></td>
                     <td width="90">　手机号：</td>
-                    <td><input name="b_mobi" value="{$user.mobile}" type="text"/></td>
+                    <td><input name="b_mobi" value="<if condition='$bill'>{$bill.b_mobi}<else/>{$user.mobile}</if>" type="text"/></td>
                 </tr>
             </table>
             <table>
@@ -186,6 +186,7 @@
         <<a href="/Home/Contract/index/">预览出售合同</a>>　　　　
           <input type="checkbox" name="contract" class="bt_s"/>我已阅读并了解合同详细内容，同意签属并确认其法律效力。
         <div class="list_page">
+            <input type="hidden" name="b_id" value="{$bill.b_id}"/>
             <input class="bt bt_s" id="t_submit" value="正式提交货单" type="button"/>
         </div>
     </div>

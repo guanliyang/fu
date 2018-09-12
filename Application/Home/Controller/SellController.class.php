@@ -33,6 +33,14 @@ class SellController extends HomeController {
         // 代入港口
         $port = M('sys_port')->where(array('bp_status' => 1))->select();
         $this->assign('port', $port);
+        // 修改 卖粮信息
+        $b_id = I('request.b_id');
+        $bill = array();
+        if ($b_id) {
+            $bill = M('s_bill')->where(array('b_id' => $b_id))->find();
+        }
+        $this->assign('bill', $bill);
+
         $this->display();
     }
 
@@ -84,5 +92,16 @@ class SellController extends HomeController {
         $info = $bill_item->getInfo();
         $this->assign('info', $info);
         $this->display();
+    }
+    // 删除
+    public function del() {
+        $bill_item = new \Home\Model\SBillModel();
+        $status = $bill_item->del();
+        if ($status) {
+            notice('修改成功', 0, array('url' => '/Home/Message/index?item=3'));
+        }
+        else {
+            notice('未修改');
+        }
     }
 }

@@ -440,10 +440,10 @@ if (!function_exists('array_column')) {
 }
 
 //根据id和类型获取被截断的消息内容
-function getMessageById($resource_id, $type = 0) {
+function getMessageById($sm_rid, $type = 0) {
     $where = array(
         'sm_type' => $type,
-        'sm_rid' => $resource_id
+        'sm_rid' => $sm_rid
     );
 
     $msg = M('sys_msg')->where($where)->order('sm_ctime desc')->find();

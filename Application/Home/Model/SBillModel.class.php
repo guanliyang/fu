@@ -67,7 +67,7 @@ class SBillModel extends HomeModel {
 
     // 用户卖货列表
     public function getUserList($uid) {
-        $where = array('u_id' => $uid);
+        $where = array('u_id' => $uid, 'b_status' => array('GT', -2));
         $count = self::where($where)->count();
         $page = $this->getPageShow($count, $str = '?item=3');
         $list = self::where($where)->order('b_id desc')->limit($page['str'])->select();
@@ -166,11 +166,25 @@ class SBillModel extends HomeModel {
         $this->_getAdd();
         $this->_getDefault();
         $this->data['u_id'] = $uid;
-        $this->data['b_photo'] = $this->getImagePath();
+
         $this->data['b_add'] = $this->getAddress($uid);
         // 港口
         $this->data['b_port'] = I('request.b_port');
-        return $this->data($this->data)->add();
+
+        // 更新还是添加
+        $b_id = I('request.b_id', 0, 'intval');
+        if ($b_id) {
+            $user_img = cookie('user_img');
+            if (!empty($user_img)) {
+                $this->data['b_photo'] = $this->getImagePath();
+            }
+            $status = $this->where('b_id='.$b_id)->save($this->data);
+        }
+        else {
+            $this->data['b_photo'] = $this->getImagePath();
+            $b_id = $this->data($this->data)->add();
+        }
+        return $b_id;
     }
 
     // 五个从表里面取得值
@@ -239,7 +253,8 @@ class SBillModel extends HomeModel {
     //出售单价 必须大于5元  读取市场参考价格
     private function _getPrice() {
         // 价格
-        $this->data['b_pri0'] = I('request.b_pri0', 0);
+        $this->data['b_pri0'] = I('request.b_pri0', 0, 'intval');
+
         if(empty($this->data['b_pri0']) || !is_int($this->data['b_pri0'] / 5 )) {
             notice('[出售单价]非法输入，请通过 +, -按钮调整价格');
         }
@@ -289,5 +304,14 @@ class SBillModel extends HomeModel {
         $this->b_code = 'S'.date('YW').rand(10000000, 99999999);
         // 合同编号
         $this->b_concode = 'SC'.date('YW').rand(10000000, 99999999);
+    }
+
+    public function del() {
+        $b_id = I('request.b_id', 0, 'intval');
+        $status = 0;
+        if ($b_id) {
+            $status = self::where('b_id='.$b_id)->save(array('b_status' => -9));
+        }
+        return $status;
     }
 }
