@@ -9,13 +9,20 @@ class SBillItemModel extends HomeModel {
     const STATUS_FINISH = 10;
 
     // bi_id_str 获取总价格
-    public function getPrice($bi_id_str) {
-        $bi_id_list = $this->checkBiIdStr($bi_id_str);
+    public function getPrice($bill) {
+
         $all_price = 0;
-        foreach ($bi_id_list as $bi_id) {
-            $bill_item = M('s_bill_item')->where(array('bi_id' => $bi_id))->find();
-            $all_price += $bill_item['bi_dpay'];
+        if (!empty($bill) && is_array($bill)) {
+            foreach ($bill as $b) {
+                $bill_item_list = $b['bill_item'];
+                if (!empty($bill_item_list) && is_array($bill_item_list)) {
+                    foreach ($bill_item_list as $bill_item) {
+                        $all_price += $bill_item['bi_nwei'] * $b['b_pri1'];
+                    }
+                }
+            }
         }
+
         return $all_price;
     }
 
