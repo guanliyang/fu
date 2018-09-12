@@ -145,6 +145,7 @@ class ROfferModel extends HomeModel {
 
     //获取详情
     public function getInfo() {
+        setReadMsg();
         $f_id = I('request.f_id', 0, 'intval');
         if (empty($f_id)) {
             $this->noticeView('未获取到预约单id');

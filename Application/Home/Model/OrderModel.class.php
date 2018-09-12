@@ -55,6 +55,7 @@ class OrderModel extends HomeModel {
 
     // 用户的订单详情页面
     public function getInfo() {
+        setReadMsg();
         $order = $this->getOrderById();
         $order_item_list = M('b_order_item')->where(array('o_id' => $order['o_id']))->select();
 
