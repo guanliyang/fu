@@ -76,8 +76,11 @@
     <volist name="info.on_sell" id="vo">
         <div class="bill_item cool" id="tr{$vo.bi_id}" onclick="iSel({$vo.bi_id});">
         <input type="checkbox" name="bi_id[]" id="{$vo.bi_id}" class="bt_s" value="{$vo.bi_id}" onclick="iSel({$vo.bi_id});"/>
-            组号：{$vo.bi_id}<label>
-            <b id="pay{$vo.bi_id}">{$vo.bi_dpay|formatMoney}</b>元</label><br/>
+            组号：{$vo.bi_id}
+            <label>
+                <a href="{$Think.config.LD_URL}{$vo.bi_video1}"> A箱视频</a>　　
+                <a href="{$Think.config.LD_URL}{$vo.bi_video2}">B箱视频</a>
+            </label><br/>
             {$vo.bi_sum}箱 (毛重：{$vo.bi_gwei}吨　皮重：{$vo.bi_tare}吨　净重：{$vo.bi_nwei}吨)
     </div>
     </volist>

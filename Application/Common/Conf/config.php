@@ -13,14 +13,16 @@ return  array(
     'MULTI_MODULE' => true,
     'MODULE_ALLOW_LIST' => array('Home','Wap'),
 
-    // admin 地址定义
-    'ADMIN_URL' => 'http://39.104.166.224:8080/',
     // 视频地址
-    'ADMIN_VIDEO_UPLOAD' => 'upload/videos/ld/',
+    'LD_URL' => 'http://39.104.166.224:8080/upload/videos/ld/',
     // 图片地址 箱号
-    'ADMIN_CN_UPLOAD' => 'upload/videos/cn/',
+    'CN_URL' => 'http://39.104.166.224:8080/upload/images/cn/',
     // 图片地址 封号
-    'ADMIN_SN_UPLOAD' => 'upload/videos/sn/',
+    'SN_URL' => 'http://39.104.166.224:8080/upload/images/sn/',
     // 图片地址 榜单
-    'ADMIN_LP_UPLOAD' => 'upload/videos/lp/',
+    'LP_URL' => 'http://39.104.166.224:8080/upload/images/lp/',
+    // 首付
+    'FIRST_PAY' => '20%',
+    // 日利率
+    'DAY_RATE' => 0.0002,
 );

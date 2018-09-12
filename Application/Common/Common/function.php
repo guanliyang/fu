@@ -828,3 +828,19 @@ function getOrderT($order_item, $status = 0) {
     }
     return $pay;
 }
+
+// 购物车每组货款
+function getItemPay($bill_item, $bill) {
+    return $bill['b_pri1'] * $bill_item['bi_nwei'];
+}
+
+//总货款
+function getItemPayAll($bill_item, $bill) {
+    $pay = 0;
+    if (!empty($bill_item) && is_array($bill_item)) {
+        foreach ($bill_item as $item) {
+            $pay += $item['bi_nwei'] * $bill['b_pri1'];
+        }
+    }
+    return $pay;
+}
