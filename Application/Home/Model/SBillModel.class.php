@@ -98,6 +98,7 @@ class SBillModel extends HomeModel {
      * 根据b_status 获取
      */
     public function getBillInfo($getMyBill = true) {
+        setReadMsg();
         $bill = $this->getBId($getMyBill);
         // 根据b_status 获取item信息
         $where = array('b_id' => $bill['b_id']);

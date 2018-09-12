@@ -11,7 +11,6 @@ class OrderController extends HomeController {
 
     // 订单详情
     public function info() {
-        setReadMsg();
         $this->checkoutUserLogin();
         $order = new \Home\Model\OrderModel();
         $info = $order->getInfo();
