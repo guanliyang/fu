@@ -67,7 +67,7 @@ class SBillModel extends HomeModel {
 
     // 用户卖货列表
     public function getUserList($uid) {
-        $where = array('u_id' => $uid);
+        $where = array('u_id' => $uid, 'b_status' => array('GT', -2));
         $count = self::where($where)->count();
         $page = $this->getPageShow($count, $str = '?item=3');
         $list = self::where($where)->order('b_id desc')->limit($page['str'])->select();
@@ -304,5 +304,14 @@ class SBillModel extends HomeModel {
         $this->b_code = 'S'.date('YW').rand(10000000, 99999999);
         // 合同编号
         $this->b_concode = 'SC'.date('YW').rand(10000000, 99999999);
+    }
+
+    public function del() {
+        $b_id = I('request.b_id', 0, 'intval');
+        $status = 0;
+        if ($b_id) {
+            $status = self::where('b_id='.$b_id)->save(array('b_status' => -9));
+        }
+        return $status;
     }
 }

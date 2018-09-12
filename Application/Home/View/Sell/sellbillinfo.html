@@ -11,7 +11,7 @@
             <if condition="$info.b_status gt 0">　　 <<a href="">下载电子合同</a>></if>
             <if condition="$info.b_status eq -1">　
                 <<a href="/Home/Sell/sellBill/b_id/{$info.b_id}">修改</a>> 　
-                <<a href="">删除</a>></if>
+                <<a href="#" onclick="disp_confirm()">删除</a>></if>
         </div>
         <div class="list">
             <table>
@@ -156,5 +156,34 @@
         </div>
     </div>
 </div>
-
+<input type="hidden" id="b_id" value="{$info.b_id}">
 <include file="public/foot" />
+<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+<script>
+    function disp_confirm()
+    {
+        var r=confirm("您确定要删除货单么?")
+        if (r==true)
+        {
+            var b_id = $("#b_id").val();
+            $.ajax({
+                type: 'POST',
+                url: '/Home/Sell/del',
+                data: 'b_id='+b_id,
+                dataType: 'json',
+                timeout: 10000,
+                success: function(data){
+                    if(data.url) {
+                        window.location.href = data.url ;
+                    }
+                    else {
+                        alert(data.msg);
+                    }
+                },
+                error: function(xhr, type){
+                    alert('抱歉,加载失败!');
+                }
+            })
+        }
+    }
+</script>

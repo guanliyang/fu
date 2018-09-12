@@ -116,4 +116,16 @@ class SellController extends HomeController {
         $this->assign('info', $info);
         $this->display();
     }
+
+    // 删除
+    public function del() {
+        $bill_item = new \Home\Model\SBillModel();
+        $status = $bill_item->del();
+        if ($status) {
+            notice('修改成功', 0, array('url' => '/Wap/Message/index?item=3'));
+        }
+        else {
+            notice('未修改');
+        }
+    }
 }
