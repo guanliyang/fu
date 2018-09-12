@@ -30,7 +30,7 @@
     <volist name="not_read.list" id="vo">
     <div class="msgitem" onclick="location.href='{$vo|getWapMsgUrl}'">
         <div class="info1">
-            {$vo.sm_type|getMsgText}：{$vo.sm_rid}<label>{$vo.sm_ctime|getDateTime}</label>
+            {$vo.sm_type|getMsgText}：{$vo.code}<label>{$vo.sm_ctime|getDateTime}</label>
         </div>
         <div class="info2">{$vo.sm_content}</div>
     </div>
@@ -42,7 +42,7 @@
     <volist name="read.list" id="vo">
         <div class="msgitem" onclick="location.href='{$vo|getWapMsgUrl}'">
             <div class="info1">
-                {$vo.type|getMsgText}：{$vo.resource_id}<label>{$vo.ctime|getDateTime}</label>
+                {$vo.type|getMsgText}：{$vo.code}<label>{$vo.ctime|getDateTime}</label>
             </div>
             <div class="info2">{$vo.sm_content}</div>
         </div>
@@ -81,12 +81,12 @@
             if (page > total_page) {
                 if (item == 1) {
                     $("#list_item_1").empty();
-                    $("#list_item_1").append('已无更改数据');
+                    $("#list_item_1").append('已无更多数据');
                 }
 
                 if (item == 2) {
                     $("#list_item_2").empty();
-                    $("#list_item_2").append('已无更改数据');
+                    $("#list_item_2").append('已无更多数据');
                 }
 
                 return false;

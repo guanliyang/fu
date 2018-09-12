@@ -7,7 +7,11 @@
 <div class="bdiv cont">
     <div class="content">
         <div class="list_item">
-            <label>:: 货单号：{$info.b_code} - {$info.b_status|getBillStatus} :: </label>　　<<a href="">下载电子合同</a>>
+            <label>:: 货单号：{$info.b_code} - {$info.b_status|getBillStatus} :: </label>
+            <if condition="$info.b_status gt 0">　　 <<a href="">下载电子合同</a>></if>
+            <if condition="$info.b_status eq -1">　
+                <<a href="/Home/Sell/sellBill/b_id/{$info.b_id}">修改</a>> 　
+                <<a href="">删除</a>></if>
         </div>
         <div class="list">
             <table>

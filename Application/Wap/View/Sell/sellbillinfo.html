@@ -137,7 +137,17 @@
             (其中:<span><b>{$info.b_id|getAllDepo=1,8}</b></span> 元，今日支付结算后可退。)
         </div>
     </if>
-    <div class="order_info"><<a href="">查看电子合同</a>></div>
+
+        <if condition="$info.b_status gt 0">
+            <div class="order_info"><<a href="">查看电子合同</a>></div>
+        </if>
+        <if condition="$info.b_status eq -1">　
+            <div class="order_info">
+            <<a href="/Wap/Sell/sellBill/b_id/{$info.b_id}">修改</a>> 　
+            <<a href="">删除</a>>
+            </div>
+        </if>
+    </div>
 
     <if condition="$info['b_status'] gt 3">
         <label>上架时间：{$info.b_stime|getDateTime}</label>
