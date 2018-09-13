@@ -63,7 +63,7 @@
     <div class="order_item">成交时间：{$info.order.o_ctime|getDateTime}</div>
     <div class="order_item">
         离岸时间：{$info.bill_item.oi_otime|getDateTime}<br/>
-        离港名称：{$info.bill_item.bi_port}
+        离港名称：{$info.bill_item.bi_port|getPortName}
     </div>
     <div class="order_item">
         到岸时间：{$info.order.o_atime|getDateTime}<br/>
