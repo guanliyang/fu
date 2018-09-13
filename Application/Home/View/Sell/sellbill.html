@@ -12,12 +12,12 @@
 
         }else{
             document.getElementById('pri1').innerText =  i2s3(npri);
-            document.getElementById('b_pri1').value = i2s3(npri);
+            //document.getElementById('b_pri1').value = i2s3(npri);
         }
         ctotal();
     }
     function cwei(){
-        document.getElementById('pri1').innerText =  document.getElementById('rpri').innerText;
+        //document.getElementById('pri1').innerText =  document.getElementById('rpri').innerText;
         var weig = document.getElementById('sweight').value;
         var bsum = Math.ceil(weig/26);
         document.getElementById('bsum').innerText = bsum;
@@ -121,10 +121,11 @@
                     <td>
 
                         　出售单价：<input class="bt inpss" value="-" type="button" onclick="cpri(-1);"/>
-                        <label id="pri1">0</label>
-                        <input type="hidden" name="b_pri0" id="b_pri1" value="0">
+                        <label id="pri1"><if condition="$bill">{$bill.b_pri1|formatMoney}<else/>1,700</if></label>
+                        <input type="hidden" name="b_pri0" id="b_pri1" value="<if condition='$bill'>{$bill.b_pri1}<else/>1700</if></if>">
                         <input class="bt inpss" value="+" type="button" onclick="cpri(1);"/> 元/吨　　　　　　　　
-                        今日市场参考价：<br/>　　　　　（提交后也可以随时调价）　　　　　　　<label class="fontbig" id="rpri">1,700</label> 元/吨</td>
+                        今日市场参考价：<br/>　　　　　（提交后也可以随时调价）　　　　　　　
+                        <label class="fontbig" id="rpri">1,700</label> 元/吨</td>
                 </tr>
                 <tr>
                     <td>　出售重量：<input name="b_weig" id="sweight" class="inpsm" value="{$bill.b_weig}" type="text" onchange="cwei();"/> 吨 (约需 <label id="bsum">0</label> 个集装箱)　　　　
