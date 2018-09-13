@@ -409,7 +409,7 @@ function getPayType($type) {
     $list =
         array(
             0 => '空',
-            1 => '20%首付',
+            1 => C('FIRST_PAY').'首付',
             2 => '全款',
         );
     return $list[$type];
@@ -521,9 +521,9 @@ function getAllInte($bill, $on_sell) {
  * @param $o_pay_f 首付款
  * @param $oi_dpay 本组货款
  */
-function getOrderItemPendingMoneyText($order, $order_item) {
+function getOrderItemPendingMoneyText($order) {
     $pay_type = $order['o_pay_type'];
-    $oi_status = $order_item['oi_status'];
+    $oi_status = $order['o_status'];
 
     $str = '--';
     // 全付
@@ -576,6 +576,14 @@ function getOrderItemPendingMoney($order, $order_item) {
     return $str;
 }
 
+// 全新 待付货款计算
+function getOipm($order) {
+    $o_pay_f = $order['o_pay_f'];
+    $str = formatMoney($o_pay_f).'元';
+
+    return $str;
+}
+
 // 公式计算出待付货款
 function getPendingMoney($o_pay_f, $o_pay_t, $oi_dpay) {
     $numb = 0;
@@ -588,21 +596,41 @@ function getPendingMoney($o_pay_f, $o_pay_t, $oi_dpay) {
     return $numb;
 }
 
-/**
- * 可结息 -  获取已结利息
- * @param $pay_type 支付方式
- * @param $oi_status  货组状态
- * @param $oi_dpay 本组货款
- */
-function getKnot($order, $order_item) {
+///**
+// * 可结息 -  获取已结利息
+// * @param $pay_type 支付方式
+// * @param $oi_status  货组状态
+// * @param $oi_dpay 本组货款
+// */
+//function getKnot($order, $order_item) {
+//    $pay_type = $order['o_pay_type'];
+//    $oi_status = $order_item['oi_status'];
+//
+//    $rate = C('RATE');
+//
+//    // 全付
+//    if ($pay_type == \Home\Model\OrderModel::PAY_ALL) {
+//        $str = '';
+//    }
+//
+//    // 20首付
+//    if ($pay_type == \Home\Model\OrderModel::PAY_PART) {
+//        if ($oi_status > 2) {
+//            $str = '已结利息';
+//        }
+//        else {
+//            $day = getPastDay($order);
+//            $str = $order['o_pay_t'] * $rate * $day;
+//        }
+//    }
+//    return $str;
+//}
+
+// 新可结利息
+function getKnotNew($order) {
     $pay_type = $order['o_pay_type'];
-    $oi_status = $order_item['oi_status'];
-    $o_pay_t = $order['o_pay_t'];
-    $o_pay_f = $order['o_pay_f'];
-    $oi_dpay = $order_item['oi_dpay'];
-
-    $rate = C('RATE');
-
+    $rate = C('DAY_RATE');
+    $status = $order['o_status'];
     // 全付
     if ($pay_type == \Home\Model\OrderModel::PAY_ALL) {
         $str = '';
@@ -610,18 +638,16 @@ function getKnot($order, $order_item) {
 
     // 20首付
     if ($pay_type == \Home\Model\OrderModel::PAY_PART) {
-        if ($oi_status > 2) {
+        if ($status > 2) {
             $str = '已结利息';
         }
         else {
-            $pendMoney = getPendingMoney($o_pay_f, $o_pay_t, $oi_dpay);
             $day = getPastDay($order);
-            $str = $pendMoney * $rate * $day;
+            $str = $order['o_pay_t'] * $rate * $day;
         }
     }
     return $str;
 }
-
 
 function getSumKnot($order_item) {
     $pay = 0;
@@ -843,4 +869,13 @@ function getItemPayAll($bill_item, $bill) {
         }
     }
     return $pay;
+}
+
+// 由港id称获取港口名称
+function getPortName($port_id) {
+    $name = '';
+    if ($port_id) {
+        $name = M('sys_port')->where(array('bp_id' => $port_id))->getField('bp_name');
+    }
+    return $name;
 }

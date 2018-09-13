@@ -16,10 +16,10 @@
         </label>
     </div>
 
-    <div class="order_item">{$info.order|getOrderItemPendingMoneyText=$info['order_item']}：
+    <div class="order_item">{$info.order|getOrderItemPendingMoneyText}：
         <label>
             <span>
-                <b>{$info.order|getOrderItemPendingMoney=$info['order_item']}</b>
+                <b>{$info.order|getOipm}</b>
             </span>元
         </label>
     </div>
@@ -28,12 +28,12 @@
     <div class="order_item">可结利息：
         <label>
             <span>
-                <b>{$info.order|getKnot=$info['order_item']}</b>
+                <b>{$info.order|getKnotNew=$info['order_item']}</b>
             </span>元
         </label>
-        <br/>计息：{$info.order_item.oi_dpay}天(成交日开始)
+        <br/>计息：{$info.order|getPastDay}天(成交日开始)
         <label>
-            ({$info.order_item.oi_dpay}x{$info.order.o_rate}x{$info.order_item.oi_dpay})
+            ({$info.order.o_pay}x{$info.order.o_rate}x{$info.order|getPastDay})
         </label>
     </div>
     </if>
@@ -42,7 +42,7 @@
         滞箱费：
         <label>
             <span>
-                <b>{$info.order_item.oi_depay|formatMoney}</b>
+                <b>{$info.order.o_depay|formatMoney}</b>
             </span>元
         </label>
         <br/>(到岸14天内免费，超出时间按50元/天.箱收取)
@@ -51,37 +51,40 @@
 
 
     <div class="order_item">
-        {$info.order_item.bi_sum}箱　
-        毛重{$info.order_item.bi_gwei}吨　
-        皮重{$info.order_item.bi_tare}吨　
-        净重{$info.order_item.bi_nwei}吨
+        {$info.bill_item.bi_sum}箱　
+        毛重{$info.bill_item.bi_gwei}吨　
+        皮重{$info.bill_item.bi_tare}吨　
+        净重{$info.bill_item.bi_nwei}吨
     </div>
     <div class="order_item">
-        货款合计：<b>{$info.order_item.bi_dpay|formatMoney}</b>元
-        ({$info.order_item.bi_dpri}元/吨)
+        货款合计：<b>{$info.bill_item.bi_dpay|formatMoney}</b>元
+        ({$info.order.o_pri1|formatMoney}元/吨)
     </div>
-    <div class="order_item">成交时间：{$info.order_item.oi_dtime|getDateTime}</div>
+    <div class="order_item">成交时间：{$info.order.o_ctime|getDateTime}</div>
     <div class="order_item">
-        离岸时间：{$info.order_item.oi_otime|getDateTime}<br/>
-        离港名称：{$info.order_item.oi_oname}
+        离岸时间：{$info.bill_item.oi_otime|getDateTime}<br/>
+        离港名称：{$info.bill_item.bi_port}
     </div>
     <div class="order_item">
-        到岸时间：{$info.order_item.oi_atime|getDateTime}<br/>
-        到港名称：{$info.order_item.oi_aname}
+        到岸时间：{$info.order.o_atime|getDateTime}<br/>
+        到港名称：{$info.order.o_port|getPortName}
     </div>
-    <div class="order_item">物流信息：{$info.order_item.oi_status|getWuLiuMessage}</div>
+    <div class="order_item">物流信息：{$info.order.o_status|getOrderStatus}</div>
 
 
     <div class="order_info">
-        <label>箱号：{$info.order_item.bi_cnum1}</label>
-        <label>封号：{$info.order_item.bi_snum1}</label><br/>
-        <img src="{$info.order_item.bi_cnum1_pho}" class="simg" />
-        <img src="{$info.order_item.bi_snum1_pho}" class="simg" /><br/>
-        <label>箱号：{$info.order_item.bi_cnum2}</label>
-        <label>封号：{$info.order_item.bi_snum2}</label><br/>
-        <img src="{$info.order_item.bi_cnum2_pho}" class="simg" />
-        <img src="{$info.order_item.bi_snum2_pho}" class="simg" /><br/>
-        <a href=""><查看装货视频></a></div>
+        <label>箱号：{$info.bill_item.bi_cnum1}</label>
+        <label>封号：{$info.bill_item.bi_snum1}</label><br/>
+        <img src="{$Think.config.CN_URL}{$info.bill_item.bi_cnum1_pho}" class="simg" />
+        <img src="{$Think.config.SN_URL}{$info.bill_item.bi_snum1_pho}" class="simg" /><br/>
+        <label>箱号：{$info.bill_item.bi_cnum2}</label>
+        <label>封号：{$info.bill_item.bi_snum2}</label><br/>
+        <img src="{$Think.config.CN_URL}{$info.bill_item.bi_cnum2_pho}" class="simg" />
+        <img src="{$Think.config.SN_URL}{$info.bill_item.bi_snum2_pho}" class="simg" /><br/>
+
+        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video1}">A箱视频</a>　　
+        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video2}">B箱视频</a>
+    </div>
 </div>
 
 <include file="public/foot" />
