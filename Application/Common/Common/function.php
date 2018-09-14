@@ -269,6 +269,15 @@ function getSellDays($bill_item) {
 }
 
 
+// 滞箱天数
+function getdeDay($order) {
+    $today = strtotime(date('Y-m-d',time()));
+    $rtimeDay = strtotime(date("Y-m-d", $order['o_detime']));
+    $days = ($today - $rtimeDay) / 86400 + 1;
+    $days = $days > 0 ? $days : 0;
+    return $days;
+}
+
 // 显示货组状态
 function getBillItemStatusByBill($bill, $status) {
     $str = '';
@@ -878,4 +887,9 @@ function getPortName($port_id) {
         $name = M('sys_port')->where(array('bp_id' => $port_id))->getField('bp_name');
     }
     return $name;
+}
+
+// 当前日期
+function getDay() {
+    return date('Y-m-d', time());
 }
