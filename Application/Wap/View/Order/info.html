@@ -3,68 +3,67 @@
 <div class="cont">
     <div class="tit"><a href="javascript:;" onClick="javascript:history.back(-1);"><返回</a>订单详情</div>
     <hr>
-
-    <volist name="info.bill" id="vo">
-    <div class="order_info"><label>订单号: {$info.order.o_code}</label><label>[{$info.order.o_status|getOrderStatus}]</label></div>
-
     <div class="order_info">
-        <label><span><b>今日须支付：85,084.5</b></span>元</label><br/>
-        其中：待付货款 <span><b>84,500</b></span>元，
-        待付利息 <span><b>84.5</b></span>元，请按合同说明方式付款至平台指定帐号。
+        <label>订单号: {$info.order.o_code}</label>
+        <label>[{$info.order.o_status|getOrderStatus}]</label>
     </div>
-
-    <div class="order_info" onclick="location.href='/Wap/Order/billInfo/b_id/{$vo.b_id}/o_id/{$info.order.o_id}/bi_id/{$vo.bill_item|getArrayV='bi_id'}'">
-        <label>
-            {$vo.b_name}　
-            {$vo.b_year}年　
-            {$vo.b_place}　
-            {$vo.b_level}　
-            容重{$vo.b_rz}g/l</label><br/>
-        <label><b>{$info.order.o_pri1|formatMoney}</b>元/吨　　（查看）</label></div>
-
+    <div class="order_info">
+        <label><span><b>需付款：139,985</b></span>元</label><br/>
+        (尾款<span><b>136,000</b></span> + 利息<span><b>85</b></span> +
+        运费<span><b>3,600</b></span> + 滞箱费<span><b>300</b></span>)<br/>
+        请按合同说明方式付款至平台指定帐号。
+    </div>
+    <volist name="info.bill" id="vo">
+        <div class="order_info" onclick="location.href='/Wap/Order/billInfo/b_id/{$vo.b_id}/o_id/{$info.order.o_id}/bi_id/{$vo.bill_item|getArrayV='bi_id'}'">
+            <label>{$vo.b_name}　{$vo.b_year}年　{$vo.b_place}　{$vo.b_level}　容重{$vo.b_rz}　g/l　　（查看）</label>
+        </div>
+        <div class="order_info">
+            <label>货款合计<b>{$info.order.o_pay|formatMoney}</b> 元
+                ({$info.order.o_pri1|formatMoney}元/吨)</label>
+        </div>
         <volist name="vo.bill_item" id="item">
             <div class="order_item" onclick="location.href='/Wap/Order/billItemInfo/oi_id/{$item.oi_id}/o_id/{$info.order.o_id}'">
-                &#8470;.{$item.bi_id}<label>
-                <span><b>{$item.oi_status|getOrderItemStatus}</b></span>　
-                (详情)</label><br/>{$item.bi_sum}箱　净重{$item.bi_nwei}吨
-                <label>{$item.bi_dpay|formatMoney}元　结息{$item.bi_inte|formatMoney}元(5天)</label>
+                &#8470;.{$item.bi_id}<label>(详情)</label><br/>
+                箱号: {$item.bi_cnum1}　{$item.bi_cnum2}<label>
+                {$item.bi_sum}箱　
+                净重{$item.bi_nwei}吨</label>
             </div>
         </volist>
-
     </volist>
 
     <div class="order_info"></div>
-    <div class="order_item">
-        货款合计：<label><b>{$info.order.o_pay|formatMoney}</b> 元</label><br/>&nbsp;
+    <div class="order_item">付款方式：{$info.order.o_pay_type|getPayType}<br/>&nbsp;
         <label>
-            (首付<b>{$info.order.o_pay_f|formatMoney}</b>元，
-            尾款<b>{$info.order.o_pay_t|formatMoney}</b>元，
-            日利{$info.order.o_rate})</label>
+            首付<b>{$info.order.o_pay_f|formatMoney}</b>元　
+            尾款<b>{$info.order.o_pay_t|formatMoney}</b>元(年利率0.06)　
+            计息<b>85</b>元(5天)
+        </label>
     </div>
     <div class="order_item">
         收货方式：{$info.order.o_deli_type|getDeliType}
         <label>运费：<b>{$info.order.o_frei|formatMoney}</b>元</label><br/>
-        收货地址：{$info.order.o_deli_add}<br/>
-        联系人：{$info.order.o_deli_cont}　　
-        手机号：{$info.order.o_deli_mobi}
+        联系人：{$info.order.o_deli_cont}　　手机号：{$info.order.o_deli_mobi}<br/>
+        收货地址：{$info.order.o_deli_add}
+    </div>
+    <div class="order_item">
+        滞箱期限：{$info.order.o_detime|date='Y-m-d',###} 结止<br/>
+        至今 <?php echo getDay(); ?> 超期 {$info.order|getdeDay} 天(50元/箱.天)
+        <label>滞箱费：<b>{$info.order.o_depay|formatMoney}</b>元</label>
     </div>
     <div class="order_info"></div>
     <div class="order_item">
-        海运公司：{$info.mc_name}<br/>
-        海运单号：{$info.order.o_marnum}<br/>
-        海运运费：{$info.order.o_frei_m|formatMoney}元<br/>
+        付款方式：{$info.order.o_pay_type|getPayType}<br/>&nbsp;
+        <label>首付<b>{$info.order.o_pay_f|formatMoney}</b>元　
+            尾款<b>{$info.order.o_pay_t|formatMoney}</b>元(年利率0.06)　
+            计息<b>85</b>元(5天)</label>
     </div>
-    <div class="order_info"></div>
-
-    <if condition="$info['order']['o_pay_type'] eq 1 AND $info['order']['o_status'] gt 0">
-        <div class="order_item">
-            已付尾款：<b>{$info.order_item|getOrderT=1}</b>元<label>
-            已付利息：<b>{$info.order_item|getSumKnot}</b>元</label></div>
-        <div class="order_item">
-            待付尾款：<b>{$info.order_item|getOrderT}</b>元<label>
-            尾款计息：<b>{$info.order|getOrderInteT=$info['order_item']}</b>元</label></div>
-        <div class="order_info"><<a href="">查看电子合同</a>></div>
-    </if>
-    <label>成交时间：{$info.order.o_dtime|getDateTime}</label>
-</div>
+    <div class="order_info">成交时间：{$info.order.o_dtime|getDateTime}</div>
+    <div class="order_info">海运单号：{$info.order.o_marnum} {$info.mc_name}</div>
+    <div class="order_item">
+        离岸时间：2018/07/16 10:12:35
+        <label><b>锦州港</b></label><br/>
+        到岸时间：2018/07/18 13:15:35
+        <label><b>{$info.order.o_port|getPortName}</b></label></div>
+    <div class="order_info"><<a href="">查看电子合同</a>>
+    </div>
 <include file="public/foot" />
