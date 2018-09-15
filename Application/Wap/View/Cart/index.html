@@ -23,7 +23,7 @@
                 selpay += eval(document.getElementById('pay'+eventdx[i].value).innerText.replace(',', ''));
             }
         }
-        selpay0 = selpay*0.2;
+        selpay0 = selpay*{$Think.config.DEPO_RATE};
         document.getElementById('selsum').innerText = selsum;
         document.getElementById('selpay').innerText = i2s3(selpay);
         document.getElementById('selpay0').innerText = i2s3(selpay0);

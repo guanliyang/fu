@@ -12,7 +12,7 @@
             if(eventdx[i].name=='payment' && eventdx[i].checked){
                 if(eventdx[i].value=='1'){
                     document.getElementById('tr20pay').style['display'] = '';
-                    npay = total*0.2;
+                    npay = total*{$Think.config.FIRST_PAY};
                     epay = total-npay;
                     var dinte = eval(document.getElementById('dinte').innerText);
                     document.getElementById('epay').innerText = i2s3(epay);
@@ -26,7 +26,7 @@
             }
             document.getElementById('npay').innerText = i2s3(npay);
             if(eventdx[i].name=='recmode' && eventdx[i].checked){
-                if(eventdx[i].value=='1'){
+                if(eventdx[i].value=='0'){
                     var freight = eval(document.getElementById('freight').innerText.replace(',', ''));
                     document.getElementById('trRadd').style['display'] = '';
                     document.getElementById('trRcon').style['display'] = '';
@@ -94,7 +94,7 @@
                     <td></td>
                     <td width="90">付款方式：</td>
                     <td width="30"><input type="radio" name="payment" class="bt_s" value="1" checked onclick="iSet();" /></td>
-                    <td width="120">{$Think.config.FIRST_PAY}首付</td>
+                    <td width="120">{$Think.config.FIRST_PAY_SHOW}首付</td>
                     <td width="30"><input type="radio" name="payment" class="bt_s" value="2" onclick="iSet();"/></td>
                     <td width="120">全款</td>
                     <td class="tdright">即付货款：</td>

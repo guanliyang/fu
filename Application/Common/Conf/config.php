@@ -22,7 +22,8 @@ return  array(
     // 图片地址 榜单
     'LP_URL' => 'http://39.104.166.224:8080/upload/images/lp/',
     // 首付
-    'FIRST_PAY' => '20%',
+    'FIRST_PAY_SHOW' => '5%',
+    'FIRST_PAY' => 0.05,
     // 日利率
     'DAY_RATE' => 0.0002,
     // 保证金
