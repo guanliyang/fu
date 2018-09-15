@@ -6,83 +6,44 @@
 <div class="bdiv cont">
     <div class="content">
         <div class="list_item">
-            <label>:: 订单号：{$info.order.o_code} - {$info.order.o_status|getOrderStatus}) ::</label>　　<<a href="javascript:;" onClick="javascript:history.back(-1);">返回</a>>
+            <label>:: 订单号：{$info.order.o_code} - {$info.order.o_status|getOrderStatus}) ::</label>　　
+            <<a href="javascript:;" onClick="javascript:history.back(-1);">返回</a>>
         </div>
         <div class="list">
-            货组编号：{$info.bill_item.bi_id}  <label>{$info.bill_item.oi_status|getOrderItemStatus}</label>
+            货组编号：{$info.bill_item.bi_id}</label>
             <table>
                 <tr>
-                    <th width="30" rowspan="2"></th>
-                    <th rowspan="2" width="110"><img src="{$Think.config.CN_URL}{$info.bill_item.bi_cnum1_pho}" width="80" height="80"/><br/></th>
-                    <th rowspan="2" width="110"><img src="{$Think.config.SN_URL}{$info.bill_item.bi_snum1_pho}" width="80" height="80"/><br/></th>
-                    <th>箱号：{$info.bill_item.bi_cnum1}</th>
-                    <th width="30" rowspan="2"></th>
-                    <th rowspan="2" width="110"><img src="{$Think.config.CN_URL}{$info.bill_item.bi_cnum2_pho}" width="80" height="80"/><br/></th>
-                    <th rowspan="2" width="110"><img src="{$Think.config.SN_URL}{$info.bill_item.bi_snum2_pho}" width="80" height="80"/><br/></th>
-                    <th>箱号：{$info.bill_item.bi_cnum2}</th>
-                </tr>
-                <tr>
-                    <th>封号：{$info.bill_item.bi_snum1}</th>
-                    <th>封号：{$info.bill_item.bi_snum2}</th>
+                    <th width="30" height="220"></th>
+                    <th width="250">
+                        <img src="{$Think.config.LP_URL}{$info.bill_item.bi_plist_pho}" width="200" height="120" onclick="window.open('{$Think.config.LP_URL}{$info.bill_item.bi_plist_pho}');"/><br/>
+                        磅单号 {$info.bill_item.bi_plist_num}
+                    </th>
+                    <th width="140">
+                        <img src="{$Think.config.CN_URL}{$info.bill_item.bi_cnum1_pho}" width="120" height="120" onclick="window.open('{$Think.config.CN_URL}{$info.bill_item.bi_cnum1_pho}');"/><br/>
+                        箱号{$info.bill_item.bi_cnum1}
+                    </th>
+                    <th width="180">
+                        <img src="{$Think.config.SN_URL}{$info.bill_item.bi_snum1_pho}" width="120" height="120" onclick="window.open('{$Think.config.SN_URL}{$info.bill_item.bi_snum1_pho}');"/><br/>
+                        封号{$info.bill_item.bi_snum1}</th>
+                    <th width="140">
+                        <img src="{$Think.config.CN_URL}{$info.bill_item.bi_cnum2_pho}" width="120" height="120" onclick="window.open('{$Think.config.CN_URL}{$info.bill_item.bi_cnum2_pho}');"/><br/>
+                        箱号{$info.bill_item.bi_cnum2}
+                    </th>
+                    <th width="150">
+                        <img src="{$Think.config.SN_URL}{$info.bill_item.bi_snum2_pho}" width="120" height="120" onclick="window.open('{$Think.config.SN_URL}{$info.bill_item.bi_snum2_pho}');"/><br/>
+                        封号{$info.bill_item.bi_snum2}
+                    </th>
+                    <th></th>
                 </tr>
                 <tr>
                     <th></th>
-                    <th colspan="7">
+                    <th colspan="6">
                         封箱: {$info.bill_item.bi_sum}箱　　　
                         毛重: {$info.bill_item.bi_gwei}吨　　　
                         皮重: {$info.bill_item.bi_tare}吨　　　
-                        净重: {$info.bill_item.bi_nwei}吨　　　
-                        货款：{$info.bill_item.bi_dpay|formatMoney}元
-                        ({$info.order.o_pri1|formatMoney}元/吨)　　　
-                        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video1}">A箱视频</a>　　
-                        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video2}">B箱视频</a>
-                    </th>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td width="30"></td>
-                    <td width="90">成交时间：</td>
-                    <td colspan="3">{$info.order.o_ctime|getDateTime}</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>离岸时间：</td>
-                    <td width="220">{$info.bill_item.oi_otime|getDateTime}</td>
-                    <td width="90">离港名称：</td>
-                    <td>{$info.bill_item.bi_port|getPortName}</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>到岸时间：</td>
-                    <td>{$info.order.o_atime|getDateTime}</td>
-                    <td>到港名称：</td>
-                    <td>{$info.order.o_port|getPortName}</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>物流信息：</td>
-                    <td>{$info.order.o_status|getOrderStatus}</td>
-                    <td colspan="2"></td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <th width="30"></th>
-                    <th width="90">{$info.order|getOrderItemPendingMoneyText}：</th>
-                    <th width="220">
-                        <label><b>{$info.order|getOipm}</b></label>
-                    </th>
-
-                    <if condition="$info['order']['o_pay_type'] eq 1">
-                    <th width="90">可结利息：</th>
-                    <th><label><b>{$info.order|getKnotNew=$info['bill_item']}</b></label> 元 ({$info.order.o_pay}x{$info.order.o_rate}x{$info.order|getPastDay}) 成交至今{$info.order|getPastDay}天。</th>
-                    </if>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th>滞箱费：</th>
-                    <th colspan="3"><label><b>{$info.order.o_depay|formatMoney}</b></label>元 (到岸14天内免费，超出时间按50元/天.箱收取)</th>
+                        净重: {$info.bill_item.bi_nwei}吨　　　　　　
+                        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video1}"><下载装货视频1></a>　　　
+                        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video2}"><下载装货视频2></a></th>
                 </tr>
             </table>
         </div>
