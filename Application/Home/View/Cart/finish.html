@@ -95,9 +95,9 @@
                 <tr>
                     <td></td>
                     <td width="90">付款方式：</td>
-                    <td width="30"><input type="radio" name="payment" class="bt_s" value="1" checked onclick="iSet();" /></td>
+                    <td width="30"><input type="radio" name="payment" class="bt_s" value="{$Think.config.FIRST_PAY}" checked onclick="iSet();" /></td>
                     <td width="120">{$Think.config.FIRST_PAY_SHOW}首付</td>
-                    <td width="30"><input type="radio" name="payment" class="bt_s" value="2" onclick="iSet();"/></td>
+                    <td width="30"><input type="radio" name="payment" class="bt_s" value="1" onclick="iSet();"/></td>
                     <td width="120">全款</td>
                     <td class="tdright">即付货款：</td>
                     <td class="tdright"><label id="npay">0</label>元</td>

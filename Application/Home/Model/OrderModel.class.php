@@ -286,8 +286,8 @@ class OrderModel extends HomeModel {
 
     // 支付方式
     public function getPayType() {
-        $pay_type = I('request.payment', 0, 'intval');
-        if (!in_array($pay_type, array(1,2))) {
+        $pay_type = I('request.payment');
+        if (empty($pay_type)) {
             notice('付款方式有误');
         }
         $this->data['o_pay_type'] = $pay_type;
