@@ -34,7 +34,7 @@
         var weig = document.getElementById('sweight').value;
         var frei = eval(document.getElementById('freight').innerText.replace(',', ''));
         var total = pri1*weig;
-        var depo = total*0.2;
+        var depo = total*{$Think.config.DEPO_RATE};
         var pay = depo + frei;
         document.getElementById('total').innerText = i2s3(total);
         document.getElementById('depo').innerText = i2s3(depo);
@@ -132,7 +132,7 @@
                         入港运费：<label id="freight">0</label> 元 (<label id="tfrei">1,200</label>元/车，需要<label id="tsum">0</label>车)</td>
                 </tr>
                 <tr>
-                    <td>　需缴保证金：<label id="depo">0</label> 元 （货款总价<label id="total">0</label>的20%，成交后即退保证金）</td>
+                    <td>　需缴保证金：<label id="depo">0</label> 元 （货款总价<label id="total">0</label>的{$Think.config.DEPO_RATE_SHOW}，成交后即退保证金）</td>
                 </tr>
             </table>
             <table>
@@ -142,7 +142,7 @@
                     <td colspan="5">
                         <select name="b_port">
                             <volist name="port" id="vo">
-                                <option value="{$vo.bp_id}" <if condition="$vo['bp_id'] eq $bill['b_port']">selected</if>>{$vo.bp_name}</option>
+                                <option value="{$vo.bp_id}" <if condition="$bill['b_port'] AND $vo['bp_id'] eq $bill['b_port']">selected<elseif condition="$vo['bp_id'] eq $user['port_id']" />selected</if>>{$vo.bp_name}</option>
                             </volist>
                         </select>
                     </td>
