@@ -1,5 +1,6 @@
 <?php
-
+phpinfo();
+die;
 function save_file($path = 'Public/user_img'){
     $size = 1024 * 1000 * 1; // 1M
     $file = $_FILES["file"];
