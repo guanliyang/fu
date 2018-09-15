@@ -12,7 +12,7 @@
             if(eventdx[i].name=='payment' && eventdx[i].checked){
                 if(eventdx[i].value=='1'){
                     document.getElementById('tr20pay').style['display'] = '';
-                    npay = total*{$Think.config.FIRST_PAY};
+                    npay = total*{$Think.config.FIRST_PAY}/365;
                     epay = total-npay;
                     var dinte = eval(document.getElementById('dinte').innerText);
                     document.getElementById('epay').innerText = i2s3(epay);
