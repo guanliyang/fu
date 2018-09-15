@@ -223,7 +223,8 @@ class OrderModel extends HomeModel {
                 $where = array(
                     'bi_id' => $bi_id
                 );
-                $bi_dpay = $bill['b_pri1'] * $bill['bi_nwei'];
+                $bill_item = M('s_bill_item')->where($where)->find();
+                $bi_dpay = $bill['b_pri1'] * $bill_item['bi_nwei'];
                 $data = array (
                     'bi_status' => 6,
                     'bi_dpri' =>  $bill['b_pri1'],
