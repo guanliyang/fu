@@ -26,10 +26,10 @@ return  array(
     'FIRST_PAY' => 0.05,
 
     // 年利率 买粮尾款
-    'BUY_RATE' => 0.06,
+    'BUY_RATE' => 0.06 / 365,
 
     // 卖粮 回款年利率
-    'SELL_RATE' => 0.06,
+    'SELL_RATE' => 0.06 / 365,
 
     // 保证金 卖粮
     'DEPO_RATE' => 0.05,
