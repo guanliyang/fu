@@ -29,11 +29,11 @@
                 if(eventdx[i].value=='0'){
                     var freight = eval(document.getElementById('freight').innerText.replace(',', ''));
                     document.getElementById('trRadd').style['display'] = '';
-                    document.getElementById('trRcon').style['display'] = '';
+                    //document.getElementById('trRcon').style['display'] = '';
                     pay = npay+freight;
                 }else{
                     document.getElementById('trRadd').style['display'] = 'none';
-                    document.getElementById('trRcon').style['display'] = 'none';
+                    //document.getElementById('trRcon').style['display'] = 'none';
                     pay = npay;
                 }
             }

@@ -28,13 +28,13 @@
                 if(eventdx[i].value=='0'){
                     var freight = eval(document.getElementById('freight').innerText.replace(',', ''));
                     document.getElementById('trRadd').style['display'] = '';
-                    document.getElementById('trRcon').style['display'] = '';
+                    //document.getElementById('trRcon').style['display'] = '';
                     document.getElementById('tr1info').style['display'] = '';
                     document.getElementById('tr2info').style['display'] = 'none';
                     pay = npay+freight;
                 }else{
                     document.getElementById('trRadd').style['display'] = 'none';
-                    document.getElementById('trRcon').style['display'] = 'none';
+                    //document.getElementById('trRcon').style['display'] = 'none';
                     document.getElementById('tr1info').style['display'] = 'none';
                     document.getElementById('tr2info').style['display'] = '';
                     pay = npay;
@@ -147,7 +147,7 @@
                 <td width="80">　联系人：</td>
                 <td><input name="user_name" value="{$user.real_name}" type="text"/></td>
             </tr>
-            <tr id="trRcon">
+            <tr>
                 <td>　手机号：</td>
                 <td><input name="mobile" value="{$user.mobile}" type="text"/></td>
             </tr>
