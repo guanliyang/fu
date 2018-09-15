@@ -16,7 +16,8 @@
                     var dinte = eval(document.getElementById('dinte').innerText);
                     document.getElementById('epay').innerText = i2s3(epay);
                     document.getElementById('epayi').innerText = i2s3(epay);
-                    document.getElementById('dipay').innerText = i2s3(epay*dinte/365);
+                    var dipay = Math.round(epay*dinte/365 * 100) / 100;
+                    document.getElementById('dipay').innerText = i2s3(dipay);
                 }else{
                     document.getElementById('tr20pay').style['display'] = 'none';
                     npay = total;
