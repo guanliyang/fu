@@ -25,4 +25,8 @@ return  array(
     'FIRST_PAY' => '20%',
     // 日利率
     'DAY_RATE' => 0.0002,
+    // 保证金
+    'DEPO_RATE' => 0.05,
+    // 保证金显示
+    'DEPO_RATE_SHOW' => '5%',
 );
