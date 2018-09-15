@@ -21,12 +21,17 @@ return  array(
     'SN_URL' => 'http://39.104.166.224:8080/upload/images/sn/',
     // 图片地址 榜单
     'LP_URL' => 'http://39.104.166.224:8080/upload/images/lp/',
-    // 首付
+    // 首付 买粮 生成订单
     'FIRST_PAY_SHOW' => '5%',
     'FIRST_PAY' => 0.05,
-    // 日利率
-    'DAY_RATE' => 0.0002,
-    // 保证金
+
+    // 年利率 买粮尾款
+    'BUY_RATE' => 0.06,
+
+    // 卖粮 回款年利率
+    'SELL_RATE' => 0.06,
+
+    // 保证金 卖粮
     'DEPO_RATE' => 0.05,
     // 保证金显示
     'DEPO_RATE_SHOW' => '5%',

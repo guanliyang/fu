@@ -638,7 +638,7 @@ function getPendingMoney($o_pay_f, $o_pay_t, $oi_dpay) {
 // 新可结利息
 function getKnotNew($order) {
     $pay_type = $order['o_pay_type'];
-    $rate = C('DAY_RATE');
+    $rate = C('BUY_RATE');
     $status = $order['o_status'];
     // 全付
     if ($pay_type == \Home\Model\OrderModel::PAY_ALL) {

@@ -192,6 +192,9 @@ class OrderModel extends HomeModel {
             // 货款金额
             $this->data['o_pay'] = $this->data['o_pri1'] * $this->data['o_nwei'];
 
+            // 利率
+            $this->data['o_rate'] = C('DUY_RATE');
+
             //order 表里插入信息
             $o_id = self::data($this->data)->add();
             // b_order_item 表插入信息
@@ -220,10 +223,10 @@ class OrderModel extends HomeModel {
                 $where = array(
                     'bi_id' => $bi_id
                 );
-                $bi_dpay = $bill['o_pri1'] * $bill['bi_nwei'];
+                $bi_dpay = $bill['b_pri1'] * $bill['bi_nwei'];
                 $data = array (
                     'bi_status' => 6,
-                    'bi_dpri' => $this->data['o_pri1'],
+                    'bi_dpri' =>  $bill['b_pri1'],
                     'bi_dpay' => $bi_dpay
                 );
 
