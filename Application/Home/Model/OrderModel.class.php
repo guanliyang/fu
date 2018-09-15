@@ -189,6 +189,9 @@ class OrderModel extends HomeModel {
             //单货数合计
             $this->data['o_bsum'] = array_sum(array_column($bill['bill_item'], 'bi_sum'));
 
+            // 货款金额
+            $this->data['o_pay'] = $this->data['o_pri1'] * $this->data['o_nwei'];
+
             //order 表里插入信息
             $o_id = self::data($this->data)->add();
             // b_order_item 表插入信息
@@ -201,7 +204,7 @@ class OrderModel extends HomeModel {
         $this->updateCat($bi_id_list, $uid);
 
         // bill_item 表改成已成交
-        $this->updateBillItem($bi_id_list);
+        $this->updateBillItem($bi_id_list, $bill);
 
 
         if (!$o_id) {
@@ -211,15 +214,19 @@ class OrderModel extends HomeModel {
     }
 
     // item 转变成已成交
-    public function updateBillItem($bi_id_list) {
+    public function updateBillItem($bi_id_list, $bill) {
         if (!empty($bi_id_list) && is_array($bi_id_list)) {
             foreach ($bi_id_list as $bi_id) {
                 $where = array(
                     'bi_id' => $bi_id
                 );
+                $bi_dpay = $bill['o_pri1'] * $bill['bi_nwei'];
                 $data = array (
-                    'bi_status' => SBillItemModel::STATUS_FINISH
+                    'bi_status' => 6,
+                    'bi_dpri' => $this->data['o_pri1'],
+                    'bi_dpay' => $bi_dpay
                 );
+
                 M('s_bill_item')->where($where)->save($data);
             }
         }
