@@ -131,7 +131,8 @@ class UserModel extends HomeModel {
         $password = $this->_checkPassword();
         $where = array(
             "mobile"    => $mobile,
-            "password"  => $password
+            "password"  => $password,
+            "status" => array("EGT", -1)
         );
 
         if (! $user =  $this->where($where)->find()) {

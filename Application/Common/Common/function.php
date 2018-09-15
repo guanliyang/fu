@@ -129,8 +129,9 @@ function save_file($path = 'Public/user_img'){
 function getUserStatus($status) {
     $list =
         array(
+            -1 => '待修改',
             0 => '待审核',
-            1 => '审核通过'
+            1 => '正常'
     );
     return $list[$status];
 }
@@ -541,7 +542,7 @@ function getOrderItemPendingMoneyText($order) {
     }
 
     // 20首付
-    if ($pay_type == \Home\Model\OrderModel::PAY_PART) {
+    else {
         if ($oi_status > 2) {
             $str = '已付货款';
         }
@@ -576,7 +577,7 @@ function getOrderItemPendingMoney($order, $order_item) {
     $str = formatMoney($oi_dpay).'元';
 
     // 20首付
-    if ($pay_type == \Home\Model\OrderModel::PAY_PART) {
+    if ($pay_type < 1) {
         if ($oi_status < 3) {
             $str = formatMoney(getPendingMoney($o_pay_f, $o_pay_t, $oi_dpay)).'元';
         }
@@ -646,7 +647,7 @@ function getKnotNew($order) {
     }
 
     // 20首付
-    if ($pay_type == \Home\Model\OrderModel::PAY_PART) {
+    else {
         if ($status > 2) {
             $str = '已结利息';
         }
@@ -864,6 +865,13 @@ function getOrderT($order_item, $status = 0) {
     return $pay;
 }
 
+// 尾款
+function getOrderTeil($order) {
+    $pay = $order['o_pay_t'] * $order['o_rate'];
+    $day = getPastDay($order);
+    return $pay * $day;
+}
+
 // 购物车每组货款
 function getItemPay($bill_item, $bill) {
     return $bill['b_pri1'] * $bill_item['bi_nwei'];
@@ -892,4 +900,9 @@ function getPortName($port_id) {
 // 当前日期
 function getDay() {
     return date('Y-m-d', time());
+}
+
+// 总共付款
+function getAllPay($order) {
+    return 2;
 }

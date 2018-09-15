@@ -38,7 +38,7 @@
                     <th>付款方式：{$info.order.o_pay_type|getPayType}</th>
                     <th>首付: {$info.order.o_pay_f|formatMoney}元</th>
                     <th>尾款: {$info.order.o_pay_t|formatMoney}元 (年利率{$info.order.o_rate})</th>
-                    <th class="tdright">计息: 85元 (5天)</th>
+                    <th class="tdright">计息: {$info.order|getOrderTeil}元 ({$info.order|getPastDay}天)</th>
                 </tr>
                 <tr>
                     <th></th>
@@ -56,17 +56,18 @@
                     <th colspan="4">
                         滞箱费: <label><b>{$info.order.o_depay|formatMoney}<b></label> 元　　
                         免费滞箱结止日 {$info.order.o_detime|date='Y-m-d',###} 至今 <?php echo getDay(); ?>
-                        超期 {$info.order|getdeDay} 天(50元/箱.天)
+                        超期 {$info.order|getdeDay} 天({$Think.config.BOX_DAY_PAY}元/箱.天)
                     </th>
                 </tr>
                 <tr>
                     <th></th>
                     <th colspan="4">
                         <label><b>[{$info.order.o_status|getOrderStatus}]<b></label>　
-                        需付款:<label><b>207,185<b></label> 元
+                        需付款:<label><b>{$info.order|getAllPay}<b></label> 元
                         (尾款<label><b>{$info.order.o_pay_t|formatMoney}<b></label> +
-                        利息<label><b>85<b></label> +
-                        运费<label><b>3,600<b></label> +
+                        利息<label><b>{$info.order|getOrderTeil}<b></label> +
+                        陆运费<label><b>{$info.order.o_frei|formatMoney}<b></label> +
+                        海运费<label><b>{$info.order.o_frei_m|formatMoney}<b></label> +
                         滞箱费<label><b>{$info.order.o_depay|formatMoney}<b></label>)，
                         请按合同说明方式付款至平台指定帐号。
                     </th>
@@ -81,7 +82,9 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td colspan="4">离岸时间：2018/07/16 10:12:35 锦州港　　　　到岸时间：2018/07/18 13:15:35 {$info.order.o_port|getPortName}</td>
+                    <td colspan="4">离岸时间：{$info.order.o_otime|getDateTime} s_bill.b_port离岸港口　　　　
+                        到岸时间：{$info.order.o_atime|getDateTime} {$info.order.o_port|getPortName}
+                    </td>
                 </tr>
             </table>
         </div>

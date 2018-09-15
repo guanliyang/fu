@@ -35,4 +35,7 @@ return  array(
     'DEPO_RATE' => 0.05,
     // 保证金显示
     'DEPO_RATE_SHOW' => '5%',
+
+    // 记箱费
+    'BOX_DAY_PAY' => 50,
 );
