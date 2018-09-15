@@ -280,7 +280,7 @@ class SBillModel extends HomeModel {
     private function _getDepo() {
         $b_pri0 = I('request.b_pri0', 0);
         $b_weig = I('request.b_weig', 0, 'intval');
-        $this->data['b_depo'] = $b_pri0 * $b_weig * 0.2;
+        $this->data['b_depo'] = $b_pri0 * $b_weig * C('DEPO_RATE');
     }
 
     // 联系人信息
