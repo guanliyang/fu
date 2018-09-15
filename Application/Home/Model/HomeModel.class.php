@@ -23,6 +23,15 @@ class HomeModel extends Model {
         return $uid;
     }
 
+    // 用户状态为1时,才能买卖粮食
+    public function checkUserNormal() {
+        $uid = $this->getModelUid();
+        $user = M('sys_user')->where(array('id' => $uid))->find();
+        if ($user['status'] < 1) {
+            notice('您的用户状态还未通过审核,不能进行此操作！');
+        }
+    }
+
     //是否阅读合同
     public function checkContract() {
         $contract = I('request.contract', 0);
@@ -55,7 +64,7 @@ class HomeModel extends Model {
                 notice('货组编号'.$bi_id.' 有误');
             }
 
-            if ($bill_item['bi_status'] == SBillItemModel::STATUS_FINISH) {
+            if ($bill_item['bi_status'] > SBillItemModel::STATUS_ORDER_PAD) {
                 notice('货组编号'.$bi_id.' 有误, 可能已被购买,请到购物车重新选择');
             }
         }

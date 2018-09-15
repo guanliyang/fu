@@ -19,8 +19,15 @@ function getMsgUrl($msg) {
             0 => '/Home/Order/info/o_id/',
             2 => '/Home/Sell/sellBillInfo/b_id/',
             1 => '/Home/Offer/offerInfo/f_id/',
+            3 => '/Home/User/userView'
         );
-    $url = $list[$msg_type].$msg['sm_rid'].'/msg_id/'.$msg['sm_id'];
+
+    if ($msg_type != 3) {
+        $url = $list[$msg_type].$msg['sm_rid'].'/msg_id/'.$msg['sm_id'];
+    }
+    else {
+        $url = $list[$msg_type].'/msg_id/'.$msg['sm_id'];
+    }
     return $url;
 }
 
@@ -31,8 +38,15 @@ function getWapMsgUrl($msg) {
             0 => '/Wap/Order/info/o_id/',
             2 => '/Wap/Sell/sellBillInfo/b_id/',
             1 => '/Wap/Offer/offerInfo/f_id/',
+            3 => '/Home/User/userView'
         );
-    $url = $list[$msg_type].$msg['sm_rid'].'/msg_id/'.$msg['sm_id'];
+
+    if ($msg_type != 3) {
+        $url = $list[$msg_type].$msg['sm_rid'].'/msg_id/'.$msg['sm_id'];
+    }
+    else {
+        $url = $list[$msg_type].'/msg_id/'.$msg['sm_id'];
+    }
     return $url;
 }
 

@@ -20,13 +20,13 @@
             if(eventdx[i].name=='bi_id[]' && eventdx[i].checked){
                 document.getElementById('tr'+eventdx[i].value).setAttribute('class', 'bill_item');
                 selsum++;
-                selpay += eval(document.getElementById('pay'+eventdx[i].value).innerText.replace(',', ''));
+                //selpay += eval(document.getElementById('pay'+eventdx[i].value).innerText.replace(',', ''));
             }
         }
-        selpay0 = selpay*0.2;
+        //selpay0 = selpay*0.2;
         document.getElementById('selsum').innerText = selsum;
-        document.getElementById('selpay').innerText = i2s3(selpay);
-        document.getElementById('selpay0').innerText = i2s3(selpay0);
+        //document.getElementById('selpay').innerText = i2s3(selpay);
+        //document.getElementById('selpay0').innerText = i2s3(selpay0);
     }
     function i2s3(intval){
         var reStr = '';
@@ -87,7 +87,10 @@
 </div>
 
 <div class="bill_ft" id="footer">
-    已选 <label id="selsum">0</label> 组货物<br/>货款合计：<label id="selpay" >0</label> 元　(首付 <label id="selpay0" >0</label> 元即可购买)<br/>
+    已选 <label id="selsum">0</label> 组货物<br/>
+    <!--货款合计：<label id="selpay" >0</label> 元　-->
+    <!--(首付 <label id="selpay0" >0</label> 元即可购买)-->
+    <br/>
     <input class="bt bt_s" id="t_submit" value="加入购物车" type="button"/>
     <input class="bt bt_s" id="be_order" value="立即下单" type="button"/>
 </div>

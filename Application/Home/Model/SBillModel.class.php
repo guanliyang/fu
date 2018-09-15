@@ -92,6 +92,47 @@ class SBillModel extends HomeModel {
         return $status;
     }
 
+    //购买订单时, 货组信息显示
+    public function getOnLineBillInfo($uid) {
+        $bill = $this->getBId();
+        // 根据b_status 获取item信息
+        $where = array('b_id' => $bill['b_id']);
+        // 在售
+        if ($bill['b_status'] == 5) {
+            $where += array('bi_status' => array('in','5, 6'));
+            $on_sell = M('s_bill_item')->where($where)->select();
+
+            // 判断on_sell 的bill_item 是否有6, 有6并且是当前用户购买的，不给当前用户显示
+            if ($on_sell && is_array($on_sell)) {
+                foreach ($on_sell as $bill_key => $bill_item) {
+                    if ($bill_item['bi_status'] == 6) {
+                        $order_item_list = M('b_order_item')->where(
+                            array(
+                                'bi_id' => $bill_item['bi_id']
+                            )
+                        )->select();
+                        if ($order_item_list && is_array($order_item_list)) {
+                            foreach ($order_item_list as $order_item) {
+                                $order = M('b_order')->where(
+                                    array(
+                                        'o_id' => $order_item['o_id'],
+                                        'u_id' => $uid
+                                    )
+                                )->find();
+                                if ($order) {
+                                    unset($on_sell[$bill_key]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            $bill['on_sell'] = $on_sell;
+
+        }
+        return $bill;
+    }
+
     /**
      * 重写获取卖单详情
      * 包括itme 已售货组和未售货组信息
@@ -112,6 +153,8 @@ class SBillModel extends HomeModel {
         if ($bill['b_status'] == 5) {
             $where += array('bi_status' => array('in','5, 6'));
             $bill['on_sell'] = M('s_bill_item')->where($where)->select();
+
+
 
             $where = array(
                 'b_id' => $bill['b_id'],
@@ -135,6 +178,7 @@ class SBillModel extends HomeModel {
         return $bill;
     }
 
+    // 获取bill信息
     public function getBId($getMyBill = true) {
         $id = I("request.b_id", 0, 'intval');
         if (empty($id)) {
@@ -157,6 +201,7 @@ class SBillModel extends HomeModel {
         return $bill;
     }
     public function ajaxAdd($uid) {
+        $this->checkUserNormal();
         $this->checkContract();
         $this->getG();
         $this->_getHan();

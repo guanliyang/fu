@@ -154,6 +154,7 @@ class OrderModel extends HomeModel {
 
     //生成订单
     public function addOrder($uid) {
+        $this->checkUserNormal();
         // 检查合同
         $this->checkContract();
         //检查bi_id
@@ -178,7 +179,6 @@ class OrderModel extends HomeModel {
 
             //收货人信息
             $this->getUser();
-
 
             $all_price = array_sum(array_column($bill['bill_item'], 'bi_dpay'));
             // 价格

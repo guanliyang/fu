@@ -44,6 +44,8 @@ class UserModel extends HomeModel {
         $this->address = I('request.address');
         $this->img = $this->getImagePath();
 
+        $this->rtime = time();
+
         $this->add();
     }
 

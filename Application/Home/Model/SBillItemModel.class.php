@@ -7,6 +7,7 @@ class SBillItemModel extends HomeModel {
     const STATUS_ON = 9;
     const STATUS_CHECK = 0;
     const STATUS_FINISH = 10;
+    const STATUS_ORDER_PAD = 6;
 
     // bi_id_str 获取总价格
     public function getPrice($bill) {

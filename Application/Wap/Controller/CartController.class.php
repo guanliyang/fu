@@ -6,7 +6,7 @@ class CartController extends HomeController {
     public function finish() {
         $this->checkoutUserLogin();
         $car = new \Home\Model\CartModel();
-        $bill = $car->finish();
+        $bill = $car->finish($this->getUid());
 
         $province = M('area')->where(array('level' => 1))->select();
         $this->assign('province', $province);

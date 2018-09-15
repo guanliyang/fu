@@ -21,13 +21,13 @@
             if(eventdx[i].name=='bi_id[]' && eventdx[i].checked){
                 document.getElementById('tr'+eventdx[i].value).setAttribute('class', 'selc');
                 selsum++;
-                selpay += eval(document.getElementById('pay'+eventdx[i].value).innerText.replace(',', ''));
+                //selpay += eval(document.getElementById('pay'+eventdx[i].value).innerText.replace(',', ''));
             }
         }
-        selpay0 = selpay*0.2;
+        //selpay0 = selpay*0.2;
         document.getElementById('selsum').innerText = selsum;
-        document.getElementById('selpay').innerText = i2s3(selpay);
-        document.getElementById('selpay0').innerText = i2s3(selpay0);
+        //document.getElementById('selpay').innerText = i2s3(selpay);
+        //document.getElementById('selpay0').innerText = i2s3(selpay0);
     }
     function i2s3(intval){
         var reStr = '';
@@ -99,7 +99,10 @@
 
                 <tr>
                     <th></th>
-                    <th colspan="5">已选 <label id="selsum" class="hot">0</label> 组货物　　　　货款合计：<label id="selpay" class="hot">0</label> 元　(首付 <label id="selpay0" class="hot">0</label> 元即可购买)</th>
+                    <th colspan="5">已选 <label id="selsum" class="hot">0</label> 组货物　　　　
+                        <!--货款合计：<label id="selpay" class="hot">0</label> 元　-->
+                        <!--(首付 <label id="selpay0" class="hot">0</label> 元即可购买)-->
+                    </th>
                 </tr>
             </table>
         </div>

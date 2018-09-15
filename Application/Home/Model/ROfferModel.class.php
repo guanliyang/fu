@@ -61,6 +61,7 @@ class ROfferModel extends HomeModel {
     }
 
     public function addOffer($uid) {
+        $this->checkUserNormal();
         $this->checkContract();
         $this->getG();
         $this->_getWeig();

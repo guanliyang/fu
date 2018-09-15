@@ -16,7 +16,8 @@ class CartModel extends HomeModel {
 
     }
     // 订单结算
-    public function finish() {
+    public function finish($uid) {
+        $this->checkUserNormal();
         $bi_id_str = I('get.bi_id_str');
         $bi_id_list = $this->checkBiIdStr($bi_id_str);
         $data = array();
@@ -38,8 +39,8 @@ class CartModel extends HomeModel {
 
     // 选择跳转
     public function choseBiId() {
+        $this->checkUserNormal();
         $bi_id_str = implode(',', I('buyid'));
-
         $this->checkBiIdStr($bi_id_str);
         return $bi_id_str;
     }
@@ -78,6 +79,7 @@ class CartModel extends HomeModel {
 
     // 添加到购物车
     public function addCart($uid) {
+        $this->checkUserNormal();
         $bi_id_list = I('request.bi_id');
         $this->checkBiIdList($bi_id_list);
         $bi_id_list = $this->checkExist($bi_id_list, $uid);

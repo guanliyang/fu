@@ -4,6 +4,7 @@ class UserController extends HomeController {
 
     // 用户详细信息
     public function userView() {
+        setReadMsg();
         $this->checkoutUserLogin();
         $province = M('area')->where(array('level' => 1))->select();
         $this->assign('province', $province);
