@@ -71,6 +71,26 @@
                     </volist>
                 </if>
 
+                <if condition="$info['order_placed']">
+                    <tr>
+                        <th width="30"></th>
+                        <th>({$info.order_placed|count}) 已下单货组：</th>
+                        <th colspan="3"><label>{$info.b_pri1}</label>元/吨 <a href="/Home/Sell/changePrice?b_id={$_GET['b_id']}"><修改单价></a></th>
+                        <th width="150"></th>
+                        <th width="90"></th>
+                    </tr>
+                    <volist name="info.order_placed" id="vo">
+                        <tr>
+                            <td></td>
+                            <td>NO：{$vo.bi_id} {$info|getBillItemStatusByBill=$vo['bi_status']}</td>
+                            <td width="90">{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
+                            <td width="180">{$vo.bi_dpay|formatMoney}元</td>
+                            <td width="60">已回款：</td>
+                            <td><a href="/Home/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}"><货组详情></a></td>
+                        </tr>
+                    </volist>
+                </if>
+
                 <if condition="$info['on_sell']">
                     <tr>
                         <th width="30"></th>

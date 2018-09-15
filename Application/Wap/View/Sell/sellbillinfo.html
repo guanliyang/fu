@@ -95,6 +95,22 @@
         </volist>
     </if>
 
+    <if condition="$info['order_placed']">
+        <div class="order_info" style="text-align:left;">({$info.order_placed|count})已下单货组　　
+            <b>{$info.b_pri1}</b>元/吨　<a href="/Wap/Sell/changePrice?b_id={$_GET['b_id']}"><修改售价></a></div>
+        <volist name="info.order_placed" id="vo">
+            <div class="order_item" onclick="location.href='/Wap/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}'">
+                &#8470;.{$vo.bi_id}<label>
+                <span><b>[{$vo.bi_status|getBillItemStatus}]</b></span>　(详情)</label><br/>
+                货款：<b>{$vo.bi_dpay|formatMoney}</b>元
+                ({$info.b_pri0|formatMoney}元/吨)<label>
+                {$vo.bi_sum}箱　净重{$info.b_weig}吨</label><br/>
+                回款：<b>{$vo.bi_rpay}</b>元<label>
+                回款结息：<span><b>{$vo.bi_inte}</b></span>元</label>
+            </div>
+        </volist>
+    </if>
+
 
     <if condition="$info['finish_sell']">
     <div class="order_info" style="text-align:left;">({$info.finish_sell|count})已售货组</div>
