@@ -36,10 +36,19 @@
                     <th>付款方式：{$info.order.o_pay_type|getPayType}</th>
                     <th>首付: {$info.order.o_pay_f|formatMoney}元</th>
                     <th>尾款: {$info.order.o_pay_t|formatMoney}元 (年利率{$info.order.o_rate})</th>
+
                     <th class="tdright">
+                    <?php if(in_array($info['order']['o_status'], array(3,4,5) ) ) { ?>
                         计息: {$info.order|getOrderTeil}元
                         ({$info.order|getPastDay}天)
+
+                    <?php } ?>
+
+                    <?php if(in_array($info['order']['o_status'], array(6,7,8,9,10) ) ) { ?>
+                        利息: {$info.order.o_inpay|formatMoney}元
+                    <?php } ?>
                     </th>
+
                 </tr>
                 <tr>
                     <th></th>

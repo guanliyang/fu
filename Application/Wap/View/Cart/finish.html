@@ -10,6 +10,9 @@
         for (var i=0;i<eventdx.length;i++){
             if(eventdx[i].name=='payment' && eventdx[i].checked){
                 if(eventdx[i].value=='1'){
+                    document.getElementById('tr20pay').style['display'] = 'none';
+                    npay = total;
+                }else{
                     document.getElementById('tr20pay').style['display'] = '';
                     npay = total*{$Think.config.FIRST_PAY};
                     epay = total-npay;
@@ -18,10 +21,6 @@
                     document.getElementById('epayi').innerText = i2s3(epay);
                     var dipay = Math.round(epay*dinte/365 * 100) / 100;
                     document.getElementById('dipay').innerText = i2s3(dipay);
-                }else{
-                    document.getElementById('tr20pay').style['display'] = 'none';
-                    npay = total;
-
                 }
             }
             document.getElementById('npay').innerText = i2s3(npay);
