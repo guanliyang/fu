@@ -193,7 +193,7 @@ class OrderModel extends HomeModel {
             $this->data['o_pay'] = $this->data['o_pri1'] * $this->data['o_nwei'];
 
             // 利率
-            $this->data['o_rate'] = C('DUY_RATE');
+            $this->data['o_rate'] = C('BUY_RATE');
 
             //order 表里插入信息
             $o_id = self::data($this->data)->add();
@@ -304,7 +304,8 @@ class OrderModel extends HomeModel {
             $this->data['o_pay_t'] = 0;
         }
         else {
-            $this->data['o_pay_f'] = $all_price * C('DUY_RATE');
+
+            $this->data['o_pay_f'] = $all_price * C('FIRST_PAY');
             $this->data['o_pay_t'] = $all_price - $this->data['o_pay_f'];
         }
 
@@ -313,5 +314,6 @@ class OrderModel extends HomeModel {
 
         // 货物单价 *元/吨
         $this->data['o_pri1'] = $bill['b_pri1'];
+
     }
 }
