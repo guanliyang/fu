@@ -29,44 +29,100 @@
                 净重{$item.bi_nwei}吨</label>
             </div>
         </volist>
-
-
     <div class="order_info"></div>
-    <div class="order_item">付款方式：{$info.order.o_pay_type|getPayType}<br/>&nbsp;
+    <!-- 支付信息 -->
+    <?php if(in_array($info['order']['o_status'], array(2) ) ) { ?>
+    <div class="order_item">
+    付款方式：{$info.order.o_pay_type|getPayType}<br/>&nbsp;
         <label>
-            首付<b>{$info.order.o_pay_f|formatMoney}</b>元　
-            尾款<b>{$info.order.o_pay_t|formatMoney}</b>元(年利率{$info.order.o_rate})　
-            计息<b>{$info.order|getOrderTeil}</b>元({$info.order|getPastDay}天)
+        需付款:
+            <b>
+                <?php
+                echo  $info['order']['o_pay_f']+
+                $info['order']['o_frei']+
+                $info['order']['o_frei_m'];
+                ?>
+            <b> 元
+			(首付<b>{$info.order.o_pay_f|formatMoney}<b> +
+            陆运费<b>{$info.order.o_frei|formatMoney}<b> +
+            海运费<b>{$info.order.o_frei_m|formatMoney}<b> )
         </label>
     </div>
+    <?php } ?>
+
+    <!-- 支付信息 -->
+    <?php if(in_array($info['order']['o_status'], array(5,6,7,8,9,10) ) ) { ?>
+    <div class="order_item">
+    付款方式：{$info.order.o_pay_type|getPayType}<br/>&nbsp;
+        <label>
+        需付款:
+            <b>
+                <?php
+                echo  $info['order']['o_pay_t']+
+                getOrderTeil($info['order'])+
+                $info['order']['o_depay'];
+                ?>
+            <b> 元 &nbsp;&nbsp;&nbsp;&nbsp;
+			(尾款<b>{$info.order.o_pay_t|formatMoney}<b> +
+            利息<b>{$info.order|getKnotNumber}<b> +
+            滞箱费<b>{$info.order.o_depay|formatMoney}<b>)
+        </label>
+    </div>
+    <?php } ?>
+    
+
     <div class="order_item">
         收货方式：{$info.order.o_deli_type|getDeliType}
         <label>陆运费：<b>{$info.order.o_frei|formatMoney}</b>元</label><br/>
         联系人：{$info.order.o_deli_cont}　　手机号：{$info.order.o_deli_mobi}<br/>
         收货地址：{$info.order.o_deli_add}
     </div>
-    <div class="order_item">
-        滞箱期限：{$info.order.o_detime|date='Y-m-d',###} 结止<br/>
-        至今 <?php echo getDay(); ?> 超期 {$info.order|getdeDay} 天({$Think.config.BOX_DAY_PAY}元/箱.天)
-        <label>滞箱费：<b>{$info.order.o_depay|formatMoney}</b>元</label>
-    </div>
-    <div class="order_info"></div>
-    <div class="order_item">
-        付款方式：{$info.order.o_pay_type|getPayType}<br/>&nbsp;
-        <label>首付<b>{$info.order.o_pay_f|formatMoney}</b>元　
-            尾款<b>{$info.order.o_pay_t|formatMoney}</b>元(年利率{$info.order.o_rate})　
-            计息<b>{$info.order|getOrderTeil}</b>元({$info.order|getPastDay}天)</label>
-    </div>
+    
     <div class="order_info">成交时间：{$info.order.o_dtime|getDateTime}</div>
-    <div class="order_info">海运单号：{$info.order.o_marnum} {$info.mc_name}</div>
+
+
+    <!-- 海运信息 -->
+    <?php if(in_array($info['order']['o_status'], array(2,3) ) ) { ?>
+    <div class="order_item">
+        <label>海运费：<b>{$info.order.o_frei_m|formatMoney}</b>元</label><br/>
+    </div>
+    <?php } ?>
+
+    <!-- 海运信息 -->
+    <?php if(in_array($info['order']['o_status'], array(4) ) ) { ?>
     <div class="order_item">
         <label>海运费：<b>{$info.order.o_frei_m|formatMoney}</b>元</label><br/>
     </div>
     <div class="order_item">
         离岸时间：{$info.order.o_otime|getDateTime}
         <label><b>{$info.bill.bill_item.0|getPortName}</b></label><br/>
-        到岸时间：{$info.order.o_atime|getDateTime}
-        <label><b>{$info.order.o_port|getPortName}</b></label></div>
+    </div>
+    <?php } ?>
+
+    <!-- 海运信息 -->
+    <?php if(in_array($info['order']['o_status'], array(5,6,7,8,9,10) ) ) { ?>
+        <div class="order_info">海运单号：{$info.order.o_marnum} {$info.mc_name}</div>
+        <div class="order_item">
+            <label>海运费：<b>{$info.order.o_frei_m|formatMoney}</b>元</label><br/>
+        </div>
+        <div class="order_item">
+            离岸时间：{$info.order.o_otime|getDateTime}
+            <label><b>{$info.bill.bill_item.0|getPortName}</b></label><br/>
+            到岸时间：{$info.order.o_atime|getDateTime}
+            <label><b>{$info.order.o_port|getPortName}</b></label>
+        </div>
+    <?php } ?>
+
+
+    <!-- 滞箱信息 -->
+    <?php if(in_array($info['order']['o_status'], array(5,6,7,8,9,10) ) ) { ?>
+        <div class="order_item">
+            滞箱期限：{$info.order.o_detime|date='Y-m-d',###} 结止<br/>
+            至今 <?php echo getDay(); ?> 超期 {$info.order|getdeDay} 天({$Think.config.BOX_DAY_PAY}元/箱.天)
+            <label>滞箱费：<b>{$info.order.o_depay|formatMoney}</b>元</label>
+        </div>
+    <?php } ?>
+
     <div class="order_info"><<a href="">查看电子合同</a>>
     </div>
 <include file="public/foot" />

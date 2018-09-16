@@ -321,12 +321,12 @@ function getOrderStatus($status) {
     $list =
         array(
             -9 => '已删除',
-            0 => '待核费(陆运)',
-            1 => '待核费(海运)',
+            0 => '审核中',//'待核费(陆运)',
+            1 => '审核中',//'待核费(海运)',
             2 => '待付款',
             3 => '待离岸',
             4 => '海运中',
-            5 => '已到岸',
+            5 => '待付尾款',//'已到岸',
             6 => '待发货',
             7 => '待收货',
             8 => '待提货',
@@ -671,6 +671,30 @@ function getKnotNew($order) {
     }
     return $str;
 }
+
+// 新可结利息
+function getKnotNumber($order) {
+    $pay_type = $order['o_pay_type'];
+    $rate = C('BUY_RATE');
+    $status = $order['o_status'];
+    // 全付
+    if ($pay_type == \Home\Model\OrderModel::PAY_ALL) {
+        $str = 0;
+    }
+
+    // 20首付
+    else {
+        if ($status > 2) {
+            $str = 0;
+        }
+        else {
+            $day = getPastDay($order);
+            $str = $order['o_pay_t'] * $rate * $day;
+        }
+    }
+    return $str;
+}
+
 
 function getSumKnot($order_item) {
     $pay = 0;

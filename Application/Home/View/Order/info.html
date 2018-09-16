@@ -44,7 +44,7 @@
                 <tr>
                     <th></th>
                     <th>收货方式：{$info.order.o_deli_type|getDeliType}</th>
-                    <th>运费：{$info.order.o_frei|formatMoney}元</th>
+                    <th>陆运费：{$info.order.o_frei|formatMoney}元</th>
                     <th>联系人：{$info.order.o_deli_cont} ({$info.order.o_deli_mobi})</th>
                     <th></th>
                 </tr>
@@ -52,34 +52,42 @@
                     <td></td>
                     <td colspan="4">地址：{$info.order.o_deli_add}　</td>
                 </tr>
-                <tr>
-                    <th></th>
-                    <th colspan="4">
-                        滞箱费: <label><b>{$info.order.o_depay|formatMoney}<b></label> 元　　
-                        免费滞箱结止日 {$info.order.o_detime|date='Y-m-d',###} 至今 <?php echo getDay(); ?>
-                        超期 {$info.order|getdeDay} 天({$Think.config.BOX_DAY_PAY}元/箱.天)
-                    </th>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th colspan="4">
-                        <label><b>[{$info.order.o_status|getOrderStatus}]<b></label>　
-                        需付款:<label><b>{$info.order|getAllPay}<b></label> 元
-                        (尾款<label><b>{$info.order.o_pay_t|formatMoney}<b></label> +
-                        利息<label><b>{$info.order|getOrderTeil}<b></label> +
-                        陆运费<label><b>{$info.order.o_frei|formatMoney}<b></label> +
-                        海运费<label><b>{$info.order.o_frei_m|formatMoney}<b></label> +
-                        滞箱费<label><b>{$info.order.o_depay|formatMoney}<b></label>)，
-                        请按合同说明方式付款至平台指定帐号。
-                    </th>
-                </tr>
+
                 <tr>
                     <th></th>
                     <th colspan="4">成交时间：{$info.order.o_dtime|getDateTime}</th>
                 </tr>
+
+                <!-- 海运信息 -->
+                <?php if(in_array($info['order']['o_status'], array(2,3) ) ) { ?>
+                    <tr>
+                        <th></th>
+                        <th>海运费：{$info.order.o_frei_m|formatMoney}元</th>
+                        <th colspan="3"></th>
+                    </tr>
+                <?php } ?>
+
+                <!-- 海运信息 -->
+                <?php if(in_array($info['order']['o_status'], array(4) ) ) { ?>
                 <tr>
                     <th></th>
-                    <th colspan="4">海运单号：{$info.order.o_marnum} {$info.mc_name}</th>
+                    <th>海运费：{$info.order.o_frei_m|formatMoney}元</th>
+                    <th colspan="3"></th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="4">离岸时间：{$info.order.o_otime|getDateTime}
+                        {$info.bill.bill_item.0|getPortName}
+                    </td>
+                </tr>
+                <?php } ?>
+
+                <!-- 海运信息 -->
+                <?php if(in_array($info['order']['o_status'], array(5,6,7,8,9,10) ) ) { ?>
+                <tr>
+                    <th></th>
+                    <th>海运费：{$info.order.o_frei_m|formatMoney}元</th>
+                    <th colspan="3"></th>
                 </tr>
                 <tr>
                     <td></td>
@@ -89,6 +97,69 @@
                         {$info.order.o_port|getPortName}
                     </td>
                 </tr>
+                <?php } ?>
+
+                <!-- 滞箱信息 -->
+                <?php if(in_array($info['order']['o_status'], array(5, 6,7,8,9,10) ) ) { ?>
+                <tr>
+                    <th></th>
+                    <th colspan="4">
+                        滞箱费: <label><b>{$info.order.o_depay|formatMoney}<b></label> 元　　
+                        免费滞箱结止日 {$info.order.o_detime|date='Y-m-d',###} 至今 <?php echo getDay(); ?>
+                        超期 {$info.order|getdeDay} 天({$Think.config.BOX_DAY_PAY}元/箱.天)
+                    </th>
+                </tr>
+                <?php } ?>
+
+
+                <!-- 支付信息 -->
+                <?php if(in_array($info['order']['o_status'], array(2) ) ) { ?>
+                <tr>
+                    <th></th>
+                    <th colspan="4">
+                        <label><b>[{$info.order.o_status|getOrderStatus}]<b></label>　
+                        需付款:
+                        <label>
+                            <b>
+                                <?php
+                                echo  $info['order']['o_pay_f']+
+                                $info['order']['o_frei']+
+                                $info['order']['o_frei_m'];
+                                ?>
+                            <b>
+                        </label> 元
+                        (首付<label><b>{$info.order.o_pay_f|formatMoney}<b></label> +
+                        陆运费<label><b>{$info.order.o_frei|formatMoney}<b></label> +
+                        海运费<label><b>{$info.order.o_frei_m|formatMoney}<b></label> )
+                        请按合同说明方式付款至平台指定帐号。
+                    </th>
+                </tr>
+                <?php } ?>
+
+                <!-- 支付信息 -->
+                <?php if(in_array($info['order']['o_status'], array(5, 6, 7, 8, 9, 10) ) ) { ?>
+                <tr>
+                    <th></th>
+                    <th colspan="4">
+                        <label><b>[{$info.order.o_status|getOrderStatus}]<b></label>　
+                        需付款:
+                        <label>
+                            <b>
+                                <?php
+                                echo  $info['order']['o_pay_t']+
+                                getOrderTeil($info['order'])+
+                                $info['order']['o_depay'];
+                                ?>
+                                <b>
+                        </label> 元
+                        (尾款<label><b>{$info.order.o_pay_t|formatMoney}<b></label> +
+                        利息<label><b>{$info.order|getKnotNumber}<b></label> +
+                        滞箱费<label><b>{$info.order.o_depay|formatMoney}<b></label>)
+                        请按合同说明方式付款至平台指定帐号。
+                    </th>
+                </tr>
+                <?php } ?>
+
             </table>
         </div>
     </div>
