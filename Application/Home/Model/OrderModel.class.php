@@ -298,13 +298,14 @@ class OrderModel extends HomeModel {
     // 支付价格
     public function getAllPrice($pay_type, $all_price, $bill) {
         $this->data['o_pay'] = $all_price;
-        if ($pay_type == self::PAY_PART) {
-            $this->data['o_pay_f'] = $all_price * 0.2;
-            $this->data['o_pay_t'] = $all_price - $this->data['o_pay_f'];
-        }
+
         if ($pay_type == self::PAY_ALL) {
             $this->data['o_pay_f'] = $all_price;
             $this->data['o_pay_t'] = 0;
+        }
+        else {
+            $this->data['o_pay_f'] = $all_price * C('DUY_RATE');
+            $this->data['o_pay_t'] = $all_price - $this->data['o_pay_f'];
         }
 
         // 运费暂时为空
