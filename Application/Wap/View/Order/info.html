@@ -13,15 +13,15 @@
         运费<span><b>3,600</b></span> + 滞箱费<span><b>300</b></span>)<br/>
         请按合同说明方式付款至平台指定帐号。
     </div>
-    <volist name="info.bill" id="vo">
-        <div class="order_info" onclick="location.href='/Wap/Order/billInfo/b_id/{$vo.b_id}/o_id/{$info.order.o_id}/bi_id/{$vo.bill_item|getArrayV='bi_id'}'">
-            <label>{$vo.b_name}　{$vo.b_year}年　{$vo.b_place}　{$vo.b_level}　容重{$vo.b_rz}　g/l　　（查看）</label>
+
+        <div class="order_info" onclick="location.href='/Wap/Order/billInfo/b_id/{$info.bill.b_id}/o_id/{$info.order.o_id}/bi_id/{$info.bill.bill_item|getArrayV='bi_id'}'">
+            <label>{$info.bill.b_name}　{$info.bill.b_year}年　{$info.bill.b_place}　{$info.bill.b_level}　容重{$info.bill.b_rz}　g/l　　（查看）</label>
         </div>
         <div class="order_info">
             <label>货款合计<b>{$info.order.o_pay|formatMoney}</b> 元
                 ({$info.order.o_pri1|formatMoney}元/吨)</label>
         </div>
-        <volist name="vo.bill_item" id="item">
+        <volist name="info.bill.bill_item" id="item">
             <div class="order_item" onclick="location.href='/Wap/Order/billItemInfo/oi_id/{$item.oi_id}/o_id/{$info.order.o_id}'">
                 &#8470;.{$item.bi_id}<label>(详情)</label><br/>
                 箱号: {$item.bi_cnum1}　{$item.bi_cnum2}<label>
@@ -29,14 +29,14 @@
                 净重{$item.bi_nwei}吨</label>
             </div>
         </volist>
-    </volist>
+
 
     <div class="order_info"></div>
     <div class="order_item">付款方式：{$info.order.o_pay_type|getPayType}<br/>&nbsp;
         <label>
             首付<b>{$info.order.o_pay_f|formatMoney}</b>元　
-            尾款<b>{$info.order.o_pay_t|formatMoney}</b>元(年利率0.06)　
-            计息<b>85</b>元(5天)
+            尾款<b>{$info.order.o_pay_t|formatMoney}</b>元(年利率{$info.order.o_rate})　
+            计息<b>{$info.order|getOrderTeil}</b>元({$info.order|getPastDay}天)
         </label>
     </div>
     <div class="order_item">
@@ -54,7 +54,7 @@
     <div class="order_item">
         付款方式：{$info.order.o_pay_type|getPayType}<br/>&nbsp;
         <label>首付<b>{$info.order.o_pay_f|formatMoney}</b>元　
-            尾款<b>{$info.order.o_pay_t|formatMoney}</b>元(年利率0.06)　
+            尾款<b>{$info.order.o_pay_t|formatMoney}</b>元(年利率{$info.order.o_rate})　
             计息<b>{$info.order|getOrderTeil}</b>元({$info.order|getPastDay}天)</label>
     </div>
     <div class="order_info">成交时间：{$info.order.o_dtime|getDateTime}</div>
@@ -64,7 +64,7 @@
     </div>
     <div class="order_item">
         离岸时间：{$info.order.o_otime|getDateTime}
-        <label><b>s_bill.b_port离岸港口</b></label><br/>
+        <label><b>{$info.bill.bill_item.0|getPortName}</b></label><br/>
         到岸时间：{$info.order.o_atime|getDateTime}
         <label><b>{$info.order.o_port|getPortName}</b></label></div>
     <div class="order_info"><<a href="">查看电子合同</a>>

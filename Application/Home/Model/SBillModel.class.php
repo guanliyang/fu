@@ -94,7 +94,7 @@ class SBillModel extends HomeModel {
 
     //购买订单时, 货组信息显示
     public function getOnLineBillInfo($uid) {
-        $bill = $this->getBId();
+        $bill = $this->getBId(false);
         // 根据b_status 获取item信息
         $where = array('b_id' => $bill['b_id']);
         // 在售

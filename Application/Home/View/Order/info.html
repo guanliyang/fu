@@ -10,17 +10,16 @@
         </div>
         <div class="list">
             <table>
-                <volist name="info.bill" id="vo">
                     <tr>
                         <th width="30"></th>
-                        <th>{$vo.b_name}　{$vo.b_year}年　{$vo.b_place}　{$vo.b_level}　容重{$vo.b_rz}g/l</th>
+                        <th>{$info.bill.b_name}　{$info.bill.b_year}年　{$info.bill.b_place}　{$info.bill.b_level}　容重{$info.bill.b_rz}g/l</th>
                         <th colspan="2">货款: <label>{$info.order.o_pay|formatMoney}</label>元
                             (<label>{$info.order.o_pri1|formatMoney}</label>元/吨)</th>
                         <th width="125" class="tdright">
-                            <a href="/Home/Order/billInfo/b_id/{$vo.b_id}/o_id/{$info.order.o_id}/bi_id/{$vo.bill_item|getArrayV='bi_id'}">...</a>
+                            <a href="/Home/Order/billInfo/b_id/{$info.bill.b_id}/o_id/{$info.order.o_id}/bi_id/{$info.bill.bill_item|getArrayV='bi_id'}">...</a>
                         </th>
                     </tr>
-                    <volist name="vo.bill_item" id="item">
+                    <volist name="info.bill.bill_item" id="item">
                         <tr>
                             <td></td>
                             <td>货组编号：{$item.bi_id}</td>
@@ -31,14 +30,16 @@
                             </td>
                         </tr>
                     </volist>
-                </volist>
 
                 <tr>
                     <th></th>
                     <th>付款方式：{$info.order.o_pay_type|getPayType}</th>
                     <th>首付: {$info.order.o_pay_f|formatMoney}元</th>
                     <th>尾款: {$info.order.o_pay_t|formatMoney}元 (年利率{$info.order.o_rate})</th>
-                    <th class="tdright">计息: {$info.order|getOrderTeil}元 ({$info.order|getPastDay}天)</th>
+                    <th class="tdright">
+                        计息: {$info.order|getOrderTeil}元
+                        ({$info.order|getPastDay}天)
+                    </th>
                 </tr>
                 <tr>
                     <th></th>
@@ -82,8 +83,10 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td colspan="4">离岸时间：{$info.order.o_otime|getDateTime} s_bill.b_port离岸港口　　　　
-                        到岸时间：{$info.order.o_atime|getDateTime} {$info.order.o_port|getPortName}
+                    <td colspan="4">离岸时间：{$info.order.o_otime|getDateTime}
+                        {$info.bill.bill_item.0|getPortName}　　　　
+                        到岸时间：{$info.order.o_atime|getDateTime}
+                        {$info.order.o_port|getPortName}
                     </td>
                 </tr>
             </table>

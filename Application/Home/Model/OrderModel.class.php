@@ -68,9 +68,9 @@ class OrderModel extends HomeModel {
                 // 父数组不存在, 去查
                 if (empty($bill_list[$b_id])) {
                     $bill = M('s_bill')->where(array('b_id' => $b_id))->find();
-                    $bill_list[$b_id] = $bill;
+                    $bill_list = $bill;
                 }
-                $bill_list[$b_id]['bill_item'][] = $bill_item +
+                $bill_list['bill_item'][] = $bill_item +
                     array(
                         'oi_status' => $order_item['oi_status'],
                         'oi_id' => $order_item['oi_id']

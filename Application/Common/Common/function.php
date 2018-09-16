@@ -430,13 +430,12 @@ function getDeliType($type) {
 
 //支付方式
 function getPayType($type) {
-    $list =
-        array(
-            0 => '空',
-            1 => C('FIRST_PAY').'首付',
-            2 => '全款',
-        );
-    return $list[$type];
+    if ($type == 1) {
+        return '全款';
+    }
+    else {
+        return $type.'首付';
+    }
 }
 
 // 二维数组 某键值
@@ -883,7 +882,7 @@ function getOrderT($order_item, $status = 0) {
 function getOrderTeil($order) {
     $pay = $order['o_pay_t'] * $order['o_rate'];
     $day = getPastDay($order);
-    return $pay * $day;
+    return  formatMoney($pay * $day);
 }
 
 // 购物车每组货款
@@ -918,5 +917,11 @@ function getDay() {
 
 // 总共付款
 function getAllPay($order) {
-    return 2;
+    // 尾款 + 利息 + 陆运 + 海运 + 滞箱
+    return $order['o_pay_t'] +
+        getOrderTeil($order) +
+        $order['o_frei'] +
+        $order['o_frei_m'] +
+        $order['o_depay'] ;
+
 }
