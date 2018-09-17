@@ -686,13 +686,8 @@ function getKnotNumber($order) {
 
     // 20首付
     else {
-        if ($status > 2) {
-            $str = 0;
-        }
-        else {
-            $day = getPastDay($order);
-            $str = $order['o_pay_t'] * $rate * $day;
-        }
+        $day = getPastDay($order);
+        $str = $order['o_pay_t'] * $rate * $day;
     }
     return $str;
 }
