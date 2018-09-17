@@ -8,7 +8,7 @@ class CliController extends Controller{
     }
 
     public function updateOrder() {
-        $order_list = M('b_order')->select();
+        $order_list = M('b_order')->where('o_artime IS NOT NULL AND o_artime < '.time().' AND o_status = 7')->select();
         if ($order_list && is_array($order_list)) {
             foreach ($order_list as $order) {
                 if (!empty($order['o_artime']) &&
