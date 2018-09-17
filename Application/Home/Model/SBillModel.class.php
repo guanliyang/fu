@@ -324,7 +324,7 @@ class SBillModel extends HomeModel {
     // 缴纳保证金
     private function _getDepo() {
         $b_pri0 = I('request.b_pri0', 0);
-        $b_weig = I('request.b_weig', 0, 'intval');
+        $b_weig = I('request.b_weig', 0);
         $this->data['b_depo'] = $b_pri0 * $b_weig * C('DEPO_RATE');
     }
 

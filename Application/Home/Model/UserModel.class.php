@@ -17,7 +17,7 @@ class UserModel extends HomeModel {
         $this->mobile = $this->_checkMobile();
         // 开户银行信息
         $this->bank_name = I('request.bank_name');
-        $this->bank_account = I('request.bank_account');
+        $this->bank_account = checkAccount(I('request.bank_account'));
         $this->bank_payee = I('request.bank_payee');
 
         //$this->_checkCode($this->mobile);
@@ -80,7 +80,7 @@ class UserModel extends HomeModel {
 
         // 开户银行信息
         $this->bank_name = I('request.bank_name');
-        $this->bank_account = I('request.bank_account');
+        $this->bank_account = checkAccount(I('request.bank_account'));
         $this->bank_payee = I('request.bank_payee');
 
         $status = $this->where(array('id'=>$user['id']))->save();
@@ -271,4 +271,5 @@ class UserModel extends HomeModel {
     private function getAreaNameById($id) {
         return M('area')->where(array('id' => $id))->getField('areaName');
     }
+
 }

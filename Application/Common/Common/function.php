@@ -949,3 +949,13 @@ function getAllPay($order) {
         $order['o_depay'] ;
 
 }
+
+// 只能包含数字或字母
+function checkAccount($bank_account){
+    $bank_account = strtolower($bank_account);
+    if(!empty($bank_account) && !preg_match("/^[a-z\d]*$/i", $bank_account))
+    {
+        notice("银行帐号只能包含数字和字母");//有数字有字母 ";
+    }
+    return $bank_account;
+}
