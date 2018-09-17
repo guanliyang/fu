@@ -465,15 +465,19 @@ if (!function_exists('array_column')) {
 }
 
 //根据id和类型获取被截断的消息内容
-function getMessageById($sm_rid, $type = 0) {
-    $where = array(
-        'sm_type' => $type,
-        'sm_rid' => $sm_rid
-    );
+function getMessageById($rid, $type = 0) {
+    $str = '.';
+    if ($type == 1) {
+        $str = getBillStatus($rid);
+    }
+    if ($type == 2) {
+        $str = getOfferStatus($rid);
+    }
 
-    $msg = M('sys_msg')->where($where)->order('sm_ctime desc')->find();
-
-    return subtext($msg['sm_content'], 6);
+    if ($type == 0) {
+        $str = getOrderStatus($rid);
+    }
+    return $str;
 }
 
 /*字符串截断函数+省略号*/

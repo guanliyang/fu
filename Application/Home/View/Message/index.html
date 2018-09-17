@@ -60,7 +60,7 @@
                     <td>容重：{$vo.bill.b_rz}g/l</td>
                     <td>{$vo.bill.all_nwei}吨</td>
                     <td>{$vo.o_pri1|formatMoney}元/吨</td>
-                    <td><a href="/Home/Order/info/o_id/{$vo.o_id}">{$vo.o_id|getMessageById=0}</a></td>
+                    <td><a href="/Home/Order/info/o_id/{$vo.o_id}">{$vo.o_status|getMessageById=0}</a></td>
                 </tr>
                 </volist>
 
@@ -82,7 +82,7 @@
                     <td>容重：{$vo.f_rz}g/l</td>
                     <td>{$vo.f_weig}吨</td>
                     <td></td>
-                    <td><a href="/Home/Offer/offerInfo/f_id/{$vo.f_id}">{$vo.f_id|getMessageById=2}</a></td>
+                    <td><a href="/Home/Offer/offerInfo/f_id/{$vo.f_id}">{$vo.f_status|getMessageById=2}</a></td>
                 </tr>
                 </volist>
             </table>
@@ -103,7 +103,7 @@
                     <td>容重：{$vo.b_rz}g/l</td>
                     <td>{$vo.b_weig}吨</td>
                     <td width="110">{$vo.b_pri1|formatMoney}元/吨</td>
-                    <td width="120"><a href="/Home/Sell/sellBillInfo/b_id/{$vo.b_id}">{$vo.b_id|getMessageById=1}</a></td>
+                    <td width="120"><a href="/Home/Sell/sellBillInfo/b_id/{$vo.b_status}">{$vo.b_id|getMessageById=1}</a></td>
                 </tr>
                 </volist>
             </table>
