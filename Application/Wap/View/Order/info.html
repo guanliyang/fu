@@ -64,7 +64,16 @@
 
     <!-- 付款方式 -->
     <div class="order_item">
-        付款方式：<label>{$info.order.o_pay_type|getPayType}</label><br>&nbsp;
+        付款方式：{$info.order.o_pay_type|getPayType}
+        <label>
+            <?php if(in_array($info['order']['o_status'], array(3,4,5) ) ) { ?>
+            计息: {$info.order|getKnotNumber}元
+            ({$info.order|getPastDay}天)
+            <?php } ?>
+            <?php if(in_array($info['order']['o_status'], array(6,7,8,9,10) ) ) { ?>
+            利息: {$info.order.o_inpay|formatMoney}元
+            <?php } ?>
+        </label><br>&nbsp;
         <?php if($info['order']['o_pay_type'] < 1) { ?>
         <label>(首付<b>{$info.order.o_pay_f|formatMoney}</b>元，
             尾款<b>{$info.order.o_pay_t|formatMoney}</b>元，
