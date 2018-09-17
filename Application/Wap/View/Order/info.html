@@ -7,6 +7,8 @@
         <label>订单号: {$info.order.o_code}</label>
         <label>[{$info.order.o_status|getOrderStatus}]</label>
     </div>
+
+    <!-- 支付信息 -->
     <div class="order_info">
         <label><span><b>需付款：139,985</b></span>元</label><br/>
         (尾款<span><b>{$info.order.o_pay_t|formatMoney}</b></span> + 利息<span><b>85</b></span> +
@@ -69,7 +71,12 @@
         </label>
     </div>
     <?php } ?>
-    
+
+    <!-- 付款方式 -->
+    <div class="order_item">
+        货款合计：<label><b>170,000</b> 元</label><br>&nbsp;
+        <label>(首付<b>34,000</b>元，尾款<b>136,000</b>元，日利0.0002)</label>
+    </div>
 
     <div class="order_item">
         收货方式：{$info.order.o_deli_type|getDeliType}

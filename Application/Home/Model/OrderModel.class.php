@@ -269,11 +269,18 @@ class OrderModel extends HomeModel {
     }
 
     public function getDeliType() {
-        $deli_type = I('request.recmode', 0, 'intval');
-        if (!in_array($deli_type, array(0,1))) {
+        $deli_type = I('request.recmode');
+        if (!in_array($deli_type, array(1,2))) {
             notice('收货方式有误');
         }
         $this->data['o_deli_type'] = $deli_type;
+
+        if ($deli_type == 2) {
+            $this->data['o_status'] = 1;
+        }
+        else {
+            $this->data['o_status'] = 0;
+        }
     }
     // 订单号设置
     public function getDefault() {
@@ -281,7 +288,7 @@ class OrderModel extends HomeModel {
         $this->data['o_contcode'] = 'BC'.date('YW').rand(10000000, 99999999);
 
         $this->data['o_ctime'] = time();
-        $this->data['o_status'] = 0;
+
     }
 
     // 支付方式

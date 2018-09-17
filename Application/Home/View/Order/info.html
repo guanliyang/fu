@@ -31,15 +31,22 @@
                         </tr>
                     </volist>
 
+                <!-- 付款方式 -->
                 <tr>
                     <th></th>
                     <th>付款方式：{$info.order.o_pay_type|getPayType}</th>
+
+                    <?php if($info['order']['o_pay_type'] < 1) { ?>
                     <th>首付: {$info.order.o_pay_f|formatMoney}元</th>
                     <th>尾款: {$info.order.o_pay_t|formatMoney}元
                         <?php if($info['order']['o_pay_t'] > 0) { ?>
                         (年利率{$info.order.o_rate})
                         <?php } ?>
                     </th>
+                    <?php } else { ?>
+                    <th>货款: {$info.order.o_pay_f|formatMoney}元</th>
+                    <th></th>
+                    <?php } ?>
 
                     <th class="tdright">
                     <?php if(in_array($info['order']['o_status'], array(3,4,5) ) ) { ?>
@@ -54,6 +61,7 @@
                     </th>
 
                 </tr>
+
                 <tr>
                     <th></th>
                     <th>收货方式：{$info.order.o_deli_type|getDeliType}</th>
