@@ -31,7 +31,7 @@
                         </tr>
                     </volist>
 
-                <!-- 付款方式 -->
+                <!-- -->
                 <tr>
                     <th></th>
                     <th>付款方式：{$info.order.o_pay_type|getPayType}</th>
@@ -50,7 +50,7 @@
 
                     <th class="tdright">
                     <?php if(in_array($info['order']['o_status'], array(3,4,5) ) ) { ?>
-                        计息: {$info.order|getOrderTeil}元
+                        计息: {$info.order|getKnotNumber}元
                         ({$info.order|getPastDay}天)
 
                     <?php } ?>
@@ -168,7 +168,7 @@
                             <b>
                                 <?php
                                 echo  $info['order']['o_pay_t']+
-                                getKnotNumber($info['order'])+
+                                getOrderTeil($info['order'])+
                                 $info['order']['o_depay'];
                                 ?>
                                 <b>
