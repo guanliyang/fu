@@ -180,9 +180,8 @@ class OrderModel extends HomeModel {
             //收货人信息
             $this->getUser();
 
-            $all_price = array_sum(array_column($bill['bill_item'], 'bi_dpay'));
             // 价格
-            $this->getAllPrice($pay_type, $all_price, $bill);
+            $this->getAllPrice($pay_type, $bill);
 
             // 订单净重合计
             $this->data['o_nwei'] = array_sum(array_column($bill['bill_item'], 'bi_nwei'));
@@ -303,7 +302,13 @@ class OrderModel extends HomeModel {
     }
 
     // 支付价格
-    public function getAllPrice($pay_type, $all_price, $bill) {
+    public function getAllPrice($pay_type, $bill) {
+        $all_price = 0;
+        if ($bill['bill_item'] && is_array($bill['bill_item'])) {
+            foreach ($bill['bill_item'] as $bill_item) {
+                $all_price = $bill['b_pri1'] * $bill_item['bi_nwei'];
+            }
+        }
         $this->data['o_pay'] = $all_price;
 
         if ($pay_type == self::PAY_ALL) {
