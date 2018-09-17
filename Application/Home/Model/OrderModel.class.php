@@ -311,7 +311,6 @@ class OrderModel extends HomeModel {
             $this->data['o_pay_t'] = 0;
         }
         else {
-
             $this->data['o_pay_f'] = $all_price * C('FIRST_PAY');
             $this->data['o_pay_t'] = $all_price - $this->data['o_pay_f'];
         }

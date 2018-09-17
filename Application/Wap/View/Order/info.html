@@ -46,7 +46,7 @@
 
 
         <div class="order_info" onclick="location.href='/Wap/Order/billInfo/b_id/{$info.bill.b_id}/o_id/{$info.order.o_id}/bi_id/{$info.bill.bill_item|getArrayV='bi_id'}'">
-            <label>{$info.bill.b_name}　{$info.bill.b_year}年　{$info.bill.b_place}　{$info.bill.b_level}　容重{$info.bill.b_rz}　g/l　　（查看）</label>
+            <label>{$info.bill.b_name}　{$info.bill.b_year}年　{$info.bill.b_place}　{$info.bill.b_level}　容重{$info.bill.b_rz}g/l　（查看）</label>
         </div>
         <div class="order_info">
             <label>货款合计<b>{$info.order.o_pay|formatMoney}</b> 元
