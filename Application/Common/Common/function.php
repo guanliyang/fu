@@ -7,6 +7,7 @@ function getMsgText($type) {
             0 => '订单号',
             2 => '货单号',
             1 => '预约单',
+            3 => '系统消息'
         );
     return $list[$type];
 }
@@ -57,6 +58,7 @@ function getMsgUrlText($type) {
             0 => '查看订单详情',
             2 => '查看货单详情',
             1 => '查看预约单详情',
+            3 => '查看个人信息'
         );
     return $list[$type];
 }
