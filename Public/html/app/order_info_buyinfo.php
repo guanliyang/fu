@@ -6,7 +6,7 @@
 	<div class="tit"><a href="#" onclick="window.history.go(-1);"><返回</a>订单详情</div>
 	<hr>
 	<div class="order_info"><label>订单号: B20183225485965</label><label>[已生效]</label></div>
-	<div class="order_info"><label><span><b>今日须支付：85,084.5</b></span>元</label><br/>其中：待付货款 <span><b>84,500</b></span>元，待付利息 <span><b>84.5</b></span>元，请按合同说明方式付款至平台指定帐号。</div>
+	<div class="order_info"><label><span><b>需支付：85,084.5</b></span>元</label><br/>其中：待付货款 <span><b>84,500</b></span>元，待付利息 <span><b>84.5</b></span>元，请按合同说明方式付款至平台指定帐号。</div>
 	<div class="order_info" onclick="location.href='buyinfo_bill.php'"><label>玉米　2018年　辽宁　一等　容重720g/l</label><br/><label><b>1,700</b>元/吨　　（查看）</label></div>
 	<div class="order_item" onclick="location.href='buyinfo_item.php'">
 		&#8470;.1021112<label><span><b>[待确认收货]</b></span>　(详情)</label><br/>2箱　净重50吨<label>85,000元　结息85元(5天)</label>

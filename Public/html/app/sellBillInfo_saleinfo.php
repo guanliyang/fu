@@ -6,7 +6,7 @@
 	<div class="tit"><a href="#" onclick="window.history.go(-1);"><返回</a>货单详情</div>
 	<hr>
 	<div class="order_info"><label>货单号: S20183225485965</label><label>[在售]</label></div>
-	<div class="order_info"><label><span><b>今日须支付：85,084.5</b></span>元</label><br/>其中：待付利息 <span><b>85</b></span>元，待付跌价差价 <span><b>500</b></span>元，请按合同说明方式付款至平台指定帐号。</div>
+	<div class="order_info"><label><span><b>需支付：85,084.5</b></span>元</label><br/>其中：待付利息 <span><b>85</b></span>元，待付跌价差价 <span><b>500</b></span>元，请按合同说明方式付款至平台指定帐号。</div>
 
 	<div class="order_info"><img src="" width="200" height="200" /></div>
 	<div class="order_info"><label>玉米　2018年　辽宁　一等　容重720g/l</label></div>
