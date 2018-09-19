@@ -241,14 +241,14 @@ function getBillStatus($status) {
     $list =
         array(
             -9 => '删除',
-            -1 => '退回',
+            -1 => '被退回',
             0 => '待审核',
-            1 => '待付保证金和运费', // 待付款
+            1 => '待付款',//'待付保证金和运费', // 待付款
             2 => '待装货',
-            3 => '待上架',
-            4 => '待上架',
+            3 => '制单中',//'待上架', // 待填单
+            4 => '待审核',//'待上架', // 待核费
             5 => '在售',
-            6 => '待上架',
+            6 => '待回款',//'待上架', // 待回款
             7 => '待上架',
             9 => '已成交',
             10 => '已结单'
@@ -839,7 +839,7 @@ function getAllDepo($b_id, $status = 2, $bi_status = 0) {
     return formatMoney($money);
 }
 
-// 成交货款
+// 成交货款 回款
 function getClinch($bill, $bill_item) {
     $pri1 = $bill['b_pri1'];
     $nwei = $bill_item['bi_nwei'];
@@ -959,4 +959,117 @@ function checkAccount($bank_account){
         notice("银行帐号只能包含数字和字母");//有数字有字母 ";
     }
     return $bank_account;
+}
+
+// 回款金额 显示
+function getBiRpayShow($bill, $bill_item) {
+    return formatMoney($bill['b_pri0'] * $bill_item['bi_nwei']);
+}
+
+// 回款金额
+function getBiRpay($bill, $bill_item) {
+    return $bill['b_pri0'] * $bill_item['bi_nwei'];
+}
+
+//回款利息
+function getBackRate($bill, $bill_item) {
+    $rpaySum = getBiRpay($bill, $bill_item);
+    $days = getSellDays($bill_item);
+    $rate = formatMoney($rpaySum * $bill['rrate'] / 365 * $days);
+    return $rate;
+}
+
+// 已成交时 bill的支付信息
+// 1 全部 2利息 3补跌价 4退溢价
+function get9AllPrice($bill, $get = 1) {
+    $price = 0;
+    $b_id = $bill['b_id'];
+    if ($b_id) {
+        $list = M('s_bill_item')->where(array(
+            'b_id' => $b_id,
+            'bi_status' => array('in','7, 8, 9')
+        ))->select();
+        if ($list && is_array($list)) {
+            //利息
+            if ($get == 2) {
+                $price = array_sum(array_column($list['bi_inte']));
+            }
+
+            // 3补跌价
+            if ($get == 3) {
+                foreach ($bill as $item) {
+                    if ($item['bi_diff'] < 0) {
+                        $price += abs($item['bi_diff']);
+                    }
+                }
+            }
+
+            //4退跌价
+            if ($get == 4) {
+                foreach ($bill as $item) {
+                    if ($item['bi_diff'] > 0) {
+                        $price += abs($item['bi_diff']);
+                    }
+                }
+            }
+
+            if ($get == 1) {
+                $price = get9AllPrice($bill, 2) + get9AllPrice($bill, 3) + get9AllPrice($bill, 4);
+            }
+        }
+    }
+    return formatMoney($price);
+}
+
+// 是否显示跌溢信息区域
+function IsShowItemDiff($bill, $bill_item) {
+    // 回款金额
+    $back = getBiRpay($bill, $bill_item);
+    // 货款金额
+    $dpri = $bill_item['bi_dpri'];
+    if ($back != $dpri) {
+        return true;
+    }
+    else {
+        return false;
+    }
+
+}
+
+// 显示文本
+function getItemDiffText($bill, $bill_item) {
+    // 回款金额
+    $back = getBiRpay($bill, $bill_item);
+    // 成交金额
+    $dpri = $bill_item['bi_dpri'];
+    if ($dpri > $back) {
+        $str = '退溢价';
+    }
+    else {
+        $str = '补跌价';
+    }
+    return $str;
+}
+// 溢价跌价 数量
+function getItemDiff($bill, $bill_item) {
+    // 回款金额
+    $back = getBiRpay($bill, $bill_item);
+    // 成交金额
+    $dpri = $bill_item['bi_dpri'];
+    return formatMoney(abs($back - $dpri));
+}
+
+// 判断谁减谁
+function getItemShowD($bill, $bill_item) {
+    // 回款金额
+    $back = intval(getBiRpay($bill, $bill_item));
+    // 成交金额
+    $dpri = intval($bill_item['bi_dpri']);
+    if ($back > $dpri) {
+        $str = "回款".$back."元-成交货款".$dpri."元";
+    }
+    else {
+        $str = "成交货款".$dpri."-回款".$back."元";
+    }
+    return $str;
 }

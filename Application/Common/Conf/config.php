@@ -15,12 +15,16 @@ return  array(
 
     // 视频地址
     'LD_URL' => 'http://39.104.166.224:8080/upload/videos/ld/',
+
     // 图片地址 箱号
     'CN_URL' => 'http://39.104.166.224:8080/upload/images/cn/',
+
     // 图片地址 封号
     'SN_URL' => 'http://39.104.166.224:8080/upload/images/sn/',
+
     // 图片地址 榜单
     'LP_URL' => 'http://39.104.166.224:8080/upload/images/lp/',
+
     // 首付 买粮 生成订单
     'FIRST_PAY_SHOW' => '5%',
     'FIRST_PAY' => 0.05,

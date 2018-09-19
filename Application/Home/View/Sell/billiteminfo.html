@@ -5,97 +5,121 @@
 
 <div class="bdiv cont">
     <div class="content">
+        <!-- 基本信息区域 -->
         <div class="list_item">
-            <label>:: 货单号：{$_GET['b_code']} ::</label>　　<<a href="javascript:;" onClick="javascript :history.back(-1);">返回</a>>
+            <label>:: 货单号：{$_GET['b_code']} ::</label>　　
+            <<a href="javascript:;" onClick="javascript :history.back(-1);">返回</a>>
         </div>
         <div class="list">
             货组编号：{$info.bill_item.bi_id} - <label>[{$info.bill_item.bi_status|getBillItemStatus}]</label>
             <table>
                 <tr>
-                    <th width="30" rowspan="2"></th>
-                    <th rowspan="2" width="110"><img src="{$Think.config.CN_URL}{$info.bill_item.bi_cnum1_pho}" width="80" height="80"/><br/></th>
-                    <th rowspan="2" width="110"><img src="{$Think.config.SN_URL}{$info.bill_item.bi_snum1_pho}" width="80" height="80"/><br/></th>
-                    <th>箱号：{$info.bill_item.bi_cnum1}</th>
-                    <th width="30" rowspan="2"></th>
-                    <th rowspan="2" width="110"><img src="{$Think.config.CN_URL}{$info.bill_item.bi_cnum2_pho}" width="80" height="80"/><br/></th>
-                    <th rowspan="2" width="110"><img src="{$Think.config.SN_URL}{$info.bill_item.bi_snum2_pho}" width="80" height="80"/><br/></th>
-                    <th>箱号：{$info.bill_item.bi_cnum2}</th>
-                </tr>
-                <tr>
-                    <th>封号：{$info.bill_item.bi_snum1}</th>
-                    <th>封号：{$info.bill_item.bi_snum2}</th>
+                    <th width="30" height="220"></th>
+                    <th width="250">
+                        <img src="{$Think.config.LP_URL}{$info.bill_item.bi_plist_pho}" width="200" height="120" onclick="window.open('{$Think.config.LP_URL}{$info.bill_item.bi_plist_pho}');"/><br/>
+                        磅单号 {$info.bill_item.bi_plist_num}
+                    </th>
+                    <th width="140">
+                        <img src="{$Think.config.SN_URL}{$info.bill_item.bi_cnum1_pho}" width="120" height="120" onclick="window.open('{$Think.config.SN_URL}{$info.bill_item.bi_cnum1_pho}');"/><br/>
+                        箱号 {$info.bill_item.bi_cnum1}
+                    </th>
+                    <th width="180">
+                        <img src="{$Think.config.SN_URL}{$info.bill_item.bi_snum1_pho}" width="120" height="120" onclick="window.open('{$Think.config.SN_URL}{$info.bill_item.bi_snum1_pho}');"/><br/>
+                        封号 {$info.bill_item.bi_snum1}
+                    </th>
+                    <th width="140">
+                        <img src="{$Think.config.CN_URL}{$info.bill_item.bi_cnum2_pho}" width="120" height="120" onclick="window.open('{$Think.config.CN_URL}{$info.bill_item.bi_cnum2_pho}');"/><br/>
+                        箱号 {$info.bill_item.bi_cnum2}
+                    </th>
+                    <th width="150">
+                        <img src="{$Think.config.SN_URL}{$info.bill_item.bi_snum2_pho}" width="120" height="120" onclick="window.open('{$Think.config.SN_URL}{$info.bill_item.bi_snum2_pho}');"/>
+                        <br/>封号 {$info.bill_item.bi_snum2o}
+                    </th>
+                    <th></th>
                 </tr>
                 <tr>
                     <th></th>
-                    <th colspan="7">
+                    <th colspan="6">
                         封箱: {$info.bill_item.bi_sum}箱　　　
                         毛重: {$info.bill_item.bi_gwei}吨　　　
                         皮重: {$info.bill_item.bi_tare}吨　　　
-                        净重: {$info.bill_item.bi_nwei}吨　　　
-                        货款：{$info.bill_item.bi_dpay|formatMoney}元
-                        ({$info.bill_item.bi_dpri|formatMoney}元/吨)　　　
-                        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video1}">A箱视频</a>　　
-                        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video2}">B箱视频</a>
-                    </th>
+                        净重: {$info.bill_item.bi_nwei}吨　
+                        　　　　　　
+                        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video1}"><下载装货视频1></a>　　　
+                        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video2}"><下载装货视频2></a></th>
                 </tr>
             </table>
-            <if condition="$info['bill_item']['bi_status'] gt 1">
-            <table>
-                <tr>
-                    <td></td>
-                    <td>物流信息：</td>
-                    <td width="320">{$info.order_item.oi_otime|getDateTime} [装车]</td>
-                    <td colspan="2"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>入港时间：</td>
-                    <td width="220">{$info.order_item.bi_itime|getDateTime} </td>
-                    <td width="90">入港名称：</td>
-                    <td>{$info.order_item.bi_pname}</td>
-                </tr>
-                <tr>
-                    <td width="30"></td>
-                    <td width="90">上架时间：</td>
-                    <td colspan="3">{$info.order_item.bi_stime|getDateTime} </td>
-                </tr>
-                <tr>
-                    <td width="30"></td>
-                    <td width="90">成交时间：</td>
-                    <td colspan="3">{$info.order_item.bi_dtime|getDateTime} </td>
-                </tr>
-            </table>
-            </if>
 
-            <if condition="$info['bill_item']['bi_status'] gt 3">
+
             <table>
+                <!-- 入港信息 -->
+                <?php if(in_array($info['bill_item']['bi_status'], array(3,5,6,7))) { ?>
                 <tr>
-                    <th width="30"></th>
-                    <th width="90">{$info.bill_item|getBillItemPayStatus}结回款：</th>
-                    <th width="300">
-                        <label>{$info.bill_item.bi_rpay|formatMoney}</label> 元
-                    </th>
-                    <th width="90">{$info.bill_item|getBillItemPayStatus}付利息：</th>
-                    <th>
-                        <label><b>{$info.order_item.oi_id}</b></label> 元 (回款
-                        {$info.bill_item.bi_rpay|formatMoney}元 x
-                        日利率{$info.bill.b_rrate} x
-                        在售{$info.bill_item|getSellDays}天)
-                    </th>
+                    <td width="30"></td>
+                    <td width="90">入港时间：</td>
+                    <td width="300">{$info['bill_item']['bi_itime']|getDateTime}</td>
+                    <td width="90">入港名称：</td>
+                    <td>{$info['bill_item']['bi_port']|getPortName}</td>
                 </tr>
+                <?php } ?>
+
+                <tr>
+                    <td></td>
+                    <!-- 上架时间 -->
+                    <?php if(in_array($info['bill_item']['bi_status'], array(5,6,7))) { ?>
+                        <td>上架时间：</td>
+                        <td>{$info['bill_item']['bi_stime']|getDateTime}</td>
+                    <?php } else { ?>
+                        <td></td>
+                        <td></td>
+                    <?php } ?>
+                    <!-- 成交时间 -->
+                    <?php if(in_array($info['bill_item']['bi_status'], array(7,10))) { ?>
+                        <td>成交时间：</td>
+                        <td colspan="3">
+                            {$info.bill_item.bi_dtime|getDateTime} (在售{$info['bill_item']|getSellDays}天)
+                        </td>
+                    <?php } else { ?>
+                        <td></td>
+                        <td></td>
+                    <?php } ?>
+                </tr>
+                <!-- 回款信息 -->
+                <?php if(in_array($info['bill_item']['bi_status'], array(5,6,7,10))) { ?>
                 <tr>
                     <th></th>
-                    <th>{$info.bill_item|getBillItemPayStatus}
-                        {$info.bill|getBackMoneyText=$info['bill_item']}：</th>
-                    <th><label><b>{$info.bill|getBackMoney=$info['bill_item']}</b></label>元
-                        (货款{$info.bill|getClinch=$info['bill_item']}元 - 回款{$info.bill_item.bi_rpay|formatMoney}元)</th>
-                    <th>{$info.bill_item|getBillItemPayStatus}退保证金：</th>
-                    <th><label><b>{$info.bill_item.bi_depo|formatMoney}</b></label>元 (付清结算费用后，即退。)</th>
+                    <th>回款金额：</th>
+                    <th><label>{$info['bill']|getBiRpayShow=$info['bill_item']}</label> 元</th>
+                    <th>回款利息：</th>
+                    <th>
+                        <label><b>{$info['bill']|getBackRate=$info['bill_item']}</b></label> 元
+                        (回款{$info['bill']|getBiRpay=$info['bill_item']}元 x
+                        年利率{$Think.config.SELL_RATE}/365 x
+                        在售{$info['bill_item']|getSellDays}天)
+                    </th>
                 </tr>
+                <?php } ?>
+
+                <!-- 成交金额和溢价 -->
+                <?php if(in_array($info['bill_item']['bi_status'], array(7,10))) { ?>
+                <tr>
+                    <th></th>
+                    <th>成交金额：</th>
+                    <th>
+                        <label>{$info.bill_item.bi_dpay|formatMoney}</label> 元
+                        ({$info.bill_item.bi_dpri|formatMoney}元/吨)
+                    </th>
+                    <?php if(IsShowItemDiff($info['bill'], $info['bill_item']) ) { ?>
+                    <th>{$info['bill']|getItemDiffText=$info['bill_item']}：</th>
+                    <th>
+                        <label><b>{$info['bill']|getItemDiff=$info['bill_item']}</b></label>
+                        元 ({$info['bill']|getItemShowD=$info['bill_item']})
+                    </th>
+                    <?php } ?>
+                </tr>
+                <?php } ?>
             </table>
-            </if>
         </div>
     </div>
 </div>
-
 <include file="public/foot" />
