@@ -1,5 +1,5 @@
 <?php
-    include 'inc/top.php';
+    include 'app_inc/top.php';
 ?>
 
 <div class="cont">

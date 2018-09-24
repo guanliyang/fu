@@ -41,7 +41,7 @@
                     </td>
                     <td>
                         <?php if(in_array($info['b_status'], array(1,2,3,5,6,7,9,10) )) { ?>
-                            运费：<label><b>{$info.b_frei|formatMoney}</b></label>元 (4车)
+                            运费：<label><b>{$info.b_frei|formatMoney}</b></label>元 ({$info|getCartNumber}车)
                         <?php } ?>
                     </td>
 
@@ -80,7 +80,7 @@
             </table>
             <table>
                 <!-- 在售货组 -->
-                <if condition="$info['wait']">
+                <if condition="$info['on_sell']">
                     <tr>
                         <th width="30"></th>
                         <th>({$info.on_sell|count}) 在售货组：</th>

@@ -399,7 +399,7 @@ function getDepo($bill) {
 
 //一共几车
 function getCartNumber($info) {
-    return count($info['on_bill_item']) + count($info['finish_bill_item']);
+    return count($info['on_sell']) + count($info['over_sell']) + count($info['finish_sell']);
 }
 // 需付运费
 function getFrei($bill) {
