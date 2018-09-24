@@ -6,8 +6,7 @@ class MessageController extends HomeController {
         $this->checkoutUserLogin();
         $user = new \Home\Model\UserModel();
         $info = $user->getMessageForWeb($this->getUid());
-//        dump($info);
-//        die;
+
         $this->assign('info', $info);
         $this->display();
     }

@@ -67,7 +67,7 @@ class SBillModel extends HomeModel {
 
     // 用户卖货列表
     public function getUserList($uid) {
-        $where = array('u_id' => $uid, 'b_status' => array('GT', -2));
+        $where = array('u_id' => $uid, 'b_status' => array('EGT', -1));
         $count = self::where($where)->count();
         $page = $this->getPageShow($count, $str = '?item=3');
         $list = self::where($where)->order('b_id desc')->limit($page['str'])->select();

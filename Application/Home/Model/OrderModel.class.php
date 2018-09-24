@@ -117,7 +117,10 @@ class OrderModel extends HomeModel {
 
     // 用户 订单列表信息
     public function getUserOrderList($uid) {
-        $where = array('u_id' => $uid);
+        $where = array(
+            'u_id' => $uid,
+            'o_status' => array('EGT', -1)
+        );
         $count = self::where($where)->count();
         $page = $this->getPageShow($count);
         $list = self::where($where)->order('o_id desc')->limit($page['str'])->select();

@@ -103,7 +103,7 @@
                     <td>容重：{$vo.b_rz}g/l</td>
                     <td>{$vo.b_weig}吨</td>
                     <td width="110">{$vo.b_pri1|formatMoney}元/吨</td>
-                    <td width="120"><a href="/Home/Sell/sellBillInfo/b_id/{$vo.b_status}">{$vo.b_status|getMessageById=1}</a></td>
+                    <td width="120"><a href="/Home/Sell/sellBillInfo/b_id/{$vo.b_id}">{$vo.b_status|getMessageById=1}</a></td>
                 </tr>
                 </volist>
             </table>
