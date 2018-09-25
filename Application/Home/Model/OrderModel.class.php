@@ -119,7 +119,7 @@ class OrderModel extends HomeModel {
     public function getUserOrderList($uid) {
         $where = array(
             'u_id' => $uid,
-            'o_status' => array('EGT', -1)
+            'o_status' => array('GT', -9)
         );
         $count = self::where($where)->count();
         $page = $this->getPageShow($count);
@@ -270,6 +270,7 @@ class OrderModel extends HomeModel {
         $this->data['o_deli_mobi'] = $mobile;
     }
 
+    // 收货方式
     public function getDeliType() {
         $deli_type = I('request.recmode');
         if (!in_array($deli_type, array(1,2))) {
@@ -277,12 +278,13 @@ class OrderModel extends HomeModel {
         }
         $this->data['o_deli_type'] = $deli_type;
 
-        if ($deli_type == 2) {
-            $this->data['o_status'] = 1;
-        }
-        else {
-            $this->data['o_status'] = 0;
-        }
+//        if ($deli_type == 2) {
+//            $this->data['o_status'] = 1;
+//        }
+//        else {
+//            $this->data['o_status'] = 0;
+//        }
+        $this->data['o_status'] = 0;
     }
     // 订单号设置
     public function getDefault() {

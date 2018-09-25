@@ -25,7 +25,7 @@
                 selpay += eval(document.getElementById('pay'+eventdx[i].value).innerText.replace(',', ''));
             }
         }
-        selpay0 = selpay*0.2;
+        selpay0 = selpay*{$Think.config.DEPO_RATE};
         document.getElementById('selsum').innerText = selsum;
         document.getElementById('selpay').innerText = i2s3(selpay);
         document.getElementById('selpay0').innerText = i2s3(selpay0);
@@ -69,9 +69,12 @@
                         <th width="120"><a href="/Home/Sell/onLineBillInfo/b_id/{$vo.b_id}">查看粮源详情</a></th>
                     </tr>
                     <foreach name="vo.bill_item" item="item">
-                        <if condition="$item['bi_status'] gt 9">
-                            <tr lass="selc cool">
-                                <td><input type="checkbox" disabled="disabled" name="buyid[]" class="bt_s" value="{$item.bi_id}" ></td>
+                        <if condition="$item['bi_status'] neq 5">
+                            <tr class="selc cool">
+                                <td>
+                                    <input type="hidden" disabled="disabled" name="buyid[]" class="bt_s" value="{$item.bi_id}" >
+                                    [无货]
+                                </td>
                             <else/>
                             <tr id="tr{$item.bi_id}" class="selc cool" onclick="iSel({$item.bi_id});">
                             <td><input type="checkbox" <if condition="in_array($item['bi_id'], $bi_id_list)">checked="checked" </if> name="buyid[]" id="{$item.bi_id}" class="bt_s" value="{$item.bi_id}" onclick="iSel({$item.bi_id});"></td>
@@ -79,7 +82,7 @@
 
                             <td>{$item.bi_sum}箱　(毛重：{$item.bi_gwei}吨　皮重：{$item.bi_tare}吨　净重：{$item.bi_nwei}吨)</td>
                             <td>货款：<label id="pay{$item.bi_id}">{$item|getItemPay=$vo}</label>元</td>
-                            <td>　<if condition="$item['bi_status'] gt 9">已售</if>　<a href="/Home/cart/delItem/bi_id/{$item.bi_id}"> 删除 </a></td>
+                            <td>　<a href="/Home/cart/delItem/bi_id/{$item.bi_id}"> 删除 </a></td>
                         </tr>
                     </foreach>
                 </foreach>

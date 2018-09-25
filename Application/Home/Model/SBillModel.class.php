@@ -18,7 +18,10 @@ class SBillModel extends HomeModel {
     }
     // 在售粮源
     public function getOnLineList() {
-        $where = array('b_status' => self::STATUS_ON);
+        $where = array(
+            'b_status' => self::STATUS_ON,
+            'b_fid' => array('GT', 0),
+        );
 
         $gc_id = I('request.gc_id', 0, 'intval');
         if (!empty($gc_id)) {
@@ -67,7 +70,7 @@ class SBillModel extends HomeModel {
 
     // 用户卖货列表
     public function getUserList($uid) {
-        $where = array('u_id' => $uid, 'b_status' => array('EGT', -1));
+        $where = array('u_id' => $uid, 'b_status' => array('GT', -9));
         $count = self::where($where)->count();
         $page = $this->getPageShow($count, $str = '?item=3');
         $list = self::where($where)->order('b_id desc')->limit($page['str'])->select();
@@ -99,34 +102,35 @@ class SBillModel extends HomeModel {
         $where = array('b_id' => $bill['b_id']);
         // 在售
         if ($bill['b_status'] == 5) {
-            $where += array('bi_status' => array('in','5, 6'));
+//            $where += array('bi_status' => array('in','5, 6'));
+            $where += array('bi_status' => array('in','5'));
             $on_sell = M('s_bill_item')->where($where)->select();
 
             // 判断on_sell 的bill_item 是否有6, 有6并且是当前用户购买的，不给当前用户显示
-            if ($on_sell && is_array($on_sell)) {
-                foreach ($on_sell as $bill_key => $bill_item) {
-                    if ($bill_item['bi_status'] == 6) {
-                        $order_item_list = M('b_order_item')->where(
-                            array(
-                                'bi_id' => $bill_item['bi_id']
-                            )
-                        )->select();
-                        if ($order_item_list && is_array($order_item_list)) {
-                            foreach ($order_item_list as $order_item) {
-                                $order = M('b_order')->where(
-                                    array(
-                                        'o_id' => $order_item['o_id'],
-                                        'u_id' => $uid
-                                    )
-                                )->find();
-                                if ($order) {
-                                    unset($on_sell[$bill_key]);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+//            if ($on_sell && is_array($on_sell)) {
+//                foreach ($on_sell as $bill_key => $bill_item) {
+//                    if ($bill_item['bi_status'] == 6) {
+//                        $order_item_list = M('b_order_item')->where(
+//                            array(
+//                                'bi_id' => $bill_item['bi_id']
+//                            )
+//                        )->select();
+//                        if ($order_item_list && is_array($order_item_list)) {
+//                            foreach ($order_item_list as $order_item) {
+//                                $order = M('b_order')->where(
+//                                    array(
+//                                        'o_id' => $order_item['o_id'],
+//                                        'u_id' => $uid
+//                                    )
+//                                )->find();
+//                                if ($order) {
+//                                    unset($on_sell[$bill_key]);
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
             $bill['on_sell'] = $on_sell;
 
         }

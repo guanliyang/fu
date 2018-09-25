@@ -170,7 +170,7 @@ class ROfferModel extends HomeModel {
 
     // 用户获取自己的列表
     public function getUserList($uid) {
-        $where = 'u_id='.$uid.' AND f_status >=0';
+        $where = 'u_id='.$uid.' AND f_status > -9';
         $count = self::where($where)->count();
         $page = $this->getPageShow($count, $str = '?item=2');
         $list = self::where($where)->order('f_id desc')->limit($page['str'])->select();
