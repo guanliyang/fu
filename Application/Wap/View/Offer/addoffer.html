@@ -16,8 +16,8 @@
     function cpay(){
         var pri1 = eval(document.getElementById('pri1').innerText.replace(',', ''));
         var weig = document.getElementById('sweight').value;
-        var opay = pri1*weig*0.2;
-        var spay = pri1*weig*0.01;
+        var opay = pri1*weig*{$Think.config.OFFER_PAY};
+        var spay = weig*{$Think.config.OFFER_SER} ;
         document.getElementById('opay').innerText = i2s3(opay);
         document.getElementById('spay').innerText = i2s3(spay);
     }
@@ -75,7 +75,7 @@
         <br/>&nbsp;<label>市场参考价：<b id="rpri">1,700</b>元/吨</label></div>
     <div class="bill_item">预购重量：<input name="f_weig" id="sweight" class="inpsm" value="" type="text" onchange="cpay();"/> 吨</div>
     <div class="bill_item">需缴预约金：<label><span><b id="opay">0</b></span> 元</label><br/>&nbsp;<label>（预约成功后，直接转为货款)</label></div>
-    <div class="bill_item">需缴服务费：<label><span><b id="spay">0</b></span> 元</label><br/>&nbsp;<label>(预购货款的1%）</label></div>
+    <div class="bill_item">需缴服务费：<label><span><b id="spay">0</b></span> 元</label><br/>&nbsp;<label>(预购货款的{$Think.config.OFFER_PAY_SHOW}）</label></div>
     <div class="bill_info" style="text-align:left;">预约购粮，不代表立即成交，需等待运营人员协调资源后，回复是否能够转正式订单。</div>
 </div>
 <div class="cont">

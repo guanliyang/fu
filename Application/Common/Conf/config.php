@@ -40,6 +40,13 @@ return  array(
     // 保证金显示
     'DEPO_RATE_SHOW' => '5%',
 
-    // 记箱费
+    // 滞箱费
     'BOX_DAY_PAY' => 50,
+
+    // 预约单 预约金比例
+    'OFFER_PAY' => 0.05,
+    'OFFER_PAY_SHOW' => '5%',
+
+    // 预约单 每吨 服务费
+    'OFFER_SER' => 3,
 );

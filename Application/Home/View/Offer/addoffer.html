@@ -19,8 +19,8 @@
     function cpay(){
         var pri1 = eval(document.getElementById('pri1').innerText.replace(',', ''));
         var weig = document.getElementById('sweight').value;
-        var opay = pri1*weig*0.2;
-        var spay = pri1*weig*0.01;
+        var opay = pri1*weig*{$Think.config.OFFER_PAY};
+        var spay = weig*{$Think.config.OFFER_SER} ;
         document.getElementById('opay').innerText = i2s3(opay);
         document.getElementById('spay').innerText = i2s3(spay);
     }
@@ -112,7 +112,7 @@
                 <tr>
                     <td></td>
                     <td>需缴预约金：<label id="opay">0</label> 元 （预约成功后，将直接转为货款)</td>
-                    <td>需缴服务费：<label id="spay">0</label> 元 （预购货款的1%）</td>
+                    <td>需缴服务费：<label id="spay">0</label> 元 （预购货款的{$Think.config.OFFER_PAY_SHOW}）</td>
                 </tr>
                 <tr>
                     <th></th>

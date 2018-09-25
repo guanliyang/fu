@@ -3,7 +3,6 @@ namespace Home\Model;
 class ROfferModel extends HomeModel {
     protected $trueTableName = 'r_offer';
 
-    const PERCENTAGE = 0.01;
     const STATUS_DEL = -9;
     const STATUS_ON = 1;
     const STATUS_LINT = 5;
@@ -122,7 +121,10 @@ class ROfferModel extends HomeModel {
         $this->data['f_pric'] = $this->data['f_pric'];
 
         //预约金额
-        $this->data['f_pay'] = ($this->data['f_pric'] * $this->data['f_weig']) * self::PERCENTAGE;
+        $this->data['f_pay'] = ($this->data['f_pric'] * $this->data['f_weig']) * C('OFFER_PAY');
+
+        // 服务费
+        $this->data['f_service_price'] = $this->data['f_weig'] * C('OFFER_SER');
 
     }
 

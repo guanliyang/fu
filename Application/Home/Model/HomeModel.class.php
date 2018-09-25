@@ -64,8 +64,8 @@ class HomeModel extends Model {
                 notice('货组编号'.$bi_id.' 有误');
             }
 
-            if ($bill_item['bi_status'] > SBillItemModel::STATUS_ORDER_PAD) {
-                notice('货组编号'.$bi_id.' 有误, 可能已被购买,请到购物车重新选择');
+            if ($bill_item['bi_status'] != SBillItemModel::STATUS_ON_SALE) {
+                notice('货组编号'.$bi_id.'可能已被购买,请到购物车重新选择');
             }
         }
 

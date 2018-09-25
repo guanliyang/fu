@@ -157,7 +157,9 @@ function getOfferStatus($status) {
     $list =
         array(
             0 => '待生效',
-            1 => '预约中', //
+            1 => '待付款', //
+            2 => '处理中',
+            3 => '待转订',
             5 => '预约确认(推荐)',
             10 => '预约成功'
         );
@@ -172,7 +174,7 @@ function getOfferStatus($status) {
  */
 function getOfferShow($offer, $number = 0, $url = 'Home') {
     $str = '';
-    if ($offer['f_status'] == 0) {
+    if ($offer['f_status'] == 0 || $offer['f_status'] == 1) {
         if ($number == 2) {
             $str = '待';
         }
@@ -193,7 +195,7 @@ function getOfferShow($offer, $number = 0, $url = 'Home') {
         }
     }
 
-    if ($offer['f_status'] > 0) {
+    if ($offer['f_status'] > 1) {
         if ($number == 2) {
             $str = '已';
         }
