@@ -20,13 +20,13 @@
     <img class="htel" src="/Public/fu/img/htel.png"/>
 </div>
 <div class="bdiv tind">
-    <a href="#" id="ind0">首页</a>
+    <a href="{$Think.config.WWW_URL}" id="ind0">首页</a>
     <a href="/Home/Sell/sellBillList" id="ind1">在售粮源</a>
     <a href="/Home/Offer/offerList" id="ind2">求购粮源</a>
     <a href="/" id="ind3">会员中心</a>
-    <a href="#" id="ind4">行业资讯</a>
-    <a href="#" id="ind5">帮助中心</a>
-    <a href="#" id="ind6">关于我们</a>
+    <a href="{$Think.config.WWW_URL}/hot.php" id="ind4">行业资讯</a>
+    <a href="{$Think.config.WWW_URL}/help.php" id="ind5">帮助中心</a>
+    <a href="{$Think.config.WWW_URL}/about.php" id="ind6">关于我们</a>
 
     <if condition="$user">
         <div class="uind">

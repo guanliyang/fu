@@ -49,4 +49,7 @@ return  array(
 
     // 预约单 每吨 服务费
     'OFFER_SER' => 3,
+
+    // WWW URL
+    'WWW_URL' => 'http://39.104.166.224:9090',
 );
