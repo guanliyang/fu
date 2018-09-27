@@ -20,7 +20,7 @@ class SBillModel extends HomeModel {
     public function getOnLineList() {
         $where = array(
             'b_status' => self::STATUS_ON,
-            'b_fid' => array('GT', 0),
+            'b_fid' => array('EGT', 0),
         );
 
         $gc_id = I('request.gc_id', 0, 'intval');
