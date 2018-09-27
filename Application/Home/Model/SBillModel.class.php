@@ -20,7 +20,7 @@ class SBillModel extends HomeModel {
     public function getOnLineList() {
         $where = array(
             'b_status' => self::STATUS_ON,
-            'b_fid' => array('EGT', 0),
+            'b_fid' => 0,
         );
 
         $gc_id = I('request.gc_id', 0, 'intval');
@@ -204,13 +204,13 @@ class SBillModel extends HomeModel {
 
         return $bill;
     }
-    public function ajaxAdd($uid) {
+    public function ajaxAdd($uid, $user) {
         $this->checkUserNormal();
         $this->checkContract();
         $this->getG();
         $this->_getHan();
         $this->_getPrice();
-        $this->_getFrei();
+        $this->_getFrei($user);
         $this->_getDepo();
         $this->_getAdd();
         $this->_getDefault();
@@ -311,7 +311,7 @@ class SBillModel extends HomeModel {
     }
 
     //获取运费
-    private function _getFrei() {
+    private function _getFrei($user) {
         //重量和保证金等信息
         $this->data['b_weig'] = I('request.b_weig', 0, 'intval');
         if (empty($this->data['b_weig'])) {
@@ -322,7 +322,7 @@ class SBillModel extends HomeModel {
         // 车数
         $carNum = ceil($boxNum / 2);
         // 全单运费  单车价格 89
-        return $this->data['b_frei'] = 89 * $carNum;
+        return $this->data['b_frei'] = $user['frei_bs'] * $carNum;
     }
 
     // 缴纳保证金

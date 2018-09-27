@@ -70,7 +70,7 @@ class SellController extends HomeController {
     // 添加卖货信息
     public function addBill() {
         $SBill = new \Home\Model\SBillModel();
-        $b_id = $SBill->ajaxAdd($this->getUid());
+        $b_id = $SBill->ajaxAdd($this->getUid(), $this->user);
 
         if ($b_id) {
             notice('添加成功', 0, array('url' => '/Wap/Sell/sellBillInfo?b_id='.$b_id));
