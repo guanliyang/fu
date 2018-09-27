@@ -3,38 +3,41 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>粮宝 - 1Liangbao.com . 粮食现货交易平台</title>
     <link href="/Public/fu/inc/css.css" rel="stylesheet" type="text/css" />
 </head>
 <script type="text/javascript">
     function pSet(pagenum){
-        document.getElementById('ind'+pagenum).style['background'] = '#DBD6C8';
-        document.getElementById('ind'+pagenum).style['color'] = '#807047';
+        document.getElementById('ind'+pagenum).style['background'] = '#006155';
+        document.getElementById('ind'+pagenum).style['color'] = '#FFF';
     }
 </script>
 <body>
-<div class="bdiv top">
-    <img class="logo" src="/Public/fu/img/logo.png"/>
-    <img class="slog" src="/Public/fu/img/slog.png"/>
-    <img class="adow" src="/Public/fu/img/adow.png"/>
-    <img class="htel" src="/Public/fu/img/htel.png"/>
+<div class="top">
+    <div class="bdiv">
+        <img class="logo" src="/Public/fu/img/logo.png"/>
+        <img class="adow" src="/Public/fu/img/adow.png"/>
+        <img class="htel" src="/Public/fu/img/htel.png"/>
+    </div>
 </div>
-<div class="bdiv tind">
-    <a href="{$Think.config.WWW_URL}" id="ind0">首页</a>
-    <a href="/Home/Sell/sellBillList" id="ind1">在售粮源</a>
-    <a href="/Home/Offer/offerList" id="ind2">求购粮源</a>
-    <a href="/" id="ind3">会员中心</a>
-    <a href="{$Think.config.WWW_URL}/hot.php" id="ind4">行业资讯</a>
-    <a href="{$Think.config.WWW_URL}/help.php" id="ind5">帮助中心</a>
-    <a href="{$Think.config.WWW_URL}/about.php" id="ind6">关于我们</a>
+<div class="tind">
+    <div class="bdiv">
+        <a href="{$Think.config.WWW_URL}" id="ind0">首页</a>
+        <a href="/Home/Sell/sellBillList" id="ind1">在售粮源</a>
+        <a href="/Home/Offer/offerList" id="ind2">求购粮源</a>
+        <a href="/" id="ind3">会员中心</a>
+        <a href="{$Think.config.WWW_URL}/hot.php" id="ind4">行业资讯</a>
+        <a href="{$Think.config.WWW_URL}/help.php" id="ind5">帮助中心</a>
+        <a href="{$Think.config.WWW_URL}/about.php" id="ind6">关于我们</a>
 
-    <if condition="$user">
-        <div class="uind">
-            <a href="/">{$user.real_name}</a>
-            <a href="/Home/SysMsg/index">系统通知({$msg_count})</a>
-            <a href="/Home/Cart/index">购物车({$cart_count})</a> |
-            <a href="/Home/Index/logOut">退出</a>
-        </div>
-    </if>
+        <if condition="$user">
+            <div class="uind">
+                <a href="/">{$user.real_name}</a>
+                <a href="/Home/SysMsg/index">系统通知({$msg_count})</a>
+                <a href="/Home/Cart/index">购物车({$cart_count})</a> |
+                <a href="/Home/Index/logOut">退出</a>
+            </div>
+        </if>
+    </div>
 </div>
 <hr>
