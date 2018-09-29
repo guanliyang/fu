@@ -10,7 +10,7 @@
 
 	<div class="order_info"><img src="" width="200" height="200" /></div>
 	<div class="order_info"><label>玉米　2018年　辽宁　一等　容重720g/l</label></div>
-	<div class="order_info"><label>霉变1.2%</label><label>水份13%</label><label>杂质2.2%</label><label>呕吐毒素1000μg/kg</label></div>
+	<div class="order_info"><label>生霉1.2%</label><label>水份13%</label><label>杂质2.2%</label><label>呕吐毒素1000μg/kg</label></div>
 	<div class="order_item">净重合计：200吨<label>初始售价：1,700元/吨</label></div>
 	<div class="order_item">入港运费：<b>4,800</b>元　(1,200元/车*4车)</div>
 	<div class="order_item">初始总价：<b>340,000</b>元<label>保证金：<b>68,000</b>元</label></div>

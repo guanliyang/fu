@@ -280,7 +280,7 @@ class SBillModel extends HomeModel {
     private function _getHan() {
         $this->data['b_mb'] = I('request.b_mb', 0, 'intval');
         if ($this->data['b_mb'] > 4 || $this->data['b_mb'] < 1) {
-            notice("[霉变]数据超出合理范围(1.0~4.0)，请重新填写");
+            notice("[生霉]数据超出合理范围(1.0~4.0)，请重新填写");
         }
 
         $this->data['b_zz'] = I('request.b_zz', 0, 'intval');

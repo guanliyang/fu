@@ -32,7 +32,7 @@
     </div>
 
     <div class="order_info">
-        <label>霉变{$info.b_mb}%</label>
+        <label>生霉{$info.b_mb}%</label>
         <label>水份{$info.b_sf}%</label>
         <label>杂质{$info.b_zz}%</label>
         <label>呕吐毒素{$info.b_ot}μg/kg</label>

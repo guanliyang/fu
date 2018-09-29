@@ -10,32 +10,32 @@
 <div class="cont">
 	<div class="list" onclick="location.href='salebill.php'">
 		<div class="info1">2018年 辽宁 100吨<h3>1,700元/吨</h3></div>
-		<div class="info2"><label>容重720g/l</label><label>霉变1.2%</label><label>水份13.5%</label></div>
+		<div class="info2"><label>容重720g/l</label><label>生霉1.2%</label><label>水份13.5%</label></div>
 		<div class="info2"><label>杂质1.9%</label><label>呕吐毒素1000μg/kg</label></div>
 	</div>
 	<div class="list" onclick="location.href='salebill.php'">
 		<div class="info1">2018年 辽宁 100吨<h3>1,700元/吨</h3></div>
-		<div class="info2"><label>容重720g/l</label><label>霉变1.2%</label><label>水份13.5%</label></div>
+		<div class="info2"><label>容重720g/l</label><label>生霉1.2%</label><label>水份13.5%</label></div>
 		<div class="info2"><label>杂质1.9%</label><label>呕吐毒素1000μg/kg</label></div>
 	</div>
 	<div class="list" onclick="location.href='salebill.php'">
 		<div class="info1">2018年 辽宁 100吨<h3>1,700元/吨</h3></div>
-		<div class="info2"><label>容重720g/l</label><label>霉变1.2%</label><label>水份13.5%</label></div>
+		<div class="info2"><label>容重720g/l</label><label>生霉1.2%</label><label>水份13.5%</label></div>
 		<div class="info2"><label>杂质1.9%</label><label>呕吐毒素1000μg/kg</label></div>
 	</div>
 	<div class="list" onclick="location.href='salebill.php'">
 		<div class="info1">2018年 辽宁 100吨<h3>1,700元/吨</h3></div>
-		<div class="info2"><label>容重720g/l</label><label>霉变1.2%</label><label>水份13.5%</label></div>
+		<div class="info2"><label>容重720g/l</label><label>生霉1.2%</label><label>水份13.5%</label></div>
 		<div class="info2"><label>杂质1.9%</label><label>呕吐毒素1000μg/kg</label></div>
 	</div>
 	<div class="list" onclick="location.href='salebill.php'">
 		<div class="info1">2018年 辽宁 100吨<h3>1,700元/吨</h3></div>
-		<div class="info2"><label>容重720g/l</label><label>霉变1.2%</label><label>水份13.5%</label></div>
+		<div class="info2"><label>容重720g/l</label><label>生霉1.2%</label><label>水份13.5%</label></div>
 		<div class="info2"><label>杂质1.9%</label><label>呕吐毒素1000μg/kg</label></div>
 	</div>
 	<div class="list" onclick="location.href='salebill.php'">
 		<div class="info1">2018年 辽宁 100吨<h3>1,700元/吨</h3></div>
-		<div class="info2"><label>容重720g/l</label><label>霉变1.2%</label><label>水份13.5%</label></div>
+		<div class="info2"><label>容重720g/l</label><label>生霉1.2%</label><label>水份13.5%</label></div>
 		<div class="info2"><label>杂质1.9%</label><label>呕吐毒素1000μg/kg</label></div>
 	</div>
 </div>

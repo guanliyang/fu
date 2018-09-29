@@ -24,6 +24,7 @@ class CartController extends HomeController {
 
     // 选择卖单附属
     public function choseBiId() {
+        $this->getUid();
         $car = new \Home\Model\CartModel();
         $bi_id_str = $car->choseBiId();
         notice('成功', 0, array('url' => '/Home/Cart/finish?bi_id_str='.$bi_id_str));

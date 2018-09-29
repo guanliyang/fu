@@ -73,7 +73,7 @@
 					<td>　品名：<select><option>玉米</option></select>　 年份：<select><option>2018</option></select>　 产地：<select><option>辽宁</option></select>　 等级：<select><option>一等</option></select>　 容重：<select><option>720</option></select>g/l</td>
 				</tr>
 				<tr>
-					<td>　霉变：<input name="mbvalue" value="" type="text" class="inpss" /> %　水份：<input name="sfvalue" value="" type="text" class="inpss" /> %　杂质：<input name="zzvalue" value="" type="text" class="inpss" /> %　呕吐毒素：<input name="otvalue" value="" type="text" class="inpsm" /> μg/kg</td>
+					<td>　生霉：<input name="mbvalue" value="" type="text" class="inpss" /> %　水份：<input name="sfvalue" value="" type="text" class="inpss" /> %　杂质：<input name="zzvalue" value="" type="text" class="inpss" /> %　呕吐毒素：<input name="otvalue" value="" type="text" class="inpsm" /> μg/kg</td>
 				</tr>
 				<tr>
 					<td>　出售单价：<input class="bt inpss" value="-" type="button" onclick="cpri(-1);"/> <label id="pri1">1,700</label> <input class="bt inpss" value="+" type="button" onclick="cpri(1);"/> 元/吨　　　　　　　　今日市场参考价：<br/>　　　　　（提交后也可以随时调价）　　　　　　　<label class="fontbig" id="rpri">1,700</label> 元/吨</td>

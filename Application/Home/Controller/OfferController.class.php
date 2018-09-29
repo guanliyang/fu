@@ -39,6 +39,7 @@ class OfferController extends HomeController {
 
     //取消预购
     public function del() {
+        $this->getUid();
         $f_id = I('request.f_id');
         $data = array(
             'f_status' => -9
