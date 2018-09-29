@@ -144,3 +144,6 @@ a{color:#807050;}
 .w180{width:180px;}
 .t-r{text-align:right;}
 .t-l{text-align:left;}
+
+#t_file{display:none;}
+.t_address {cursor:pointer}
