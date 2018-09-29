@@ -66,9 +66,11 @@ class SellController extends HomeController {
         }
         else {
             // 传此参数时,是装货地址
-            $this->getC($this->user['prov_id'], $this->user['city_id'], '');
             $this->getC();
+
+            $this->getC($this->user['prov_id'], $this->user['city_id'], '');
         }
+
         $this->assign('bill', $bill);
 
         $this->display();

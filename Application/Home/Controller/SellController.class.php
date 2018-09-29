@@ -35,7 +35,7 @@ class SellController extends HomeController {
         $this->assign('port', $port);
         // 修改 卖粮信息
         $b_id = I('request.b_id');
-        $bill = array();
+        $bill = '';
         if ($b_id) {
             $bill = M('s_bill')->where(array('b_id' => $b_id))->find();
             $this->getC($bill['c_province_id'], $bill['c_city_id']);
@@ -44,8 +44,9 @@ class SellController extends HomeController {
         }
         else {
             // 传此参数时,是装货地址
-            $this->getC($this->user['prov_id'], $this->user['city_id'], '');
             $this->getC();
+            $this->getC($this->user['prov_id'], $this->user['city_id'], '');
+
         }
         $this->assign('bill', $bill);
 

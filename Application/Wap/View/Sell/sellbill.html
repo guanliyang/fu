@@ -144,24 +144,24 @@
         <select id="z_province" name="z_province">
             <volist name="province" id="vo">
                 <option value="{$vo.id}"
-                <?php if($bill && $bill['z_province_id'] == $vo['id']) {  ?>selected<?php } ?>
-                <?php if(!$bill && $user['prov_id'] == $vo['id']) {  ?>selected<?php } ?>
+                <?php if(!empty($bill) && $bill['z_province_id'] == $vo['id']) {  ?>selected<?php } ?>
+                <?php if(empty($bill) && $user['prov_id'] == $vo['id']) {  ?>selected<?php } ?>
                 >{$vo.areaName}</option>
             </volist>
         </select>
         <select id="z_city" name="z_city">
             <volist name="city" id="vo">
                 <option value="{$vo.id}"
-                <?php if($bill && $bill['z_city_id'] == $vo['id']) {  ?>selected<?php } ?>
-                <?php if(!$bill && $user['city_id'] == $vo['id']) {  ?>selected<?php } ?>
+                <?php if(!empty($bill) && $bill['z_city_id'] == $vo['id']) {  ?>selected<?php } ?>
+                <?php if(empty($bill) && $user['city_id'] == $vo['id']) {  ?>selected<?php } ?>
                 >{$vo.areaName}</option>
             </volist>
         </select>
         <select id="z_area" name="z_area">
             <volist name="area" id="vo">
                 <option value="{$vo.id}"
-                <?php if($bill && $bill['z_area_id'] == $vo['id']) {  ?>selected<?php } ?>
-                <?php if(!$bill && $user['area_id'] == $vo['id']) {  ?>selected<?php } ?>
+                <?php if(!empty($bill) && $bill['z_area_id'] == $vo['id']) {  ?>selected<?php } ?>
+                <?php if(empty($bill) && $user['area_id'] == $vo['id']) {  ?>selected<?php } ?>
                 >{$vo.areaName}</option>
             </volist>
         </select>
@@ -170,8 +170,8 @@
 
         <br/>　　　　　
         <input name="address" value="<?php
-        if($is_in_area) {echo $user['address']; }
-        if($bill ) {echo $bill['b_add']; }
+                        if(empty($bill) && $is_in_area) {echo $user['address']; }
+                        if(!empty($bill)) {echo $bill['b_add']; }
         ?>" type="text" /><br/>　
         联系人：<input name="b_cont" value="<if condition='$bill'>{$bill.b_cont}<else/>{$user.real_name}</if>" type="text"/><br/>　
         手机号：<input name="b_mobi" value="<if condition='$bill'>{$bill.b_mobi}<else/>{$user.mobile}</if>" type="text"/></div>

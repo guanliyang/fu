@@ -79,7 +79,6 @@ class HomeController extends Controller {
         }
         $area = M('local_area')->where(array('parentId' => $city[$city_key]['id']))->select();
         $this->assign($prefix.'area', $area);
-
         $this->assign('is_in_area', $is_in_area);
     }
 }
