@@ -37,13 +37,23 @@
                             <else />
                             <label class="hotitem">全部</label>　　
                         </if>
-                        <volist name="place" id="vo">
-                            <if condition="$_GET['gp_id'] eq $vo['gp_id']">
-                                <label class="hotitem">{$vo.gp_name}</label>　　
-                            <else />
-                                <a href="#" value="{$vo.gp_id}" class="gp_click">{$vo.gp_name}</a>　　
-                            </if>
-                        </volist>
+
+                        <select id="c_province" name="c_province">
+                            <volist name="c_province" id="vo">
+                                <option value="{$vo.id}">{$vo.areaName}</option>
+                            </volist>
+                        </select>
+                        <select id="c_city" name="c_city">
+                            <volist name="c_city" id="vo">
+                                <option value="{$vo.id}">{$vo.areaName}</option>
+                            </volist>
+                        </select>
+                        <select id="c_area" name="c_area">
+                            <volist name="c_area" id="vo">
+                                <option value="{$vo.id}">{$vo.areaName}</option>
+                            </volist>
+                        </select>
+
                     </td>
                 </tr>
                 <tr>
@@ -114,6 +124,7 @@
 
 <include file="public/foot" />
 <script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/js/cz_address.js" ></script>
 <script type="text/javascript">
 function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象

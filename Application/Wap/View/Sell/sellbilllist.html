@@ -15,16 +15,24 @@
                 </if>
             </volist>
         </select>
-        <select name="place" class="gp_id">
-            <option>全部</option>
-            <volist name="place" id="vo">
-                <if condition="$_GET['gp_id'] eq $vo['gp_id']">
-                    <option value="{$vo.gp_id}" selected>{$vo.gp_name}</option>
-                    <else/>
-                    <option value="{$vo.gp_id}">{$vo.gp_name}</option>
-                </if>
+
+        <br/>
+        <select id="c_province" name="c_province">
+            <volist name="c_province" id="vo">
+                <option value="{$vo.id}">{$vo.areaName}</option>
             </volist>
         </select>
+        <select id="c_city" name="c_city">
+            <volist name="c_city" id="vo">
+                <option value="{$vo.id}">{$vo.areaName}</option>
+            </volist>
+        </select>
+        <select id="c_area" name="c_area">
+            <volist name="c_area" id="vo">
+                <option value="{$vo.id}">{$vo.areaName}</option>
+            </volist>
+        </select>
+
     </div>
     <div class="ord">
 
@@ -71,6 +79,7 @@
 <input type="hidden" class="item_total_page" value="{$info.total_page}" />
 
 <script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/js/cz_address.js" ></script>
 <script type="text/javascript">
 function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
