@@ -59,7 +59,7 @@
 	<hr>
 	<div class="bill_info"><label>玉米</label><label>2016</label><label>吉林</label><label>一等</label><br/><img src=""><br/><b>1,690</b>元/吨</div>
 	<div class="bill_info">货单号：S101101101　　　<a href=""><装货视频></a></div>
-	<div class="bill_info"><label>容重715g/l</label><label>霉变1.2%</label><label>水份13%</label><label>杂质2.2%</label><label>呕吐毒素1000μg/kg</label></div>
+	<div class="bill_info"><label>容重715g/l</label><label>生霉1.2%</label><label>水份13%</label><label>杂质2.2%</label><label>呕吐毒素1000μg/kg</label></div>
 
 	<div class="bill_item cool" id="tr2121112" onclick="iSel(2121112);">
 		<input type="checkbox" name="buyid" id="2121112" class="bt_s" value="2121112" onclick="iSel(2121112);"/> 组号：2121112<label><b id="pay2121112">84,500</b>元</label><br/>2箱 (毛重：60吨　皮重：10吨　净重：50吨)

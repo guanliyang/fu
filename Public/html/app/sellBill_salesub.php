@@ -66,7 +66,7 @@
 	<hr>
 	<div class="bill_info"><img src="" width="200" height="200" /><br/>粮食近照 (点击上传)</div>
 	<div class="bill_item">一等玉米　<select><option>2018</option></select><select><option>辽宁</option></select><select><option>720</option></select>g/l</div>
-	<div class="bill_item">霉变：<input name="mbvalue" value="" type="text" class="inpss" />%　水份：<input name="sfvalue" value="" type="text" class="inpss" />%</div>
+	<div class="bill_item">生霉：<input name="mbvalue" value="" type="text" class="inpss" />%　水份：<input name="sfvalue" value="" type="text" class="inpss" />%</div>
 	<div class="bill_item">杂质：<input name="zzvalue" value="" type="text" class="inpss" />%　呕吐毒素：<input name="otvalue" value="" type="text" class="inpsm" />μg/kg</div>
 	<div class="bill_item">出售单价：<input class="bt inpss" value="-" type="button" onclick="cpri(-1);"/> <b><span id="pri1">1,700</span></b> <input class="bt inpss" value="+" type="button" onclick="cpri(1);"/> 元/吨
 		<br/><label>市场参考价：<b id="rpri">1,700</b>元/吨</label><br/>(提交后也可以随时调价)</div>

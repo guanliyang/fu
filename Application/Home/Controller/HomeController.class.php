@@ -44,7 +44,13 @@ class HomeController extends Controller {
     // ajax uid
     public function getUid() {
         if (empty($this->user)) {
+<<<<<<< HEAD
             notice('您还没有登录, 请点击<会员中心>进行登录');
+=======
+            notice('您还没有登录, 请点击<会员中心>,或刷新页面重新登录');
+//            print_r('<script type="text/javascript" charset="utf-8">alert("您还没有登录, 请进入<会员中心>登录");window.location = "/";</script>');
+//            exit;
+>>>>>>> c8b868fe95e729eb4c95ced5b3427d593c5a526b
         }
         return $this->user['id'];
     }

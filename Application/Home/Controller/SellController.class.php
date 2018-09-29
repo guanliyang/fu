@@ -15,6 +15,7 @@ class SellController extends HomeController {
 
     // 在售粮源详情
     public function onLineBillInfo() {
+        $this->checkoutUserLogin();
         $bill = new \Home\Model\SBillModel();
         $info = $bill->getOnLineBillInfo($this->getUid());
 
@@ -95,6 +96,7 @@ class SellController extends HomeController {
     }
     // 删除
     public function del() {
+        $this->getUid();
         $bill_item = new \Home\Model\SBillModel();
         $status = $bill_item->del();
         if ($status) {
