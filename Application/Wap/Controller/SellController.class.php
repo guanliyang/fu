@@ -50,9 +50,8 @@ class SellController extends HomeController {
         $this->checkoutUserLogin();
         $this->putG();
         $this->assign('user', $this->user);
+        $this->getC();
 
-        $province = M('area')->where(array('level' => 1))->select();
-        $this->assign('province', $province);
         // 代入港口
         $port = M('sys_port')->where(array('bp_status' => 1))->select();
         $this->assign('port', $port);

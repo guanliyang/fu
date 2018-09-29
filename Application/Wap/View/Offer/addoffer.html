@@ -50,17 +50,34 @@
     <hr>
     <input type="hidden" name="gc_id" value="1">
     <input type="hidden" name="gl_id" value="1">
-    <div class="bill_item">一等玉米　
+    <div class="bill_item">
+
+        <select id="c_province" name="c_province">
+            <volist name="province" id="vo">
+                <option value="{$vo.id}">{$vo.areaName}</option>
+            </volist>
+        </select>
+        <select id="c_city" name="c_city">
+            <volist name="city" id="vo">
+                <option value="{$vo.id}">{$vo.areaName}</option>
+            </volist>
+        </select>
+        <select id="c_area" name="c_area">
+            <volist name="area" id="vo">
+                <option value="{$vo.id}">{$vo.areaName}</option>
+            </volist>
+        </select><br/>
+
+        一等玉米　
         <select name="gy_id">
             <volist name="year" id="vo">
                 <option value="{$vo.gy_id}">{$vo.gy_id}</option>
             </volist>
         </select>
-        <select name="gp_id">
-            <volist name="place" id="vo">
-                <option value="{$vo.gp_id}">{$vo.gp_name}</option>
-            </volist>
-        </select>
+
+
+
+
         <select name="gr_id">
             <volist name="rz" id="vo">
                 <option value="{$vo.gr_id}">{$vo.gr_name}</option>
@@ -89,4 +106,5 @@
 <script type="text/javascript">
     t_submit('/Wap/Offer/ajaxAddOffer');
 </script>
+<script type="text/javascript" src="/Public/js/cz_address.js" ></script>
 <include file="public/foot" />

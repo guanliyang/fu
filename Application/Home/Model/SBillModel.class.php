@@ -215,6 +215,7 @@ class SBillModel extends HomeModel {
         $this->_getAdd();
         $this->_getDefault();
         $this->data['u_id'] = $uid;
+        $this->_getCZ();
 
         $this->data['b_add'] = $this->getAddress($uid);
         // 港口
@@ -252,12 +253,12 @@ class SBillModel extends HomeModel {
             notice('出产年份有误');
         }
 
-        $this->data['gp_id'] = I('request.gp_id', 0, 'intval');
-        $where = array('gp_id' => $this->data['gp_id']);
-        $this->data['b_place'] = M('g_place')->where($where)->getField('gp_name');
-        if (empty($this->data['b_place'])) {
-            notice('产地有误');
-        }
+//        $this->data['gp_id'] = I('request.gp_id', 0, 'intval');
+//        $where = array('gp_id' => $this->data['gp_id']);
+//        $this->data['b_place'] = M('g_place')->where($where)->getField('gp_name');
+//        if (empty($this->data['b_place'])) {
+//            notice('产地有误');
+//        }
 
         $this->data['gr_id'] = I('request.gr_id', 0, 'intval');
         $where = array('gr_id' => $this->data['gr_id']);
@@ -362,5 +363,16 @@ class SBillModel extends HomeModel {
             $status = self::where('b_id='.$b_id)->save(array('b_status' => -9));
         }
         return $status;
+    }
+
+    // 产地和装货地址
+    public function _getCZ() {
+        $this->data['c_province_id'] = I('request.c_province', 0, 'intval');
+        $this->data['c_city_id'] = I('request.c_city', 0, 'intval');
+        $this->data['c_area_id'] = I('request.c_area', 0, 'intval');
+
+        $this->data['z_province_id'] = I('request.z_province', 0, 'intval');
+        $this->data['z_city_id'] = I('request.z_city', 0, 'intval');
+        $this->data['z_area_id'] = I('request.z_area', 0, 'intval');
     }
 }

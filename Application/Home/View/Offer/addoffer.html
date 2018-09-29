@@ -73,9 +73,19 @@
                         </select>
                         　 　
                         产地：
-                        <select name="gp_id">
-                            <volist name="place" id="vo">
-                                <option value="{$vo.gp_id}">{$vo.gp_name}</option>
+                        <select id="c_province" name="c_province">
+                            <volist name="province" id="vo">
+                                <option value="{$vo.id}">{$vo.areaName}</option>
+                            </volist>
+                        </select>
+                        <select id="c_city" name="c_city">
+                            <volist name="city" id="vo">
+                                <option value="{$vo.id}">{$vo.areaName}</option>
+                            </volist>
+                        </select>
+                        <select id="c_area" name="c_area">
+                            <volist name="area" id="vo">
+                                <option value="{$vo.id}">{$vo.areaName}</option>
                             </volist>
                         </select>
                         　 　
@@ -133,5 +143,5 @@
 <script type="text/javascript">
     t_submit('/Home/Offer/ajaxAddOffer');
 </script>
-
+<script type="text/javascript" src="/Public/js/cz_address.js" ></script>
 <include file="public/foot" />

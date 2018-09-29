@@ -48,4 +48,16 @@ class HomeController extends Controller {
         }
         return $this->user['id'];
     }
+
+    // 产地
+    public function getC() {
+        $province = M('local_area')->where(array('level' => 1))->select();
+        $this->assign('province', $province);
+
+        $city = M('local_area')->where(array('parentId' => $province[0]['id']))->select();
+        $this->assign('city', $city);
+
+        $area = M('local_area')->where(array('parentId' => $city[0]['id']))->select();
+        $this->assign('area', $area);
+    }
 }

@@ -62,17 +62,25 @@ class UserModel extends HomeModel {
         $province = I('request.province');
         if (!empty($province)) {
             $this->province = $this->getAreaNameById($province);
+            $this->prov_id = $province;
         }
 
         $city = I('request.city');
         if (!empty($city)) {
             $this->city = $this->getAreaNameById($city);
+            $this->city_id = $city;
         }
 
         $area = I('request.area');
         if (!empty($area)) {
             $this->area = $this->getAreaNameById($area);
+            $this->area_id = $area;
         }
+
+
+
+
+
 
         $this->address = I('request.address');
 

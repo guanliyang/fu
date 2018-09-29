@@ -93,11 +93,26 @@
                             </volist>
                         </select>
                         　产地：
-                        <select name="gp_id">
-                            <volist name="place" id="vo">
-                                <option value="{$vo.gp_id}" <if condition="$vo['gp_id'] eq $bill['gp_id']">selected</if>>{$vo.gp_name}</option>
+                        <select id="c_province" name="c_province">
+                            <volist name="province" id="vo">
+                                <option value="{$vo.id}">{$vo.areaName}</option>
                             </volist>
                         </select>
+                        <select id="c_city" name="c_city">
+                            <volist name="city" id="vo">
+                                <option value="{$vo.id}">{$vo.areaName}</option>
+                            </volist>
+                        </select>
+                        <select id="c_area" name="c_area">
+                            <volist name="area" id="vo">
+                                <option value="{$vo.id}">{$vo.areaName}</option>
+                            </volist>
+                        </select>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         　等级：
                         <select name="gl_id">
                             <volist name="level" id="vo">
@@ -109,13 +124,15 @@
                             <volist name="rz" id="vo">
                                 <option value="{$vo.gr_id}" <if condition="$vo['gr_id'] eq $bill['gr_id']">selected</if>>{$vo.gr_name}</option>
                             </volist>
-                        </select>g/l</td>
+                        </select>g/l
+                    </td>
                 </tr>
                 <tr>
                     <td>　霉变：<input name="b_mb" value="{$bill.b_mb}" type="text" class="inpss" /> %　
                         水份：<input name="b_sf" value="{$bill.b_sf}" type="text" class="inpss" /> %　
                         杂质：<input name="b_zz" value="{$bill.b_zz}" type="text" class="inpss" /> %　
-                        呕吐毒素：<input name="b_ot" value="{$bill.b_ot}" type="text" class="inpsm" /> μg/kg</td>
+                        呕吐毒素：<input name="b_ot" value="{$bill.b_ot}" type="text" class="inpsm" /> μg/kg
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -131,11 +148,13 @@
                     <td>　出售重量：<input name="b_weig" id="sweight" class="inpsm" value="{$bill.b_weig}" type="text" onchange="cwei();"/> 吨 (约需 <label id="bsum">0</label> 个集装箱)　　　　
                         入港运费：<label id="freight">0</label> 元 (<label id="tfrei">1,200</label>元/车，需要<label id="tsum">0</label>车)</td>
                 </tr>
-                <tr>
-                    <td>　需缴保证金：<label id="depo">0</label> 元 （货款总价<label id="total">0</label>的{$Think.config.DEPO_RATE_SHOW}，成交后即退保证金）</td>
-                </tr>
+
             </table>
             <table>
+                <tr>
+                    <td width="40"></td>
+                    <td colspan="6">　需缴保证金：<label id="depo">0</label> 元 （货款总价<label id="total">0</label>的{$Think.config.DEPO_RATE_SHOW}，成交后即退保证金）</td>
+                </tr>
                 <tr>
                     <td width="40"></td>
                     <td>卖粮港口：</td>
@@ -151,20 +170,26 @@
                     <td width="40"></td>
                     <td>装货地址：</td>
                     <td colspan="5">
-                        <select id="cmbProvince" name="province">
-                            <option value="">{$user.province}</option>
+                        <select id="z_province" name="z_province">
                             <volist name="province" id="vo">
-                                <option value="{$vo.id}">{$vo.areaName}</option>
+                                <option value="{$vo.id}"
+                                >{$vo.areaName}</option>
                             </volist>
                         </select>
-                        <select id="cmbCity" name="city">
-                            <option value="">{$user.city}</option>
+                        <select id="z_city" name="z_city">
+                            <volist name="city" id="vo">
+                                <option value="{$vo.id}"
+                                >{$vo.areaName}</option>
+                            </volist>
                         </select>
-                        <select id="cmbArea" name="area">
-                            <option value="">{$user.area}</option>
+                        <select id="z_area" name="z_area">
+                            <volist name="area" id="vo">
+                                <option value="{$vo.id}"
+                                >{$vo.areaName}</option>
+                            </volist>
                         </select>
 
-                        <input name="address" value="{$user.address}" type="text" class="inpbig" />
+                        <input name="address" value="" type="text" class="inpbig" />
                     </td>
                 </tr>
                 <tr>
@@ -199,5 +224,5 @@
     t_submit('/Home/Sell/addBill');
 </script>
 <script type="text/javascript" src="/Public/js/upload.js"></script>
-<script type="text/javascript" src="/Public/js/address.js" ></script>
+<script type="text/javascript" src="/Public/js/cz_address.js" ></script>
 <include file="public/foot" />

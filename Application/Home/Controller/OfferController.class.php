@@ -14,6 +14,7 @@ class OfferController extends HomeController {
     public function addOffer() {
         $this->checkoutUserLogin();
         $this->putG();
+        $this->getC();
         $this->display();
     }
     // 提交预约信息

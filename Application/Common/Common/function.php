@@ -1077,3 +1077,10 @@ function getItemShowD($bill, $bill_item) {
     }
     return $str;
 }
+
+function getCAddress($bill) {
+    $p = M('local_area')->where(array('id' => $bill['c_province_id']))->getField('areaName');
+    $c = M('local_area')->where(array('id' => $bill['c_city_id']))->getField('areaName');
+    $a = M('local_area')->where(array('id' => $bill['c_area_id']))->getField('areaName');
+    return $p.$c.$a;
+}

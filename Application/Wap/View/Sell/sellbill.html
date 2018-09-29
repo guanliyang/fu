@@ -70,17 +70,34 @@
     </div>
     <input type="hidden" name="gc_id" value="1">
     <input type="hidden" name="gl_id" value="1">
-    <div class="bill_item">一等玉米　
+    <div class="bill_item">
+        <select id="c_province" name="c_province">
+            <volist name="province" id="vo">
+                <option value="{$vo.id}">{$vo.areaName}</option>
+            </volist>
+        </select>
+        <select id="c_city" name="c_city">
+            <volist name="city" id="vo">
+                <option value="{$vo.id}">{$vo.areaName}</option>
+            </volist>
+        </select>
+        <select id="c_area" name="c_area">
+            <volist name="area" id="vo">
+                <option value="{$vo.id}">{$vo.areaName}</option>
+            </volist>
+        </select><br/>
+
+
+        一等玉米　
         <select name="gy_id">
             <volist name="year" id="vo">
                 <option value="{$vo.gy_id}" <if condition="$vo['gy_id'] eq $bill['gy_id']">selected</if> >{$vo.gy_id}</option>
             </volist>
         </select>
-        <select name="gp_id">
-            <volist name="place" id="vo">
-                <option value="{$vo.gp_id}" <if condition="$vo['gp_id'] eq $bill['gp_id']">selected</if>>{$vo.gp_name}</option>
-            </volist>
-        </select>
+
+
+
+
         <select name="gr_id">
             <volist name="rz" id="vo">
                 <option value="{$vo.gr_id}" <if condition="$vo['gr_id'] eq $bill['gr_id']">selected</if>>{$vo.gr_name}</option>
@@ -117,18 +134,25 @@
     </div>
     <div class="bill_item">
         装货地址：
-        <select id="cmbProvince" name="province">
-            <option value="">{$user.province}</option>
+        <select id="z_province" name="z_province">
             <volist name="province" id="vo">
-                <option value="{$vo.id}">{$vo.areaName}</option>
+                <option value="{$vo.id}"
+                >{$vo.areaName}</option>
+            </volist>
+        </select>
+        <select id="z_city" name="z_city">
+            <volist name="city" id="vo">
+                <option value="{$vo.id}"
+                >{$vo.areaName}</option>
+            </volist>
+        </select>
+        <select id="z_area" name="z_area">
+            <volist name="area" id="vo">
+                <option value="{$vo.id}"
+                >{$vo.areaName}</option>
             </volist>
         </select><br/>
-        <select id="cmbCity" name="city">
-            <option value="">{$user.city}</option>
-        </select><br/>
-        <select id="cmbArea" name="area">
-            <option value="">{$user.area}</option>
-        </select>
+
         <br/>　　　　　
         <input name="address" value="{$user.address}" type="text" /><br/>　
         联系人：<input name="b_cont" value="<if condition='$bill'>{$bill.b_cont}<else/>{$user.real_name}</if>" type="text"/><br/>　
@@ -149,4 +173,4 @@
     t_submit('/Wap/Sell/addBill');
 </script>
 <script type="text/javascript" src="/Public/js/upload.js"></script>
-<script type="text/javascript" src="/Public/js/address.js" ></script>
+<script type="text/javascript" src="/Public/js/cz_address.js" ></script>

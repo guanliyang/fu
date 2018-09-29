@@ -29,8 +29,7 @@ class SellController extends HomeController {
         $this->putG();
         $this->assign('user', $this->user);
 
-        $province = M('area')->where(array('level' => 1))->select();
-        $this->assign('province', $province);
+        $this->getC();
         // 代入港口
         $port = M('sys_port')->where(array('bp_status' => 1))->select();
         $this->assign('port', $port);

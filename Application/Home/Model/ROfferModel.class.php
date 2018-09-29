@@ -87,12 +87,15 @@ class ROfferModel extends HomeModel {
             notice('出产年份有误');
         }
 
-        $this->data['gp_id'] = I('request.gp_id', 0, 'intval');
-        $where = array('gp_id' => $this->data['gp_id']);
-        $this->data['f_place'] = M('g_place')->where($where)->getField('gp_name');
-        if (empty($this->data['f_place'])) {
-            notice('产地有误');
-        }
+        $this->data['c_province_id'] = I('request.c_province', 0, 'intval');
+        $this->data['c_city_id'] = I('request.c_city', 0, 'intval');
+        $this->data['c_area_id'] = I('request.c_area', 0, 'intval');
+//        $this->data['gp_id'] = I('request.gp_id', 0, 'intval');
+//        $where = array('gp_id' => $this->data['gp_id']);
+//        $this->data['f_place'] = M('g_place')->where($where)->getField('gp_name');
+//        if (empty($this->data['f_place'])) {
+//            notice('产地有误');
+//        }
 
         $this->data['gr_id'] = I('request.gr_id', 0, 'intval');
         $where = array('gr_id' => $this->data['gr_id']);

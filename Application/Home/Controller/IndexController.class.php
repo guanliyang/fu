@@ -145,4 +145,40 @@ class IndexController extends Controller {
         }
         die(json_encode(array('city' => $str)));
     }
+
+
+    // 返回二级城市列表
+    public function getCityCZ() {
+        $pId = I('request.province');
+        $province = M('local_area')->where(array('parentId' => $pId))->select();
+        $str = '';//'<option>请选择城市</option>';
+        if (!empty($province)) {
+            foreach ($province as $value) {
+                $str .= '<option value="'.$value['id'].' "> '.$value['areaName'].'</option>';
+            }
+        }
+
+        $area_str = '';
+        $area = M('local_area')->where(array('parentId' => $province[0]['id']))->select();
+        if (!empty($area)) {
+            foreach ($area as $value) {
+                $area_str .= '<option value="'.$value['id'].' "> '.$value['areaName'].'</option>';
+            }
+        }
+
+        die(json_encode(array('city' => $str, 'area' => $area_str)));
+    }
+
+    // 返回三级市区
+    public function getAreaCZ() {
+        $cid = I('request.city');
+        $province = M('local_area')->where(array('parentId' => $cid))->select();
+        $str = '';
+        if (!empty($province)) {
+            foreach ($province as $value) {
+                $str .= '<option value="'.$value['id'].' "> '.$value['areaName'].'</option>';
+            }
+        }
+        die(json_encode(array('city' => $str)));
+    }
 }
