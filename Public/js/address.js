@@ -10,6 +10,7 @@ $('select[name="province"]').on('change',function(){
             $("#cmbCity").empty();
             $("#cmbArea").empty();
             $("#cmbCity").append(data.city);
+            $("#cmbArea").append(data.area);
         },
         error: function(xhr, type){
             alert('抱歉,加载失败!');

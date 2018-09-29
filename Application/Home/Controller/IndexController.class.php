@@ -115,13 +115,22 @@ class IndexController extends Controller {
     public function getCity() {
         $pId = I('request.province');
         $province = M('area')->where(array('parentId' => $pId))->select();
-        $str = '<option>请选择城市</option>';
+        $str = '';//'<option>请选择城市</option>';
         if (!empty($province)) {
             foreach ($province as $value) {
                 $str .= '<option value="'.$value['id'].' "> '.$value['areaName'].'</option>';
             }
         }
-        die(json_encode(array('city' => $str)));
+
+        $area_str = '';
+        $area = M('area')->where(array('parentId' => $province[0]['id']))->select();
+        if (!empty($area)) {
+            foreach ($area as $value) {
+                $area_str .= '<option value="'.$value['id'].' "> '.$value['areaName'].'</option>';
+            }
+        }
+
+        die(json_encode(array('city' => $str, 'area' => $area_str)));
     }
 
     // 返回三级市区

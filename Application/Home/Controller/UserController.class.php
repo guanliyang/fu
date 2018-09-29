@@ -16,7 +16,6 @@ class UserController extends HomeController {
     public function ajaxSaveUser() {
         $this->getUid();
         $user = new \Home\Model\UserModel();
-        $this->getUid();
         $status = $user->saveUser($this->user);
         if ($status) {
             notice('修改成功', 0, array('url' => '/'));
