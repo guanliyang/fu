@@ -29,7 +29,7 @@ class SellController extends HomeController {
         $this->putG();
         $this->assign('user', $this->user);
 
-        $this->getC();
+
         // 代入港口
         $port = M('sys_port')->where(array('bp_status' => 1))->select();
         $this->assign('port', $port);
@@ -38,6 +38,14 @@ class SellController extends HomeController {
         $bill = array();
         if ($b_id) {
             $bill = M('s_bill')->where(array('b_id' => $b_id))->find();
+            $this->getC($bill['c_province_id'], $bill['c_city_id']);
+            // 传此参数时,是装货地址
+            $this->getC($bill['z_province_id'], $bill['z_city_id'], '');
+        }
+        else {
+            // 传此参数时,是装货地址
+            $this->getC($this->user['prov_id'], $this->user['city_id'], '');
+            $this->getC();
         }
         $this->assign('bill', $bill);
 

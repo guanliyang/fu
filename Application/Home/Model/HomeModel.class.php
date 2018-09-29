@@ -92,6 +92,16 @@ class HomeModel extends Model {
         return $area_address . $address;
     }
 
+    //单纯获取地址
+    public function getAdd() {
+
+        $address = I('request.address');
+        if (empty($address)) {
+            notice('请认真填写地址');
+        }
+        return $address;
+    }
+
     // 分页
     public function getPageShow($count, $str = '') {
         $Page       = new \Think\Page($count, $this->limit);

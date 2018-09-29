@@ -94,18 +94,24 @@
                         </select>
                         　产地：
                         <select id="c_province" name="c_province">
-                            <volist name="province" id="vo">
-                                <option value="{$vo.id}">{$vo.areaName}</option>
+                            <volist name="c_province" id="vo">
+                                <option value="{$vo.id}"
+                                <?php if($bill['c_province_id'] == $vo['id']) {  ?>selected<?php } ?>
+                                >{$vo.areaName}</option>
                             </volist>
                         </select>
                         <select id="c_city" name="c_city">
-                            <volist name="city" id="vo">
-                                <option value="{$vo.id}">{$vo.areaName}</option>
+                            <volist name="c_city" id="vo">
+                                <option value="{$vo.id}"
+                                <?php if($bill['c_city_id'] == $vo['id']) {  ?>selected<?php } ?>
+                                >{$vo.areaName}</option>
                             </volist>
                         </select>
                         <select id="c_area" name="c_area">
-                            <volist name="area" id="vo">
-                                <option value="{$vo.id}">{$vo.areaName}</option>
+                            <volist name="c_area" id="vo">
+                                <option value="{$vo.id}"
+                                <?php if($bill['c_area_id'] == $vo['id']) {  ?>selected<?php } ?>
+                                >{$vo.areaName}</option>
                             </volist>
                         </select>
 
@@ -173,23 +179,32 @@
                         <select id="z_province" name="z_province">
                             <volist name="province" id="vo">
                                 <option value="{$vo.id}"
+                                <?php if($bill && $bill['z_province_id'] == $vo['id']) {  ?>selected<?php } ?>
+                                <?php if(!$bill && $user['prov_id'] == $vo['id']) {  ?>selected<?php } ?>
                                 >{$vo.areaName}</option>
                             </volist>
                         </select>
                         <select id="z_city" name="z_city">
                             <volist name="city" id="vo">
                                 <option value="{$vo.id}"
+                                <?php if($bill && $bill['z_city_id'] == $vo['id']) {  ?>selected<?php } ?>
+                                <?php if(!$bill && $user['city_id'] == $vo['id']) {  ?>selected<?php } ?>
                                 >{$vo.areaName}</option>
                             </volist>
                         </select>
                         <select id="z_area" name="z_area">
                             <volist name="area" id="vo">
                                 <option value="{$vo.id}"
+                                <?php if($bill && $bill['z_area_id'] == $vo['id']) {  ?>selected<?php } ?>
+                                <?php if(!$bill && $user['area_id'] == $vo['id']) {  ?>selected<?php } ?>
                                 >{$vo.areaName}</option>
                             </volist>
                         </select>
 
-                        <input name="address" value="" type="text" class="inpbig" />
+                        <input name="address" value="<?php
+                        if(!$bill && $is_in_area) {echo $user['address']; }
+                        if($bill ) {echo $bill['b_add']; }
+                        ?>" type="text" class="inpbig" />
                     </td>
                 </tr>
                 <tr>

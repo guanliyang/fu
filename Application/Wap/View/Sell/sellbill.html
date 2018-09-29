@@ -72,20 +72,27 @@
     <input type="hidden" name="gl_id" value="1">
     <div class="bill_item">
         <select id="c_province" name="c_province">
-            <volist name="province" id="vo">
-                <option value="{$vo.id}">{$vo.areaName}</option>
+            <volist name="c_province" id="vo">
+                <option value="{$vo.id}"
+                <?php if($bill['c_province_id'] == $vo['id']) {  ?>selected<?php } ?>
+                >{$vo.areaName}</option>
             </volist>
         </select>
         <select id="c_city" name="c_city">
-            <volist name="city" id="vo">
-                <option value="{$vo.id}">{$vo.areaName}</option>
+            <volist name="c_city" id="vo">
+                <option value="{$vo.id}"
+                <?php if($bill['c_city_id'] == $vo['id']) {  ?>selected<?php } ?>
+                >{$vo.areaName}</option>
             </volist>
         </select>
         <select id="c_area" name="c_area">
-            <volist name="area" id="vo">
-                <option value="{$vo.id}">{$vo.areaName}</option>
+            <volist name="c_area" id="vo">
+                <option value="{$vo.id}"
+                <?php if($bill['c_area_id'] == $vo['id']) {  ?>selected<?php } ?>
+                >{$vo.areaName}</option>
             </volist>
-        </select><br/>
+        </select>
+        <br/>
 
 
         一等玉米　
@@ -137,24 +144,35 @@
         <select id="z_province" name="z_province">
             <volist name="province" id="vo">
                 <option value="{$vo.id}"
+                <?php if($bill && $bill['z_province_id'] == $vo['id']) {  ?>selected<?php } ?>
+                <?php if(!$bill && $user['prov_id'] == $vo['id']) {  ?>selected<?php } ?>
                 >{$vo.areaName}</option>
             </volist>
         </select>
         <select id="z_city" name="z_city">
             <volist name="city" id="vo">
                 <option value="{$vo.id}"
+                <?php if($bill && $bill['z_city_id'] == $vo['id']) {  ?>selected<?php } ?>
+                <?php if(!$bill && $user['city_id'] == $vo['id']) {  ?>selected<?php } ?>
                 >{$vo.areaName}</option>
             </volist>
         </select>
         <select id="z_area" name="z_area">
             <volist name="area" id="vo">
                 <option value="{$vo.id}"
+                <?php if($bill && $bill['z_area_id'] == $vo['id']) {  ?>selected<?php } ?>
+                <?php if(!$bill && $user['area_id'] == $vo['id']) {  ?>selected<?php } ?>
                 >{$vo.areaName}</option>
             </volist>
-        </select><br/>
+        </select>
+
+        <br/>
 
         <br/>　　　　　
-        <input name="address" value="{$user.address}" type="text" /><br/>　
+        <input name="address" value="<?php
+        if($is_in_area) {echo $user['address']; }
+        if($bill ) {echo $bill['b_add']; }
+        ?>" type="text" /><br/>　
         联系人：<input name="b_cont" value="<if condition='$bill'>{$bill.b_cont}<else/>{$user.real_name}</if>" type="text"/><br/>　
         手机号：<input name="b_mobi" value="<if condition='$bill'>{$bill.b_mobi}<else/>{$user.mobile}</if>" type="text"/></div>
       <div class="bill_item">提交后需付款：<label><b id="pay">0</b> 元</label></div>

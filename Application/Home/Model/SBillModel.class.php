@@ -217,7 +217,7 @@ class SBillModel extends HomeModel {
         $this->data['u_id'] = $uid;
         $this->_getCZ();
 
-        $this->data['b_add'] = $this->getAddress($uid);
+        $this->data['b_add'] = $this->getAdd();
         // 港口
         $this->data['b_port'] = I('request.b_port');
 

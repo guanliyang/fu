@@ -51,14 +51,36 @@ class HomeController extends Controller {
     }
 
     // 产地
-    public function getC() {
+    public function getC($pid = '', $cid = '', $prefix = 'c_') {
         $province = M('local_area')->where(array('level' => 1))->select();
-        $this->assign('province', $province);
+        $this->assign($prefix.'province', $province);
 
-        $city = M('local_area')->where(array('parentId' => $province[0]['id']))->select();
-        $this->assign('city', $city);
+        // 选中市
+        $pro_key = 0;
+        if ($province) {
+            foreach ($province as $key => $value) {
+                if ($pid == $value['id']) {
+                    $pro_key = $key;
+                }
+            }
+        }
+        $city = M('local_area')->where(array('parentId' => $province[$pro_key]['id']))->select();
+        $this->assign($prefix.'city', $city);
 
-        $area = M('local_area')->where(array('parentId' => $city[0]['id']))->select();
-        $this->assign('area', $area);
+        //选中区
+        $is_in_area = false;
+        $city_key = 0;
+        if ($city) {
+            foreach ($city as $key => $value) {
+                if ($cid == $value['id']) {
+                    $city_key = $key;
+                    $is_in_area = true;
+                }
+            }
+        }
+        $area = M('local_area')->where(array('parentId' => $city[$city_key]['id']))->select();
+        $this->assign($prefix.'area', $area);
+
+        $this->assign('is_in_area', $is_in_area);
     }
 }
