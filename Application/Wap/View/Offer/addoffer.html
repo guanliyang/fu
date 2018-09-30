@@ -53,17 +53,17 @@
     <div class="bill_item">
 
         <select id="c_province" name="c_province">
-            <volist name="province" id="vo">
+            <volist name="c_province" id="vo">
                 <option value="{$vo.id}">{$vo.areaName}</option>
             </volist>
         </select>
         <select id="c_city" name="c_city">
-            <volist name="city" id="vo">
+            <volist name="c_city" id="vo">
                 <option value="{$vo.id}">{$vo.areaName}</option>
             </volist>
         </select>
         <select id="c_area" name="c_area">
-            <volist name="area" id="vo">
+            <volist name="c_area" id="vo">
                 <option value="{$vo.id}">{$vo.areaName}</option>
             </volist>
         </select><br/>

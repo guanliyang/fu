@@ -12,7 +12,7 @@
             <table>
                     <tr>
                         <th width="30"></th>
-                        <th>{$info.bill.b_name}　{$info.bill.b_year}年　{$info.bill.b_place}　{$info.bill.b_level}　容重{$info.bill.b_rz}g/l</th>
+                        <th>{$info.bill.b_name}　{$info.bill.b_year}年　{$info.bill|getCAddress}　{$info.bill.b_level}　容重{$info.bill.b_rz}g/l</th>
                         <th colspan="2">货款: <label>{$info.order.o_pay|formatMoney}</label>元
                             (<label>{$info.order.o_pri1|formatMoney}</label>元/吨)</th>
                         <th width="125" class="tdright">

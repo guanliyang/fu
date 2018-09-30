@@ -101,10 +101,10 @@
                         <td width="120">容重：{$vo.b_rz}g/l</td>
                         <td width="110">净重：{$vo.b_weig}吨</td>
                         <td width="110">{$vo.b_pri1|formatMoney}元/吨</td>
-                        <td width="200">{$vo.b_stime|date='Y年m月d日 H:i:s',###}</td>
+                        <td></td>
                         <td>{$vo.b_name}</td>
                         <td>{$vo.b_year}年</td>
-                        <td>{$vo.b_place}</td>
+                        <td>{$vo|getCAddress}</td>
                         <td>{$vo.b_level}</td>
                         <td><a href="/Home/Sell/onLineBillInfo/b_id/{$vo.b_id}"><查看详情></a></td>
                     </tr>

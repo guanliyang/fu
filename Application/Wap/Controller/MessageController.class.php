@@ -30,7 +30,7 @@ class MessageController extends HomeController {
         <div class="info1">
             '.$bill['b_code'].'<label>'.date("Y/m/d H:i", $bill['b_ctime']).'</label>
         </div>
-        <div class="info2">'.$bill['b_name'].'　　'.$bill['b_year'].'年/'.$bill['b_place'].'/'.$bill['b_level'].'　　容重：'.$bill['b_rz'].'g/l</div>
+        <div class="info2">'.$bill['b_name'].'　　'.$bill['b_year'].'年/'.getCAddress($bill).'/'.$bill['b_level'].'　　容重：'.$bill['b_rz'].'g/l</div>
         <div class="info3"><b>'.$bill['b_weig'].'</b>吨　　<b>'.formatMoney($bill['b_pri1']).'</b>元/吨<label><b>'.getMessageById($bill['b_id'], 1).'</b></label></div>
     </div>';
             }
@@ -57,7 +57,7 @@ class MessageController extends HomeController {
         <div class="info1">
             '.$offer['f_code'].'<label>'.date("Y/m/d H:i", $offer['f_ctime']).'</label>
         </div>
-        <div class="info2">'.$offer['f_name'].'　　'.$offer['f_year'].'年/'.$offer['f_place'].'/'.$offer['f_level'].'　　容重：'.$offer['f_rz'].'g/l</div>
+        <div class="info2">'.$offer['f_name'].'　　'.$offer['f_year'].'年/'.getCAddress($offer).'/'.$offer['f_level'].'　　容重：'.$offer['f_rz'].'g/l</div>
         <div class="info3"><b>'.$offer['f_weig'].'</b>吨<label>'.getMessageById($offer['f_id'] ,2).'</label></div>
     </div>';
             }
@@ -90,7 +90,7 @@ onclick="location.href=\'/Wap/Order/info/o_id/'.$order['o_id'].'\'">
 <label>'.date("Y/m/d H:i", $order['o_ctime']).'</label></div>
 <div class="info2">'.$order['bill']['b_name'].'　　
 '.$order['bill']['b_year'].'年/
-'.$order['bill']['b_place'].'/
+'.getCAddress($order['bill']).'/
 '.$order['bill']['b_level'].'　　
 容重：'.$order['bill']['b_rz'].'g/l</div>
 <div class="info3"><b>'.$order['bill']['all_nwei'].'</b>吨

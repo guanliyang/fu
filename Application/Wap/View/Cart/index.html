@@ -58,7 +58,7 @@
 
     <foreach name="list" item="vo">
         <div class="bill_info">
-            <label>{$vo.b_name}</label><label>{$vo.b_year}</label><label>{$vo.b_place}</label>
+            <label>{$vo.b_name}</label><label>{$vo.b_year}</label><label>{$vo|getCAddress}</label>
             <label>{$vo.b_level}</label><label>{$vo.b_pri1|formatMoney}元/吨</label>
         </div>
         <foreach name="vo.bill_item" item="item">

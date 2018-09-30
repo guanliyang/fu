@@ -46,7 +46,7 @@
             <div class="info1">
                 {$vo.o_code}<label>{$vo.o_ctime|date='Y/m/d H:i',###}</label>
             </div>
-            <div class="info2">{$vo.bill.b_name}　　{$vo.bill.b_year}年/{$vo.bill.b_place}/{$vo.bill.b_level}　　容重：{$vo.bill.b_rz}g/l</div>
+            <div class="info2">{$vo.bill.b_name}　　{$vo.bill.b_year}年/{$vo.bill|getCAddress}/{$vo.bill.b_level}　　容重：{$vo.bill.b_rz}g/l</div>
             <div class="info3"><b>{$vo.bill.all_nwei}</b>吨　　
                 <b>{$vo.o_pri1|formatMoney}</b>元/吨
                 <label><b>{$vo.o_status|getMessageById=0}</b></label>
@@ -62,7 +62,7 @@
         <div class="info1">
             {$vo.f_code}<label>{$vo.f_ctime|date='Y/m/d H:i',###}</label>
         </div>
-        <div class="info2">{$vo.f_name}　　{$vo.f_year}年/{$vo.f_place}/{$vo.f_level}　　容重：{$vo.f_rz}g/l</div>
+        <div class="info2">{$vo.f_name}　　{$vo.f_year}年/{$vo|getCAddress}/{$vo.f_level}　　容重：{$vo.f_rz}g/l</div>
         <div class="info3"><b>{$vo.f_weig}</b>吨<label>{$vo.f_status|getMessageById=2}</label></div>
     </div>
     </volist>
@@ -75,7 +75,7 @@
         <div class="info1">
             {$vo.b_code}<label>{$vo.b_ctime|date='Y/m/d H:i',###}</label>
         </div>
-        <div class="info2">{$vo.b_name}　　{$vo.b_year}年/{$vo.b_place}/{$vo.b_level}　　容重：{$vo.b_rz}g/l</div>
+        <div class="info2">{$vo.b_name}　　{$vo.b_year}年/{$vo|getCAddress}/{$vo.b_level}　　容重：{$vo.b_rz}g/l</div>
         <div class="info3"><b>{$vo.b_weig}</b>吨　　<b>{$vo.b_pri1|formatMoney}</b>元/吨<label><b>{$vo.b_status|getMessageById=1}</b></label></div>
     </div>
     </volist>

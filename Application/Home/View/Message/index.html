@@ -55,7 +55,7 @@
                     <td width="150">{$vo.o_ctime|date='Y/m/d H:i',###}</td>
                     <td>{$vo.bill.b_name}</td>
                     <td>{$vo.bill.b_year}年</td>
-                    <td>{$vo.bill.b_place}</td>
+                    <td>{$vo.bill|getCAddress}</td>
                     <td>{$vo.bill.b_level}</td>
                     <td>容重：{$vo.bill.b_rz}g/l</td>
                     <td>{$vo.bill.all_nwei}吨</td>
@@ -77,7 +77,7 @@
                     <td width="150">{$vo.f_ctime|date='Y/m/d H:i',###}</td>
                     <td>{$vo.f_name}</td>
                     <td>{$vo.f_year}年</td>
-                    <td>{$vo.f_place}</td>
+                    <td>{$vo||getCAddress}</td>
                     <td>{$vo.f_level}</td>
                     <td>容重：{$vo.f_rz}g/l</td>
                     <td>{$vo.f_weig}吨</td>
@@ -95,10 +95,10 @@
                 <volist name="info.bill.list" id="vo">
                 <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
                     <td width="220"><a href="/Home/Sell/sellBillInfo/b_id/{$vo.b_id}">货单号：{$vo.b_code}</a></td>
-                    <td width="150">{$vo.b_ctime|date='Y/m/d H:i',###}</td>
+                    <td></td>
                     <td>{$vo.b_name}</td>
                     <td>{$vo.b_year}年</td>
-                    <td>{$vo.b_place}</td>
+                    <td>{$vo|getCAddress}</td>
                     <td>{$vo.b_level}</td>
                     <td>容重：{$vo.b_rz}g/l</td>
                     <td>{$vo.b_weig}吨</td>

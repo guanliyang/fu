@@ -77,7 +77,7 @@
                 <foreach name="list" item="vo">
                     <tr>
                         <th width="60"></th>
-                        <th class="tdlock">{$vo.b_name}　{$vo.b_year}年　{$vo.b_place}　{$vo.b_level}　容重{$vo.b_rz}g/l　单价：<label>{$vo.b_pri1|formatMoney}</label>元</th>
+                        <th class="tdlock">{$vo.b_name}　{$vo.b_year}年　{$vo|getCAddress}　{$vo.b_level}　容重{$vo.b_rz}g/l　单价：<label>{$vo.b_pri1|formatMoney}</label>元</th>
                         <th>{$vo.bill_item|count}组　({$vo.bill_item|array_column='bi_sum'|array_sum}箱　净重：{$vo.bill_item|array_column='bi_nwei'|array_sum}吨)</th>
                         <th width="150" class="tdright">
                             <label>

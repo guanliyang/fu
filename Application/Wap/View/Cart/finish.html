@@ -75,7 +75,7 @@
         <div class="bill_info">
             <label>{$vo.b_name}</label>
             <label>{$vo.b_year}</label>
-            <label>{$vo.b_place}</label>
+            <label>{$vo|getCAddress}</label>
             <label>{$vo.b_level}</label>
             <label>{$vo.b_pri1|formatMoney}元/吨</label>
             <label>{$vo.bill_item|count}组({$vo.bill_item|array_column='bi_sum'|array_sum}箱　净重{$vo.bill_item|array_column='bi_nwei'|array_sum}吨)</label>

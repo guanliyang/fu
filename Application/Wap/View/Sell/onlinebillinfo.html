@@ -59,7 +59,7 @@
     <div class="bill_info">
         <label>{$info.b_name}</label>
         <label>{$info.b_year}</label>
-        <label>{$info.b_place}</label>
+        <label>{$info|getCAddress}</label>
         <label>{$info.b_level}</label><br/>
         <img src="{$info.b_photo}"><br/><b>{$info.b_pri1|formatMoney}</b>元/吨</div>
     <div class="bill_info">
