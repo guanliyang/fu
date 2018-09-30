@@ -35,16 +35,25 @@
             联系地址：
             <span class="my_select">
             <select id="cmbProvince" name="province">
-                <option value="">{$user.province}</option>
                 <volist name="province" id="vo">
-                    <option value="{$vo.id}">{$vo.areaName}</option>
+                    <option value="{$vo.id}"
+                    <?php if($user['prov_id'] == $vo['id']) {  ?>selected<?php } ?>
+                    >{$vo.areaName}</option>
                 </volist>
             </select>
             <select id="cmbCity" name="city">
-                <option value="">{$user.city}</option>
+                <volist name="city" id="vo">
+                    <option value="{$vo.id}"
+                    <?php if($user['city_id'] == $vo['id']) {  ?>selected<?php } ?>
+                    >{$vo.areaName}</option>
+                </volist>
             </select>
             <select id="cmbArea" name="area">
-                <option value="">{$user.area}</option>
+                <volist name="area" id="vo">
+                    <option value="{$vo.id}"
+                    <?php if($user['area_id'] == $vo['id']) {  ?>selected<?php } ?>
+                    >{$vo.areaName}</option>
+                </volist>
             </select>
             </span>
             <br/>

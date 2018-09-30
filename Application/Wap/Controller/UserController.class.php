@@ -6,8 +6,8 @@ class UserController extends HomeController {
     public function userView() {
         setReadMsg();
         $this->checkoutUserLogin();
-        $province = M('area')->where(array('level' => 1))->select();
-        $this->assign('province', $province);
+        $this->getUserAdd($this->user['prov_id'], $this->user['city_id']);
+
         $this->assign('user', $this->user);
         $this->display();
     }

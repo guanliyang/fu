@@ -23,18 +23,29 @@
         <a href="#" onclick="$('#t_file').click()">(重新上传)</a><br/><br/><br/>
         公司名称：<input name="company_name" value="{$user.company_name}" type="text"/>
         联系地址：
-            <select id="cmbProvince" name="province">
-                <option value="">{$user.province}</option>
-                <volist name="province" id="vo">
-                    <option value="{$vo.id}">{$vo.areaName}</option>
-                </volist>
-            </select><br/>
-        　　　　　<select id="cmbCity" name="city">
-                <option value="">{$user.city}</option>
-            </select><br/>
-        　　　　　<select id="cmbArea" name="area">
-                <option value="">{$user.area}</option>
-            </select><br/>
+        <select id="cmbProvince" name="province">
+            <volist name="province" id="vo">
+                <option value="{$vo.id}"
+                <?php if($user['prov_id'] == $vo['id']) {  ?>selected<?php } ?>
+                >{$vo.areaName}</option>
+            </volist>
+        </select><br/>　　　　　
+        <select id="cmbCity" name="city">
+            <volist name="city" id="vo">
+                <option value="{$vo.id}"
+                <?php if($user['city_id'] == $vo['id']) {  ?>selected<?php } ?>
+                >{$vo.areaName}</option>
+            </volist>
+        </select><br/>　　　　　
+        <select id="cmbArea" name="area">
+            <volist name="area" id="vo">
+                <option value="{$vo.id}"
+                <?php if($user['area_id'] == $vo['id']) {  ?>selected<?php } ?>
+                >{$vo.areaName}</option>
+            </volist>
+        </select>
+
+        <br/>
         详细地址：<input name="address" value="{$user.address}" type="text"/>
     </div>
     <hr>

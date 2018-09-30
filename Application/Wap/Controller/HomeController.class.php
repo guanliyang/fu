@@ -83,4 +83,34 @@ class HomeController extends Controller {
 
         $this->assign('is_in_area', $is_in_area);
     }
+
+    // 用户地址
+    public function getUserAdd($pid = '', $cid = '') {
+        $province = M('area')->where(array('level' => 1))->select();
+        $this->assign('province', $province);
+
+        // 选中市
+        $pro_key = 0;
+        if ($province) {
+            foreach ($province as $key => $value) {
+                if ($pid == $value['id']) {
+                    $pro_key = $key;
+                }
+            }
+        }
+        $city = M('area')->where(array('parentId' => $province[$pro_key]['id']))->select();
+        $this->assign('city', $city);
+
+        //选中区
+        $city_key = 0;
+        if ($city) {
+            foreach ($city as $key => $value) {
+                if ($cid == $value['id']) {
+                    $city_key = $key;
+                }
+            }
+        }
+        $area = M('area')->where(array('parentId' => $city[$city_key]['id']))->select();
+        $this->assign('area', $area);
+    }
 }
