@@ -32,25 +32,34 @@
                 <tr>
                     <th></th>
                     <th colspan="9">产地：　　
-                        <if condition="$_GET['gp_id']">
+                        <if condition="$_GET['c_province_id'] OR $_GET['c_city_id'] OR $_GET['c_area_id']">
                             <a href="#" class="gp_click">全部</a>　　
                             <else />
                             <label class="hotitem">全部</label>　　
                         </if>
 
                         <select id="c_province" name="c_province">
+                            <option value="">请选择省份</option>
                             <volist name="c_province" id="vo">
-                                <option value="{$vo.id}">{$vo.areaName}</option>
+                                <option value="{$vo.id}"
+                                <?php if($_GET['c_province_id'] == $vo['id']) {  ?>selected<?php } ?>
+                                >{$vo.areaName}</option>
                             </volist>
                         </select>
                         <select id="c_city" name="c_city">
+                            <option value="">请选择市</option>
                             <volist name="c_city" id="vo">
-                                <option value="{$vo.id}">{$vo.areaName}</option>
+                                <option value="{$vo.id}"
+                                <?php if($_GET['c_city_id'] == $vo['id']) {  ?>selected<?php } ?>
+                                >{$vo.areaName}</option>
                             </volist>
                         </select>
                         <select id="c_area" name="c_area">
+                            <option value="">请选区</option>
                             <volist name="c_area" id="vo">
-                                <option value="{$vo.id}">{$vo.areaName}</option>
+                                <option value="{$vo.id}"
+                                <?php if($_GET['c_area_id'] == $vo['id']) {  ?>selected<?php } ?>
+                                >{$vo.areaName}</option>
                             </volist>
                         </select>
 
@@ -124,7 +133,7 @@
 
 <include file="public/foot" />
 <script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
-<script type="text/javascript" src="/Public/js/cz_address.js" ></script>
+
 <script type="text/javascript">
 function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -158,15 +167,7 @@ var url = '/Home/Sell/sellBillList?';
 // 排序
 $(".clkitem").on('click tap',function(){
     // 设置url  有年份和产地时 把年份和产地参数带上
-    var url_gy_id = getUrlParam('gy_id');
-    var url_gp_id = getUrlParam('gp_id');
-    if (!isEmpty(url_gy_id)) {
-        url = url + '&gy_id=' + url_gy_id;
-    }
-
-    if (!isEmpty(url_gp_id)) {
-        url = url + '&gp_id=' + url_gp_id;
-    }
+    var url = getUrlYearAndOrder(true, true, true, true, null);
 
     // 重新设置排序属性
     var t_name = $(this).attr('t_name');
@@ -183,22 +184,7 @@ $(".clkitem").on('click tap',function(){
 
 //年份
 $(".gy_click").on('click tap',function(){
-    // 地点链接
-    var url_gp_id = getUrlParam('gp_id');
-    if (!isEmpty(url_gp_id)) {
-        url = url + '&gp_id=' + url_gp_id;
-    }
-
-    //排序链接
-    var url_t_name = getUrlParam('t_name');
-    if (!isEmpty(url_t_name)) {
-        url = url + '&t_name=' + url_t_name;
-    }
-
-    var url_t_order = getUrlParam('t_order');
-    if (!isEmpty(url_t_order)) {
-        url = url + '&t_order=' + url_t_order;
-    }
+    var url = getUrlYearAndOrder(true, true, true, null, true);
 
     var gy_id = $(this).attr('value');
     if (!isEmpty(gy_id)) {
@@ -235,5 +221,80 @@ $(".gp_click").on('click tap', function() {
     else {
         window.location.href = url;
     }
-})
+});
+
+// 年份和排序
+function getUrlYearAndOrder(is_province, is_city, is_area, is_gy, is_order) {
+    // 年份链接
+    var url_gy_id = getUrlParam('gy_id');
+    if (!isEmpty(url_gy_id) && !isEmpty(is_gy)) {
+        url = url + '&gy_id=' + url_gy_id;
+    }
+
+    //排序链接
+    var url_t_name = getUrlParam('t_name');
+    if (!isEmpty(url_t_name) && !isEmpty(is_order)) {
+        url = url + '&t_name=' + url_t_name;
+    }
+
+    var url_t_order = getUrlParam('t_order');
+    if (!isEmpty(url_t_order) && !isEmpty(is_order)) {
+        url = url + '&t_order=' + url_t_order;
+    }
+
+    //省市区
+    var c_province_id = getUrlParam('c_province_id');
+    if (!isEmpty(c_province_id) && !isEmpty(is_province)) {
+        url = url + '&c_province_id=' + c_province_id;
+    }
+
+    var c_city_id = getUrlParam('c_city_id');
+    if (!isEmpty(c_city_id) && !isEmpty(is_city)) {
+        url = url + '&c_city_id=' + c_city_id;
+    }
+
+    var c_area_id = getUrlParam('c_area_id');
+    if (!isEmpty(c_area_id) && !isEmpty(is_area)) {
+        url = url + '&c_area_id=' + c_area_id;
+    }
+    return url;
+}
+
+
+$('select[name="c_province"]').on('change',function(){
+    url = getUrlYearAndOrder(null, true, true, true, true);
+
+    var c_province_id = $(this).val();
+    if (!isEmpty(c_province_id)) {
+        window.location.href = url + "&c_province_id=" + c_province_id;
+    }
+    else {
+        window.location.href = url;
+    }
+});
+
+$('select[name="c_city"]').on('change',function(){
+    url = getUrlYearAndOrder(true, null, true, true, true);
+
+    var c_city_id = $(this).val();
+    if (!isEmpty(c_city_id)) {
+        window.location.href = url + "&c_city_id=" + c_city_id;
+    }
+    else {
+        window.location.href = url;
+    }
+});
+
+
+$('select[name="c_area"]').on('change',function(){
+    url = getUrlYearAndOrder(true, true, null, true, true);
+
+    var c_area_id = $(this).val();
+    if (!isEmpty(c_area_id)) {
+        window.location.href = url + "&c_area_id=" + c_area_id;
+    }
+    else {
+        window.location.href = url;
+    }
+});
 </script>

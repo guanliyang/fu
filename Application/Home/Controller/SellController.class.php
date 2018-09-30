@@ -6,7 +6,7 @@ class SellController extends HomeController {
     public function sellBillList() {
         $this->putG();
 
-        $this->getC();
+        $this->getC(I('request.c_province_id'), I('request.c_city_id'));
 
         $SBill = new \Home\Model\SBillModel();
         $info = $SBill->getOnLineList();
