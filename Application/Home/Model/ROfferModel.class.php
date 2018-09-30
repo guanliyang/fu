@@ -40,6 +40,20 @@ class ROfferModel extends HomeModel {
             $where += array('gy_id' => $gc_id);
         }
 
+        // 省市区
+        $c_province_id = I('request.c_province_id', 0, 'intval');
+        if (!empty($c_province_id)) {
+            $where += array('c_province_id' => $c_province_id);
+        }
+        $c_city_id = I('request.c_city_id', 0, 'intval');
+        if (!empty($c_city_id)) {
+            $where += array('c_city_id' => $c_city_id);
+        }
+        $c_area_id = I('request.c_area_id', 0, 'intval');
+        if (!empty($c_area_id)) {
+            $where += array('c_area_id' => $c_area_id);
+        }
+
         // 排序相关
         $order = 'f_ctime desc';
         $order_name = I('request.t_name');
