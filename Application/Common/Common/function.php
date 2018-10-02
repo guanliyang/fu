@@ -1096,7 +1096,8 @@ function getZAddress($bill) {
 
 // 显示会员权益
 function getLevMessage($lev) {
-    if (empty($lev['ul_fee'] * 100)) {
+    $ul_fee = $lev['ul_fee'] * 100;
+    if (empty($ul_fee)) {
         $fee = '免会员年费';
     }
     else {
