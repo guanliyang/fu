@@ -1078,6 +1078,7 @@ function getItemShowD($bill, $bill_item) {
     return $str;
 }
 
+//拼接产地地址
 function getCAddress($bill) {
     $p = M('local_area')->where(array('id' => $bill['c_province_id']))->getField('areaName');
     $c = M('local_area')->where(array('id' => $bill['c_city_id']))->getField('areaName');
@@ -1085,9 +1086,32 @@ function getCAddress($bill) {
     return $p.$c.$a;
 }
 
+// 拼接装货地址
 function getZAddress($bill) {
     $p = M('local_area')->where(array('id' => $bill['z_province_id']))->getField('areaName');
     $c = M('local_area')->where(array('id' => $bill['z_city_id']))->getField('areaName');
     $a = M('local_area')->where(array('id' => $bill['z_area_id']))->getField('areaName');
     return $p.$c.$a.$bill['b_add'];
+}
+
+// 显示会员权益
+function getLevMessage($lev) {
+    if (empty($lev['ul_fee'] * 100)) {
+        $fee = '免会员年费';
+    }
+    else {
+        $fee = '会员年费'.$lev['ul_fee'].'元';
+    }
+    return $str = '买粮'.($lev['ul_fpay'] * 100).'%首付，卖粮'.($lev['ul_depo'] * 100).'%保证金，'.$fee;
+}
+
+// wap显示会员权益
+function getWapLevMessage($lev) {
+    if (empty($lev['ul_fee'] * 100)) {
+        $fee = '免会员年费';
+    }
+    else {
+        $fee = '会员年费'.$lev['ul_fee'].'元';
+    }
+    return $str = '买粮'.($lev['ul_fpay'] * 100).'%首付<br/>卖粮'.($lev['ul_depo'] * 100).'%保证金<br/>'.$fee;
 }

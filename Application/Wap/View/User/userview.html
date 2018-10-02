@@ -6,7 +6,9 @@
         　　姓名：<input name="name" value="{$user.real_name}" type="text"/><br/>
         手机号/帐号：{$user.mobile}　　
         <a href="/Wap/User/changePassword"><input class="bt bt_s" value="重置密码" type="button"/></a><br/>
-        帐号状态： {$user.status|getUserStatus}
+        帐号状态： {$user.status|getUserStatus}<br/>
+        会员级别： {$user_lev.ul_title}会员<br/>
+        {$user_lev.ul_title}权益：{$user_lev|getWapLevMessage}
     </div>
     <hr>
     <div class="inp">

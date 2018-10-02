@@ -6,8 +6,12 @@ class UserController extends HomeController {
     public function userView() {
         setReadMsg();
         $this->checkoutUserLogin();
+        // 用户地址
         $this->getUserAdd($this->user['prov_id'], $this->user['city_id']);
-        $this->assign('user', $this->user);
+        // 用户等级
+        $user_lev = M('sys_user_lev')->where('ul_id='.$this->user['ul_id'])->find();
+        $this->assign('user_lev', $user_lev);
+
         $this->display();
     }
 
