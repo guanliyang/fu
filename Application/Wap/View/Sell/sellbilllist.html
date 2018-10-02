@@ -76,7 +76,7 @@
     <volist name="info.list" id="vo">
     <div class="list" onclick="location.href='/Wap/Sell/onLineBillInfo/b_id/{$vo.b_id}'">
         <div class="info1">{$vo.b_year}年 {$vo|getCAddress} {$vo.b_weig}吨<h3>{$vo.b_pri1|formatMoney}元/吨</h3></div>
-        <div class="info2"><label>容重{$vo.b_rz}g/l</label><label>霉变{$vo.b_mb}%</label><label>水份{$vo.b_sf}%</label></div>
+        <div class="info2"><label>容重{$vo.b_rz}g/l</label><label>生霉{$vo.b_mb}%</label><label>水份{$vo.b_sf}%</label></div>
         <div class="info2"><label>杂质{$vo.b_zz}%</label><label>呕吐毒素{$vo.b_ot}μg/kg</label></div>
     </div>
     </volist>
