@@ -36,7 +36,7 @@
                     <td width="200">
                         <?php if(in_array($info['b_status'], array(1,2,3,5,6,7,9,10) )) { ?>
                         保证金：<label><b>{$info.b_depo|formatMoney}</b></label>
-                        元(货款{$Think.config.DEPO_RATE_SHOW})
+                        元(货款{$user|getLevDepoShow=2})
                         <?php } ?>
                     </td>
                     <td>

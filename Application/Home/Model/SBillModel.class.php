@@ -225,7 +225,7 @@ class SBillModel extends HomeModel {
         $this->_getHan();
         $this->_getPrice();
         $this->_getFrei($user);
-        $this->_getDepo();
+        $this->_getDepo($user);
         $this->_getAdd();
         $this->_getDefault();
         $this->data['u_id'] = $uid;
@@ -341,10 +341,10 @@ class SBillModel extends HomeModel {
     }
 
     // 缴纳保证金
-    private function _getDepo() {
+    private function _getDepo($user) {
         $b_pri0 = I('request.b_pri0', 0);
         $b_weig = I('request.b_weig', 0);
-        $this->data['b_depo'] = $b_pri0 * $b_weig * C('DEPO_RATE');
+        $this->data['b_depo'] = $b_pri0 * $b_weig * getLevDepoShow($user, 3);
     }
 
     // 联系人信息

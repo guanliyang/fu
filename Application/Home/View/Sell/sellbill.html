@@ -34,7 +34,7 @@
         var weig = document.getElementById('sweight').value;
         var frei = eval(document.getElementById('freight').innerText.replace(',', ''));
         var total = pri1*weig;
-        var depo = total*{$Think.config.DEPO_RATE};
+        var depo = total*{$user|getLevDepoShow=3};
         var pay = depo + frei;
         document.getElementById('total').innerText = i2s3(total);
         document.getElementById('depo').innerText = i2s3(depo);
@@ -159,7 +159,7 @@
             <table>
                 <tr>
                     <td width="40"></td>
-                    <td colspan="6">　需缴保证金：<label id="depo">0</label> 元 （货款总价<label id="total">0</label>的{$Think.config.DEPO_RATE_SHOW}，成交后即退保证金）</td>
+                    <td colspan="6">　需缴保证金：<label id="depo">0</label> 元 （{$user|getLevDepoShow}货款总价<label id="total">0</label>的{$user|getLevDepoShow=2}，成交后即退保证金）</td>
                 </tr>
                 <tr>
                     <td width="40"></td>

@@ -1127,3 +1127,17 @@ function getLevFPay($user) {
     $lev = M('sys_user_lev')->where('ul_id='.$user['ul_id'])->find();
     return $lev['ul_fpay'];
 }
+
+// 卖粮保证金比例 显示
+function getLevDepoShow($user, $title = 1) {
+    $lev = M('sys_user_lev')->where('ul_id='.$user['ul_id'])->find();
+    if ($title == 1) {
+        return $lev['ul_title'].'会员,';
+    }
+    if ($title == 2) {
+        return ($lev['ul_depo'] * 100).'%';
+    }
+    if ($title == 3) {
+        return $lev['ul_depo'];
+    }
+}
