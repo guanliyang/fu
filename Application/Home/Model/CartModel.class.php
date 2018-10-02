@@ -19,7 +19,7 @@ class CartModel extends HomeModel {
     public function finish($uid) {
         $this->checkUserNormal();
         $bi_id_str = I('get.bi_id_str');
-        $bi_id_list = $this->checkBiIdStr($bi_id_str);
+        $bi_id_list = $this->checkBiIdStrView($bi_id_str);
         $data = array();
         foreach ($bi_id_list as $bi_id) {
             $bill_item = M('s_bill_item')->where(array('bi_id' => $bi_id))->find();

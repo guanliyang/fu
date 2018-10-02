@@ -75,6 +75,30 @@ class HomeModel extends Model {
         return $bi_id_list;
     }
 
+    // 检查 bi_id_str 页面显示, 非ajax请求
+    public function checkBiIdStrView($bi_id_str) {
+        if (empty($bi_id_str)) {
+            $this->noticeView('请勾选货组');
+        }
+        $bi_id_list = explode(',', trim($bi_id_str, ','));
+        if (empty($bi_id_list) || !is_array($bi_id_list)) {
+            $this->noticeView('bi_id_str 不能为空');
+        }
+
+        foreach ($bi_id_list as $bi_id) {
+            $bill_item = M('s_bill_item')->where(array('bi_id' => $bi_id))->find();
+            if (empty($bill_item)) {
+                $this->noticeView('货组编号'.$bi_id.' 有误');
+            }
+
+            if ($bill_item['bi_status'] != SBillItemModel::STATUS_ON_SALE) {
+                $this->noticeView('货组编号'.$bi_id.'可能已被购买,请到购物车重新选择');
+            }
+        }
+
+        return $bi_id_list;
+    }
+
     // 获取上传图片地址
     public function getImagePath() {
         $user_img = cookie('user_img');
