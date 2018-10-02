@@ -5,7 +5,7 @@ class OrderController extends HomeController {
     // 进入订单结算
     public function add() {
         $order = new \Home\Model\OrderModel();
-        $o_id = $order->addOrder($this->getUid());
+        $o_id = $order->addOrder($this->getUid(), $this->user);
         notice('生成订单成功', 0, array('url'=>'/Home/Message/index?item=1'));
     }
 

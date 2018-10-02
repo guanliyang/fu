@@ -14,7 +14,7 @@
                     npay = Math.round(total*100)/100;
                 }else{
                     document.getElementById('tr20pay').style['display'] = '';
-                    npay = Math.round(total*{$Think.config.FIRST_PAY} * 100) /100;
+                    npay = Math.round(total*{$user|getLevFPay} * 100) /100;
                     epay = total-npay;
                     var dinte = eval(document.getElementById('dinte').innerText);
                     document.getElementById('epay').innerText = i2s3(epay);
@@ -89,7 +89,7 @@
         <table>
             <tr>
                 <td width="80">付款方式：</td>
-                <td><input type="radio" name="payment" class="bt_s" value="{$Think.config.FIRST_PAY}" checked onclick="iSet();" />{$Think.config.FIRST_PAY_SHOW}首付</td>
+                <td><input type="radio" name="payment" class="bt_s" value="{$user|getLevFPay}" checked onclick="iSet();" />{$user|getLevFPayShow}</td>
             </tr>
             <tr>
                 <td></td>

@@ -1115,3 +1115,15 @@ function getWapLevMessage($lev) {
     }
     return $str = '买粮'.($lev['ul_fpay'] * 100).'%首付<br/>卖粮'.($lev['ul_depo'] * 100).'%保证金<br/>'.$fee;
 }
+
+// 显示 用户 买粮 首付 比例
+function getLevFPayShow($user) {
+    $lev = M('sys_user_lev')->where('ul_id='.$user['ul_id'])->find();
+    return $lev['ul_title'].'用户'.($lev['ul_fpay'] * 100).'%首付';
+}
+
+//用户 买粮 首付 比例  参与计算的
+function getLevFPay($user) {
+    $lev = M('sys_user_lev')->where('ul_id='.$user['ul_id'])->find();
+    return $lev['ul_fpay'];
+}

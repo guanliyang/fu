@@ -156,7 +156,7 @@ class OrderModel extends HomeModel {
     }
 
     //生成订单
-    public function addOrder($uid) {
+    public function addOrder($uid, $user) {
         $this->checkUserNormal();
         // 检查合同
         $this->checkContract();
@@ -184,7 +184,7 @@ class OrderModel extends HomeModel {
             $this->getUser();
 
             // 价格
-            $this->getAllPrice($pay_type, $bill);
+            $this->getAllPrice($pay_type, $bill, $user);
 
             // 订单净重合计
             $this->data['o_nwei'] = array_sum(array_column($bill['bill_item'], 'bi_nwei'));
@@ -307,7 +307,7 @@ class OrderModel extends HomeModel {
     }
 
     // 支付价格
-    public function getAllPrice($pay_type, $bill) {
+    public function getAllPrice($pay_type, $bill, $user) {
         $all_price = 0;
         if ($bill['bill_item'] && is_array($bill['bill_item'])) {
             foreach ($bill['bill_item'] as $bill_item) {
@@ -321,7 +321,7 @@ class OrderModel extends HomeModel {
             $this->data['o_pay_t'] = 0;
         }
         else {
-            $this->data['o_pay_f'] = $all_price * C('FIRST_PAY');
+            $this->data['o_pay_f'] = $all_price * getLevFPay($user);
             $this->data['o_pay_t'] = $all_price - $this->data['o_pay_f'];
         }
 
