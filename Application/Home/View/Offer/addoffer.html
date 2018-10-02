@@ -88,7 +88,11 @@
                                 <option value="{$vo.id}">{$vo.areaName}</option>
                             </volist>
                         </select>
-                        　 　
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td width="500">
                         等级：
                         <select name="gl_id">
                             <volist name="level" id="vo">
@@ -96,13 +100,7 @@
                             </volist>
                         </select>
                         　 　
-                        容重：
-                        <select name="gr_id">
-                            <volist name="rz" id="vo">
-                                <option value="{$vo.gr_id}">{$vo.gr_name}</option>
-                            </volist>
-                        </select>
-                        g/l
+                        容重：<input type="text" class="inpsm" name="rz"/>g/l
                     </td>
                 </tr>
                 <tr>

@@ -111,11 +111,9 @@ class ROfferModel extends HomeModel {
 //            notice('产地有误');
 //        }
 
-        $this->data['gr_id'] = I('request.gr_id', 0, 'intval');
-        $where = array('gr_id' => $this->data['gr_id']);
-        $this->data['f_rz'] = M('g_rz')->where($where)->getField('gr_name');
+        $this->data['f_rz'] = I('request.rz', 0, 'intval');
         if (empty($this->data['f_rz'])) {
-            notice('容量有误');
+            notice('容重有误');
         }
 
         $this->data['gl_id'] = I('request.gl_id', 0, 'intval');
