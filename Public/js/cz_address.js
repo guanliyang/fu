@@ -37,8 +37,6 @@ $('select[name="c_city"]').on('change',function(){
 });
 
 
-
-
 $('select[name="z_province"]').on('change',function(){
     var province = $(this).val();
     $.ajax({

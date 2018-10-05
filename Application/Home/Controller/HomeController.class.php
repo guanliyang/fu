@@ -50,11 +50,11 @@ class HomeController extends Controller {
     }
 
     // 产地
-    public function getC($pid = '', $cid = '', $prefix = 'c_') {
+    public function getC($pid = '', $cid = '', $prefix = 'c_', $area_id = 0) {
         $province = M('local_area')->where(array('level' => 1))->select();
         $this->assign($prefix.'province', $province);
 
-        // 选中市
+        // 选中省
         $pro_key = 0;
         if ($province) {
             foreach ($province as $key => $value) {
@@ -66,7 +66,7 @@ class HomeController extends Controller {
         $city = M('local_area')->where(array('parentId' => $province[$pro_key]['id']))->select();
         $this->assign($prefix.'city', $city);
 
-        //选中区
+        //选中市
         $is_in_area = false;
         $city_key = 0;
         if ($city) {
@@ -80,6 +80,7 @@ class HomeController extends Controller {
         $area = M('local_area')->where(array('parentId' => $city[$city_key]['id']))->select();
         $this->assign($prefix.'area', $area);
         $this->assign('is_in_area', $is_in_area);
+
     }
 
     // 用户地址

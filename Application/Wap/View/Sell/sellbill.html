@@ -94,13 +94,13 @@
         </select>
         <br/>
 
-
+        玉米　
         <select name="gl_id">
             <volist name="level" id="vo">
                 <option value="{$vo.gl_id}" <if condition="$vo['gl_id'] eq $bill['gl_id']">selected</if>>{$vo.gl_name}</option>
             </volist>
         </select>
-        玉米　
+
         <select name="gy_id">
             <volist name="year" id="vo">
                 <option value="{$vo.gy_id}" <if condition="$vo['gy_id'] eq $bill['gy_id']">selected</if> >{$vo.gy_id}</option>
@@ -108,20 +108,21 @@
         </select>
 
 
-
-
         <select name="gr_id">
             <volist name="rz" id="vo">
                 <option value="{$vo.gr_id}" <if condition="$vo['gr_id'] eq $bill['gr_id']">selected</if>>{$vo.gr_name}</option>
             </volist>
-        </select>
-        g/l</div>
+        </select>g/l
+    </div>
     <div class="bill_item">
         生霉：<input name="b_mb" value="{$bill.b_mb}" type="text" class="inpss" />%　
-        水份：<input name="b_sf" value="{$bill.b_sf}" type="text" class="inpss" />%</div>
-    <div class="bill_item">
+        水份：<input name="b_sf" value="{$bill.b_sf}" type="text" class="inpss" />%　
         杂质：<input name="b_zz" value="{$bill.b_zz}" type="text" class="inpss" />%　
-        呕吐毒素：<input name="b_ot" value="{$bill.b_ot}" type="text" class="inpsm" />μg/kg</div>
+    </div>
+    <div class="bill_item">
+        呕吐毒素：<input name="b_ot" value="{$bill.b_ot}" type="text" class="inpsm" />μg/kg
+        　<abbr class="val_ot"></abbr>
+    </div>
     <div class="bill_item">
         出售单价：<input class="bt inpss" value="-" type="button" onclick="cpri(-1);"/> <b>
         <span id="pri1"><if condition="$bill">{$bill.b_pri1}<else/> 1,700</if></span></b>
@@ -135,7 +136,7 @@
         <input name="b_weig" id="sweight" class="inpsm" value="{$bill.b_weig}" type="text" onchange="cwei();"/>吨
         <label>(约需<b id="bsum">0</b>个集装箱)</label><br/>&nbsp;
         <label>入港运费：<b id="freight">0</b> 元</label><br/>&nbsp;<label>(<b id="tfrei">1,200</b> 元/车，需要 <b id="tsum">0</b> 车)</label></div>
-    <div class="bill_item">需缴保证金：<label><b id="depo">0</b> 元</label><br/>
+    <div class="bill_item">保证金：<label><b id="depo">0</b> 元</label><br/>
         ({$user|getLevDepoShow}货款<b id="total">0</b>元的{$user|getLevDepoShow=2}，成交后即退保证金)</div>
     <div class="bill_item">
         卖粮港口：
@@ -181,7 +182,7 @@
         ?>" type="text" /><br/>　
         联系人：<input name="b_cont" value="<if condition='$bill'>{$bill.b_cont}<else/>{$user.real_name}</if>" type="text"/><br/>　
         手机号：<input name="b_mobi" value="<if condition='$bill'>{$bill.b_mobi}<else/>{$user.mobile}</if>" type="text"/></div>
-      <div class="bill_item">提交后需付款：<label><b id="pay">0</b> 元</label></div>
+      <!--<div class="bill_item">提交后需付款：<label><b id="pay">0</b> 元</label></div>-->
     </div>
 <div class="cont">
     <<a href="viewcont.php">预览出售合同</a>><br/><input name="contract" type="checkbox" class="bt_s"/> 我已阅读并了解合同详细内容，同意签属并确认其法律效力。
@@ -198,3 +199,4 @@
 </script>
 <script type="text/javascript" src="/Public/js/upload.js"></script>
 <script type="text/javascript" src="/Public/js/cz_address.js" ></script>
+<script type="text/javascript" src="/Public/js/val_ot.js" ></script>

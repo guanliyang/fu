@@ -181,4 +181,15 @@ class IndexController extends Controller {
         }
         die(json_encode(array('city' => $str)));
     }
+
+    public function getValOt() {
+        $area = I('request.area');
+        $province = M('local_area')->where(array('id' => $area))->getField('val_ot');
+        if (!empty($province)) {
+            die(json_encode(array("val_ot" => '地区指标：'.$province)));
+        }
+        else {
+            die(json_encode(array("val_ot" => '')));
+        }
+    }
 }

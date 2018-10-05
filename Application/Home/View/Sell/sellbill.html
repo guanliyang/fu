@@ -131,6 +131,7 @@
                                 <option value="{$vo.gr_id}" <if condition="$vo['gr_id'] eq $bill['gr_id']">selected</if>>{$vo.gr_name}</option>
                             </volist>
                         </select>g/l
+                        　<span class="val_ot"></span>
                     </td>
                 </tr>
                 <tr>
@@ -159,7 +160,7 @@
             <table>
                 <tr>
                     <td width="40"></td>
-                    <td colspan="6">　需缴保证金：<label id="depo">0</label> 元 （{$user|getLevDepoShow}货款总价<label id="total">0</label>的{$user|getLevDepoShow=2}，成交后即退保证金）</td>
+                    <td colspan="6">　保证金：<label id="depo">0</label> 元 （{$user|getLevDepoShow}货款总价<label id="total">0</label>的{$user|getLevDepoShow=2}，成交后即退保证金）</td>
                 </tr>
                 <tr>
                     <td width="40"></td>
@@ -216,13 +217,13 @@
                     <td><input name="b_mobi" value="<if condition='$bill'>{$bill.b_mobi}<else/>{$user.mobile}</if>" type="text"/></td>
                 </tr>
             </table>
-            <table>
-                <tr>
-                    <td></td>
-                    <td width="150" class="tdright"><label>提交后需付款：</label></td>
-                    <td width="150" class="tdright"><label id="pay">0</label>元</td>
-                </tr>
-            </table>
+            <!--<table>-->
+                <!--<tr>-->
+                    <!--<td></td>-->
+                    <!--<td width="150" class="tdright"><label>提交后需付款：</label></td>-->
+                    <!--<td width="150" class="tdright"><label id="pay">0</label>元</td>-->
+                <!--</tr>-->
+            <!--</table>-->
         </div>
         <<a href="/Home/Contract/index/">预览出售合同</a>>　　　　
           <input type="checkbox" name="contract" class="bt_s"/>我已阅读并了解合同详细内容，同意签属并确认其法律效力。
@@ -233,6 +234,8 @@
     </div>
 </div>
 
+<include file="public/foot" />
+
 <script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="/Public/bootstrap/js/t_submit.js"></script>
 <script type="text/javascript">
@@ -240,4 +243,4 @@
 </script>
 <script type="text/javascript" src="/Public/js/upload.js"></script>
 <script type="text/javascript" src="/Public/js/cz_address.js" ></script>
-<include file="public/foot" />
+<script type="text/javascript" src="/Public/js/val_ot.js" ></script>

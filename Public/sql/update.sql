@@ -24,3 +24,6 @@ ALTER TABLE `sys_user` ADD COLUMN `ul_id` int(11) DEFAULT '10' COMMENT '用户�
 
 -- 粮食等级
 insert into g_level set gl_name='二等',gl_id=2;
+
+-- 地区呕吐
+alter table `local_area` add COLUMN `val_ot` int(11) DEFAULT NULL;
