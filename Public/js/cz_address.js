@@ -13,7 +13,7 @@ $('select[name="c_province"]').on('change',function(){
             $("#c_area").append(data.area);
         },
         error: function(xhr, type){
-            alert('抱歉,加载失败!');
+            //alert('抱歉,加载失败!');
         }
     })
 });
@@ -31,7 +31,7 @@ $('select[name="c_city"]').on('change',function(){
             $("#c_area").append(data.city);
         },
         error: function(xhr, type){
-            alert('抱歉,加载失败!');
+            //alert('抱歉,加载失败!');
         }
     })
 });
