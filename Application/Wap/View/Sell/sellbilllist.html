@@ -4,7 +4,16 @@
     <hr>
     <div class="sel">
         <select disabled><option>玉米</option></select>
-        <select disabled><option>一等</option></select>
+        <select name="level" class="gl_id">
+            <option>全部</option>
+            <volist name="level" id="vo">
+                <if condition="$_GET['gl_id'] eq $vo['gl_id']">
+                    <option selected value="{$vo.gl_id}">{$vo.gl_name}</option>　　
+                    <else />
+                    <option value="{$vo.gl_id}">{$vo.gl_name}</option>　　
+                </if>
+            </volist>
+        </select>
         <select name="year" class="gy_id">
             <option>全部</option>
             <volist name="year" id="vo">
@@ -18,7 +27,7 @@
 
         <br/>
         <select id="c_province" name="c_province">
-            <option value="">请选择省份</option>
+            <option value="">全部</option>
             <volist name="c_province" id="vo">
                 <option value="{$vo.id}"
                 <?php if($_GET['c_province_id'] == $vo['id']) {  ?>selected<?php } ?>
@@ -26,7 +35,7 @@
             </volist>
         </select>
         <select id="c_city" name="c_city">
-            <option value="">请选择市</option>
+            <option value="">全部</option>
             <volist name="c_city" id="vo">
                 <option value="{$vo.id}"
                 <?php if($_GET['c_city_id'] == $vo['id']) {  ?>selected<?php } ?>
@@ -122,7 +131,7 @@ var url = '/Wap/Sell/sellBillList?';
 // 排序
 $(".clkitem").on('click tap',function(){
     // 设置url  有年份和产地时 把年份和产地参数带上
-    var url = getUrlYearAndOrder(true, true, true, true, null);
+    var url = getUrlYearAndOrder(true, true, true, true, null, true);
 
     // 重新设置排序属性
     var t_name = $(this).attr('t_name');
@@ -139,11 +148,25 @@ $(".clkitem").on('click tap',function(){
 
 // 年份
 $(".gy_id").on('change', function(){
-    var url = getUrlYearAndOrder(true, true, true, null, true);
+    var url = getUrlYearAndOrder(true, true, true, null, true, true);
 
     var gy_id = $(this).val();
     if (!isEmpty(gy_id)) {
         window.location.href = url + "&gy_id=" + gy_id;
+    }
+    else {
+        window.location.href = url;
+    }
+});
+
+
+//等级事件
+$(".gl_id").on('change', function () {
+    var url = getUrlYearAndOrder(true, true, true, true, true, null);
+
+    var gl_id = $(this).val();
+    if (!isEmpty(gl_id)) {
+        window.location.href = url + "&gl_id=" + gl_id;
     }
     else {
         window.location.href = url;
@@ -181,7 +204,13 @@ $(".gp_id").on('change', function(){
 
 
 // 年份和排序
-function getUrlYearAndOrder(is_province, is_city, is_area, is_gy, is_order) {
+function getUrlYearAndOrder(is_province, is_city, is_area, is_gy, is_order, is_level) {
+    //等级
+    var url_gl_id = getUrlParam('gl_id');
+    if (!isEmpty(url_gl_id) && !isEmpty(is_level)) {
+        url = url + '&gl_id=' + url_gl_id;
+    }
+
     // 年份链接
     var url_gy_id = getUrlParam('gy_id');
     if (!isEmpty(url_gy_id) && !isEmpty(is_gy)) {
@@ -220,7 +249,7 @@ function getUrlYearAndOrder(is_province, is_city, is_area, is_gy, is_order) {
 
 
 $('select[name="c_province"]').on('change',function(){
-    url = getUrlYearAndOrder(null, true, true, true, true);
+    url = getUrlYearAndOrder(null, true, true, true, true, true);
 
     var c_province_id = $(this).val();
     if (!isEmpty(c_province_id)) {
@@ -232,7 +261,7 @@ $('select[name="c_province"]').on('change',function(){
 });
 
 $('select[name="c_city"]').on('change',function(){
-    url = getUrlYearAndOrder(true, null, true, true, true);
+    url = getUrlYearAndOrder(true, null, true, true, true, true);
 
     var c_city_id = $(this).val();
     if (!isEmpty(c_city_id)) {
@@ -245,7 +274,7 @@ $('select[name="c_city"]').on('change',function(){
 
 
 $('select[name="c_area"]').on('change',function(){
-    url = getUrlYearAndOrder(true, true, null, true, true);
+    url = getUrlYearAndOrder(true, true, null, true, true, true);
 
     var c_area_id = $(this).val();
     if (!isEmpty(c_area_id)) {
@@ -258,11 +287,12 @@ $('select[name="c_area"]').on('change',function(){
 
 
 
-// 声明参数 并添加筛选条件参数
-var ajaxUrl = '/Wap/Sell/ajaxGetPageSellBillList?';
-ajaxUrl = ajaxUrl + getUrlYearAndOrder(true, true, true, true, true);
 
 $(window).scroll(function(){
+    // 声明参数 并添加筛选条件参数
+    var ajaxUrl = '/Wap/Sell/ajaxGetPageSellBillList?';
+    ajaxUrl = ajaxUrl + getUrlYearAndOrder(true, true, true, true, true, true);
+
     //判断是否滑动到页面底部
     if($(window).scrollTop() === $(document).height() - $(window).height()){
         //当前第几页

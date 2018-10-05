@@ -21,3 +21,6 @@ ALTER TABLE `r_offer` ADD COLUMN `c_area_id` int(11) unsigned DEFAULT '0' COMMEN
 
 -- 用户等级
 ALTER TABLE `sys_user` ADD COLUMN `ul_id` int(11) DEFAULT '10' COMMENT '用户级别id';
+
+-- 粮食等级
+insert into g_level set gl_name='二等',gl_id=2;

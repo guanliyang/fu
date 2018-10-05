@@ -68,7 +68,12 @@
             </volist>
         </select><br/>
 
-        一等玉米　
+        <select name="gl_id">
+            <volist name="level" id="vo">
+                <option value="{$vo.gl_id}" <if condition="$vo['gl_id'] eq $bill['gl_id']">selected</if>>{$vo.gl_name}</option>
+            </volist>
+        </select>
+        玉米　
         <select name="gy_id">
             <volist name="year" id="vo">
                 <option value="{$vo.gy_id}">{$vo.gy_id}</option>
