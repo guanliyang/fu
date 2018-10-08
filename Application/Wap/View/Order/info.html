@@ -12,10 +12,10 @@
     <?php if(in_array($info['order']['o_status'], array(2) ) ) { ?>
     <div class="order_info">
         <label><span><b>需付款：<?php
-                echo  $info['order']['o_pay_f']+
-                $info['order']['o_frei']+
-                $info['order']['o_frei_m'];
-                ?>
+                                echo  formatMoney($info['order']['o_pay_f']+
+                                $info['order']['o_frei']+
+                                $info['order']['o_frei_m']);
+                                ?>
         </b></span>元</label><br/>
         (首付<span><b>{$info.order.o_pay_f|formatMoney}</b></span> +
         陆运费<span><b>{$info.order.o_frei|formatMoney}</b></span> +
