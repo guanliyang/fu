@@ -985,7 +985,7 @@ function getBackRate($bill, $bill_item) {
 
 // 已成交时 bill的支付信息
 // 1 全部 2利息 3补跌价 4退溢价
-function get9AllPrice($bill, $get = 1) {
+function get9AllPrice($bill, $get = 1, $type = 1) {
     $price = 0;
     $b_id = $bill['b_id'];
     if ($b_id) {
@@ -1023,7 +1023,7 @@ function get9AllPrice($bill, $get = 1) {
             }
 
             if ($get == 1) {
-                $price = get9AllPrice($bill, 2) + get9AllPrice($bill, 3) - get9AllPrice($bill, 4) - get9AllPrice($bill, 5);
+                $price = get9AllPrice($bill, 2,0) + get9AllPrice($bill, 3,0) - get9AllPrice($bill, 4,0) - $bill['b_depo'];
                 if ($price < 0) {
                     return '(待收款)'.formatMoney(abs($price));
                 }
@@ -1033,7 +1033,11 @@ function get9AllPrice($bill, $get = 1) {
             }
         }
     }
-    return formatMoney($price);
+    if ($type) {
+        $price = formatMoney($price);
+    }
+    return $price;
+
 }
 
 // 是否显示跌溢信息区域
