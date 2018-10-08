@@ -1025,10 +1025,10 @@ function get9AllPrice($bill, $get = 1, $type = 1) {
             if ($get == 1) {
                 $price = get9AllPrice($bill, 2,0) + get9AllPrice($bill, 3,0) - get9AllPrice($bill, 4,0) - $bill['b_depo'];
                 if ($price < 0) {
-                    return '(待收款)'.formatMoney(abs($price));
+                    return '(收款)'.formatMoney(abs($price));
                 }
                 else{
-                    return '(待付款)'.formatMoney($price);
+                    return '(付款)'.formatMoney($price);
                 }
             }
         }

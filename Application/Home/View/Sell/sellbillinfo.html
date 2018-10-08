@@ -157,10 +157,10 @@
                 </tr>
                 <?php } ?>
 
-                <?php if(in_array($info['b_status'], array(9) )) { ?>
+                <?php if(in_array($info['b_status'], array(9, 10) )) { ?>
                 <tr>
                     <th width="30"></th>
-                    <th>结算：<label><b>{$info|get9AllPrice=1}<b></label> 元</th>
+                    <th><if condition="$info['b_status'] eq 9">待结算<else/>已结算</if>：<label><b>{$info|get9AllPrice=1}<b></label> 元</th>
                     <th colspan="5">
                         其中：利息 <label><b>{$info|get9AllPrice=2}</b></label> 元，
                         补跌价 <label><b>{$info|get9AllPrice=3}</b></label> 元，
