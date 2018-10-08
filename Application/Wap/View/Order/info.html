@@ -20,7 +20,6 @@
         (首付<span><b>{$info.order.o_pay_f|formatMoney}</b></span> +
         陆运费<span><b>{$info.order.o_frei|formatMoney}</b></span> +
         海运费<span><b>{$info.order.o_frei_m|formatMoney}</b></span>)<br/>
-        请按合同说明方式付款至平台指定帐号。
     </div>
     <?php } ?>
 
@@ -42,7 +41,6 @@
         (尾款<span><b>{$info.order.o_pay_t|formatMoney}</b></span> +
         利息<span><b>{$info.order|getKnotNumber}</b></span> +
         滞箱费<span><b>{$info.order.o_depay|formatMoney}</b></span>)<br/>
-        请按合同说明方式付款至平台指定帐号。
     </div>
     </div>
     <?php } ?>

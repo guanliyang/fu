@@ -18,7 +18,7 @@
                         <th colspan="2">{$info.bill.b_name}　{$info.bill.b_year}年　{$info.bill|getCAddress}　{$info.bill.b_level}　容重{$info.bill.b_rz}g/l</th>
                         <th >货款: <label>{$info.order.o_pay|formatMoney}</label>元
                             (<label>{$info.order.o_pri1|formatMoney}</label>元/吨)</th>
-                        <th width="125" class="tdright">
+                        <th class="tdright">
                             <a href="/Home/Order/billInfo/b_id/{$info.bill.b_id}/o_id/{$info.order.o_id}/bi_id/{$info.bill.bill_item|getArrayV='bi_id'}">...</a>
                         </th>
                     </tr>
@@ -156,7 +156,6 @@
                         (首付<label><b>{$info.order.o_pay_f|formatMoney}<b></label> +
                         陆运费<label><b>{$info.order.o_frei|formatMoney}<b></label> +
                         海运费<label><b>{$info.order.o_frei_m|formatMoney}<b></label> )
-                        请按合同说明方式付款至平台指定帐号。
                     </th>
                 </tr>
                 <?php } ?>
@@ -174,16 +173,15 @@
                         <label>
                             <b>
                                 <?php
-                                echo  $info['order']['o_pay_t']+
-                                getOrderTeil($info['order'])+
-                                $info['order']['o_depay'];
+                                echo  formatMoney($info['order']['o_pay_t']+
+                                getKnotNumber($info['order'])+
+                                $info['order']['o_depay']);
                                 ?>
                                 <b>
                         </label> 元
                         (尾款<label><b>{$info.order.o_pay_t|formatMoney}<b></label> +
                         利息<label><b>{$info.order|getKnotNumber}<b></label> +
                         滞箱费<label><b>{$info.order.o_depay|formatMoney}<b></label>)
-                        请按合同说明方式付款至平台指定帐号。
                     </th>
                 </tr>
                 <?php } ?>
