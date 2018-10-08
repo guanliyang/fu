@@ -1020,10 +1020,10 @@ function get9AllPrice($bill, $get = 1) {
             if ($get == 1) {
                 $price = get9AllPrice($bill, 2) + get9AllPrice($bill, 3) - get9AllPrice($bill, 4);
                 if ($price < 0) {
-                    $price = abs($price).'(待收款)';
+                    return formatMoney(abs($price)).'(待收款)';
                 }
                 else{
-                    $price = $price.'(待付款)';
+                    return formatMoney($price).'(待付款)';
                 }
             }
         }
