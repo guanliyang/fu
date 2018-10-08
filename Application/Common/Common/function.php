@@ -1083,7 +1083,7 @@ function getCAddress($bill) {
     $p = M('local_area')->where(array('id' => $bill['c_province_id']))->getField('areaName');
     $c = M('local_area')->where(array('id' => $bill['c_city_id']))->getField('areaName');
     $a = M('local_area')->where(array('id' => $bill['c_area_id']))->getField('areaName');
-    return $p.$c.$a;
+    return $p.' '.$c.' '.$a;
 }
 
 // 拼接装货地址
@@ -1091,7 +1091,7 @@ function getZAddress($bill) {
     $p = M('local_area')->where(array('id' => $bill['z_province_id']))->getField('areaName');
     $c = M('local_area')->where(array('id' => $bill['z_city_id']))->getField('areaName');
     $a = M('local_area')->where(array('id' => $bill['z_area_id']))->getField('areaName');
-    return $p.$c.$a.$bill['b_add'];
+    return $p.' '.$c.' '.$a.' '.$bill['b_add'];
 }
 
 // 显示会员权益
