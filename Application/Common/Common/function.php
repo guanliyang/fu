@@ -1017,8 +1017,13 @@ function get9AllPrice($bill, $get = 1) {
                 }
             }
 
+            // 保证金
+            if ($get == 5) {
+                $price = $bill['b_depo'];
+            }
+
             if ($get == 1) {
-                $price = get9AllPrice($bill, 2) + get9AllPrice($bill, 3) - get9AllPrice($bill, 4);
+                $price = get9AllPrice($bill, 2) + get9AllPrice($bill, 3) - get9AllPrice($bill, 4) - get9AllPrice($bill, 5);
                 if ($price < 0) {
                     return '(待收款)'.formatMoney(abs($price));
                 }
