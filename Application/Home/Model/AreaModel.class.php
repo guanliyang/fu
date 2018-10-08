@@ -21,7 +21,7 @@ class AreaModel extends Model {
             notice('请认真选择三级地址');
         }
 
-        return $this->getAreaNameById($province). $this->getAreaNameById($city) . $this->getAreaNameById($area);
+        return $this->getAreaNameById($province).' '.$this->getAreaNameById($city) . ' '.$this->getAreaNameById($area).' ';
     }
 
     private function getAreaNameById($id) {

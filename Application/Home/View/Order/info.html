@@ -6,7 +6,10 @@
 <div class="bdiv cont">
     <div class="content">
         <div class="list_item">
-            <label>:: 订单号：{$info.order.o_code} - {$info.order.o_status|getOrderStatus} ::</label>　　<<a href="">下载电子合同</a>>
+            <label>:: 订单号：{$info.order.o_code} - {$info.order.o_status|getOrderStatus} ::</label>
+            <?php if(in_array($info['order']['o_status'], array(2,3,4,5,6,7,8,9,10) ) ) { ?>
+            　　<<a href="">下载电子合同</a>>
+            <?php } ?>
         </div>
         <div class="list">
             <table>
