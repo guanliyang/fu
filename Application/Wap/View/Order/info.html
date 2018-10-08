@@ -32,9 +32,9 @@
                     <else/>已付款:
                 </if>
                 <?php
-                echo  $info['order']['o_pay_t']+
+                echo  formatMoney($info['order']['o_pay_t']+
                 getKnotNumber($info['order'])+
-                $info['order']['o_depay'];
+                $info['order']['o_depay']);
                 ?>
             </b></span>元
         </label><br/>
