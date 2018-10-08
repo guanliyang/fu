@@ -155,6 +155,17 @@ class UserModel extends HomeModel {
             notice("密码输入错误，请重新填写");
         }
         session('uid', $user['id']);
+        $this->setCookie($user);
+    }
+
+    public function setCookie($user) {
+        $uid = $user['id'];
+        $msg_count = M('sys_msg')->where(array('u_id' => $uid, 'sm_status' => SysMsgModel::NOT_READ))->count();
+        $cart_count = M('b_cart')->where(array('u_id' => $uid, 'c_status' => CartModel::STATUS_NORMAL))->count();
+
+        cookie('lb_user_name', $user['real_name']);
+        cookie('lb_msg_count', $msg_count);
+        cookie('lb_cart_count', $cart_count);
     }
 
     public function mobileLogin() {
