@@ -96,9 +96,10 @@
         联系人：{$info.order.o_deli_cont}　　手机号：{$info.order.o_deli_mobi}<br/>
         收货地址：{$info.order.o_deli_add}
     </div>
-    
-    <div class="order_info">成交时间：{$info.order.o_dtime|getDateTime}</div>
 
+    <?php if(in_array($info['order']['o_status'], array(3,4,5,6,7,8,9,10) ) ) { ?>
+        <div class="order_info">成交时间：{$info.order.o_dtime|getDateTime}</div>
+    <?php } ?>
 
     <!-- 海运信息 -->
     <?php if(in_array($info['order']['o_status'], array(2,3) ) ) { ?>

@@ -74,11 +74,12 @@
                     <td colspan="4">地址：{$info.order.o_deli_add}　</td>
                 </tr>
 
+                <?php if(in_array($info['order']['o_status'], array(3,4,5,6,7,8,9,10) ) ) { ?>
                 <tr>
                     <th></th>
                     <th colspan="4">成交时间：{$info.order.o_dtime|getDateTime}</th>
                 </tr>
-
+                <?php } ?>
                 <!-- 海运信息 -->
                 <?php if(in_array($info['order']['o_status'], array(2,3) ) ) { ?>
                     <tr>
