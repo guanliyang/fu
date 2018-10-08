@@ -87,7 +87,7 @@
                     <td width="90"><label id="wei{$vo.bi_id}">{$vo.bi_gwei}</label>吨({$vo.bi_sum}箱)</td>
                     <td width="180"><label id="sum{$vo.bi_id}">0</label>元</td>
                     <td width="60">已回款：</td>
-                    <td><label id="rem{$vo.bi_id}">{$vo.bi_rpay|formatMoney}</label>元 (计息{$info|getInte=$vo}元)</td>
+                    <td><label id="rem{$vo.bi_id}">{$info|getBeginClinch=$vo}</label>元 (计息{$info|getInte=$vo}元)</td>
                     <td id="diff{$vo.bi_id}">0</td>
                 </tr>
                 </volist>

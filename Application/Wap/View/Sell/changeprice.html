@@ -78,7 +78,7 @@
         <div class="order_item">
         &#8470;.{$vo.bi_id}<label><b id="wei{$vo.bi_id}">{$vo.bi_gwei}</b>吨({$vo.bi_sum}箱)　
             售款<span><b id="sum{$vo.bi_id}">0</b></span>元</label>
-        <br/>回款：<b id="rem{$vo.bi_id}">{$vo.bi_rpay|formatMoney}</b>元
+        <br/>回款：<b id="rem{$vo.bi_id}">{$info|getBeginClinch=$vo}</b>元
             (计息<b>{$info|getInte=$vo}</b>元)<label id="diff{$vo.bi_id}"></label>
     </div>
     </volist>

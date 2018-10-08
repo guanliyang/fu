@@ -117,7 +117,7 @@
                             <td>{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
                             <td>{$vo.bi_dpay|formatMoney}元 ({$info.b_pri1}元/吨)</td>
                             <td>利息：<label><b>{$vo.bi_inte|formatMoney}</b></label>元</td>
-                            <td>{$vo|getDiffText}：<label><b>{$info|getBackMoney=$vo}</b></label>元</td>
+                            <td>{$vo|getDiffText=$info}：<label><b>{$info|getBackMoney=$vo}</b></label>元</td>
                             <td><a href="/Home/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}"><详情></a></td>
                         </tr>
                     </volist>

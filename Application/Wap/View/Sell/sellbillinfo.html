@@ -103,7 +103,7 @@
         <volist name="info.finish_sell" id="vo">
     <div class="order_item" onclick="location.href='/Wap/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}'">
         &#8470;.{$vo.bi_id}
-        <label>{$vo|getDiffText}：<span><b>{$info|getBackMoney=$vo}</b></span>元</label><br/>
+        <label>{$vo|getDiffText=$info}：<span><b>{$info|getBackMoney=$vo}</b></span>元</label><br/>
         {$vo.bi_sum}箱　净重{$vo.bi_gwei}吨
         <label>回款利息：<span><b>{$vo.bi_inte|formatMoney}</b></span>元</label><br/>
         货款：<b>{$vo.bi_dpay|formatMoney}</b>元 ({$info.b_pri1}元/吨)<label>(详情)</label>
