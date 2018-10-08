@@ -898,7 +898,7 @@ function get9AllPrice($bill, $get = 1, $type = 1) {
 
             // 3补跌价
             if ($get == 3) {
-                foreach ($bill as $item) {
+                foreach ($list as $item) {
                     if ($item['bi_dpri'] < $bill['b_pri0']) {
                         $price += ($bill['b_pri0'] - $item['bi_dpri']) * $item['bi_nwei'];
                     }
@@ -907,7 +907,7 @@ function get9AllPrice($bill, $get = 1, $type = 1) {
 
             //4退溢价
             if ($get == 4) {
-                foreach ($bill as $item) {
+                foreach ($list as $item) {
                     if ($item['bi_dpri'] > $bill['b_pri0']) {
                         $price += ($item['bi_dpri'] - $bill['b_pri0']) * $item['bi_nwei'];;
                     }
