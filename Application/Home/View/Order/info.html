@@ -12,8 +12,8 @@
             <table>
                     <tr>
                         <th width="30"></th>
-                        <th>{$info.bill.b_name}　{$info.bill.b_year}年　{$info.bill|getCAddress}　{$info.bill.b_level}　容重{$info.bill.b_rz}g/l</th>
-                        <th colspan="2">货款: <label>{$info.order.o_pay|formatMoney}</label>元
+                        <th colspan="2">{$info.bill.b_name}　{$info.bill.b_year}年　{$info.bill|getCAddress}　{$info.bill.b_level}　容重{$info.bill.b_rz}g/l</th>
+                        <th >货款: <label>{$info.order.o_pay|formatMoney}</label>元
                             (<label>{$info.order.o_pri1|formatMoney}</label>元/吨)</th>
                         <th width="125" class="tdright">
                             <a href="/Home/Order/billInfo/b_id/{$info.bill.b_id}/o_id/{$info.order.o_id}/bi_id/{$info.bill.bill_item|getArrayV='bi_id'}">...</a>
