@@ -1008,17 +1008,23 @@ function get9AllPrice($bill, $get = 1) {
                 }
             }
 
-            //4退跌价
+            //4退溢价
             if ($get == 4) {
                 foreach ($bill as $item) {
                     if ($item['bi_diff'] > 0) {
-                        $price += abs($item['bi_diff']);
+                        $price += $item['bi_diff'];
                     }
                 }
             }
 
             if ($get == 1) {
-                $price = get9AllPrice($bill, 2) + get9AllPrice($bill, 3) + get9AllPrice($bill, 4);
+                $price = get9AllPrice($bill, 2) + get9AllPrice($bill, 3) - get9AllPrice($bill, 4);
+                if ($price < 0) {
+                    $price = abs($price).'(待收款)';
+                }
+                else{
+                    $price = $price.'(待付款)';
+                }
             }
         }
     }
