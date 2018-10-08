@@ -163,7 +163,10 @@
                     <th></th>
                     <th colspan="4">
                         <label><b>[{$info.order.o_status|getOrderStatus}]<b></label>　
-                        需付款:
+                        <if condition="$info['order']['o_status'] eq 5">需
+                        <else/>已
+                        </if>
+                        付款:
                         <label>
                             <b>
                                 <?php
