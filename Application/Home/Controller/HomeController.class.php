@@ -19,6 +19,9 @@ class HomeController extends Controller {
         $cart_count = M('b_cart')->where(array('u_id' => $uid, 'c_status' => CartModel::STATUS_NORMAL))->count();
         $this->assign('msg_count', $msg_count);
         $this->assign('cart_count', $cart_count);
+
+        $user = new \Home\Model\UserModel();
+        $user->setCookie($this->user);
     }
 
     public function putG() {
