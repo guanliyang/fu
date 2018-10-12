@@ -1060,14 +1060,11 @@ function getLevDepoShow($user, $title = 1) {
 function setSmsMessage($mobile, $type, $code) {
     $url = C('SMS_URL').'/dysms/smser/smser.php';
 
-    $obj[$mobile] = $mobile;
-    $obj[$type] = $type;
-    $obj[$code] = $code;
+    $obj['mobile'] = $mobile;
+    $obj['type'] = $type;
+    $obj['code'] = $code;
 
-    $data =  json_encode($obj);
-
-
-    $res = send_post($url, $data);
+    $res = send_post($url, $obj);
 
     return $res;
 }
