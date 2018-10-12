@@ -132,10 +132,10 @@ class UserModel extends HomeModel {
         return $name;
     }
 
-    public function ajaxSendSms() {
+    public function ajaxSendSms($type = 'reg') {
         $mobile = $this->_checkMobile();
-        $this->_checkToken();
-        $this->_insertSmsLog($mobile);
+//        $this->_checkToken();
+        $this->_insertSmsLog($mobile, $type);
         //发短信 方法
         notice('请求成功', 0);
     }
@@ -203,7 +203,8 @@ class UserModel extends HomeModel {
         return true;
     }
 
-    private function _insertSmsLog($mobile) {
+    private function _insertSmsLog($mobile, $type) {
+        //入库
         $code = $this->_getCode();
         $smsLog = M('SmsLog');
         $smsLog->code = $code;
@@ -211,7 +212,8 @@ class UserModel extends HomeModel {
         $smsLog->message = "您的验证码是".$code;
         $smsLog->ctime = time();
         $smsLog->add();
-
+        //发送短信
+        setSmsMessage($mobile, $type, $code);
     }
 
     private function _checkMobile() {

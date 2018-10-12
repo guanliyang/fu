@@ -1055,3 +1055,37 @@ function getLevDepoShow($user, $title = 1) {
         return $lev['ul_depo'];
     }
 }
+
+// 短信发送
+function setSmsMessage($mobile, $type, $code) {
+    $url = C('SMS_URL').'/dysms/smser/smser.php';
+
+    $obj[$mobile] = $mobile;
+    $obj[$type] = $type;
+    $obj[$code] = $code;
+
+    $data =  json_encode($obj);
+
+
+    $res = send_post($url, $data);
+
+    return $res;
+}
+
+
+function send_post($url, $post_data) {
+
+    $postdata = http_build_query($post_data);
+    $options = array(
+        'http' => array(
+            'method' => 'POST',
+            'header' => 'Content-type:application/x-www-form-urlencoded',
+            'content' => $postdata,
+            'timeout' => 15 * 60 // 超时时间（单位:s）
+        )
+    );
+    $context = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+
+    return $result;
+}

@@ -52,4 +52,7 @@ return  array(
 
     // WWW URL
     'WWW_URL' => 'http://39.104.166.224:9090',
+
+    //sms URL
+    'SMS_URL' => 'http://39.104.166.224:8080',
 );

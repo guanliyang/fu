@@ -59,7 +59,7 @@ class IndexController extends Controller {
     // 短信发送验证码
     public function ajaxSendSms() {
         $user = new \Home\Model\UserModel();
-        $user->ajaxSendSms();
+        $user->ajaxSendSms($type = 'reg');
     }
 
     // 登录
