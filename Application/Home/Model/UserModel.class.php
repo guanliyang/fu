@@ -209,12 +209,15 @@ class UserModel extends HomeModel {
         $smsLog = M('SmsLog');
         $smsLog->code = $code;
         $smsLog->mobile = $mobile;
-        $smsLog->message = "您的验证码是".$code;
-        $smsLog->ctime = time();
-        $smsLog->add();
+
         //发送短信
         $type = I('request.type');
-        setSmsMessage($mobile, $type, $code);
+        $msg = setSmsMessage($mobile, $type, $code);
+
+        $smsLog->message = @$msg[0];
+        $smsLog->ctime = time();
+        $smsLog->add();
+
     }
 
     private function _checkMobile() {
