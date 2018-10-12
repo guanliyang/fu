@@ -1,9 +1,10 @@
 $("#code_bt").click(function(){
     var mobile = $("input[name='mobile']").val();
+    var type = $("#msgType").val();
     $.ajax({
         type: 'POST',
         url: '/Home/Index/ajaxSendSms',
-        data: 'mobile=' + mobile,
+        data: 'mobile=' + mobile + '&type=' + type,
         dataType: 'json',
         timeout: 10000,
         success: function(data){

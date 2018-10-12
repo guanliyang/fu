@@ -30,6 +30,7 @@
         　手机号：<input name="mobile" placeholder="限中国大陆手机号" value="" type="text"/>
         　验证码：<input name="mobi_code" id="mobi_code" class="tx_dis" disabled value="请先点击“发送验证码”" type="text"/>　　　　　　　　　　<input id="code_bt" class="bt bt_s" value="发送验证码" type="button" onclick="codePost();"/>
         设置密码：<input name="password" value="" type="text"/>
+        <input type="hidden" id="msgType" value="reg"/>
     </div>
     <hr>
     <div class="inp">
@@ -73,4 +74,5 @@
     t_submit('/Wap/Index/register/');
 </script>
 <script type="text/javascript" src="/Public/js/upload.js" ></script>
+<script type="text/javascript" src="/Public/js/sendMsg.js" ></script>
 <include file="public/foot" />
