@@ -54,5 +54,5 @@ return  array(
     'WWW_URL' => 'http://39.104.166.224:9090',
 
     //sms URL
-    'SMS_URL' => 'http://39.104.166.224:8080',
+    'SMS_URL' => 'http://127.0.0.1:8080',
 );
