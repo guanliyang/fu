@@ -1066,9 +1066,9 @@ function setSmsMessage($mobile, $type, $code) {
 
     $res = send_post($url, $obj);
 
-    if ($res[0] != 'ok') {
-        notice($res[0]);
-    }
+//    if ($res[0] != 'ok') {
+//        notice($res[0]);
+//    }
 }
 
 
