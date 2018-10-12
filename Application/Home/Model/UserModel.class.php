@@ -214,7 +214,7 @@ class UserModel extends HomeModel {
         $type = I('request.type');
         $msg = setSmsMessage($mobile, $type, $code);
 
-        $smsLog->message = @$msg[0];
+        $smsLog->message = json_encode($msg);
         $smsLog->ctime = time();
         $smsLog->add();
 
