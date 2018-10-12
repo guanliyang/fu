@@ -20,7 +20,7 @@ class UserModel extends HomeModel {
         $this->bank_account = checkAccount(I('request.bank_account'));
         $this->bank_payee = I('request.bank_payee');
 
-        //$this->_checkCode($this->mobile);
+        $this->_checkCode($this->mobile);
         $this->_checkMobileExisted($this->mobile);
         $this->password = $this->_checkPassword();
         $this->company_name = I('request.company_name');
@@ -170,7 +170,7 @@ class UserModel extends HomeModel {
 
     public function mobileLogin() {
         $mobile = $this->_checkMobile();
-//        $this->_checkCode($mobile);
+        $this->_checkCode($mobile);
         $where = array(
             "mobile"    => $mobile,
         );
@@ -244,7 +244,7 @@ class UserModel extends HomeModel {
     public function changePassword($user_mobile = '') {
         $mobile = $this->_checkMobile();
 
-//        $this->_checkCode($mobile);
+        $this->_checkCode($mobile);
         $password = $this->_checkPassword();
         $where = array('mobile' => $mobile);
         $user = $this->where($where)->find();
