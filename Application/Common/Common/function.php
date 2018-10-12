@@ -1066,6 +1066,10 @@ function setSmsMessage($mobile, $type, $code) {
 
     $res = send_post($url, $obj);
 
+    $res = json_decode($res);
+    if ($res[0] != 'ok') {
+        notice($res[0]);
+    }
     return $res;
 }
 
