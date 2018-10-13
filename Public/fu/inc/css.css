@@ -19,9 +19,8 @@ a{color:#807050;}
 .top{height:90px;background:#FFF;}
 .top .logo{margin:20px 40px;}
 .top .slog{margin:35px 0px;}
-.top .htel{float:right;}
-.top .htel{margin:25px 0px;}
-.top .adow{margin-left:15px;cursor:pointer}
+.top .htel{float:right;margin:25px 0px;}
+.top .adow{float:right;margin:20px 0px;cursor:pointer}
 
 .tbanner{box-shadow:0px 0px 20px #333 inset;}
 .infodiv{background:#FFF;position:absolute;padding:5px 10px;width:380px;height:90px;margin:60px;opacity:0.5;border-radius:5px;box-shadow:3px 3px 10px #333;z-index:999;}
