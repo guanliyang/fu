@@ -11,7 +11,7 @@ class IndexController extends Controller {
     public function changePassword() {
         $user = new \Home\Model\UserModel();
         $user->changePassword();
-        notice("修改成功", 0);
+        notice('', 2, array('url' => '/'));
     }
 
     // 首页登录页面

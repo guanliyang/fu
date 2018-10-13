@@ -11,6 +11,9 @@ $("#code_bt").click(function(){
             if (data.code != 0) {
                 alert(data.msg);
             }
+            if (data.code == 2) {
+                window.location.href = data.url;
+            }
         },
         error: function(xhr, type){
             alert('抱歉,加载失败!');
