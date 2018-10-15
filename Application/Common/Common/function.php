@@ -1090,3 +1090,10 @@ function send_post($url, $post_data) {
 
     return $result;
 }
+
+function getPriJson(){
+    $file = C('WWW_URL').'/inc/pri_json.json';
+    $priArr = '""';
+    if (is_file($file)) $priArr = file_get_contents($file);
+    return $priArr;
+}

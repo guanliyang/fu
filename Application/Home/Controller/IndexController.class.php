@@ -192,4 +192,11 @@ class IndexController extends Controller {
             die(json_encode(array("val_ot" => '')));
         }
     }
+
+    public function getPirJson() {
+        $file = C('WWW_URL').'/inc/pri_json.json';
+        $priArr = '""';
+        $priArr = file_get_contents($file);
+        die($priArr);
+    }
 }

@@ -24,8 +24,8 @@
         <div class="pboard">
             <h2>高品质玉米：</h2>
             <h5>今日市场参考价</h5>
-            <h4>锦州港　容重<b>720</b>g/l　生霉<b>1.2</b>%　　　　　　　　　　元 / 吨</h4>
-            <h1>1,700</h1>
+            <h4><span id="pri_g"></span>　容重<b id="pri_r"></b>g/l　　　　　　　　　　　　　　　　元 / 吨</h4>
+            <h1><span id="pri_p">1,700</span></h1>
         </div>
         <div class="uboard">
             <h3>成交订单： {$info.all_order_count} 笔</h3>
@@ -116,3 +116,5 @@
 
 
 <include file="public/foot" />
+<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/js/priJson.js"></script>
