@@ -39,7 +39,7 @@ function getWapMsgUrl($msg) {
             0 => '/Wap/Order/info/o_id/',
             2 => '/Wap/Sell/sellBillInfo/b_id/',
             1 => '/Wap/Offer/offerInfo/f_id/',
-            3 => '/Home/User/userView'
+            3 => '/Wap/User/userView'
         );
 
     if ($msg_type != 3) {
