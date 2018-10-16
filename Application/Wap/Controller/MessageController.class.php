@@ -30,8 +30,8 @@ class MessageController extends HomeController {
         <div class="info1">
             '.$bill['b_code'].'<label>'.date("Y/m/d H:i", $bill['b_ctime']).'</label>
         </div>
-        <div class="info2">'.$bill['b_name'].'　　'.$bill['b_year'].'年/'.getCAddress($bill).'/'.$bill['b_level'].'　　容重：'.$bill['b_rz'].'g/l</div>
-        <div class="info3"><b>'.$bill['b_weig'].'</b>吨　　<b>'.formatMoney($bill['b_pri1']).'</b>元/吨<label><b>'.getMessageById($bill['b_id'], 1).'</b></label></div>
+        <div class="info2">'.$bill['b_name'].'　　'.$bill['b_year'].'年/'.getCAddress($bill).'/'.$bill['b_level'].'</div>
+        <div class="info3">容重：<b>'.$bill['b_rz'].'</b>g/l　　<b>'.$bill['b_weig'].'</b>吨　　<b>'.formatMoney($bill['b_pri1']).'</b>元/吨<label><b>'.getMessageById($bill['b_id'], 1).'</b></label></div>
     </div>';
             }
         }
@@ -57,8 +57,8 @@ class MessageController extends HomeController {
         <div class="info1">
             '.$offer['f_code'].'<label>'.date("Y/m/d H:i", $offer['f_ctime']).'</label>
         </div>
-        <div class="info2">'.$offer['f_name'].'　　'.$offer['f_year'].'年/'.getCAddress($offer).'/'.$offer['f_level'].'　　容重：'.$offer['f_rz'].'g/l</div>
-        <div class="info3"><b>'.$offer['f_weig'].'</b>吨<label>'.getMessageById($offer['f_id'] ,2).'</label></div>
+        <div class="info2">'.$offer['f_name'].'　　'.$offer['f_year'].'年/'.getCAddress($offer).'/'.$offer['f_level'].'</div>
+        <div class="info3">容重：<b>'.$offer['f_rz'].'</b>g/l　　<b>'.$offer['f_weig'].'</b>吨<label>'.getMessageById($offer['f_id'] ,2).'</label></div>
     </div>';
             }
         }
@@ -91,9 +91,8 @@ onclick="location.href=\'/Wap/Order/info/o_id/'.$order['o_id'].'\'">
 <div class="info2">'.$order['bill']['b_name'].'　　
 '.$order['bill']['b_year'].'年/
 '.getCAddress($order['bill']).'/
-'.$order['bill']['b_level'].'　　
-容重：'.$order['bill']['b_rz'].'g/l</div>
-<div class="info3"><b>'.$order['bill']['all_nwei'].'</b>吨
+'.$order['bill']['b_level'].'</div>
+<div class="info3">容重：<b>'.$order['bill']['b_rz'].'</b>g/l　　<b>'.$order['bill']['all_nwei'].'</b>吨
 <b>'.$order['o_pri1'].'</b>元/吨<label><b>'.getMessageById($order['o_id'], 0).'</b></label>
 </div></div>';
 
