@@ -504,6 +504,13 @@ function getDateTime($time) {
     return date("Y/m/d H:i:s", $time);
 }
 
+function getDateTimeDate($time) {
+    if (empty($time)) {
+        return '暂无';
+    }
+    return date("Y/m/d", $time);
+}
+
 function getBillItemPayStatus($billItem) {
     $str = '-';
     if (in_array($billItem['bi_status'], array(5, 6, 7, 8))) {

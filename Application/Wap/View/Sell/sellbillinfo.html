@@ -71,7 +71,7 @@
         <?php } ?>
         <label>
             <?php if(in_array($info['b_status'], array(5,7,9,10) )) { ?>
-            ({$info.b_rtime|getDateTime}) 回款：<b>{$info.b_rpay|formatMoney}</b>元
+            ({$info.b_rtime|getDateTimeDate}) 回款：<b>{$info.b_rpay|formatMoney}</b>元
             <?php } ?>
         </label>
     </div>
