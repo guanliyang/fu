@@ -7,9 +7,9 @@
     <hr>
     <div class="order_info">
         <label>货单号: {$info.b_code}</label>
-        <label>[{$info.b_status|getBillStatus}]</label>
+        <label>[{$info.b_status|getBillStatus}]</label><br/>
         <if condition="$info.b_status eq -1">　
-            <<a href="/Home/Sell/sellBill/b_id/{$info.b_id}">修改</a>> 　
+            <<a href="/Wap/Sell/sellBill/b_id/{$info.b_id}">修改</a>> 　
             <<a href="#" onclick="disp_confirm()">删除</a>>
         </if>
     </div>
@@ -35,12 +35,12 @@
     <?php } ?>
 
     <!-- 基础信息 -->
-    <div class="order_info"><img src="" width="200" height="200" /></div>
+    <div class="order_info"><img src="{$info.b_photo}" width="200" height="200" /></div>
     <div class="order_info">
         <label>
         {$info.b_name}　
         {$info.b_year}　
-        {$info|getCAddress}　
+        {$info|getCAddress}　<br/>
         {$info.b_level}　
         容重{$info.b_rz}g/l
         </label>
