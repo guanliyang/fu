@@ -94,10 +94,10 @@
         <div><a href="/Wap/Cart/index">购物车({$cart_count})</a></div>
     </div>
     <div id="ft2">
-        <div><a href="/Wap/Offer/addOffer">我要预购</a></div>
+        <div><a href="#" id="buy_grain">我要预购</a></div>
     </div>
     <div id="ft3">
-        <div><a href="/Wap/Sell/sellBill">我要卖粮</a></div>
+        <div><a href="#" id="sell_grain">我要卖粮</a></div>
     </div>
 </div>
 
@@ -226,3 +226,45 @@
     });
 </script>
 <script type="text/javascript" src="/Public/js/priJson.js"></script>
+
+<script type="text/javascript">
+    $("#buy_grain").on('click tap',function(){
+        $.ajax({
+            type: 'POST',
+            url: '/Home/User/checkoutUserPermission',
+            dataType: 'json',
+            timeout: 10000,
+            success: function(data){
+                if (data.code != 0) {
+                    alert(data.msg);
+                }
+                else {
+                    window.location.href = "/Wap/Offer/addOffer";
+                }
+            },
+            error: function(xhr, type){
+                alert('抱歉,加载失败!');
+            }
+        })
+    })
+
+    $("#sell_grain").on('click tap',function(){
+        $.ajax({
+            type: 'POST',
+            url: '/Home/User/checkoutUserPermission',
+            dataType: 'json',
+            timeout: 10000,
+            success: function(data){
+                if (data.code != 0) {
+                    alert(data.msg);
+                }
+                else {
+                    window.location.href = "/Wap/Sell/sellBill";
+                }
+            },
+            error: function(xhr, type){
+                alert('抱歉,加载失败!');
+            }
+        })
+    })
+</script>

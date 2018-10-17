@@ -41,4 +41,15 @@ class UserController extends HomeController {
         $user->changePassword($this->user['mobile']);
         notice("修改成功");
     }
+
+    // 检查用户是否有发布权限
+    public function checkoutUserPermission() {
+        $user = $this->user;
+        if (!empty($user) && $user['status'] < 1) {
+            notice('您的用户状态还未通过审核,不能进行此操作！');
+        }
+        else {
+            notice('成功', 0);
+        }
+    }
 }

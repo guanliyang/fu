@@ -31,8 +31,8 @@
             <h3>成交订单： {$info.all_order_count} 笔</h3>
             <h3>注册会员： {$info.user_count} 人</h3>
             <div>
-                <a href="/Home/Offer/addOffer"><img src="/Public/fu/img/bt_buy.png"/></a>
-                <a href="/Home/Sell/sellBill"><img src="/Public/fu/img/bt_sal.png"/></a>
+                <a href="#"><img id="buy_grain" src="/Public/fu/img/bt_buy.png"/></a>
+                <a href="#"><img id="sell_grain" src="/Public/fu/img/bt_sal.png"/></a>
             </div>
         </div>
     </div>
@@ -118,3 +118,44 @@
 <include file="public/foot" />
 <script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="/Public/js/priJson.js"></script>
+<script type="text/javascript">
+    $("#buy_grain").on('click tap',function(){
+        $.ajax({
+            type: 'POST',
+            url: '/Home/User/checkoutUserPermission',
+            dataType: 'json',
+            timeout: 10000,
+            success: function(data){
+                if (data.code != 0) {
+                    alert(data.msg);
+                }
+                else {
+                    window.location.href = "/Home/Offer/addOffer";
+                }
+            },
+            error: function(xhr, type){
+                alert('抱歉,加载失败!');
+            }
+        })
+    })
+
+    $("#sell_grain").on('click tap',function(){
+        $.ajax({
+            type: 'POST',
+            url: '/Home/User/checkoutUserPermission',
+            dataType: 'json',
+            timeout: 10000,
+            success: function(data){
+                if (data.code != 0) {
+                    alert(data.msg);
+                }
+                else {
+                    window.location.href = "/Home/Sell/sellBill";
+                }
+            },
+            error: function(xhr, type){
+                alert('抱歉,加载失败!');
+            }
+        })
+    })
+</script>
