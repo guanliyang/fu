@@ -193,10 +193,30 @@ class IndexController extends Controller {
         }
     }
 
+    // 首页参考价格轮换
     public function getPirJson() {
         $file = C('WWW_URL').'/inc/pri_json.json';
-        $priArr = '""';
         $priArr = file_get_contents($file);
         die($priArr);
+    }
+
+    // 卖粮时 点击容重可港口参考价格变化
+    public function getReferPrice() {
+        $file = C('WWW_URL').'/inc/pri_json.json';
+        $priArr = json_decode(file_get_contents($file), true);
+        $gang = I('request.gang');
+        $rz = I('request.rz');
+
+        $price = '暂无';
+        $clean = 1; // 清除 元/吨
+        foreach ($priArr as $value) {
+            if ($value['port'] == $gang && $value['rz'] == $rz) {
+                $price = formatMoney($value['price']);
+                $clean = 0;
+                break;
+            }
+        }
+
+        notice('成功', 0, array('price' => $price, 'clean' => $clean));
     }
 }

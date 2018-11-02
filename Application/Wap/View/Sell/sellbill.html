@@ -34,7 +34,7 @@
         var pay = depo + frei;
         document.getElementById('total').innerText = i2s3(total);
         document.getElementById('depo').innerText = i2s3(depo);
-        document.getElementById('pay').innerText = i2s3(pay);
+        //document.getElementById('pay').innerText = i2s3(pay);
     }
     function i2s3(intval){
         var reStr = '';
@@ -130,7 +130,7 @@
 
  <input class="bt inpss" value="+" type="button" onclick="cpri(1);"/>元/吨
         <br/>
-        <label>市场参考价：<b id="rpri">1,700</b>元/吨</label><br/>(提交后也可以随时调价)</div>
+        <label>市场参考价：<b id="rpri">1,905</b><span id="danwei">元/吨</span></label><br/>(提交后也可以随时调价)</div>
     <div class="bill_item">
         出售重量：
         <input name="b_weig" id="sweight" class="inpsm" value="{$bill.b_weig}" type="text" onchange="cwei();"/>吨
@@ -198,3 +198,4 @@
 <script type="text/javascript" src="/Public/js/upload.js"></script>
 <script type="text/javascript" src="/Public/js/cz_address.js" ></script>
 <script type="text/javascript" src="/Public/js/val_ot.js" ></script>
+<script type="text/javascript" src="/Public/js/referPrice.js"></script>

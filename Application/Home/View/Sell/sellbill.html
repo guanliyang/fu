@@ -35,10 +35,10 @@
         var frei = eval(document.getElementById('freight').innerText.replace(',', ''));
         var total = pri1*weig;
         var depo = total*{$user|getLevDepoShow=3};
-        var pay = depo + frei;
+//        var pay = depo + frei;
         document.getElementById('total').innerText = i2s3(total);
         document.getElementById('depo').innerText = i2s3(depo);
-        document.getElementById('pay').innerText = i2s3(pay);
+        //document.getElementById('pay').innerText = i2s3(pay);
     }
     function i2s3(intval){
         var reStr = '';
@@ -149,7 +149,7 @@
                         <input type="hidden" name="b_pri0" id="b_pri1" value="<if condition='$bill'>{$bill.b_pri1}<else/>1700</if></if>">
                         <input class="bt inpss" value="+" type="button" onclick="cpri(1);"/> 元/吨　　　　　　　　
                         今日市场参考价：<br/>　　　　　（提交后也可以随时调价）　　　　　　　
-                        <label class="fontbig" id="rpri">1,700</label> 元/吨</td>
+                        <label class="fontbig" id="rpri">1,905</label> <span id="danwei">元/吨</span> </td>
                 </tr>
                 <tr>
                     <td>　出售重量：<input name="b_weig" id="sweight" class="inpsm" value="{$bill.b_weig}" type="text" onchange="cwei();"/> 吨 (约需 <label id="bsum">0</label> 个集装箱)　　　　
@@ -244,3 +244,4 @@
 <script type="text/javascript" src="/Public/js/upload.js"></script>
 <script type="text/javascript" src="/Public/js/cz_address.js" ></script>
 <script type="text/javascript" src="/Public/js/val_ot.js" ></script>
+<script type="text/javascript" src="/Public/js/referPrice.js"></script>
