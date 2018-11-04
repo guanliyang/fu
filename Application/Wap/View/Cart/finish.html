@@ -24,23 +24,23 @@
                 }
             }
             document.getElementById('npay').innerText = i2s3(npay);
-            if(eventdx[i].name=='recmode' && eventdx[i].checked){
-                if(eventdx[i].value=='1'){
-                    var freight = eval(document.getElementById('freight').innerText.replace(',', ''));
-                    document.getElementById('trRadd').style['display'] = '';
+            //if(eventdx[i].name=='recmode' && eventdx[i].checked){
+                //if(eventdx[i].value=='1'){
+                    //var freight = eval(document.getElementById('freight').innerText.replace(',', ''));
+                    //document.getElementById('trRadd').style['display'] = '';
                     //document.getElementById('trRcon').style['display'] = '';
-                    document.getElementById('tr1info').style['display'] = '';
-                    document.getElementById('tr2info').style['display'] = 'none';
-                    pay = npay+freight;
-                }else{
-                    document.getElementById('trRadd').style['display'] = 'none';
+                    //document.getElementById('tr1info').style['display'] = '';
+                    //document.getElementById('tr2info').style['display'] = 'none';
+                    //pay = npay+freight;
+                //}else{
+                    //document.getElementById('trRadd').style['display'] = 'none';
                     //document.getElementById('trRcon').style['display'] = 'none';
-                    document.getElementById('tr1info').style['display'] = 'none';
-                    document.getElementById('tr2info').style['display'] = '';
-                    pay = npay;
-                }
-            }
-            document.getElementById('pay').innerText = i2s3(pay);
+                    //document.getElementById('tr1info').style['display'] = 'none';
+                    //document.getElementById('tr2info').style['display'] = '';
+                    //pay = npay;
+                //}
+            //}
+            //document.getElementById('pay').innerText = i2s3(pay);
         }
     }
     function i2s3(intval){
@@ -79,7 +79,6 @@
             <label>{$vo.b_level}</label>
             <label>{$vo.b_pri1|formatMoney}元/吨</label>
             <label>{$vo.bill_item|count}组({$vo.bill_item|array_column='bi_sum'|array_sum}箱　净重{$vo.bill_item|array_column='bi_nwei'|array_sum}吨)</label>
-            <label>合计：{$vo.bill_item|array_column='bi_dpay'|array_sum|formatMoney}元</label>
         </div>
     </foreach>
 
@@ -95,28 +94,21 @@
                 <td></td>
                 <td><input type="radio" name="payment" class="bt_s" value="1" onclick="iSet();"/>全款</td>
             </tr>
-            <tr id="tr20pay">
-                <td colspan="2" class="tdright">尾款：<label><b id="epay">0</b> 元</label><br/>* 到岸支付尾款，尾款计息，按实际天数收取。<br/>(<b id="epayi">0</b>x<b id="dinte">{$Think.config.BUY_RATE}</b>年利率 / 365)=日利息：<b id="dipay">0</b>元
-                </td>
-            </tr>
         </table>
     </div>
     <div class="bill_item">即付货款：<label><b id="npay">0</b> 元</label></div>
+    <div class="bill_item" id="tr20pay">尾款：<label><b id="epay">0</b> 元</label><br/>* 到岸支付尾款，尾款计息，按实际天数收取。<br/>(<b id="epayi">0</b>x<b id="dinte">{$Think.config.BUY_RATE}</b>年利率 / 365)=日利息：<b id="dipay">0</b>元</div>
     <div class="bill_item">
         <table>
             <tr>
                 <td width="80">收货方式：</td>
                 <td>
                     <input type="radio" name="recmode" class="bt_s" value="1" checked  onclick="iSet();"/>送货到门　　
-                    <input type="radio" name="recmode" class="bt_s" value="2"  onclick="iSet();"/>自行提货</td>
+                    <input type="radio" name="recmode" class="bt_s" value="2"  onclick="iSet();"/>送货到港</td>
             </tr>
-            <tr id="tr1info">
+            <tr>
                 <td></td>
-                <td>沈阳(3车)运费：<label><b id="freight">3,600</b> 元</label></td>
-            </tr>
-            <tr id="tr2info">
-                <td></td>
-                <td>* 提货即视为确认收货</td>
+                <td>(运费按下单当日实际价格核算)</td>
             </tr>
         </table>
         <table id="trRadd">
@@ -139,7 +131,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td><input name="address" value="{$user.address}" type="text"/></td>
+                <td><input name="address" value="{$user.address}" type="text" onfocus="if(this.value=='请输入详细地址...')this.value='';" /></td>
             </tr>
         </table>
         <table id="trRcon">
@@ -153,7 +145,6 @@
             </tr>
         </table>
     </div>
-    <div class="bill_item">提交后需付款：<label><b id="pay">0</b> 元</label></div>
 </div>
 <div class="cont">
     <input type="hidden" name="bi_id_str" value="{$_GET['bi_id_str']}">

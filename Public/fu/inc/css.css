@@ -150,4 +150,4 @@ a{color:#807050;}
 #show_img{max-height: 200px;max-width: 200px;}
 #t_file{display:none;}
 .current{margin:5px;padding:0px 8px;border:1px solid #CCC;text-decoration:none; background:#807050;color:#FFF;}
-.t_address {cursor:pointer}
+.t_address {cursor:pointer;font-size:14px;}

@@ -15,23 +15,24 @@
         ctotal();
     }
     function cwei(){
+        document.getElementById('pri1').innerText =  document.getElementById('rpri').innerText;
         var weig = document.getElementById('sweight').value;
         var bsum = Math.ceil(weig/26);
         document.getElementById('bsum').innerText = bsum;
-        var tfrei = eval(document.getElementById('tfrei').innerText.replace(',', ''));
+        //var tfrei = eval(document.getElementById('tfrei').innerText.replace(',', ''));
         var tsum =  Math.ceil(bsum/2);
-        var freight = tfrei*tsum;
-        document.getElementById('freight').innerText = i2s3(freight);
+        //var freight = tfrei*tsum;
+        //document.getElementById('freight').innerText = i2s3(freight);
         document.getElementById('tsum').innerText = tsum;
         ctotal();
     }
     function ctotal(){
         var pri1 = eval(document.getElementById('pri1').innerText.replace(',', ''));
         var weig = document.getElementById('sweight').value;
-        var frei = eval(document.getElementById('freight').innerText.replace(',', ''));
+        //var frei = eval(document.getElementById('freight').innerText.replace(',', ''));
         var total = pri1*weig;
         var depo = total*0.2;
-        var pay = depo + frei;
+        //var pay = depo + frei;
         document.getElementById('total').innerText = i2s3(total);
         document.getElementById('depo').innerText = i2s3(depo);
         //document.getElementById('pay').innerText = i2s3(pay);
@@ -71,6 +72,19 @@
     <input type="hidden" name="gc_id" value="1">
     <input type="hidden" name="gl_id" value="1">
     <div class="bill_item">
+        品名：玉米　　
+        等级：<select name="gl_id">
+            <volist name="level" id="vo">
+                <option value="{$vo.gl_id}" <if condition="$vo['gl_id'] eq $bill['gl_id']">selected</if>>{$vo.gl_name}</option>
+            </volist>
+        </select>
+        年份：<select name="gy_id">
+            <volist name="year" id="vo">
+                <option value="{$vo.gy_id}" <if condition="$vo['gy_id'] eq $bill['gy_id']">selected</if> >{$vo.gy_id}</option>
+            </volist>
+        </select>
+        <br/>
+        产地：
         <select id="c_province" name="c_province">
             <volist name="c_province" id="vo">
                 <option value="{$vo.id}"
@@ -92,30 +106,16 @@
                 >{$vo.areaName}</option>
             </volist>
         </select>
-        <br/>
-
-        玉米　
-        <select name="gl_id">
-            <volist name="level" id="vo">
-                <option value="{$vo.gl_id}" <if condition="$vo['gl_id'] eq $bill['gl_id']">selected</if>>{$vo.gl_name}</option>
-            </volist>
-        </select>
-
-        <select name="gy_id">
-            <volist name="year" id="vo">
-                <option value="{$vo.gy_id}" <if condition="$vo['gy_id'] eq $bill['gy_id']">selected</if> >{$vo.gy_id}</option>
-            </volist>
-        </select>
-
-
-        <select name="gr_id">
+    </div>
+    <div class="bill_item">
+        容重：<select name="gr_id">
             <volist name="rz" id="vo">
                 <option value="{$vo.gr_id}" <if condition="$vo['gr_id'] eq $bill['gr_id']">selected</if>>{$vo.gr_name}</option>
             </volist>
-        </select>g/l
+        </select>g/l　　
+        生霉：<input name="b_mb" value="{$bill.b_mb}" type="text" class="inpss" />%　
     </div>
     <div class="bill_item">
-        生霉：<input name="b_mb" value="{$bill.b_mb}" type="text" class="inpss" />%　
         水份：<input name="b_sf" value="{$bill.b_sf}" type="text" class="inpss" />%　
         杂质：<input name="b_zz" value="{$bill.b_zz}" type="text" class="inpss" />%　
     </div>
@@ -133,9 +133,9 @@
         <label>市场参考价：<b id="rpri">1,905</b><span id="danwei">元/吨</span></label><br/>(提交后也可以随时调价)</div>
     <div class="bill_item">
         出售重量：
-        <input name="b_weig" id="sweight" class="inpsm" value="{$bill.b_weig}" type="text" onchange="cwei();"/>吨
-        <label>(约需<b id="bsum">0</b>个集装箱)</label><br/>&nbsp;
-        <label>入港运费：<b id="freight">0</b> 元</label><br/>&nbsp;<label>(<b id="tfrei">1,200</b> 元/车，需要 <b id="tsum">0</b> 车)</label></div>
+        <input name="b_weig" id="sweight" class="inpsm" value="{$bill.b_weig}" type="text" onchange="cwei();"/>吨 (约需<b id="bsum">0</b>个集装箱)
+        <label>约需车辆：<b id="tsum">0</b> 车</label><br/>&nbsp;
+        <label>(运费按实际装运日费用核算)</label></div>
     <div class="bill_item">保证金：<label><b id="depo">0</b> 元</label><br/>
         ({$user|getLevDepoShow}货款<b id="total">0</b>元的{$user|getLevDepoShow=2}，成交后即退保证金)</div>
     <div class="bill_item">

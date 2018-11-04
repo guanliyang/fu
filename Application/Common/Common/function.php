@@ -428,8 +428,8 @@ function getDeliType($type) {
     $list =
         array(
             0 => '空',
-            1 => '平台物流到门',
-            2 => '自提',
+            1 => '送货到门',
+            2 => '送货到港',
         );
     return $list[$type];
 }
@@ -440,7 +440,7 @@ function getPayType($type) {
         return '全款';
     }
     else {
-        return $type.'首付';
+        return '首付';
     }
 }
 

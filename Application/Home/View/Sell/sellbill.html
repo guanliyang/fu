@@ -17,14 +17,14 @@
         ctotal();
     }
     function cwei(){
-        //document.getElementById('pri1').innerText =  document.getElementById('rpri').innerText;
+        document.getElementById('pri1').innerText =  document.getElementById('rpri').innerText;
         var weig = document.getElementById('sweight').value;
         var bsum = Math.ceil(weig/26);
         document.getElementById('bsum').innerText = bsum;
-        var tfrei = eval(document.getElementById('tfrei').innerText.replace(',', ''));
+        //var tfrei = eval(document.getElementById('tfrei').innerText.replace(',', ''));
         var tsum =  Math.ceil(bsum/2);
-        var freight = tfrei*tsum;
-        document.getElementById('freight').innerText = i2s3(freight);
+        //var freight = tfrei*tsum;
+        //document.getElementById('freight').innerText = i2s3(freight);
         document.getElementById('tsum').innerText = tsum;
         ctotal();
     }
@@ -32,10 +32,10 @@
         document.getElementById('b_pri1').value =  document.getElementById('pri1').innerText.replace(',', '');
         var pri1 = eval(document.getElementById('pri1').innerText.replace(',', ''));
         var weig = document.getElementById('sweight').value;
-        var frei = eval(document.getElementById('freight').innerText.replace(',', ''));
+        //var frei = eval(document.getElementById('freight').innerText.replace(',', ''));
         var total = pri1*weig;
         var depo = total*{$user|getLevDepoShow=3};
-//        var pay = depo + frei;
+        //var pay = depo + frei;
         document.getElementById('total').innerText = i2s3(total);
         document.getElementById('depo').innerText = i2s3(depo);
         //document.getElementById('pay').innerText = i2s3(pay);
@@ -80,13 +80,14 @@
                         <input id="t_file" type="file" accept="image/*"/>
                         　　　　　　　
                     </td>
-                    <td>品名：
+                    <td>
+                        　品名：
                         <select name="gc_id">
                             <volist name="class" id="vo">
                                 <option value="{$vo.gc_id}" <if condition="$vo['gc_id'] eq $bill['gc_id']">selected</if>>{$vo.gc_name}</option>
                             </volist>
                         </select>
-                        年份：
+                        　年份：
                         <select name="gy_id">
                             <volist name="year" id="vo">
                                 <option value="{$vo.gy_id}" <if condition="$vo['gy_id'] eq $bill['gy_id']">selected</if>>{$vo.gy_id}</option>
@@ -153,7 +154,7 @@
                 </tr>
                 <tr>
                     <td>　出售重量：<input name="b_weig" id="sweight" class="inpsm" value="{$bill.b_weig}" type="text" onchange="cwei();"/> 吨 (约需 <label id="bsum">0</label> 个集装箱)　　　　
-                        入港运费：<label id="freight">0</label> 元 (<label id="tfrei">1,200</label>元/车，需要<label id="tsum">0</label>车)</td>
+                        约需车辆：<label id="tsum">0</label>车 (运费按实际装运日费用核算)</td>
                 </tr>
 
             </table>

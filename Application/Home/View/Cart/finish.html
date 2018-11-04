@@ -29,17 +29,17 @@
             document.getElementById('npay').innerText = i2s3(npay);
             if(eventdx[i].name=='recmode' && eventdx[i].checked){
                 if(eventdx[i].value=='1'){
-                    var freight = eval(document.getElementById('freight').innerText.replace(',', ''));
+                    //var freight = eval(document.getElementById('freight').innerText.replace(',', ''));
                     document.getElementById('trRadd').style['display'] = '';
                     //document.getElementById('trRcon').style['display'] = '';
-                    pay = npay+freight;
+                    //pay = npay+freight;
                 }else{
                     document.getElementById('trRadd').style['display'] = 'none';
                     //document.getElementById('trRcon').style['display'] = 'none';
-                    pay = npay;
+                    //pay = npay;
                 }
             }
-            document.getElementById('pay').innerText = i2s3(pay);
+            //document.getElementById('pay').innerText = i2s3(pay);
         }
     }
     function i2s3(intval){
@@ -77,12 +77,8 @@
                 <foreach name="list" item="vo">
                     <tr>
                         <th width="60"></th>
-                        <th class="tdlock">{$vo.b_name}　{$vo.b_year}年　{$vo|getCAddress}　{$vo.b_level}　容重{$vo.b_rz}g/l　单价：<label>{$vo.b_pri1|formatMoney}</label>元</th>
-                        <th>{$vo.bill_item|count}组　({$vo.bill_item|array_column='bi_sum'|array_sum}箱　净重：{$vo.bill_item|array_column='bi_nwei'|array_sum}吨)</th>
-                        <th width="150" class="tdright">
-                            <label>
-                                {$vo.bill_item|getItemPayAll=$vo}
-                            </label>元</th>
+                        <th class="tdlock">{$vo.b_name}　{$vo.b_year}年　{$vo|getCAddress}　{$vo.b_level}　容重{$vo.b_rz}g/l</th>
+                        <th>单价：<label>{$vo.b_pri1|formatMoney}</label>元　{$vo.bill_item|count}组　({$vo.bill_item|array_column='bi_sum'|array_sum}箱　净重：{$vo.bill_item|array_column='bi_nwei'|array_sum}吨)</th>
                     </tr>
                 </foreach>
             </table>
@@ -112,15 +108,10 @@
                 <tr>
                     <td width="60"></td>
                     <td width="90">收货方式：</td>
-                    <td width="30">
-                        <input type="radio" name="recmode" class="bt_s" value="1" checked  onclick="iSet();"/>
+                    <td colspan="5">
+                        <input type="radio" name="recmode" class="bt_s" value="1" checked  onclick="iSet();"/>送货到门　
+                        <input type="radio" name="recmode" class="bt_s" value="2"  onclick="iSet();"/>送货到港　　(运费按下单当日实际价格核算)
                     </td>
-                    <td width="200">平台物流到门(运费：<label id="freight">1,200</label>元)</td>
-                    <td></td>
-                    <td width="30">
-                        <input type="radio" name="recmode" class="bt_s" value="2"  onclick="iSet();"/>
-                    </td>
-                    <td>自行进港提货(提货即视为确认收货)</td>
                 </tr>
                 <tr id="trRadd">
                     <td></td>
@@ -138,7 +129,7 @@
                         <select id="cmbArea" name="area">
                             <option value="">{$user.area}</option>
                         </select>
-                        <input type="text" name="address" value="{$user.address}" class="inpbig"/>
+                        <input type="text" name="address" value="{$user.address}" class="inpbig" onfocus="if(this.value=='请输入详细地址...')this.value='';" />
                         </td>
                 </tr>
                 <tr id="trRcon">
@@ -147,13 +138,6 @@
                     <td colspan="2"><input name="user_name" value="{$user.real_name}" type="text"/></td>
                     <td width="90">　手机号：</td>
                     <td colspan="2"><input name="mobile" value="{$user.mobile}" type="text"/></td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td></td>
-                    <td width="150" class="tdright"><label>提交后需付款：</label></td>
-                    <td width="150" class="tdright"><label id="pay">0</label>元</td>
                 </tr>
             </table>
             <input type="hidden" name="bi_id_str" value="{$_GET['bi_id_str']}">
