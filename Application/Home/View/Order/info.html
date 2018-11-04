@@ -37,7 +37,7 @@
                 <!-- 付款方式 -->
                 <tr>
                     <th></th>
-                    <th>付款方式：{$info.order.o_pay_type|getPayType}</th>
+                    <th>购买方式：{$info.order.o_pay_type|getPayType}</th>
 
                     <?php if($info['order']['o_pay_type'] < 1) { ?>
                     <th>首付: {$info.order.o_pay_f|formatMoney}元</th>
@@ -68,13 +68,13 @@
                 <tr>
                     <th></th>
                     <th>收货方式：{$info.order.o_deli_type|getDeliType}</th>
-                    <th>陆运费：{$info.order.o_frei|formatMoney}元</th>
                     <th>联系人：{$info.order.o_deli_cont} ({$info.order.o_deli_mobi})</th>
+                    <th>运费：{$info.order.o_frei_m|formatMoney}元</th>
                     <th></th>
                 </tr>
                 <tr>
                     <td></td>
-                    <td colspan="4">地址：{$info.order.o_deli_add}　</td>
+                    <td colspan="4">收货地址：{$info.order.o_deli_add}　</td>
                 </tr>
 
                 <?php if(in_array($info['order']['o_status'], array(3,4,5,6,7,8,9,10) ) ) { ?>
@@ -83,22 +83,9 @@
                     <th colspan="4">成交时间：{$info.order.o_dtime|getDateTime}</th>
                 </tr>
                 <?php } ?>
-                <!-- 海运信息 -->
-                <?php if(in_array($info['order']['o_status'], array(2,3) ) ) { ?>
-                    <tr>
-                        <th></th>
-                        <th>海运费：{$info.order.o_frei_m|formatMoney}元</th>
-                        <th colspan="3"></th>
-                    </tr>
-                <?php } ?>
 
                 <!-- 海运信息 -->
                 <?php if(in_array($info['order']['o_status'], array(4) ) ) { ?>
-                <tr>
-                    <th></th>
-                    <th>海运费：{$info.order.o_frei_m|formatMoney}元</th>
-                    <th colspan="3"></th>
-                </tr>
                 <tr>
                     <td></td>
                     <td colspan="4">离岸时间：{$info.order.o_otime|getDateTime}
@@ -109,11 +96,6 @@
 
                 <!-- 海运信息 -->
                 <?php if(in_array($info['order']['o_status'], array(5,6,7,8,9,10) ) ) { ?>
-                <tr>
-                    <th></th>
-                    <th>海运费：{$info.order.o_frei_m|formatMoney}元</th>
-                    <th colspan="3"></th>
-                </tr>
                 <tr>
                     <td></td>
                     <td colspan="4">离岸时间：{$info.order.o_otime|getDateTime}
@@ -154,8 +136,7 @@
                             <b>
                         </label> 元
                         (首付<label><b>{$info.order.o_pay_f|formatMoney}<b></label> +
-                        陆运费<label><b>{$info.order.o_frei|formatMoney}<b></label> +
-                        海运费<label><b>{$info.order.o_frei_m|formatMoney}<b></label> )
+                        运费<label><b>{$info.order.o_frei_m|formatMoney}<b></label> )
                     </th>
                 </tr>
                 <?php } ?>

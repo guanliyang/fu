@@ -18,8 +18,7 @@
                                 ?>
         </b></span>元</label><br/>
         (首付<span><b>{$info.order.o_pay_f|formatMoney}</b></span> +
-        陆运费<span><b>{$info.order.o_frei|formatMoney}</b></span> +
-        海运费<span><b>{$info.order.o_frei_m|formatMoney}</b></span>)<br/>
+        运费<span><b>{$info.order.o_frei_m|formatMoney}</b></span>)<br/>
     </div>
     <?php } ?>
 
@@ -47,7 +46,7 @@
 
 
         <div class="order_info" onclick="location.href='/Wap/Order/billInfo/b_id/{$info.bill.b_id}/o_id/{$info.order.o_id}/bi_id/{$info.bill.bill_item|getArrayV='bi_id'}'">
-            <label>{$info.bill.b_name}　{$info.bill.b_year}年　{$info.bill|getCAddress}　{$info.bill.b_level}　容重{$info.bill.b_rz}g/l　（查看）</label>
+            <label>{$info.bill.b_name}　{$info.bill.b_year}年　{$info.bill|getCAddress}<br/>{$info.bill.b_level}　容重{$info.bill.b_rz}g/l　（查看）</label>
         </div>
         <div class="order_info">
             <label>货款合计<b>{$info.order.o_pay|formatMoney}</b> 元
@@ -90,7 +89,7 @@
 
     <div class="order_item">
         收货方式：{$info.order.o_deli_type|getDeliType}
-        <label>陆运费：<b>{$info.order.o_frei|formatMoney}</b>元</label><br/>
+        <label>运费：<b>{$info.order.o_frei_m|formatMoney}</b>元</label><br/>
         联系人：{$info.order.o_deli_cont}　　手机号：{$info.order.o_deli_mobi}<br/>
         收货地址：{$info.order.o_deli_add}
     </div>
@@ -100,17 +99,7 @@
     <?php } ?>
 
     <!-- 海运信息 -->
-    <?php if(in_array($info['order']['o_status'], array(2,3) ) ) { ?>
-    <div class="order_item">
-        <label>海运费：<b>{$info.order.o_frei_m|formatMoney}</b>元</label><br/>
-    </div>
-    <?php } ?>
-
-    <!-- 海运信息 -->
     <?php if(in_array($info['order']['o_status'], array(4) ) ) { ?>
-    <div class="order_item">
-        <label>海运费：<b>{$info.order.o_frei_m|formatMoney}</b>元</label><br/>
-    </div>
     <div class="order_item">
         离岸时间：{$info.order.o_otime|getDateTime}
         <label><b>{$info.bill.bill_item.0|getPortName}</b></label><br/>
@@ -120,9 +109,6 @@
     <!-- 海运信息 -->
     <?php if(in_array($info['order']['o_status'], array(5,6,7,8,9,10) ) ) { ?>
         <div class="order_info">海运单号：{$info.order.o_marnum} {$info.mc_name}</div>
-        <div class="order_item">
-            <label>海运费：<b>{$info.order.o_frei_m|formatMoney}</b>元</label><br/>
-        </div>
         <div class="order_item">
             离岸时间：{$info.order.o_otime|getDateTime}
             <label><b>{$info.bill.bill_item.0|getPortName}</b></label><br/>

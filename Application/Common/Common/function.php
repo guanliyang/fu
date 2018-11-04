@@ -437,10 +437,10 @@ function getDeliType($type) {
 //支付方式
 function getPayType($type) {
     if ($type == 1) {
-        return '全款';
+        return '全款购买';
     }
     else {
-        return '首付';
+        return '首付购买';
     }
 }
 
