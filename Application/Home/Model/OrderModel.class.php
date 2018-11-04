@@ -278,13 +278,12 @@ class OrderModel extends HomeModel {
         }
         $this->data['o_deli_type'] = $deli_type;
 
-//        if ($deli_type == 2) {
-//            $this->data['o_status'] = 1;
-//        }
-//        else {
-//            $this->data['o_status'] = 0;
-//        }
-        $this->data['o_status'] = 0;
+        if ($deli_type == 2) {
+            $this->data['o_status'] = 1;
+        }
+        else {
+            $this->data['o_status'] = 1;
+        }
     }
     // 订单号设置
     public function getDefault() {
