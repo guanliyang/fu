@@ -308,10 +308,11 @@ class OrderModel extends HomeModel {
 
     // 支付价格
     public function getAllPrice($pay_type, $bill, $user) {
+
         $all_price = 0;
         if ($bill['bill_item'] && is_array($bill['bill_item'])) {
             foreach ($bill['bill_item'] as $bill_item) {
-                $all_price = $bill['b_pri1'] * $bill_item['bi_nwei'];
+                $all_price += $bill['b_pri1'] * $bill_item['bi_nwei'];
             }
         }
         $this->data['o_pay'] = $all_price;
