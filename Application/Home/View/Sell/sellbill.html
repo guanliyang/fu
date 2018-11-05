@@ -2,7 +2,12 @@
 
 <script type="text/javascript">
     pSet('3');
-    onload = function(){cwei();}
+    onload = function(){
+        var gang = $('select[name="b_port"] option:selected').text();
+        var rz = $('select[name="gr_id"] option:selected').text();
+        getReferPrice(gang, rz);
+        cwei();
+    }
     function cpri(cval){
         var epri = eval(document.getElementById('rpri').innerText.replace(',', ''))+20;
         var pri1 = eval(document.getElementById('pri1').innerText.replace(',', ''));
@@ -17,7 +22,7 @@
         ctotal();
     }
     function cwei(){
-        document.getElementById('pri1').innerText =  document.getElementById('rpri').innerText;
+        //document.getElementById('pri1').innerText =  document.getElementById('rpri').innerText;
         var weig = document.getElementById('sweight').value;
         var bsum = Math.ceil(weig/26);
         document.getElementById('bsum').innerText = bsum;
@@ -146,11 +151,11 @@
                     <td>
 
                         　出售单价：<input class="bt inpss" value="-" type="button" onclick="cpri(-1);"/>
-                        <label id="pri1"><if condition="$bill">{$bill.b_pri1|formatMoney}<else/>1,700</if></label>
-                        <input type="hidden" name="b_pri0" id="b_pri1" value="<if condition='$bill'>{$bill.b_pri1}<else/>1700</if></if>">
+                        <label id="pri1">{$bill.b_pri1|formatMoney}</label>
+                        <input type="hidden" name="b_pri0" id="b_pri1" value="{$bill.b_pri1}">
                         <input class="bt inpss" value="+" type="button" onclick="cpri(1);"/> 元/吨　　　　　　　　
                         今日市场参考价：<br/>　　　　　（提交后也可以随时调价）　　　　　　　
-                        <label class="fontbig" id="rpri">1,905</label> <span id="danwei">元/吨</span> </td>
+                        <label class="fontbig" id="rpri"></label> 元/吨 </td>
                 </tr>
                 <tr>
                     <td>　出售重量：<input name="b_weig" id="sweight" class="inpsm" value="{$bill.b_weig}" type="text" onchange="cwei();"/> 吨 (约需 <label id="bsum">0</label> 个集装箱)　　　　
@@ -161,11 +166,11 @@
             <table>
                 <tr>
                     <td width="40"></td>
-                    <td colspan="6">　保证金：<label id="depo">0</label> 元 （{$user|getLevDepoShow}货款总价<label id="total">0</label>的{$user|getLevDepoShow=2}，成交后即退保证金）</td>
+                    <td colspan="6">预计保证金：<label id="depo">0</label> 元 （{$user|getLevDepoShow}货款总价<label id="total">0</label>的{$user|getLevDepoShow=2}。实际保证金按具体净重计算，成交后即退）</td>
                 </tr>
                 <tr>
                     <td width="40"></td>
-                    <td>卖粮港口：</td>
+                    <td>　卖粮港口：</td>
                     <td colspan="5">
                         <select name="b_port">
                             <volist name="port" id="vo">
@@ -176,7 +181,7 @@
                 </tr>
                 <tr>
                     <td width="40"></td>
-                    <td>装货地址：</td>
+                    <td>　装货地址：</td>
                     <td colspan="5">
                         <select id="z_province" name="z_province">
                             <volist name="province" id="vo">
@@ -211,7 +216,7 @@
                 </tr>
                 <tr>
                     <td ></td>
-                    <td width="90">　联系人：</td>
+                    <td width="90">　　联系人：</td>
                     <td width="200"><input name="b_cont" value="<if condition='$bill'>{$bill.b_cont}<else/>{$user.real_name}</if>" type="text"/></td>
                     <td width="30"></td>
                     <td width="90">　手机号：</td>

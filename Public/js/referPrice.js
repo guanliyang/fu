@@ -20,12 +20,15 @@ function getReferPrice(gang, rz) {
         success: function(data){
             $("#rpri").empty();
             $("#rpri").append(data.price);
+            $("#pri1").empty();
+            $("#pri1").append(data.price);
             if(data.clean) {
-                $("#danwei").empty();
+                //$("#danwei").empty();
             }
             else {
-                $("#danwei").empty();
-                $("#danwei").append("元/吨");
+                //$("#danwei").empty();
+                $("#rpri").append();
+                $("#pri1").append();
             }
         },
         error: function(xhr, type){

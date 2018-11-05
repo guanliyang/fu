@@ -1,6 +1,12 @@
 <include file="public/head" />
+
 <script type="text/javascript">
-    onload = function(){cwei();}
+    onload = function(){
+        var gang = $('select[name="b_port"] option:selected').text();
+        var rz = $('select[name="gr_id"] option:selected').text();
+        getReferPrice(gang, rz);
+        cwei();
+    }
     function cpri(cval){
         var epri = eval(document.getElementById('rpri').innerText.replace(',', ''))+20;
         var pri1 = eval(document.getElementById('pri1').innerText.replace(',', ''));
@@ -10,12 +16,12 @@
 
         }else{
             document.getElementById('pri1').innerText =  i2s3(npri);
-            document.getElementById('b_pri1').value =  npri;
+            //document.getElementById('b_pri1').value =  npri;
         }
         ctotal();
     }
     function cwei(){
-        document.getElementById('pri1').innerText =  document.getElementById('rpri').innerText;
+        //document.getElementById('pri1').innerText =  document.getElementById('rpri').innerText;
         var weig = document.getElementById('sweight').value;
         var bsum = Math.ceil(weig/26);
         document.getElementById('bsum').innerText = bsum;
@@ -27,11 +33,12 @@
         ctotal();
     }
     function ctotal(){
+        document.getElementById('b_pri1').value =  document.getElementById('pri1').innerText.replace(',', '');
         var pri1 = eval(document.getElementById('pri1').innerText.replace(',', ''));
         var weig = document.getElementById('sweight').value;
         //var frei = eval(document.getElementById('freight').innerText.replace(',', ''));
         var total = pri1*weig;
-        var depo = total*0.2;
+        var depo = total*{$user|getLevDepoShow=3};
         //var pay = depo + frei;
         document.getElementById('total').innerText = i2s3(total);
         document.getElementById('depo').innerText = i2s3(depo);
@@ -125,19 +132,19 @@
     </div>
     <div class="bill_item">
         出售单价：<input class="bt inpss" value="-" type="button" onclick="cpri(-1);"/> <b>
-        <span id="pri1"><if condition="$bill">{$bill.b_pri1}<else/> 1,700</if></span></b>
-        <input type="hidden" name="b_pri0" id="b_pri1" value="<if condition="$bill">{$bill.b_pri1}<else/> 1700</if>">
+        <span id="pri1">{$bill.b_pri1}</span></b>
+        <input type="hidden" name="b_pri0" id="b_pri1" value="{$bill.b_pri1}">
 
  <input class="bt inpss" value="+" type="button" onclick="cpri(1);"/>元/吨
         <br/>
-        <label>市场参考价：<b id="rpri">1,905</b><span id="danwei">元/吨</span></label><br/>(提交后也可以随时调价)</div>
+        <label>市场参考价：<b id="rpri"></b><span>元/吨</span></label><br/>(提交后也可以随时调价)</div>
     <div class="bill_item">
         出售重量：
         <input name="b_weig" id="sweight" class="inpsm" value="{$bill.b_weig}" type="text" onchange="cwei();"/>吨 (约需<b id="bsum">0</b>个集装箱)
         <label>约需车辆：<b id="tsum">0</b> 车</label><br/>&nbsp;
         <label>(运费按实际装运日费用核算)</label></div>
-    <div class="bill_item">保证金：<label><b id="depo">0</b> 元</label><br/>
-        ({$user|getLevDepoShow}货款<b id="total">0</b>元的{$user|getLevDepoShow=2}，成交后即退保证金)</div>
+    <div class="bill_item">预计保证金：<label><b id="depo">0</b> 元</label><br/>
+        ({$user|getLevDepoShow}货款<b id="total">0</b>元的{$user|getLevDepoShow=2})<br/>(实际保证金按具体净重计算，成交后即退)</div>
     <div class="bill_item">
         卖粮港口：
         <select name="b_port">
