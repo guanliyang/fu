@@ -26,8 +26,8 @@ return  array(
     'LP_URL' => 'http://39.104.166.224:8080/upload/images/lp/',
 
     // 首付 买粮 生成订单
-    'FIRST_PAY_SHOW' => '5%',
-    'FIRST_PAY' => 0.05,
+    //'FIRST_PAY_SHOW' => '5%',
+    //'FIRST_PAY' => 0.05,
 
     // 年利率 买粮尾款
     'BUY_RATE' => 0.06,
@@ -36,16 +36,16 @@ return  array(
     'SELL_RATE' => 0.06,
 
     // 保证金 卖粮
-    'DEPO_RATE' => 0.05,
+    //'DEPO_RATE' => 0.05,
     // 保证金显示
-    'DEPO_RATE_SHOW' => '5%',
+    //'DEPO_RATE_SHOW' => '5%',
 
     // 滞箱费
     'BOX_DAY_PAY' => 50,
 
     // 预约单 预约金比例
-    'OFFER_PAY' => 0.05,
-    'OFFER_PAY_SHOW' => '5%',
+    'OFFER_PAY' => 0.10,
+    'OFFER_PAY_SHOW' => '10%',
 
     // 预约单 每吨 服务费
     'OFFER_SER' => 3,

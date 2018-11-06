@@ -145,6 +145,7 @@
         <label>(运费按实际装运日费用核算)</label></div>
     <div class="bill_item">预计保证金：<label><b id="depo">0</b> 元</label><br/>
         ({$user|getLevDepoShow}货款<b id="total">0</b>元的{$user|getLevDepoShow=2})<br/>(实际保证金按具体净重计算，成交后即退)</div>
+    <div class="bill_item">回款利率：年利率{$Think.config.SELL_RATE}<br/>（ 回款金额 = 货款合计 - 保证金 - 实际运费 ）</div>
     <div class="bill_item">
         卖粮港口：
         <select name="b_port">

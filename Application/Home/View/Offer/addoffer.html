@@ -2,24 +2,11 @@
 <script type="text/javascript">
     pSet('3');
     onload = function(){cpay();}
-    function cpri(cval){
-        var epri = eval(document.getElementById('rpri').innerText.replace(',', ''))-20;
-        var pri1 = eval(document.getElementById('pri1').innerText.replace(',', ''));
-        var npri = pri1+(cval*5);
-        if(npri<epri) {
-            alert('报价下限不得低于市场价格合理范围。');
-
-        }else{
-            document.getElementById('pri1').innerText =  i2s3(npri);
-            document.getElementById('f_pric').value = i2s3(npri);
-        }
-        cpay();
-    }
 
     function cpay(){
-        var pri1 = eval(document.getElementById('pri1').innerText.replace(',', ''));
+        var spric = document.getElementById('spric').value;
         var weig = document.getElementById('sweight').value;
-        var opay = pri1*weig*{$Think.config.OFFER_PAY};
+        var opay = spric*weig*{$Think.config.OFFER_PAY};
         var spay = weig*{$Think.config.OFFER_SER} ;
         document.getElementById('opay').innerText = i2s3(opay);
         document.getElementById('spay').innerText = i2s3(spay);
@@ -65,13 +52,18 @@
                                 <option value="{$vo.gc_id}">{$vo.gc_name}</option>
                             </volist>
                         </select>　 　
+                        等级：
+                        <select name="gl_id">
+                            <volist name="level" id="vo">
+                                <option value="{$vo.gl_id}">{$vo.gl_name}</option>
+                            </volist>
+                        </select>　 　
                         年份：
                         <select name="gy_id">
                             <volist name="year" id="vo">
                                 <option value="{$vo.gy_id}">{$vo.gy_id}</option>
                             </volist>
-                        </select>
-                        　 　
+                        </select>　 　
                         产地：
                         <select id="c_province" name="c_province">
                             <volist name="c_province" id="vo">
@@ -87,40 +79,27 @@
                             <volist name="c_area" id="vo">
                                 <option value="{$vo.id}">{$vo.areaName}</option>
                             </volist>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td width="500">
-                        等级：
-                        <select name="gl_id">
-                            <volist name="level" id="vo">
-                                <option value="{$vo.gl_id}">{$vo.gl_name}</option>
-                            </volist>
-                        </select>
-                        　 　
+                        </select>　 　
                         容重：<input type="text" class="inpsm" id="rzprice" name="rz"/>g/l
                     </td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td width="500">预购单价：
-                        <input class="bt inpss" value="-" type="button" onclick="cpri(-1);"/>
-                        <label id="pri1">1,700</label>
-                        <input type="hidden" name="f_pric" id="f_pric" value="1700">
-                        <input class="bt inpss" value="+" type="button" onclick="cpri(1);"/> 元/吨</td>
-                    <td>今日市场参考价：<br/><label class="fontbig" id="rpri">1,700</label> <span id="danwei">元/吨</span></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>预购重量：<input name="f_weig" id="sweight" class="inpsm" value="" type="text" onchange="cpay();"/> 吨</td>
+                    <td width="500">
+                        预购单价：<input type="text" name="f_pric" id="spric" class="inpsm" value="0" onchange="cpay();"> 元/吨　 　
+                        预购重量：<input type="text" name="f_weig" id="sweight" class="inpsm" value="0" onchange="cpay();"/> 吨
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>需缴预约金：<label id="opay">0</label> 元 （预约成功后，将直接转为货款)</td>
-                    <td>需缴服务费：<label id="spay">0</label> 元 （预购货款的{$Think.config.OFFER_PAY_SHOW}）</td>
+                    <td>需缴预约金：<label id="opay">0</label> 元 （货款的{$Think.config.OFFER_PAY_SHOW}。预约成功后，将直接转为货款首付 )</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>需缴服务费：<label id="spay">0</label> 元 （{$Think.config.OFFER_SER} 元/吨 )</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <th></th>

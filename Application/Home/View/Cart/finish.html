@@ -118,16 +118,16 @@
                     <td>收货地址：</td>
                     <td colspan="5">
                         <select id="cmbProvince" name="province">
-                            <option value="">{$user.province}</option>
+                            <option value="{$user.prov_id}">{$user.province}</option>
                             <volist name="province" id="vo">
                                 <option value="{$vo.id}">{$vo.areaName}</option>
                             </volist>
                         </select>
                         <select id="cmbCity" name="city">
-                            <option value="">{$user.city}</option>
+                            <option value="{$user.city_id}">{$user.city}</option>
                         </select>
                         <select id="cmbArea" name="area">
-                            <option value="">{$user.area}</option>
+                            <option value="{$user.area_id}">{$user.area}</option>
                         </select>
                         <input type="text" name="address" value="{$user.address}" class="inpbig" onfocus="if(this.value=='请输入详细地址...')this.value='';" />
                         </td>
