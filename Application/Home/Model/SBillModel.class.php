@@ -235,6 +235,9 @@ class SBillModel extends HomeModel {
         // 港口
         $this->data['b_port'] = I('request.b_port');
 
+        // 回款年利率
+        $this->data['b_rrate'] = C("SELL_RATE");
+
         // 更新还是添加
         $b_id = I('request.b_id', 0, 'intval');
         if ($b_id) {
