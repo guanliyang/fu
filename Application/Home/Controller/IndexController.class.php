@@ -219,23 +219,4 @@ class IndexController extends Controller {
 
         notice('成功', 0, array('price' => $price, 'clean' => $clean));
     }
-
-    // 只输入容重
-    public function getOffReferPrice() {
-        $file = C('WWW_URL').'/inc/pri_json.json';
-        $priArr = json_decode(file_get_contents($file), true);
-        $rz = I('request.rz');
-
-        $price = '暂无';
-        $clean = 1; // 清除 元/吨
-        foreach ($priArr as $value) {
-            if ($value['rz'] == $rz) {
-                $price = formatMoney($value['price']);
-                $clean = 0;
-                break;
-            }
-        }
-
-        notice('成功', 0, array('price' => $price, 'clean' => $clean));
-    }
 }

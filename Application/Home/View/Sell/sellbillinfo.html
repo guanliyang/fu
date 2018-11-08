@@ -93,7 +93,7 @@
                         <tr>
                             <td></td>
                             <td>货组编号：{$vo.bi_id}</td>
-                            <td width="90">{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
+                            <td width="90">{$vo.bi_nwei}吨({$vo.bi_sum}箱)</td>
                             <td>已回款：{$info|getClinch=$vo}元</td>
                             <td>计息：{$info|getInte=$vo}元</td>
                             <td></td>
@@ -114,7 +114,7 @@
                         <tr>
                             <td></td>
                             <td>货组编号：{$vo.bi_id}</td>
-                            <td>{$vo.bi_gwei}吨({$vo.bi_sum}箱)</td>
+                            <td>{$vo.bi_nwei}吨({$vo.bi_sum}箱)</td>
                             <td>{$vo.bi_dpay|formatMoney}元 ({$info.b_pri1}元/吨)</td>
                             <td>利息：<label><b>{$vo.bi_inte|formatMoney}</b></label>元</td>
                             <td>{$vo|getDiffText=$info}：<label><b>{$info|getBackMoney=$vo}</b></label>元</td>

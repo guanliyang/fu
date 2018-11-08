@@ -1,6 +1,12 @@
 <include file="public/head" />
+
 <script type="text/javascript">
-    onload = function(){iSet();}
+    onload = function(){
+        var gang = document.getElementById('b_port').value;
+        var rz = document.getElementById('gr_id').value;
+        getPrice(gang, rz);
+        iSet();
+    }
     function iSet(){
         var pri1 = eval(document.getElementById('pri1').innerText.replace(',', ''));
         var eventdx = document.getElementsByTagName('b');
@@ -59,6 +65,29 @@
         if(strval.hasOwnProperty(1)) reStr += '.'+strval[1];
         return reStr ;
     }
+    function getPrice(gang, rz) {
+    $.ajax({
+        type: 'POST',
+        url: '/Home/Index/getReferPrice',
+        data: 'gang=' + gang + '&rz=' +rz,
+        dataType: 'json',
+        timeout: 10000,
+        success: function(data){
+            $("#rpri").empty();
+            $("#rpri").append(data.price);
+            if(data.clean) {
+                //$("#danwei").empty();
+            }
+            else {
+                //$("#danwei").empty();
+                $("#rpri").append();
+            }
+        },
+        error: function(xhr, type){
+            //alert('抱歉,加载失败!');
+        }
+    })
+    }
 </script>
 
 <div class="cont">
@@ -67,16 +96,18 @@
     <div class="bill_info"><label>货单号: {$info.b_code}</label></div>
     <div class="bill_info">
         售价：<input class="bt inpss" value="-" type="button" onclick="cpri(-1);"/>
-            <span><b id="pri1">1,690</b></span>
+            <span><b id="pri1">{$info.b_pri1|number_format}</b></span>
         <input class="bt inpss" value="+" type="button" onclick="cpri(1);"/>元/吨<br/>
-        今日市场参考价：<b id="rpri">1,700</b> 元/吨</div>
+        今日市场参考价：<b id="rpri"></b> 元/吨</div>
     <input type="hidden" id="b_pri1" value="{$info.b_pri1}" name="b_pri1" />
+    <input type="hidden" id="b_port" value="{$info.b_port|getPortName}"/>
+    <input type="hidden" id="gr_id" value="{$info.gr_id}"/>
 
 
     <div class="order_info" style="text-align:left;">({$info.on_sell|count})在售货组</div>
     <volist name="info.on_sell" id="vo">
         <div class="order_item">
-        &#8470;.{$vo.bi_id}<label><b id="wei{$vo.bi_id}">{$vo.bi_gwei}</b>吨({$vo.bi_sum}箱)　
+        &#8470;.{$vo.bi_id}<label><b id="wei{$vo.bi_id}">{$vo.bi_nwei}</b>吨({$vo.bi_sum}箱)　
             售款<span><b id="sum{$vo.bi_id}">0</b></span>元</label>
         <br/>回款：<b id="rem{$vo.bi_id}">{$info|getBeginClinch=$vo}</b>元
             (计息<b>{$info|getInte=$vo}</b>元)<label id="diff{$vo.bi_id}"></label>

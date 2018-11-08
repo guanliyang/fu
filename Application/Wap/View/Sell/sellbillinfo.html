@@ -90,7 +90,7 @@
             <div class="order_item" onclick="location.href='/Wap/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}'">
                 &#8470;.{$vo.bi_id}
                 <label>回款：<b>{$info|getClinch=$vo}</b>元</label><br/>
-                {$vo.bi_sum}箱　净重{$vo.bi_gwei}吨<label>
+                {$vo.bi_sum}箱　净重{$vo.bi_nwei}吨<label>
                 回款计息：<b>{$info|getInte=$vo}</b>元</label><br/>&nbsp;
                 <label>(详情)</label>
             </div>
@@ -104,7 +104,7 @@
     <div class="order_item" onclick="location.href='/Wap/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}'">
         &#8470;.{$vo.bi_id}
         <label>{$vo|getDiffText=$info}：<span><b>{$info|getBackMoney=$vo}</b></span>元</label><br/>
-        {$vo.bi_sum}箱　净重{$vo.bi_gwei}吨
+        {$vo.bi_sum}箱　净重{$vo.bi_nwei}吨
         <label>回款利息：<span><b>{$vo.bi_inte|formatMoney}</b></span>元</label><br/>
         货款：<b>{$vo.bi_dpay|formatMoney}</b>元 ({$info.b_pri1}元/吨)<label>(详情)</label>
     </div>

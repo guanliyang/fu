@@ -14,16 +14,16 @@ return  array(
     'MODULE_ALLOW_LIST' => array('Home','Wap'),
 
     // 视频地址
-    'LD_URL' => 'http://39.104.166.224:8080/upload/videos/ld/',
+    'LD_URL' => 'http://download.1liangbao.com/videos/ld/',
 
     // 图片地址 箱号
-    'CN_URL' => 'http://39.104.166.224:8080/upload/images/cn/',
+    'CN_URL' => 'http://download.1liangbao.com/images/cn/',
 
     // 图片地址 封号
-    'SN_URL' => 'http://39.104.166.224:8080/upload/images/sn/',
+    'SN_URL' => 'http://download.1liangbao.com/images/sn/',
 
     // 图片地址 榜单
-    'LP_URL' => 'http://39.104.166.224:8080/upload/images/lp/',
+    'LP_URL' => 'http://download.1liangbao.com/images/lp/',
 
     // 首付 买粮 生成订单
     //'FIRST_PAY_SHOW' => '5%',
@@ -51,7 +51,7 @@ return  array(
     'OFFER_SER' => 3,
 
     // WWW URL
-    'WWW_URL' => 'http://39.104.166.224:9090',
+    'WWW_URL' => 'http://www.1liangbao.com',
 
     //sms URL
     'SMS_URL' => 'http://127.0.0.1:8080',

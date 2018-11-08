@@ -127,7 +127,9 @@ function save_file($path = 'Public/user_img'){
         //检查是否有该文件夹，如果没有就创建，并给予最高权限
         mkdir($file_path, 0777);
     }
-    $src = $file_path.time()."{$file["name"]}";
+    $sec_name = array_pop(explode('.', $file['name']));
+    $src = $file_path.time().'_'.mt_rand(111111,999999).'.'.$sec_name;
+    //$src = $file_path.time()."array_pop(explode('.', $file_name)){$file["name"]}";
 
     $status = move_uploaded_file($file["tmp_name"], $src);
     if ($status) {
@@ -534,11 +536,11 @@ function getDiffText($bill_item, $bill) {
 // 在售货组 回款计息  计算出的，不取数据库字段
 function getInte($bill, $bill_item) {
     $today = strtotime(date('Y-m-d',time()));
-    $rtimeDay = strtotime(date("Y-m-d", $bill_item['bi_rtime']));
+    $rtimeDay = strtotime(date("Y-m-d", $bill['b_rtime']));
 
     $days = ($today - $rtimeDay) / 86400 + 1;
 
-    return formatMoney($days * $bill['b_rrate'] * $bill_item['bi_newi'] * $bill['b_pri0']);
+    return formatMoney($days * $bill['b_rrate']/365 * $bill_item['bi_nwei'] * $bill['b_pri0']);
 }
 
 // 回款计息
