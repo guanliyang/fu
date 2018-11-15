@@ -209,14 +209,16 @@ class IndexController extends Controller {
 
         $price = '暂无';
         $clean = 1; // 清除 元/吨
+        $b_price = 0;
         foreach ($priArr as $value) {
             if ($value['port'] == $gang && $value['rz'] == $rz) {
                 $price = formatMoney($value['price']);
                 $clean = 0;
+                $b_price = $value['price'];
                 break;
             }
         }
 
-        notice('成功', 0, array('price' => $price, 'clean' => $clean));
+        notice('成功', 0, array('price' => $price, 'clean' => $clean, 'b_price' => $b_price));
     }
 }

@@ -22,6 +22,7 @@ function getReferPrice(gang, rz) {
             $("#rpri").append(data.price);
             $("#pri1").empty();
             $("#pri1").append(data.price);
+            $("#b_pri1").val(data.b_price);
             if(data.clean) {
                 //$("#danwei").empty();
             }
