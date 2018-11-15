@@ -52,31 +52,30 @@
         <label>呕吐毒素{$info.b_ot}μg/kg</label>
     </div>
     <div class="order_item">
-        出售重量：{$info.b_weig}吨<label>
-        出售价格：{$info.b_pri0|formatMoney}元/吨元</label>
+        <?php if(in_array($info['b_status'], array(5,6,7,9,10) )) { ?>
+            货款：<span><b>{$info['b_nwei']*$info['b_pri0']|formatMoney}</b></span>元 ({$info.b_nwei}吨&nbsp;&nbsp;{$info.b_pri0|formatMoney}元/吨)
+        <?php }else{ ?>
+            货款：<span><b>{$info['b_weig']*$info['b_pri0']|formatMoney}</b></span>元 ({$info.b_weig}吨&nbsp;&nbsp;{$info.b_pri0|formatMoney}元/吨)
+        <?php } ?>
     </div>
 
     <!-- 核费信息 -->
     <div class="order_item">
         <?php if(in_array($info['b_status'], array(1,2,3,4,5,6,7,9,10) )) { ?>
-        运费：<span><b>{$info.b_frei|formatMoney}</b></span>元 ({$info|getCartNumber}车)
+        保证金：<span><b>{$info.b_depo|formatMoney}</b></span>元 (货款{$user|getLevDepoShow=2})
         <?php } ?>
-        <?php if(in_array($info['b_status'], array(1,2,3,4,5,6,7,9,10) )) { ?>
-        <label>保证金：<span><b>{$info.b_depo|formatMoney}</b></span>元</label>
+        <?php if(in_array($info['b_status'], array(5,6,7,9,10) )) { ?><br/>
+        服务费：<span><b>{$info.b_sser|formatMoney}</b></span>元<br/>
+        运费：<span><b>{$info.b_frei|formatMoney}</b></span>元
         <?php } ?>
     </div>
+    <?php if(in_array($info['b_status'], array(5,6,7,9,10) )) { ?>
     <div class="order_item">
-        <?php if(in_array($info['b_status'], array(5,6,7,9,10) )) { ?>
-        净重：{$info.b_nwei}吨
+        <?php if(in_array($info['b_status'], array(5,7,9,10) )) { ?>
+        回款：<span><b>{$info.b_rpay|formatMoney}</b></span>元 ({$info.b_rtime|getDateTimeDate}) 
         <?php } ?>
-        <label>
-            <?php if(in_array($info['b_status'], array(5,7,9,10) )) { ?>
-            ({$info.b_rtime|getDateTimeDate}) 回款：<b>{$info.b_rpay|formatMoney}</b>元
-            <?php } ?>
-        </label>
     </div>
-
-
+    <?php } ?>
     <div class="order_item">装货地址：{$info|getZAddress}<br/>联系人：{$info.b_cont}　　手机号：{$info.b_mobi}</div>
     <hr>
 
@@ -89,8 +88,9 @@
         <volist name="info.on_sell" id="vo">
             <div class="order_item" onclick="location.href='/Wap/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}'">
                 &#8470;.{$vo.bi_id}
-                <label>回款：<b>{$info|getClinch=$vo}</b>元</label><br/>
-                {$vo.bi_sum}箱　净重{$vo.bi_nwei}吨<label>
+                <label>{$vo.bi_sum}箱　净重{$vo.bi_nwei}吨</label><br/>
+                回款：<b>{$info|getClinch=$vo}</b>元
+                <label>
                 回款计息：<b>{$info|getInte=$vo}</b>元</label><br/>&nbsp;
                 <label>(详情)</label>
             </div>

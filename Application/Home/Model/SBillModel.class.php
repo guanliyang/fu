@@ -226,17 +226,16 @@ class SBillModel extends HomeModel {
         $this->_getPrice();
         $this->_getFrei($user);
         $this->_getDepo($user);
+        $this->_getSser($user);
         $this->_getAdd();
         $this->_getDefault();
         $this->data['u_id'] = $uid;
+        $this->data['b_rrate'] = C('SELL_RATE');
         $this->_getCZ();
 
         $this->data['b_add'] = $this->getAdd();
         // 港口
         $this->data['b_port'] = I('request.b_port');
-
-        // 回款年利率
-        $this->data['b_rrate'] = C("SELL_RATE");
 
         // 更新还是添加
         $b_id = I('request.b_id', 0, 'intval');
@@ -348,6 +347,12 @@ class SBillModel extends HomeModel {
         $b_pri0 = I('request.b_pri0', 0);
         $b_weig = I('request.b_weig', 0);
         $this->data['b_depo'] = $b_pri0 * $b_weig * getLevDepoShow($user, 3);
+    }
+
+    // 缴纳卖粮服务费
+    private function _getSser($user) {
+        $b_weig = I('request.b_weig', 0);
+        $this->data['b_sser'] = $b_weig * getLevSerShow($user, 2);
     }
 
     // 联系人信息

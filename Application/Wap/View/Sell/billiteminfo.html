@@ -65,18 +65,27 @@
     <?php } ?>
     <!-- 基本信息区域 -->
     <div class="order_info">
+        <label>磅单：</label><br/>
+        <img src="{$Think.config.LP_URL}{$info.bill_item.bi_plist_pho}" width="200" height="90" onclick="window.open('{$Think.config.LP_URL}{$info.bill_item.bi_plist_pho}');"/>
+    </div>
+    <div class="order_info">
         <label>箱号：{$info.bill_item.bi_cnum1}</label>
         <label>封号：{$info.bill_item.bi_snum1}</label><br/>
         <img src="{$Think.config.CN_URL}{$info.bill_item.bi_cnum1_pho}" class="simg" />
         <img src="{$Think.config.SN_URL}{$info.bill_item.bi_snum1_pho}" class="simg" /><br/>
-        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video1}"><装货视频1></a>
+        <?php if($info['bill_item']['bi_video1']){ ?>
+        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video1}"><装货视频></a>
+        <?php }?>
     </div>
     <div class="order_info">
         <label>箱号：{$info.bill_item.bi_cnum2}</label>
         <label>封号：{$info.bill_item.bi_snum2}</label><br/>
         <img src="{$Think.config.CN_URL}{$info.bill_item.bi_cnum2_pho}" class="simg" />
         <img src="{$Think.config.SN_URL}{$info.bill_item.bi_cnum2_pho}" class="simg" /><br/>
-        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video2}"><装货视频2></a>
+        <?php if($info['bill_item']['bi_video2']){ ?>　
+        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video2}"><装货视频></a>
+        <?php }?>
+
     </div>
 </div>
 

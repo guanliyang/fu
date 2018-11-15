@@ -91,8 +91,14 @@
                     <td></td>
                     <td colspan="2">{$vo.bi_sum}箱　(毛重：{$vo.bi_gwei}吨　皮重：{$vo.bi_tare}吨　净重：{$vo.bi_nwei}吨)</td>
                     <td>
-                        <a href="{$Think.config.LD_URL}{$vo.bi_video1}"> A箱视频</a>　　
-                        <a href="{$Think.config.LD_URL}{$vo.bi_video2}">B箱视频</a>
+                        <?php 
+                        if(!empty($vo['bi_video1'])){?>
+                        <a href="{$Think.config.LD_URL}{$vo.bi_video1}">视频</a>　　
+                        <?php }
+                        if(!empty($vo['bi_video2'])){
+                        ?>
+                        <a href="{$Think.config.LD_URL}{$vo.bi_video2}">视频</a>
+                        <?php }?>
                     </td>
                 </tr>
                 </volist>

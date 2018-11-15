@@ -1,5 +1,6 @@
 <include file="public/head" />
 <script type="text/javascript">
+
     onload = function(){iSet();}
     function iSet(){
         var eventdx = document.getElementsByTagName('input');
@@ -22,8 +23,9 @@
                     var dipay = Math.round(epay*dinte/365 * 100) / 100;
                     document.getElementById('dipay').innerText = i2s3(dipay);
                 }
+                bser = eval(document.getElementById('bser').innerText);
             }
-            document.getElementById('npay').innerText = i2s3(npay);
+            document.getElementById('npay').innerText = i2s3(npay+bser);
             //if(eventdx[i].name=='recmode' && eventdx[i].checked){
                 //if(eventdx[i].value=='1'){
                     //var freight = eval(document.getElementById('freight').innerText.replace(',', ''));
@@ -80,10 +82,12 @@
             <label>{$vo.b_pri1|formatMoney}元/吨</label>
             <label>{$vo.bill_item|count}组({$vo.bill_item|array_column='bi_sum'|array_sum}箱　净重{$vo.bill_item|array_column='bi_nwei'|array_sum}吨)</label>
         </div>
+        <?php $nweisum += array_sum(array_column($vo['bill_item'],'bi_nwei'));?>
     </foreach>
 
 
     <div class="bill_item">货款合计：<label><b id="total">{$all_price|formatMoney}</b> 元</label></div>
+    <div class="bill_item">服务费：<label><b id="bser"><?php $bser=getLevSerShow($user,3);echo formatMoney($nweisum*$bser);?></b> 元</label><br/>({$user|getLevSerShow} <?php echo $bser;?>元/吨 <?php echo $nweisum;?>吨)</div>
     <div class="bill_item">
         <table>
             <tr>
@@ -96,7 +100,7 @@
             </tr>
         </table>
     </div>
-    <div class="bill_item">即付货款：<label><b id="npay">0</b> 元</label></div>
+    <div class="bill_item">付款：<label>(货款+服务费) <b id="npay">0</b> 元</label></div>
     <div class="bill_item" id="tr20pay">尾款：<label><b id="epay">0</b> 元</label><br/>* 到岸支付尾款，尾款计息，按实际天数收取。<br/>(<b id="epayi">0</b>x<b id="dinte">{$Think.config.BUY_RATE}</b>年利率 / 365)=日利息：<b id="dipay">0</b>元</div>
     <div class="bill_item">
         <table>

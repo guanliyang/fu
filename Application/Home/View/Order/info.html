@@ -70,7 +70,7 @@
                     <th>收货方式：{$info.order.o_deli_type|getDeliType}</th>
                     <th>联系人：{$info.order.o_deli_cont} ({$info.order.o_deli_mobi})</th>
                     <th>运费：{$info.order.o_frei_m|formatMoney}元</th>
-                    <th></th>
+                    <th class="tdright">服务费：{$info.order.o_bser|formatMoney}元</th>
                 </tr>
                 <tr>
                     <td></td>
@@ -107,7 +107,7 @@
                 <?php } ?>
 
                 <!-- 滞箱信息 -->
-                <?php if(in_array($info['order']['o_status'], array(5, 6,7,8,9,10) ) ) { ?>
+                <?php if(in_array($info['order']['o_status'], array(5,6,7,8,9,10) ) ) { ?>
                 <tr>
                     <th></th>
                     <th colspan="4">
@@ -130,27 +130,25 @@
                             <b>
                                 <?php
                                 echo  formatMoney($info['order']['o_pay_f']+
-                                $info['order']['o_frei']+
+                                $info['order']['o_bser']+
                                 $info['order']['o_frei_m']);
                                 ?>
                             <b>
                         </label> 元
                         (首付<label><b>{$info.order.o_pay_f|formatMoney}<b></label> +
-                        运费<label><b>{$info.order.o_frei_m|formatMoney}<b></label> )
+                        运费<label><b>{$info.order.o_frei_m|formatMoney}<b></label> +
+                        服务费<label><b>{$info.order.o_bser|formatMoney}<b></label>)
                     </th>
                 </tr>
                 <?php } ?>
 
                 <!-- 支付信息 -->
-                <?php if(in_array($info['order']['o_status'], array(5, 6, 7, 8, 9, 10) ) ) { ?>
+                <?php if(in_array($info['order']['o_status'], array(5) ) ) { ?>
                 <tr>
                     <th></th>
                     <th colspan="4">
                         <label><b>[{$info.order.o_status|getOrderStatus}]<b></label>　
-                        <if condition="$info['order']['o_status'] eq 5">需付款:
-                            <else/>已付款:
-                        </if>
-
+                        需付款:
                         <label>
                             <b>
                                 <?php
@@ -161,6 +159,33 @@
                                 <b>
                         </label> 元
                         (尾款<label><b>{$info.order.o_pay_t|formatMoney}<b></label> +
+                        利息<label><b>{$info.order|getKnotNumber}<b></label> +
+                        滞箱费<label><b>{$info.order.o_depay|formatMoney}<b></label>)
+                    </th>
+                </tr>
+                <?php } ?>
+                <?php if(in_array($info['order']['o_status'], array(6, 7, 8, 9, 10) ) ) { ?>
+                <tr>
+                    <th></th>
+                    <th colspan="4">
+                        <label><b>[{$info.order.o_status|getOrderStatus}]<b></label>　
+                        已付款:
+                        <label>
+                            <b>
+                                <?php
+                                echo  formatMoney($info['order']['o_pay_f']+
+                                $info['order']['o_frei_m']+
+                                $info['order']['o_bser']+
+                                $info['order']['o_pay_t']+
+                                getKnotNumber($info['order'])+
+                                $info['order']['o_depay']);
+                                ?>
+                                <b>
+                        </label> 元
+                        (首付款<label><b>{$info.order.o_pay_f|formatMoney}<b></label> +
+                        运费<label><b>{$info.order.o_frei_m|formatMoney}<b></label> +
+                        服务费<label><b>{$info.order.o_bser|formatMoney}<b></label> +
+                        尾款<label><b>{$info.order.o_pay_t|formatMoney}<b></label> +
                         利息<label><b>{$info.order|getKnotNumber}<b></label> +
                         滞箱费<label><b>{$info.order.o_depay|formatMoney}<b></label>)
                     </th>

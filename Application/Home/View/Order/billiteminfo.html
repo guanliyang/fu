@@ -6,7 +6,7 @@
 <div class="bdiv cont">
     <div class="content">
         <div class="list_item">
-            <label>:: 订单号：{$info.order.o_code} - {$info.order.o_status|getOrderStatus}) ::</label>　　
+            <label>:: 订单号：{$info.order.o_code} - {$info.order.o_status|getOrderStatus} ::</label>　　
             <<a href="javascript:;" onClick="javascript:history.back(-1);">返回</a>>
         </div>
         <div class="list">
@@ -16,7 +16,7 @@
                     <th width="30" height="220"></th>
                     <th width="250">
                         <img src="{$Think.config.LP_URL}{$info.bill_item.bi_plist_pho}" width="200" height="120" onclick="window.open('{$Think.config.LP_URL}{$info.bill_item.bi_plist_pho}');"/><br/>
-                        磅单号 {$info.bill_item.bi_plist_num}
+                        磅单
                     </th>
                     <th width="140">
                         <img src="{$Think.config.CN_URL}{$info.bill_item.bi_cnum1_pho}" width="120" height="120" onclick="window.open('{$Think.config.CN_URL}{$info.bill_item.bi_cnum1_pho}');"/><br/>
@@ -42,8 +42,13 @@
                         毛重: {$info.bill_item.bi_gwei}吨　　　
                         皮重: {$info.bill_item.bi_tare}吨　　　
                         净重: {$info.bill_item.bi_nwei}吨　　　　　　
-                        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video1}"><下载装货视频1></a>　　　
-                        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video2}"><下载装货视频2></a></th>
+                        <?php if($info['bill_item']['bi_video1']){ ?>
+                        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video1}"><下载装货视频1></a>
+                        <?php }?>　　
+                        <?php if($info['bill_item']['bi_video2']){ ?>
+                        <a href="{$Think.config.LD_URL}{$info.bill_item.bi_video2}"><下载装货视频2></a>
+                        <?php }?>
+                    </th>
                 </tr>
             </table>
         </div>

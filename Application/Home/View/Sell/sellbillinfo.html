@@ -30,33 +30,36 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td width="200">出售重量：{$info.b_weig}吨</td>
-
-                    <!-- 核费信息 -->
+                    <td width="230">
+                        <?php if(in_array($info['b_status'], array(5,6,7,9,10) )) { ?>
+                            货款合计：{$info['b_nwei']*$info['b_pri0']|formatMoney}元
+                        <?php }else{ ?>
+                            预计货款：{$info['b_weig']*$info['b_pri0']|formatMoney}元
+                        <?php } ?>
+                    </td>
                     <td width="200">
+                        <?php if(in_array($info['b_status'], array(5,6,7,9,10) )) { ?>
+                            净重：{$info.b_nwei}吨
+                        <?php }else{ ?>
+                            重量：{$info.b_weig}吨
+                        <?php } ?>
+                    </td>
+                    <td>单价：{$info.b_pri0}元/吨</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
                         <?php if(in_array($info['b_status'], array(1,2,3,4,5,6,7,9,10) )) { ?>
                         保证金：<label><b>{$info.b_depo|formatMoney}</b></label>
                         元(货款{$user|getLevDepoShow=2})
                         <?php } ?>
                     </td>
-                    <td>
-                        <?php if(in_array($info['b_status'], array(1,2,3,4,5,6,7,9,10) )) { ?>
-                            运费：<label><b>{$info.b_frei|formatMoney}</b></label>元 ({$info|getCartNumber}车)
-                        <?php } ?>
-                    </td>
-
-
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>出售价格：{$info.b_pri0}元/吨</td>
-                    <td>
-                        <!-- 称重信息 -->
+                    <td colspan="2">
                         <?php if(in_array($info['b_status'], array(5,6,7,9,10) )) { ?>
-                        实际净重：{$info.b_nwei}吨
+                            运费：<label><b>{$info.b_frei|formatMoney}</b></label>元&nbsp;&nbsp;
+                            服务费：<label><b>{$info.b_sser|formatMoney}</b></label>元
                         <?php } ?>
                     </td>
-                    <td></td>
                 </tr>
 
                 <!-- 回款信息 -->
@@ -64,7 +67,7 @@
                     <td></td>
                     <td>
                         <?php if(in_array($info['b_status'], array(5,7,9,10) )) { ?>
-                        回款合计：{$info.b_rpay|formatMoney}元
+                        回款合计：<label><b>{$info.b_rpay|formatMoney}</b></label>元
                         <?php } ?>
                     </td>
                     <td colspan="2">
@@ -93,10 +96,9 @@
                         <tr>
                             <td></td>
                             <td>货组编号：{$vo.bi_id}</td>
-                            <td width="90">{$vo.bi_nwei}吨({$vo.bi_sum}箱)</td>
-                            <td>已回款：{$info|getClinch=$vo}元</td>
-                            <td>计息：{$info|getInte=$vo}元</td>
-                            <td></td>
+                            <td colspan="2">{$vo.bi_nwei}吨({$vo.bi_sum}箱)</td>
+                            <td>已回款：{$info|getBeginClinch=$vo}元</td>
+                            <td>回款计息：{$info|getInte=$vo}元</td>
                             <td><a href="/Home/Sell/billItemInfo/bi_id/{$vo.bi_id}?b_code={$info.b_code}"><详情></a></td>
                         </tr>
                     </volist>

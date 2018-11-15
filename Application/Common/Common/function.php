@@ -770,9 +770,10 @@ function getBackMoney($bill, $bill_item) {
 
 // 原始  回款
 function getBeginClinch($bill, $bill_item) {
-    $pri0 = $bill['b_pri0'];
-    $nwei = $bill_item['bi_nwei'];
-    return formatMoney($pri0 * $nwei);
+    $depo = $bill['b_depo'];
+    $inwei = $bill_item['bi_nwei'];
+    $nwei = $bill['b_nwei'];
+    return formatMoney($depo*($inwei/$nwei));
 }
 
 
@@ -999,6 +1000,12 @@ function getItemShowD($bill, $bill_item) {
     return $str;
 }
 
+//获取卖粮货组状态，判断是否显示
+function getSellItemS($bid){
+    $itemArr = M('s_bill_item')->where(array('b_id' => $bid, 'bi_status' => 5))->getField('count(*)');
+    return $itemArr;
+}
+
 //拼接产地地址
 function getCAddress($bill) {
     $p = M('local_area')->where(array('id' => $bill['c_province_id']))->getField('areaName');
@@ -1042,7 +1049,7 @@ function getWapLevMessage($lev) {
 // 显示 用户 买粮 首付 比例
 function getLevFPayShow($user) {
     $lev = M('sys_user_lev')->where('ul_id='.$user['ul_id'])->find();
-    return $lev['ul_title'].'用户'.($lev['ul_fpay'] * 100).'%首付';
+    return $lev['ul_title'].'会员'.($lev['ul_fpay'] * 100).'%首付';
 }
 
 //用户 买粮 首付 比例  参与计算的
@@ -1062,6 +1069,20 @@ function getLevDepoShow($user, $title = 1) {
     }
     if ($title == 3) {
         return $lev['ul_depo'];
+    }
+}
+
+// 卖粮，买粮服务费
+function getLevSerShow($user, $title = 1) {
+    $lev = M('sys_user_lev')->where('ul_id='.$user['ul_id'])->find();
+    if ($title == 1) {
+        return $lev['ul_title'].'会员,';
+    }
+    if ($title == 2) {
+        return $lev['ul_sser'];
+    }
+    if ($title == 3) {
+        return $lev['ul_bser'];
     }
 }
 

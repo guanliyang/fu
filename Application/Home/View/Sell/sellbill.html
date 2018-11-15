@@ -40,9 +40,11 @@
         //var frei = eval(document.getElementById('freight').innerText.replace(',', ''));
         var total = pri1*weig;
         var depo = total*{$user|getLevDepoShow=3};
+        var sser = {$user|getLevSerShow=2}*weig;
         //var pay = depo + frei;
         document.getElementById('total').innerText = i2s3(total);
         document.getElementById('depo').innerText = i2s3(depo);
+        document.getElementById('sser').innerText = i2s3(sser);
         //document.getElementById('pay').innerText = i2s3(pay);
     }
     function i2s3(intval){
@@ -166,11 +168,15 @@
             <table>
                 <tr>
                     <td width="40"></td>
-                    <td colspan="6">预计保证金：<label id="depo">0</label> 元 （{$user|getLevDepoShow}货款总价<label id="total">0</label>的{$user|getLevDepoShow=2}。实际保证金按具体净重计算，成交后即退）</td>
+                    <td colspan="6">保证金：<label id="depo">0</label> 元 （{$user|getLevDepoShow}货款总价<label id="total">0</label>的{$user|getLevDepoShow=2}。实际保证金按具体净重计算，成交后即退）</td>
                 </tr>
                 <tr>
                     <td width="40"></td>
-                    <td colspan="6">回款利率：年利率 <label>{$Think.config.SELL_RATE}</label> （ 回款金额 = 货款合计 - 保证金 - 实际运费 ）</td>
+                    <td colspan="6">服务费：<label id="sser">0</label> 元 （{$user|getLevSerShow} <label>{$user|getLevSerShow=2}</label>元/吨，实际服务费按具体净重计算。）</td>
+                </tr>
+                <tr>
+                    <td width="40"></td>
+                    <td colspan="6">回款金额 = 货款合计 - 保证金 - 实际运费 - 服务费 (回款利率：年利率 <label>{$Think.config.SELL_RATE}</label>)</td>
                 </tr>
                 <tr>
                     <td width="40"></td>

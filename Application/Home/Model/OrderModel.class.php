@@ -194,6 +194,9 @@ class OrderModel extends HomeModel {
             // 货款金额
             $this->data['o_pay'] = $this->data['o_pri1'] * $this->data['o_nwei'];
 
+            // 服务费
+            $this->data['o_bser'] = $this->data['o_nwei']*getLevSerShow($user,3);
+
             // 利率
             $this->data['o_rate'] = C('BUY_RATE');
 

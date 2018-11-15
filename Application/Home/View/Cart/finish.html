@@ -16,17 +16,16 @@
                 }else{
                     document.getElementById('tr20pay').style['display'] = '';
                     npay = Math.round(total*{$user|getLevFPay} * 100) /100;
-
                     epay = total-npay;
                     var dinte = eval(document.getElementById('dinte').innerText);
                     document.getElementById('epay').innerText = i2s3(epay);
                     document.getElementById('epayi').innerText = i2s3(epay);
-
                     var dipay = Math.round(epay*dinte/365 * 100) / 100;
                     document.getElementById('dipay').innerText = i2s3(dipay);
                 }
+                bser = eval(document.getElementById('bser').innerText);
             }
-            document.getElementById('npay').innerText = i2s3(npay);
+            document.getElementById('npay').innerText = i2s3(npay+bser);
             //if(eventdx[i].name=='recmode' && eventdx[i].checked){
                 //if(eventdx[i].value=='1'){
                     //var freight = eval(document.getElementById('freight').innerText.replace(',', ''));
@@ -79,14 +78,20 @@
                         <th width="60"></th>
                         <th class="tdlock">{$vo.b_name}　{$vo.b_year}年　{$vo|getCAddress}　{$vo.b_level}　容重{$vo.b_rz}g/l</th>
                         <th>单价：<label>{$vo.b_pri1|formatMoney}</label>元　{$vo.bill_item|count}组　({$vo.bill_item|array_column='bi_sum'|array_sum}箱　净重：{$vo.bill_item|array_column='bi_nwei'|array_sum}吨)</th>
+                        <?php $nweisum += array_sum(array_column($vo['bill_item'],'bi_nwei'));?>
                     </tr>
                 </foreach>
             </table>
             <table>
                 <tr>
                     <td width="60"></td>
-                    <td colspan="6" class="tdright">订单货款合计：</td>
+                    <td colspan="6" class="tdright">货款合计：</td>
                     <td width="150" class="tdright"><label id="total">{$all_price|formatMoney}</label>元</td>
+                </tr>
+                <tr>
+                    <td width="60"></td>
+                    <td colspan="6" class="tdright">({$user|getLevSerShow} <label><?php $bser=getLevSerShow($user,3);echo $bser;?></label>元/吨 <?php echo $nweisum;?>吨) 服务费：</td>
+                    <td width="150" class="tdright"><label id="bser"><?php echo formatMoney($nweisum*$bser);?></label>元</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -95,7 +100,7 @@
                     <td width="120">{$user|getLevFPayShow}</td>
                     <td width="30"><input type="radio" name="payment" class="bt_s" value="1" onclick="iSet();"/></td>
                     <td width="120">全款</td>
-                    <td class="tdright">即付货款：</td>
+                    <td class="tdright">(货款+服务费) 付款：</td>
                     <td class="tdright"><label id="npay">0</label>元</td>
                 </tr>
                 <tr id="tr20pay">

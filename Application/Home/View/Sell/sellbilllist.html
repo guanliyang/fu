@@ -107,14 +107,20 @@
                     <tr onmouseover="this.style['background']='#F0ECE1';"  onmouseout="this.style['background']='#FFF';">
                         <td></td>
                         <td width="120">容重：{$vo.b_rz}g/l</td>
-                        <td width="110">净重：{$vo.b_nwei}吨</td>
+                        <td width="150">净重：{$vo.b_nwei}吨</td>
                         <td width="110">{$vo.b_pri1|formatMoney}元/吨</td>
                         <td></td>
                         <td>{$vo.b_name}</td>
                         <td>{$vo.b_year}年</td>
                         <td>{$vo|getCAddress}</td>
                         <td>{$vo.b_level}</td>
-                        <td><a href="/Home/Sell/onLineBillInfo/b_id/{$vo.b_id}"><查看详情></a></td>
+                        <td>
+                            <?php if(getSellItemS($vo['b_id'])>0){ ?>
+                                <a href="/Home/Sell/onLineBillInfo/b_id/{$vo.b_id}"><查看详情></a>
+                            <?php }else{?>
+                                <已经售出>
+                            <?php }?>
+                        </td>
                     </tr>
                 </volist>
                     <else/>

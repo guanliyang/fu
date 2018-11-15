@@ -39,9 +39,11 @@
         //var frei = eval(document.getElementById('freight').innerText.replace(',', ''));
         var total = pri1*weig;
         var depo = total*{$user|getLevDepoShow=3};
+        var sser = {$user|getLevSerShow=2}*weig;
         //var pay = depo + frei;
         document.getElementById('total').innerText = i2s3(total);
         document.getElementById('depo').innerText = i2s3(depo);
+        document.getElementById('sser').innerText = i2s3(sser);
         //document.getElementById('pay').innerText = i2s3(pay);
     }
     function i2s3(intval){
@@ -143,8 +145,12 @@
         <input name="b_weig" id="sweight" class="inpsm" value="{$bill.b_weig}" type="text" onchange="cwei();"/>吨 (约需<b id="bsum">0</b>个集装箱)
         <label>约需车辆：<b id="tsum">0</b> 车</label><br/>&nbsp;
         <label>(运费按实际装运日费用核算)</label></div>
-    <div class="bill_item">预计保证金：<label><b id="depo">0</b> 元</label><br/>
-        ({$user|getLevDepoShow}货款<b id="total">0</b>元的{$user|getLevDepoShow=2})<br/>(实际保证金按具体净重计算，成交后即退)</div>
+    <div class="bill_item">保证金：<label><b id="depo">0</b> 元</label><br/>
+        ({$user|getLevDepoShow}货款<b id="total">0</b>元的{$user|getLevDepoShow=2})<br/>(实际保证金按具体净重计算，成交后即退)
+    </div>
+    <div class="bill_item">服务费：<label><b id="sser">0</b> 元</label><br/>
+        ({$user|getLevSerShow} {$user|getLevSerShow=2})(实际服务费按具体净重计算)
+    </div>
     <div class="bill_item">回款利率：年利率{$Think.config.SELL_RATE}<br/>（ 回款金额 = 货款合计 - 保证金 - 实际运费 ）</div>
     <div class="bill_item">
         卖粮港口：
