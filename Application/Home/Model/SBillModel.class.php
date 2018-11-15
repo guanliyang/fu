@@ -280,7 +280,7 @@ class SBillModel extends HomeModel {
         $where = array('gr_id' => $this->data['gr_id']);
         $this->data['b_rz'] = M('g_rz')->where($where)->getField('gr_name');
         if (empty($this->data['b_rz'])) {
-            notice('容量有误');
+            notice('容重有误');
         }
 
         $this->data['gl_id'] = I('request.gl_id', 0, 'intval');
@@ -295,17 +295,17 @@ class SBillModel extends HomeModel {
 
     // 四个汉字百分比
     private function _getHan() {
-        $this->data['b_mb'] = I('request.b_mb', 0, 'intval');
+        $this->data['b_mb'] = I('request.b_mb', 0);
         if ($this->data['b_mb'] > 4 || $this->data['b_mb'] < 1) {
             notice("[生霉]数据超出合理范围(1.0~4.0)，请重新填写");
         }
 
-        $this->data['b_zz'] = I('request.b_zz', 0, 'intval');
+        $this->data['b_zz'] = I('request.b_zz', 0);
         if ($this->data['b_zz'] < 1 || $this->data['b_zz'] > 2) {
             notice("[杂质]数据超出合理范围(1.0-2.0)，请重新填写");
         }
 
-        $this->data['b_sf'] = I('request.b_sf', 0, 'intval');
+        $this->data['b_sf'] = I('request.b_sf', 0);
         if ($this->data['b_sf'] < 12 || $this->data['b_sf'] > 16) {
             notice("[水份]数据超出合理范围(12.0~16.0)，请重新填写");
         }
